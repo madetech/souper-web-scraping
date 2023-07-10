@@ -9,7 +9,7 @@ Collecting information from Service Assessment reports
 
 ## Plan
 - API (FastAPI)
-- ORM
+- ORM (SQL Alchemy)
 - Database to cache data (Postgres)
 - Docker image for db
 - CRON running to update data
@@ -19,4 +19,9 @@ Collecting information from Service Assessment reports
 ## Outputs
 - JSON output of passes per service (assessment vs reassessment)
 - Plotly graph of pass and failure
+
+## Testing (Arrange, Act, Assert)
+- Functional Test on API endpoints
+- Mocking service
+
 
