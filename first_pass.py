@@ -1,14 +1,14 @@
-from pprint import pprint
+# from pprint import pprint
 from bs4 import BeautifulSoup
 import requests
 import re
 from tabulate import tabulate
 import urllib.parse
 # had to manually install urllib3==1.26.6
-import plotly.graph_objects as go
+# import plotly.graph_objects as go
 reports_url = "https://www.gov.uk/service-standard-reports?page="
-import matplotlib.pyplot as plt
-import plotly.express as px
+# import matplotlib.pyplot as plt
+# import plotly.express as px
 import pandas as pd
 
 
@@ -79,7 +79,7 @@ def display_results(report: Report) -> None:
     data = pd.DataFrame(dict([ (k,pd.Series(v)) for k,v in report.data_dict.items() ]))
     print(tabulate(data, headers='keys', tablefmt='psql'))
 
-def main():
+def first_pass():
     url_list = [reports_url + str(i) for i in range(1, 8)] # Hard-code the number of pages because extracting the number from a page layout is just as
     # use-case-specific but a lot more work
     reports_list = []
@@ -88,6 +88,4 @@ def main():
     for report in reports_list:
         extract_decisions_from_report(report)
     display_results(report)
-
-
-main()
+    return report
