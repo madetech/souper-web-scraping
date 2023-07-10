@@ -5,7 +5,8 @@ Collecting information from Service Assessment reports
 - clone repo
 - activate venv source /venv/bin/activate
 - install requirements (pip install -r requirements.txt)
-- run (uvicorn main:app --reload)
+- run db (docker-compose up) *need docker
+- run app through uvicorn to make it async and handle lots or requests (uvicorn main:app --reload) *asgi
 
 ## Plan
 - API (FastAPI)
@@ -15,6 +16,7 @@ Collecting information from Service Assessment reports
 - CRON running to update data
 - Testing:
 -- TODO
+-- Reload end-point must be massively limited and locked-down
 
 ## Outputs
 - JSON output of passes per service (assessment vs reassessment)
