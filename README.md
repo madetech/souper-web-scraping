@@ -6,14 +6,14 @@ Collecting information from Service Assessment reports
 - Install docker
 - (build) docker-compose up -d --build
 - (run) docker-compose -f docker-compose.yml up
-- (stop) docker-compose down -v  
+- (stop) docker-compose down -v
 
+docker-compose down --volumes
 
-## How to Work (No Docker)
+## How to Work (No Docker but db)
 - activate virtual environment 'source /venv/bin/activate'
 - install requirements 'pip install -r requirements.txt'
-- START DB //!TODO Add docker-compose option for just db
-  - docker-compose -f docker-compose.yml up -d db ?
+- start db 'docker-compose -f docker-compose.yml up -d db'
 - run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server
 - Run tests        
 
