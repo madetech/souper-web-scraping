@@ -14,17 +14,17 @@ class Base(DeclarativeBase):
 
 class Report(Base):
     __tablename__ = "report"
-    id = Column(Integer, primary_key=True, index=True, autoincrement="auto")
-    assessment_date: str # also reassessment
-    overall_verdict: str
-    name: str
-    url: str
+    id :Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
+    assessment_date: Mapped[str] # also reassessment
+    overall_verdict: Mapped[str]
+    name: Mapped[str]
+    url: Mapped[str]
     # sections: relationship("Section")
 
 class Section(Base):
     __tablename__ = "section"
-    id = Column(Integer, primary_key=True, index=True)
+    id :Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
     section_id = Column(Integer, ForeignKey("report.id"))
-    number: int
-    decision: str # default null
-    feedback: str
+    number: Mapped[int]
+    decision: Mapped[str] # default null
+    feedback: Mapped[str]

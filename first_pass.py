@@ -4,7 +4,7 @@ import requests
 import re
 from tabulate import tabulate
 import urllib.parse
-from models import Report, Section
+from models.basic import Report, Section
 # had to manually install urllib3==1.26.6
 # import plotly.graph_objects as go
 reports_url = "https://www.gov.uk/service-standard-reports?page="
