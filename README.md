@@ -13,7 +13,9 @@ Collecting information from Service Assessment reports
 - activate virtual environment 'source /venv/bin/activate'
 - install requirements 'pip install -r requirements.txt'
 - START DB //!TODO Add docker-compose option for just db
-- run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server          
+  - docker-compose -f docker-compose.yml up -d db ?
+- run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server
+- Run tests        
 
 ## Plan
 - API (FastAPI)
@@ -24,7 +26,7 @@ Collecting information from Service Assessment reports
 - Testing (PyTest):
   - Test alive
   - Test DB connection successful
-  - 
+  - Test data is present in db
 - Reload end-point must be not be able to run until
   previous reload is complete
 

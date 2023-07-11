@@ -26,7 +26,7 @@ import pandas as pd
 #         self.met = None
 #         self.section_data = []
 
-
+# !Needs to be more selective and test for existence
 def extract_reports_from_main_page(main_url: str) -> list[Report]:
     report_list = []
     page = requests.get(main_url)
@@ -42,7 +42,7 @@ def extract_reports_from_main_page(main_url: str) -> list[Report]:
                 report_list.append(report)
     return report_list
 
-
+# Gets the job done but probably needs a pairing re-write to be safer and testable
 def extract_decisions_from_report(report: Report) -> None:
     #decision_list = []
     section_list = []
@@ -88,9 +88,11 @@ def display_results(report: Report) -> None:
     print(tabulate(data, headers='keys', tablefmt='psql'))
 
 def first_pass():
+    # !if paging need to look for that button and test is available
     url_list = [reports_url + str(i) for i in range(1, 8)] # Hard-code the number of pages because extracting the number from a page layout is just as
     # use-case-specific but a lot more work
     reports_list = []
+    # !Combine for loops
     for url in url_list:
         reports_list.extend(extract_reports_from_main_page(url))
     for report in reports_list:

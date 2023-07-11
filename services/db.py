@@ -7,7 +7,7 @@ url = URL.create(
     username="postgres",
     password="password",
     host="/var/lib/postgresql/data",
-    database="data_collector"
+    database="postgres"
 )
 
 engine = create_engine(url)
