@@ -2,15 +2,15 @@ from typing import Union
 from fastapi import FastAPI
 from first_pass import first_pass
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
-POSTGRES_USER = os.getenv('POSTGRES_USER')
-POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
-POSTGRES_DB = os.getenv('POSTGRES_DB')
+# POSTGRES_USER = os.getenv('POSTGRES_USER')
+# POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+# POSTGRES_DB = os.getenv('POSTGRES_DB')
 
-print(POSTGRES_USER)
+# print(POSTGRES_USER)
 
 app = FastAPI()
 
