@@ -3,10 +3,17 @@ Collecting information from Service Assessment reports
 
 ## How to Run
 - clone repo
-- activate venv source /venv/bin/activate
-- install requirements (pip install -r requirements.txt)
-- run db (docker-compose up) *need docker
-- run app through uvicorn to make it async and handle lots or requests (uvicorn main:app --reload) *asgi
+- Install docker
+- (build) docker-compose up -d --build
+- (run) docker-compose -f docker-compose.yml up
+- (stop) docker-compose down -v  
+
+
+## How to Work (No Docker)
+- activate virtual environment 'source /venv/bin/activate'
+- install requirements 'pip install -r requirements.txt'
+- START DB //!TODO Add docker-compose option for just db
+- run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server          
 
 ## Plan
 - API (FastAPI)
@@ -14,9 +21,12 @@ Collecting information from Service Assessment reports
 - Database to cache data (Postgres)
 - Docker image for db
 - CRON running to update data
-- Testing:
--- TODO
--- Reload end-point must be massively limited and locked-down
+- Testing (PyTest):
+  - Test alive
+  - Test DB connection successful
+  - 
+- Reload end-point must be not be able to run until
+  previous reload is complete
 
 ## Outputs
 - JSON output of passes per service (assessment vs reassessment)
