@@ -5,8 +5,8 @@ from ..main import main
 client = TestClient(app)
 
 def test_is_alive():
-    response = client.get("/")
+    response = client.get("/alive")
     assert response.status_code == 200
-    assert response.json() == {"Hello": "World"}
+    assert response.json() == {"Me": "Hi"}
 
 test_is_alive()
