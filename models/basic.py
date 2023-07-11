@@ -6,26 +6,25 @@ from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text
+
 
 class Base(DeclarativeBase):
     pass
 
-class User(Base):
-    __tablename__ = "user_account"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(30))
-    fullname: Mapped[Optional[str]]
-    addresses: Mapped[List["Address"]] = relationship(
-        back_populates="user", cascade="all, delete-orphan"
-    )
-    def __repr__(self) -> str:
-        return f"User(id={self.id!r}, name={self.name!r}, fullname={self.fullname!r})"
+class Report(Base):
+    __tablename__ = "report"
+    id = Column(Integer, primary_key=True, index=True, autoincrement="auto")
+    assessment_date: str # also reassessment
+    overall_verdict: str
+    name: str
+    url: str
+    # sections: relationship("Section")
 
-class Address(Base):
-    __tablename__ = "address"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    email_address: Mapped[str]
-    user_id: Mapped[int] = mapped_column(ForeignKey("user_account.id"))
-    user: Mapped["User"] = relationship(back_populates="addresses")
-    def __repr__(self) -> str:
-        return f"Address(id={self.id!r}, email_address={self.email_address!r})"
+class Section(Base):
+    __tablename__ = "section"
+    id = Column(Integer, primary_key=True, index=True)
+    section_id = Column(Integer, ForeignKey("report.id"))
+    number: int
+    decision: str # default null
+    feedback: str

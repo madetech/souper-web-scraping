@@ -4,6 +4,7 @@ import requests
 import re
 from tabulate import tabulate
 import urllib.parse
+from models import Report, Section
 # had to manually install urllib3==1.26.6
 # import plotly.graph_objects as go
 reports_url = "https://www.gov.uk/service-standard-reports?page="
@@ -17,13 +18,13 @@ import pandas as pd
 # Outcomes and section numbers are contained in the sentence following the 'Decision' headings
 # There are multiple pages of reports
 
-class Report():
-    data_dict = {"report": [], "section": []}
-    def __init__(self) -> None:
-        self.name = None
-        self.url = None
-        self.met = None
-        self.section_data = []
+# class Report():
+#     data_dict = {"report": [], "section": []}
+#     def __init__(self) -> None:
+#         self.name = None
+#         self.url = None
+#         self.met = None
+#         self.section_data = []
 
 
 def extract_reports_from_main_page(main_url: str) -> list[Report]:
@@ -43,12 +44,14 @@ def extract_reports_from_main_page(main_url: str) -> list[Report]:
 
 
 def extract_decisions_from_report(report: Report) -> None:
-    decision_list = []
+    #decision_list = []
+    section_list = []
     page = requests.get(report.url)
     soup = BeautifulSoup(page.content, "html.parser")
     results = soup.find("main", id="content")
     decision_elements = results.find_all(["h3", "h2"], id=re.compile("decision"))
     for decision_element in decision_elements:
+        section = Section()
         for elem in decision_element.next_siblings: # Could use 'next_sibling'? Assuming the sentence following "Decision" contains the verdict
             if elem.name and elem.name.startswith('h'):
                 # stop at next header
@@ -57,13 +60,18 @@ def extract_decisions_from_report(report: Report) -> None:
                 outcome = process_decision(elem.get_text())
                 #report.section_data.append(outcome) # For a binary approach, appends a list of 2 elements
                 if outcome[1] == 1:
-                    decision_list.append(outcome[0])
+                    #decision_list.append(outcome[0])
+
+                    section.decision = outcome[1]
+                section.number = outcome[0]
                 #else:
                 #    decision_list.append('') # In case we want to add a null character
                 #print(elem.get_text(), outcome) # Useful for checking if the 'met/not-met' is correctly matched up to 1/0
                 break # Some reports have multiple decisions for a section. Assume the 'met' verdict is the most recent
-    report.data_dict["report"].append(report.name)
-    report.data_dict["section"].append(decision_list)
+        section_list.append(section)
+    #report.data_dict["report"].append(report.name)
+    #report.data_dict["section"].append(decision_list)
+    return section_list
 
 
 def process_decision(decision: str) -> list:
