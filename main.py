@@ -1,6 +1,7 @@
 from typing import Union
 from fastapi import FastAPI
 from services.first_pass import first_pass
+import services.db
 import os
 # from dotenv import load_dotenv
 
@@ -21,5 +22,5 @@ async def alive():
 
 
 @app.get("/firstPass")
-def do_first_pass():
+def do_first_pass(): # async!
     return first_pass()

@@ -8,14 +8,17 @@ Collecting information from Service Assessment reports
 - (run) docker-compose -f docker-compose.yml up
 - (stop) docker-compose down -v
 
-docker-compose down --volumes
+### Scripts (chmod +x *.sh)
+- ./rebuild.sh
+- ./startdb.sh
+- ./stopall.sh
 
 ## How to Work (No Docker but db)
 - activate virtual environment 'source /venv/bin/activate'
 - install requirements 'pip install -r requirements.txt'
 - start db 'docker-compose -f docker-compose.yml up -d db'
 - run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server
-- Run tests        
+- Run tests
 
 ## Plan
 - API (FastAPI)
