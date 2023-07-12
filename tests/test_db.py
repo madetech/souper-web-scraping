@@ -2,7 +2,7 @@ from sqlalchemy import text
 from services.db import souperDB
 
 def test_dbConnection():
-        connection = souperDB.getConnection
+        connection = souperDB.getConnection()
         trans = connection.begin()
         try:
             connection.execute(text('SELECT 1'))

@@ -6,17 +6,18 @@ from sqlalchemy.orm import sessionmaker
 
 class souperDB:
 
-    DATABASE_URL = URL.create(
-        drivername="postgresql",
-        username="postgres",
-        password="password",
-        host="0.0.0.0:5432",
-        database="postgres"
-    )
+
 
     # a method for printing data members
-    def getConnection(self):
-        self.engine = create_engine(self.DATABASE_URL, pool_pre_ping=True)
+    def getConnection():
+        DATABASE_URL = URL.create(
+            drivername="postgresql",
+            username="postgres",
+            password="password",
+            host="/var/lib/postgresql/data",
+            database="postgres"
+        )
+        engine = create_engine(DATABASE_URL, pool_pre_ping=True)
         return engine.connect()
 
 
