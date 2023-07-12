@@ -10,6 +10,15 @@ Collecting information from Service Assessment reports
 
 docker-compose down --volumes
 
+### To add database tables
+Run 
+alembic revision --autogenerate -m “New tables”
+alembic upgrade head
+
+### To add dummy data to the tables
+Run python souper-web-scraping/models/db.py
+
+
 ## How to Work (No Docker but db)
 - activate virtual environment 'source /venv/bin/activate'
 - install requirements 'pip install -r requirements.txt'
