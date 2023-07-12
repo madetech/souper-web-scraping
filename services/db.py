@@ -10,15 +10,28 @@ class souperDB:
 
     # a method for printing data members
     def getConnection():
-        DATABASE_URL = URL.create(
-            drivername="postgresql",
-            username="postgres",
-            password="password",
-            host="/var/lib/postgresql/data",
-            database="postgres"
+        # DATABASE_URL = URL.create(
+        #     drivername="postgresql",
+        #     username="postgres",
+        #     password="password",
+        #     host="/var/lib/postgresql/data",
+        #     database="postgres"
+        # )
+
+        user = 'postgres'
+        password = 'password'
+        host = '0.0.0.0'
+        port = 5432
+        database = 'postgres'
+
+        DATABASE_URL = "postgresql://{0}:{1}@{2}:{3}/{4}".format(
+            user, password, host, port, database
         )
-        engine = create_engine(DATABASE_URL, pool_pre_ping=True)
-        return engine.connect()
+
+        print(DATABASE_URL)
+
+        engine = create_engine(DATABASE_URL, pool_pre_ping=False)
+        return engine.connect() # CANNOT CONNECT
 
 
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
