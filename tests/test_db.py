@@ -12,5 +12,3 @@ def test_dbConnection():
             trans.rollback()
             # print('\n\n----------- Connection failed ! ERROR : ', e)
             assert False
-
-test_dbConnection()
