@@ -10,28 +10,19 @@ from sqlalchemy import text
 from services.db import souperDB
 
 def test_dbConnection():
-         connection = souperDB.getConnection()
-         trans = connection.begin()
-         try:
-             connection.execute(text('SELECT 1'))
-             trans.commit()
-             assert True
-         except Exception:
-             trans.rollback()
-             # print('\n\n----------- Connection failed ! ERROR : ', e)
-             assert False
-
-
-url = URL.create(
-    drivername="postgresql",
-    username="postgres",
-    password="password",
-    host="localhost",
-    database="postgres"
-    )
-engine = create_engine(url)
+    connection = souperDB().get_connection()
+    trans = connection.begin()
+    try:
+        connection.execute(text('SELECT 1'))
+        trans.commit()
+        assert True
+    except Exception:
+        trans.rollback()
+        # print('\n\n----------- Connection failed ! ERROR : ', e)
+        assert False
     
 def test_db_insert_report():
+    engine = souperDB().get_engine()
     random_str_dummy_name = ''.join(random.choices(string.ascii_letters))
     report = Report(assessment_date="today",
                 overall_verdict="pass",
