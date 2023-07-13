@@ -18,7 +18,7 @@ url = URL.create(
     )
 engine = create_engine(url)
     
-def test_db_insert_method():
+def test_db_insert_report():
     random_str_dummy_name = ''.join(random.choices(string.ascii_letters))
     report = Report(assessment_date="today",
                 overall_verdict="pass",
