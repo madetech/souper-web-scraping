@@ -4,7 +4,7 @@ import requests
 import re
 from tabulate import tabulate
 import urllib.parse
-from models.basic import Report, Section
+#from models.basic import Report, Section
 import pandas as pd
 
 # needs to be from .env (os.getenv('BASE_URL'))
@@ -13,9 +13,9 @@ reports_url = "https://www.gov.uk/service-standard-reports?page="
 
 def get_report_info(url):
     info = {}
-    info["Assessment date: "] = ''
-    info["Result: "] = ''
-    info["Stage: "] = ''
+    info["Assessment date:"] = ''
+    info["Result:"] = ''
+    info["Stage:"] = ''
     return info
 
 def parse_html(content):
@@ -27,6 +27,7 @@ def parse_html(content):
         if element.string in ["Assessment date: ", "Result: ", "Stage: "]:
             for elem in element.next_siblings:
                 if elem.name == 'dd':
-                    info_dict[element.string] = elem.get_text().strip()
+                    key_string = element.string.strip()
+                    info_dict[key_string] = elem.get_text().strip()
                     break
     return info_dict
