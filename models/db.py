@@ -1,27 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 
-from basic import Report, Section
+from models.basic import Report, Section, Base
 
 from sqlalchemy.orm import Session
+import random
+import string
 
-url = URL.create(
-    drivername="postgresql",
-    username="postgres",
-    password="password",
-    host="localhost",
-    database="postgres"
-)
 
-engine = create_engine(url)
-
-report = Report(assessment_date="today",
-                overall_verdict="pass",
-                name="anna",
-                url="www.")
-
-#now connect
-connection = engine.connect()
-with Session(engine) as session:
-    session.add(report)
-    session.commit()
+def insert_entry(entry: Base, engine):
+    with Session(engine) as session:
+        session.add(entry)
+        session.commit()
+    session.close()

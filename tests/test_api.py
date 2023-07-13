@@ -9,4 +9,4 @@ def test_is_alive():
     assert response.status_code == 200
     assert response.json() == {"Me": "Hi"}
 
-test_is_alive()
+# test_is_alive()
