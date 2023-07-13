@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from ..main import main
+from main import app
 
 client = TestClient(app)
 
@@ -9,4 +9,4 @@ def test_is_alive():
     assert response.status_code == 200
     assert response.json() == {"Me": "Hi"}
 
-test_is_alive()
+# test_is_alive()

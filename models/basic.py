@@ -8,6 +8,8 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text
 
+from sqlalchemy.ext.declarative import declarative_base
+
 
 class Base(DeclarativeBase):
     pass
