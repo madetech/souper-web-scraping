@@ -13,6 +13,8 @@ def insert_entry(entry: Base, engine):
 
 
 class souperDB:
+    """Class to handle database connection"""
+    
     def __init__(self):
         self.user = os.getenv('POSTGRES_USER')
         self.password = os.getenv('POSTGRES_PASSWORD')
@@ -23,8 +25,6 @@ class souperDB:
         DATABASE_URL = "postgresql://{0}:{1}@{2}:{3}/{4}".format(
             self.user, self.password, self.host, self.port, self.database
         )
-        
-        print(DATABASE_URL)
         
         self.engine = create_engine(DATABASE_URL, pool_pre_ping=False)
         
