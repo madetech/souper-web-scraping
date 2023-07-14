@@ -13,6 +13,7 @@ pytest-mock==3.10.0
 python-dateutil==2.8.2
 python-dotenv==1.0.0
 python-minifier==2.8.1
+responses==0.23.1
 soupsieve==2.4.1
 SQLAlchemy==2.0.18
 stackexplain==1.5.0

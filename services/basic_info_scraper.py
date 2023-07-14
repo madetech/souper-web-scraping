@@ -9,18 +9,21 @@ import pandas as pd
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
+import pytest
 
 
 def get_report_info(url):
-    info = {}
-    info["Assessment date:"] = ''
-    info["Result:"] = ''
-    info["Stage:"] = ''
-    return info
+    info_dict = parse_html(requests.get(url).content)
+    return info_dict
+    #info = {}
+    #info["Assessment date:"] = ''
+    #info["Result:"] = ''
+    #info["Stage:"] = ''
+    #return info
 
 def parse_html(content):
     info_dict = {}
-    soup = BeautifulSoup(content)
+    soup = BeautifulSoup(content, "html.parser")
     results = soup.find("main", id="content")
     info_title_elements = results.find_all("dt")
     for element in info_title_elements:
