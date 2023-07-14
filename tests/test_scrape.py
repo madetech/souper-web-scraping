@@ -1,5 +1,5 @@
 from models.basic import Report
-from services.basic_info_scraper import get_report_info, parse_html, create_report_model
+from services.basic_info_scraper import get_all_service_standard_links, get_all_service_standard_links_by_page, get_report_info, scrape_report_html, create_report_model
 import pytest
 import responses
 import requests
@@ -11,12 +11,30 @@ file = 'data/report_html.txt'
 @pytest.fixture
 def mocked_responses():
     with open('data/report_html.txt', 'r') as f:
-        content = f.read()
+        report_content = f.read()
+
+    with open('data/report_list_html.txt', 'r') as f:
+        report_list = f.read()
+
+    with open('data/report_list_empty_html.txt', 'r') as f:
+        report_list_empty = f.read()
+        
     with responses.RequestsMock() as rsps:
         rsps.get("https://www.gov.uk/service-standard-reports/get-security-clearance-test",
-        body=content,
-        status=200,
-        content_type="text/html")
+            body=report_content,
+            status=200,
+            content_type="text/html")
+
+        rsps.get("https://www.gov.uk/service-standard-reports-test?page=1",
+            body=report_list,
+            status=200,
+            content_type="text/html")
+        
+        rsps.get("https://www.gov.uk/service-standard-reports-test?page=2",
+            body=report_list_empty,
+            status=200,
+            content_type="text/html")
+        
         yield rsps
 
 
@@ -42,9 +60,9 @@ def test_report_info_dict_value_types(mocked_responses):
 def test_report_parses():
     with open(file, 'r') as f:
         content = f.read()
-    assert parse_html(content)["Assessment date:"] == '23 March 2022'
-    assert parse_html(content)["Result:"] == 'Not met'
-    assert parse_html(content)["Stage:"] == 'Alpha'
+    assert scrape_report_html(content)["Assessment date:"] == '23 March 2022'
+    assert scrape_report_html(content)["Result:"] == 'Not met'
+    assert scrape_report_html(content)["Stage:"] == 'Alpha'
 
 
 def test_specific_report(mocked_responses):
@@ -55,3 +73,13 @@ def test_specific_report(mocked_responses):
 
 def test_create_report_model():
     assert type(create_report_model(url)) == Report
+
+def test_get_all_service_standard_links_by_page_returns_expected_links(mocked_responses):
+    page_links = get_all_service_standard_links_by_page(1)
+    links_per_page = 50
+    assert len(page_links) == links_per_page
+
+def test_get_all_service_standard_links_returns_expected_links():
+    all_links = get_all_service_standard_links()
+    total_link_count = 50
+    assert len(all_links) == total_link_count

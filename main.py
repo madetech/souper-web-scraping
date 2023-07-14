@@ -1,16 +1,6 @@
 from typing import Union
 from fastapi import FastAPI
-from services.first_pass import first_pass
-import os
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
-# POSTGRES_USER = os.getenv('POSTGRES_USER')
-# POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
-# POSTGRES_DB = os.getenv('POSTGRES_DB')
-
-# print(POSTGRES_USER)
+from services.basic_info_scraper import get_all_service_standard_links
 
 app = FastAPI()
 
@@ -20,6 +10,6 @@ async def alive():
     return {"Me": "Hi"}
 
 
-@app.get("/firstPass")
-def do_first_pass():
-    return first_pass()
+@app.get("/standard-reports")
+def get_standard_reports():
+    return get_all_service_standard_links()

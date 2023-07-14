@@ -1,5 +1,5 @@
 # from pprint import pprint
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 import requests
 import re
 from tabulate import tabulate
@@ -14,7 +14,7 @@ import pytest
 
 
 def get_report_info(url):
-    info_dict = parse_html(requests.get(url).content)
+    info_dict = scrape_report_html(requests.get(url).content)
     return info_dict
     #info = {}
     #info["Assessment date:"] = ''
@@ -22,7 +22,38 @@ def get_report_info(url):
     #info["Stage:"] = ''
     #return info
 
-def parse_html(content):
+def get_all_reports():
+    report_links = get_all_service_standard_links()
+    # TODO: scrape HTML for each report link
+
+def get_all_service_standard_links():
+    page_links_count = 0
+    page = 1
+    total_links = []
+
+    while (page_links_count > 0 or page == 1):
+        page_links = get_all_service_standard_links_by_page(page)
+        page_links_count = len(page_links)
+        total_links.extend(page_links)
+        page += 1
+
+    return total_links
+
+def get_all_service_standard_links_by_page(pageNum):
+    page = requests.get(f"{reports_url}{pageNum}")
+    soup = BeautifulSoup(page.content, "html.parser")
+    links = []
+
+    results = soup.find_all("li", {"class": "gem-c-document-list__item"})
+    
+    for result in results:
+        if isinstance(result, Tag):
+            link = result.find("a")
+            links.append(link["href"])
+
+    return links
+
+def scrape_report_html(content):
     info_dict = {}
     soup = BeautifulSoup(content, "html.parser")
     results = soup.find("main", id="content")
