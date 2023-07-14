@@ -36,7 +36,8 @@ def test_db_insert_report():
     report = Report(assessment_date="today",
                 overall_verdict="pass",
                 name=random_str_dummy_name,
-                url="www.")
+                url="www.",
+                stage="")
     db.insert_entry(report, engine)
     result = Session(engine).query(Report).filter(Report.name==random_str_dummy_name).all()
     assert len(result) != 0

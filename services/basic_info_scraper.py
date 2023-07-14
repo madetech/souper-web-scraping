@@ -77,3 +77,5 @@ def create_report_model(info_dict, url):
     report.stage = info_dict["Stage:"]
     report.url = url
     report.name = url.split('/')[-1]
+
+    return report

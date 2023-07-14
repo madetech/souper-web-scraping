@@ -7,52 +7,69 @@ url = 'https://www.gov.uk/service-standard-reports/get-security-clearance-test'
 
 file = 'data/report_html.txt'
 
-
 @pytest.fixture
-def mocked_responses():
-    with open('data/report_html.txt', 'r') as f:
-        report_content = f.read()
-
+def mocked_report_list_all_response():
     with open('data/report_list_html.txt', 'r') as f:
         report_list = f.read()
 
     with open('data/report_list_empty_html.txt', 'r') as f:
         report_list_empty = f.read()
+    
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            method=responses.GET,
+            url="https://www.gov.uk/service-standard-reports?page=1",
+            body=report_list)
         
+        rsps.add(
+            method=responses.GET,
+            url="https://www.gov.uk/service-standard-reports?page=2",
+            body=report_list_empty)
+        
+        yield rsps
+
+@pytest.fixture
+def mocked_report_list_page_response():
+    with open('data/report_list_html.txt', 'r') as f:
+        report_list = f.read()
+    
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            method=responses.GET,
+            url="https://www.gov.uk/service-standard-reports?page=1",
+            body=report_list)
+        
+        yield rsps
+
+@pytest.fixture
+def mocked_report_response():
+    with open('data/report_html.txt', 'r') as f:
+        report_content = f.read()
+
     with responses.RequestsMock() as rsps:
         rsps.get("https://www.gov.uk/service-standard-reports/get-security-clearance-test",
             body=report_content,
-            status=200,
-            content_type="text/html")
-
-        rsps.get("https://www.gov.uk/service-standard-reports-test?page=1",
-            body=report_list,
-            status=200,
-            content_type="text/html")
-        
-        rsps.get("https://www.gov.uk/service-standard-reports-test?page=2",
-            body=report_list_empty,
             status=200,
             content_type="text/html")
         
         yield rsps
 
 
-def test_api(mocked_responses):
+def test_api(mocked_report_response):
     resp = requests.get("https://www.gov.uk/service-standard-reports/get-security-clearance-test")
     assert resp.status_code == 200
 
 
-def test_get_report_info_returns_dict(mocked_responses):
+def test_get_report_info_returns_dict(mocked_report_response):
     assert type(get_report_info(url)) == dict
     assert type(get_report_info(url)) != int
 
-def test_report_info_dict_contains_known_keys(mocked_responses):
+def test_report_info_dict_contains_known_keys(mocked_report_response):
     assert get_report_info(url)["Assessment date:"] is not None
     assert get_report_info(url)["Result:"] is not None
     assert get_report_info(url)["Stage:"] is not None
 
-def test_report_info_dict_value_types(mocked_responses):
+def test_report_info_dict_value_types(mocked_report_response):
     assert type(get_report_info(url)["Assessment date:"]) == str
     assert type(get_report_info(url)["Result:"]) == str
     assert type(get_report_info(url)["Stage:"]) == str
@@ -65,21 +82,26 @@ def test_report_parses():
     assert scrape_report_html(content)["Stage:"] == 'Alpha'
 
 
-def test_specific_report(mocked_responses):
+def test_specific_report(mocked_report_response):
     resp = requests.get('https://www.gov.uk/service-standard-reports/get-security-clearance-test')
     assert resp.status_code == 200
     assert get_report_info('https://www.gov.uk/service-standard-reports/get-security-clearance-test')["Assessment date:"] == '23 March 2022'
 
 
 def test_create_report_model():
-    assert type(create_report_model(url)) == Report
+    info_dict = {
+        "Assessment date:": "",
+        "Result:": "",
+        "Stage:": ""
+    }
+    assert type(create_report_model(info_dict, url)) == Report
 
-def test_get_all_service_standard_links_by_page_returns_expected_links(mocked_responses):
+def test_get_all_service_standard_links_by_page_returns_expected_links(mocked_report_list_page_response):
     page_links = get_all_service_standard_links_by_page(1)
     links_per_page = 50
     assert len(page_links) == links_per_page
 
-def test_get_all_service_standard_links_returns_expected_links():
+def test_get_all_service_standard_links_returns_expected_links(mocked_report_list_all_response):
     all_links = get_all_service_standard_links()
     total_link_count = 50
     assert len(all_links) == total_link_count
