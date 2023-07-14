@@ -10,21 +10,22 @@ import pandas as pd
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
+BASE_URL = "https://www.gov.uk"
 import pytest
 
 
-def get_report_info(url):
+def get_report_info(url: str) -> dict:
     info_dict = scrape_report_html(requests.get(url).content)
     return info_dict
-    #info = {}
-    #info["Assessment date:"] = ''
-    #info["Result:"] = ''
-    #info["Stage:"] = ''
-    #return info
 
-def get_all_reports():
+def get_all_reports() -> list[Report]:
     report_links = get_all_service_standard_links()
-    # TODO: scrape HTML for each report link
+    reports_models = []
+    for link in report_links:
+        report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").content)
+        reports_models.append(create_report_model(report_dict, link))
+    return reports_models
+
 
 def get_all_service_standard_links():
     page_links_count = 0
@@ -39,7 +40,7 @@ def get_all_service_standard_links():
 
     return total_links
 
-def get_all_service_standard_links_by_page(pageNum):
+def get_all_service_standard_links_by_page(pageNum: int) -> list[str]:
     page = requests.get(f"{reports_url}{pageNum}")
     soup = BeautifulSoup(page.content, "html.parser")
     links = []
@@ -53,7 +54,7 @@ def get_all_service_standard_links_by_page(pageNum):
 
     return links
 
-def scrape_report_html(content):
+def scrape_report_html(content: str) -> dict:
     info_dict = {}
     soup = BeautifulSoup(content, "html.parser")
     results = soup.find("main", id="content")
@@ -65,12 +66,10 @@ def scrape_report_html(content):
                     key_string = element.string.strip()
                     info_dict[key_string] = elem.get_text().strip()
                     break
-    title_element = results.find_all("h1", {"class":"gem-c-title"})
-    # find title
-
+    # TODO find report name from page title eg. title_element = results.find_all("h1", {"class":"gem-c-title"})
     return info_dict
 
-def create_report_model(info_dict, url):
+def create_report_model(info_dict: dict, url: str) -> Report:
     report = Report()
     report.assessment_date = info_dict["Assessment date:"]
     report.overall_verdict = info_dict["Result:"]

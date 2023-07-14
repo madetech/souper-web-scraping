@@ -1,18 +1,18 @@
 from models.basic import Report
-from services.basic_info_scraper import get_all_service_standard_links, get_all_service_standard_links_by_page, get_report_info, scrape_report_html, create_report_model
+from services.basic_info_scraper import get_all_reports, get_all_service_standard_links, get_all_service_standard_links_by_page, get_report_info, scrape_report_html, create_report_model
 import pytest
 import responses
 import requests
 url = 'https://www.gov.uk/service-standard-reports/get-security-clearance-test'
 
-file = 'data/report_html.txt'
+file = 'tests/data/report_html.txt'
 
 @pytest.fixture
 def mocked_report_list_all_response():
-    with open('data/report_list_html.txt', 'r') as f:
+    with open('tests/data/report_list_html.txt', 'r') as f:
         report_list = f.read()
 
-    with open('data/report_list_empty_html.txt', 'r') as f:
+    with open('tests/data/report_list_empty_html.txt', 'r') as f:
         report_list_empty = f.read()
     
     with responses.RequestsMock() as rsps:
@@ -30,7 +30,7 @@ def mocked_report_list_all_response():
 
 @pytest.fixture
 def mocked_report_list_page_response():
-    with open('data/report_list_html.txt', 'r') as f:
+    with open('tests/data/report_list_html.txt', 'r') as f:
         report_list = f.read()
     
     with responses.RequestsMock() as rsps:
@@ -43,7 +43,7 @@ def mocked_report_list_page_response():
 
 @pytest.fixture
 def mocked_report_response():
-    with open('data/report_html.txt', 'r') as f:
+    with open('tests/data/report_html.txt', 'r') as f:
         report_content = f.read()
 
     with responses.RequestsMock() as rsps:
@@ -54,6 +54,45 @@ def mocked_report_response():
         
         yield rsps
 
+@pytest.fixture
+def mocked_main_page_response():
+    with open('tests/data/report_list_one.html', 'r') as f:
+        page_content = f.read()
+    with open('tests/data/report_html.txt', 'r') as f:
+        report_content = f.read()
+    with open('tests/data/report_list_empty_html.txt', 'r') as f:
+        report_list_empty = f.read()
+
+    with responses.RequestsMock() as rsps:
+        rsps.add(method=responses.GET,
+                url="https://www.gov.uk/service-standard-reports?page=1",
+                body=page_content)
+        rsps.add(method=responses.GET,
+                url="https://www.gov.uk/service-standard-reports/get-security-clearance-test",
+                body=report_content)
+        rsps.add(
+                method=responses.GET,
+                url="https://www.gov.uk/service-standard-reports?page=2",
+                body=report_list_empty)
+        yield rsps
+
+@pytest.fixture
+def mocked_main_page_response_one():
+    with open('tests/data/report_list_one.html', 'r') as f:
+        page_content = f.read()
+    with open('tests/data/report_list_empty_html.txt', 'r') as f:
+        report_list_empty = f.read()
+
+    with responses.RequestsMock() as rsps:
+        rsps.add(method=responses.GET,
+                url="https://www.gov.uk/service-standard-reports?page=1",
+                body=page_content)
+        rsps.add(
+            method=responses.GET,
+            url="https://www.gov.uk/service-standard-reports?page=2",
+            body=report_list_empty)
+        
+        yield rsps
 
 def test_api(mocked_report_response):
     resp = requests.get("https://www.gov.uk/service-standard-reports/get-security-clearance-test")
@@ -105,3 +144,12 @@ def test_get_all_service_standard_links_returns_expected_links(mocked_report_lis
     all_links = get_all_service_standard_links()
     total_link_count = 50
     assert len(all_links) == total_link_count
+
+def test_get_one(mocked_main_page_response_one):
+    all_links = get_all_service_standard_links()
+    total_link_count = 1
+    assert len(all_links) == total_link_count
+
+def test_get_all_reports_returns_list(mocked_main_page_response):
+    reports_list = get_all_reports()
+    assert type(reports_list) == list
