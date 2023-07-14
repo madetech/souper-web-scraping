@@ -6,13 +6,15 @@ from tabulate import tabulate
 import urllib.parse
 #from models.basic import Report, Section
 import pandas as pd
+import logging
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 import pytest
 
-
+LOGGER = logging.getLogger(__name__)
 def get_report_info(url):
+    LOGGER.info("LOG", requests.get(url))
     info_dict = parse_html(requests.get(url).content)
     return info_dict
     #info = {}
