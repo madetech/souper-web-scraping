@@ -1,37 +1,40 @@
 from models.basic import Report
-from services.basic_info_scraper import get_report_info, parse_html #, get_content
+from services.basic_info_scraper import get_report_info, parse_html, create_report_model
 import pytest
 import responses
 import requests
 url = 'https://www.gov.uk/service-standard-reports/get-security-clearance-test'
-# url = ''
+
 file = 'data/report_html.txt'
-#import logging
-#LOGGER = logging.getLogger(__name__)
+
 
 @pytest.fixture
-def register_response():
+def mocked_responses():
     with open('data/report_html.txt', 'r') as f:
         content = f.read()
-    with responses.RequestsMock() as mock:
-        mock.add(
-            method=responses.GET,
-            url="https://www.gov.uk/service-standard-reports/get-security-clearance-test",
-            content_type='text/html',
-            body=content
-        )
-    yield mock
+    with responses.RequestsMock() as rsps:
+        rsps.get("https://www.gov.uk/service-standard-reports/get-security-clearance-test",
+        body=content,
+        status=200,
+        content_type="text/html")
+        yield rsps
 
-def test_get_report_info_returns_dict(register_response):
+
+def test_api(mocked_responses):
+    resp = requests.get("https://www.gov.uk/service-standard-reports/get-security-clearance-test")
+    assert resp.status_code == 200
+
+
+def test_get_report_info_returns_dict(mocked_responses):
     assert type(get_report_info(url)) == dict
     assert type(get_report_info(url)) != int
 
-def test_report_info_dict_contains_known_keys(register_response):
+def test_report_info_dict_contains_known_keys(mocked_responses):
     assert get_report_info(url)["Assessment date:"] is not None
     assert get_report_info(url)["Result:"] is not None
     assert get_report_info(url)["Stage:"] is not None
 
-def test_report_info_dict_value_types(register_response):
+def test_report_info_dict_value_types(mocked_responses):
     assert type(get_report_info(url)["Assessment date:"]) == str
     assert type(get_report_info(url)["Result:"]) == str
     assert type(get_report_info(url)["Stage:"]) == str
@@ -44,10 +47,11 @@ def test_report_parses():
     assert parse_html(content)["Stage:"] == 'Alpha'
 
 
-def test_specific_report(register_response):
+def test_specific_report(mocked_responses):
     resp = requests.get('https://www.gov.uk/service-standard-reports/get-security-clearance-test')
     assert resp.status_code == 200
-   # LOGGER.info("LOG", requests.get(url))
-   # assert get_report_info('https://www.gov.uk/service-standard-reports/get-security-clearance-test')["Assessment date:"] == '23 March 2022'
+    assert get_report_info('https://www.gov.uk/service-standard-reports/get-security-clearance-test')["Assessment date:"] == '23 March 2022'
 
 
+def test_create_report_model():
+    assert type(create_report_model(url)) == Report

@@ -4,17 +4,16 @@ import requests
 import re
 from tabulate import tabulate
 import urllib.parse
-#from models.basic import Report, Section
+from models.basic import Report, Section
 import pandas as pd
-import logging
+#import logging
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 import pytest
 
-LOGGER = logging.getLogger(__name__)
+
 def get_report_info(url):
-    LOGGER.info("LOG", requests.get(url))
     info_dict = parse_html(requests.get(url).content)
     return info_dict
     #info = {}
@@ -35,4 +34,15 @@ def parse_html(content):
                     key_string = element.string.strip()
                     info_dict[key_string] = elem.get_text().strip()
                     break
+    title_element = results.find_all("h1", {"class":"gem-c-title"})
+    # find title
+
     return info_dict
+
+def create_report_model(info_dict, url):
+    report = Report()
+    report.assessment_date = info_dict["Assessment date:"]
+    report.overall_verdict = info_dict["Result:"]
+    report.stage = info_dict["Stage:"]
+    report.url = url
+    report.name = url.split('/')[-1]

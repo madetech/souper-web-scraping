@@ -21,6 +21,7 @@ class Report(Base):
     overall_verdict: Mapped[str]
     name: Mapped[str]
     url: Mapped[str]
+    stage: Mapped[str]
     # sections: relationship("Section")
 
 class Section(Base):
