@@ -98,7 +98,6 @@ def test_api(mocked_report_response):
     resp = requests.get("https://www.gov.uk/service-standard-reports/get-security-clearance-test")
     assert resp.status_code == 200
 
-
 def test_get_report_info_returns_dict(mocked_report_response):
     assert type(get_report_info(url)) == dict
     assert type(get_report_info(url)) != int
@@ -113,19 +112,17 @@ def test_report_info_dict_value_types(mocked_report_response):
     assert type(get_report_info(url)["Result:"]) == str
     assert type(get_report_info(url)["Stage:"]) == str
 
-def test_report_parses():
-    with open(file, 'r') as f:
-        content = f.read()
-    assert scrape_report_html(content)["Assessment date:"] == '23 March 2022'
-    assert scrape_report_html(content)["Result:"] == 'Not met'
-    assert scrape_report_html(content)["Stage:"] == 'Alpha'
-
-
 def test_specific_report(mocked_report_response):
     resp = requests.get('https://www.gov.uk/service-standard-reports/get-security-clearance-test')
     assert resp.status_code == 200
     assert get_report_info('https://www.gov.uk/service-standard-reports/get-security-clearance-test')["Assessment date:"] == '23 March 2022'
 
+def test_scrape_report_html_extracts_data():
+    with open(file, 'r') as f:
+        content = f.read()
+    assert scrape_report_html(content)["Assessment date:"] == '23 March 2022'
+    assert scrape_report_html(content)["Result:"] == 'Not met'
+    assert scrape_report_html(content)["Stage:"] == 'Alpha'
 
 def test_create_report_model():
     info_dict = {
@@ -145,11 +142,11 @@ def test_get_all_service_standard_links_returns_expected_links(mocked_report_lis
     total_link_count = 50
     assert len(all_links) == total_link_count
 
-def test_get_one(mocked_main_page_response_one):
+def test_get_all_service_standard_links_returns_one(mocked_main_page_response_one):
     all_links = get_all_service_standard_links()
     total_link_count = 1
     assert len(all_links) == total_link_count
 
 def test_get_all_reports_returns_list(mocked_main_page_response):
     reports_list = get_all_reports()
-    assert type(reports_list) == list
+    assert type(reports_list) == list[Report]

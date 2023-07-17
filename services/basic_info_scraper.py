@@ -1,9 +1,8 @@
 # from pprint import pprint
+import logging
 from bs4 import BeautifulSoup, Tag
 import requests
-import re
 from tabulate import tabulate
-import urllib.parse
 from models.basic import Report, Section
 import pandas as pd
 #import logging
@@ -11,7 +10,6 @@ import pandas as pd
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
-import pytest
 
 
 def get_report_info(url: str) -> dict:
@@ -22,8 +20,12 @@ def get_all_reports() -> list[Report]:
     report_links = get_all_service_standard_links()
     reports_models = []
     for link in report_links:
-        report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").content)
-        reports_models.append(create_report_model(report_dict, link))
+        try:
+            report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").content)
+            reports_models.append(create_report_model(report_dict, link))
+        except Exception as e:
+            logging.error(f"Failed to scrape report HTML for {link}: {e}")
+
     return reports_models
 
 
@@ -58,11 +60,11 @@ def scrape_report_html(content: str) -> dict:
     info_dict = {}
     soup = BeautifulSoup(content, "html.parser")
     results = soup.find("main", id="content")
-    info_title_elements = results.find_all("dt")
+    info_title_elements = results.find_all("td")
     for element in info_title_elements:
-        if element.string in ["Assessment date: ", "Result: ", "Stage: "]:
+        if element.string in ["Assessment date:", "Result:", "Stage:"]:
             for elem in element.next_siblings:
-                if elem.name == 'dd':
+                if elem.name == 'td':
                     key_string = element.string.strip()
                     info_dict[key_string] = elem.get_text().strip()
                     break

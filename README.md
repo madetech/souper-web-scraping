@@ -19,6 +19,7 @@ alembic upgrade head
 Run python souper-web-scraping/models/db.py
 
 ## How to Work (No Docker but db)
+- create virtual environment 'python<version> -m venv <virtual-environment-name>'
 - activate virtual environment 'source /venv/bin/activate'
 - install requirements 'pip install -r requirements.txt'
 - start db 'docker-compose -f docker-compose.yml up -d db'
