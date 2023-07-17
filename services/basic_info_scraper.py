@@ -2,10 +2,7 @@
 import logging
 from bs4 import BeautifulSoup, Tag
 import requests
-from tabulate import tabulate
 from models.basic import Report, Section
-import pandas as pd
-import numpy as np
 
 #import logging
 
