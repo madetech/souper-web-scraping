@@ -20,7 +20,7 @@ def get_report_info(url: str) -> dict:
 
 def get_all_reports() -> list[Report]:
     report_links = get_all_service_standard_links()
-    report_links = report_links[slice(1)]
+    # report_links = report_links[slice(1)]
     reports_models = []
     for link in report_links:
         try:
@@ -66,18 +66,19 @@ def scrape_report_html(content: str) -> dict:
     info_title_elements = results.find_all("td")
 
     key_mapping = {
-        "Assessment date:": ["Assessment date:"],
+        "Assessment date:": ["Assessment date:", "Reassessment date:"],
         "Result:": ["Result:"],
         "Stage:": ["Stage:", "Assessment stage:"]
     }
 
+
     for element in info_title_elements:
-        if element.string in ["Assessment date:", "Result:", "Stage:"]:
-            for elem in element.next_siblings:
-                if elem.name == 'td':
-                    key_string = element.string.strip()
-                    info_dict[key_string] = elem.get_text().strip()
-                    break
+        for key in key_mapping.keys():
+            if element.string in key_mapping[key]:
+                for elem in element.next_siblings:
+                    if elem.name == 'td':
+                        info_dict[key] = elem.get_text().strip()
+                        break
     # TODO find report name from page title eg. title_element = results.find_all("h1", {"class":"gem-c-title"})
     return info_dict
 
