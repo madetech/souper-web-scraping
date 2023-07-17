@@ -5,6 +5,8 @@ import requests
 from tabulate import tabulate
 from models.basic import Report, Section
 import pandas as pd
+import numpy as np
+
 #import logging
 
 # needs to be from .env (os.getenv('BASE_URL'))
@@ -18,6 +20,7 @@ def get_report_info(url: str) -> dict:
 
 def get_all_reports() -> list[Report]:
     report_links = get_all_service_standard_links()
+    report_links = report_links[slice(1)]
     reports_models = []
     for link in report_links:
         try:
@@ -61,6 +64,13 @@ def scrape_report_html(content: str) -> dict:
     soup = BeautifulSoup(content, "html.parser")
     results = soup.find("main", id="content")
     info_title_elements = results.find_all("td")
+
+    key_mapping = {
+        "Assessment date:": ["Assessment date:"],
+        "Result:": ["Result:"],
+        "Stage:": ["Stage:", "Assessment stage:"]
+    }
+
     for element in info_title_elements:
         if element.string in ["Assessment date:", "Result:", "Stage:"]:
             for elem in element.next_siblings:
