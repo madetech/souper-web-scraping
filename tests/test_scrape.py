@@ -149,4 +149,4 @@ def test_get_all_service_standard_links_returns_one(mocked_main_page_response_on
 
 def test_get_all_reports_returns_list(mocked_main_page_response):
     reports_list = get_all_reports()
-    assert type(reports_list) == list[Report]
+    assert type(reports_list) == list
