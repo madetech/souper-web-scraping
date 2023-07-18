@@ -17,7 +17,7 @@ def get_report_info(url: str) -> dict:
 
 def get_all_reports() -> list[Report]:
     report_links = get_all_service_standard_links()
-    # report_links = report_links[slice(1)]
+    #report_links = report_links[slice(1)]
     reports_models = []
     for link in report_links:
         try:
@@ -59,31 +59,66 @@ def get_all_service_standard_links_by_page(pageNum: int) -> list[str]:
 def scrape_report_html(content: str) -> dict:
     info_dict = {}
     soup = BeautifulSoup(content, "html.parser")
-    results = soup.find("main", id="content")
-    info_title_elements = results.find_all("td")
+    elements = soup.find_all("dt")
+    keys_found = set()
 
     key_mapping = {
-        "Assessment date:": ["Assessment date:", "Reassessment date:"],
-        "Result:": ["Result:"],
-        "Stage:": ["Stage:", "Assessment stage:"]
+        "assessment_date": ["Assessment date:", "Reassessment date:"],
+        "result": ["Result", "Result:"],
+        "stage": ["Stage", "Stage:", "Assessment stage:"]
     }
 
-
-    for element in info_title_elements:
+    # Loop through each matching element
+    for element in elements:
+        # Loop through each key in key_mapping
         for key in key_mapping.keys():
-            if element.string in key_mapping[key]:
-                for elem in element.next_siblings:
-                    if elem.name == 'td':
-                        info_dict[key] = elem.get_text().strip()
-                        break
+            # Check if element text is in list of possible values for the given key
+            if element.string.strip() in key_mapping[key]:
+                # Store matched key in list
+                keys_found.add(key)
+                # Get element text and add to dictionary
+                value = element.find_next_sibling('dd').get_text().strip()
+                info_dict[key] = value
+        
+        # Exit loop if all keys have been matched
+        if len(keys_found) == len(key_mapping.keys()):
+            break
+
+    # List keys to retry which have not been matched
+    all_keys = set(list(key_mapping.keys()))
+    retry_keys = list(all_keys - keys_found)
+    
+    # Scrape data for missing keys from other elements
+    if any(retry_keys):
+        # Reset keys found
+        keys_found = set()
+        elements = soup.find_all("td")
+        # Loop through each matching element
+        for element in elements:
+            # Loop through each key to retry
+            for key in retry_keys:
+                # Check if element text is in list of possible values for the given key
+                if element.string is not None and element.string.strip() in key_mapping[key]:
+                    # Store matched key in list
+                    keys_found.add(key)
+                    # Get element text and add to dictionary
+                    value_td = element.find_next_sibling("td")
+
+                    if value_td is not None:
+                        info_dict[key] = value_td.get_text()
+
+            # Exit loop if all keys have been matched
+            if len(keys_found) == len(key_mapping.keys()):
+                break
+                    
     # TODO find report name from page title eg. title_element = results.find_all("h1", {"class":"gem-c-title"})
     return info_dict
 
 def create_report_model(info_dict: dict, url: str) -> Report:
     report = Report()
-    report.assessment_date = info_dict["Assessment date:"]
-    report.overall_verdict = info_dict["Result:"]
-    report.stage = info_dict["Stage:"]
+    report.assessment_date = info_dict.get("assessment_date", "")
+    report.overall_verdict = info_dict.get("result", "")
+    report.stage = info_dict.get("stage", "")
     report.url = url
     report.name = url.split('/')[-1]
 

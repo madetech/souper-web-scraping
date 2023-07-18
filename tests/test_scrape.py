@@ -103,32 +103,32 @@ def test_get_report_info_returns_dict(mocked_report_response):
     assert type(get_report_info(url)) != int
 
 def test_report_info_dict_contains_known_keys(mocked_report_response):
-    assert get_report_info(url)["Assessment date:"] is not None
-    assert get_report_info(url)["Result:"] is not None
-    assert get_report_info(url)["Stage:"] is not None
+    assert get_report_info(url)["assessment_date"] is not None
+    assert get_report_info(url)["result"] is not None
+    assert get_report_info(url)["stage"] is not None
 
 def test_report_info_dict_value_types(mocked_report_response):
-    assert type(get_report_info(url)["Assessment date:"]) == str
-    assert type(get_report_info(url)["Result:"]) == str
-    assert type(get_report_info(url)["Stage:"]) == str
+    assert type(get_report_info(url)["assessment_date"]) == str
+    assert type(get_report_info(url)["result"]) == str
+    assert type(get_report_info(url)["stage"]) == str
 
 def test_specific_report(mocked_report_response):
     resp = requests.get('https://www.gov.uk/service-standard-reports/get-security-clearance-test')
     assert resp.status_code == 200
-    assert get_report_info('https://www.gov.uk/service-standard-reports/get-security-clearance-test')["Assessment date:"] == '23 March 2022'
+    assert get_report_info('https://www.gov.uk/service-standard-reports/get-security-clearance-test')["assessment_date"] == '23 March 2022'
 
 def test_scrape_report_html_extracts_data():
     with open(file, 'r') as f:
         content = f.read()
-    assert scrape_report_html(content)["Assessment date:"] == '23 March 2022'
-    assert scrape_report_html(content)["Result:"] == 'Not met'
-    assert scrape_report_html(content)["Stage:"] == 'Alpha'
+    assert scrape_report_html(content)["assessment_date"] == '23 March 2022'
+    assert scrape_report_html(content)["result"] == 'Not met'
+    assert scrape_report_html(content)["stage"] == 'Alpha'
 
 def test_create_report_model():
     info_dict = {
-        "Assessment date:": "",
-        "Result:": "",
-        "Stage:": ""
+        "assessment_date": "",
+        "result": "",
+        "stage": ""
     }
     assert type(create_report_model(info_dict, url)) == Report
 
