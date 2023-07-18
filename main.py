@@ -30,7 +30,7 @@ async def alive():
     return {"Me": "Hi"}
 
 @app.get("/report", status_code=200)
-async def alive():
+async def list_report():
     return [{"id": "12", "assessment_date": "14/06/2023", "name": "anna", "overall_verdict": "pass"}, {"id": "13", "assessment_date": "13/06/2023", "name": "rose", "overall_verdict": "pass"}]
 
 
