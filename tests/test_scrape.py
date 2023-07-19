@@ -100,7 +100,6 @@ def test_api(mocked_report_response):
 
 def test_get_report_info_returns_dict(mocked_report_response):
     assert type(get_report_info(url)) == dict
-    assert type(get_report_info(url)) != int
 
 def test_report_info_dict_contains_known_keys(mocked_report_response):
     assert get_report_info(url)["assessment_date"] is not None
