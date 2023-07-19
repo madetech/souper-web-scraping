@@ -1,6 +1,6 @@
 from typing import List
 from typing import Optional
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, UniqueConstraint
 from sqlalchemy import String
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
@@ -20,7 +20,8 @@ class Report(Base):
     assessment_date: Mapped[str] # also reassessment
     overall_verdict: Mapped[str]
     name: Mapped[str]
-    url: Mapped[str]
+    url: Mapped[str] = mapped_column(unique=True)
+    stage: Mapped[str]
     # sections: relationship("Section")
 
 class Section(Base):
