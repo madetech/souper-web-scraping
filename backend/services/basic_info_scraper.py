@@ -74,6 +74,7 @@ def scrape_one(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
     keys_found = set()
 
     # Loop through each matching element
+    # TODO: Refactor loops for each scrape function and pass logic as lambda
     for element in elements:
         # Loop through each key in key_mapping
         for key in key_mapping.keys():
