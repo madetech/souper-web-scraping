@@ -27,7 +27,7 @@ def get_reports() -> list[Report]:
 
     return reports_models
 
-def get_report_links():
+def get_report_links() -> list[str]:
     page_links_count = 0
     page = 1
     total_links = []
