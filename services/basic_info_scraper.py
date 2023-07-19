@@ -33,14 +33,14 @@ def get_report_links():
     total_links = []
 
     while (page_links_count > 0 or page == 1):
-        page_links = get_report_links(page)
+        page_links = get_report_links_by_page(page)
         page_links_count = len(page_links)
         total_links.extend(page_links)
         page += 1
 
     return total_links
 
-def get_report_links(pageNum: int) -> list[str]:
+def get_report_links_by_page(pageNum: int) -> list[str]:
     page = requests.get(f"{reports_url}{pageNum}")
     soup = BeautifulSoup(page.content, "html.parser")
     links = []
@@ -61,8 +61,8 @@ def scrape_report_html(content: str) -> dict:
 
     key_mapping = {
         "assessment_date": ["assessment date:", "reassessment date:"],
-        "stage": ["stage", "stage:", "assessment stage", "assessment stage:" "moving to:"],
-        "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment"],
+        "stage": ["stage", "stage:", "assessment stage", "assessment stage:", "moving to:"],
+        "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
     }
 
     scrape_one(soup, key_mapping, report_dict, retry_keys)
