@@ -99,6 +99,34 @@ def scrape_one(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
 def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
     if not any(retry_keys):
         return
+    
+    content = soup.find("div", { "class": "gem-c-govspeak govuk-govspeak" })
+    elements = content.select("p strong")
+    keys_found = set()
+
+    # Loop through each matching element
+    for element in elements:
+        # Loop through each key to retry
+        for key in retry_keys:
+            # Check if element text is in list of possible values for the given key
+            if element.string is not None and element.string.lower().strip() in key_mapping[key]:
+                # Store matched key in list
+                keys_found.add(key)
+                # Get element text and add to dictionary
+                value = element.next_sibling.next_sibling
+                report_dict[key] = value.get_text().strip()
+        
+        # Exit loop if all keys have been matched
+        if len(keys_found) == len(key_mapping.keys()):
+            break
+
+    # List keys to retry which have not been matched
+    all_keys = set(list(key_mapping.keys()))
+    retry_keys[:] = list(all_keys - keys_found)
+
+def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
+    if not any(retry_keys):
+        return
 
     elements = soup.find_all("td")
     keys_found = set()
@@ -121,34 +149,6 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
         if len(keys_found) == len(key_mapping.keys()):
             break
     
-    # List keys to retry which have not been matched
-    all_keys = set(list(key_mapping.keys()))
-    retry_keys[:] = list(all_keys - keys_found)
-
-def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
-    if not any(retry_keys):
-        return
-    
-    content = soup.find("div", { "class": "gem-c-govspeak govuk-govspeak" })
-    elements = content.find_all("strong")
-    keys_found = set()
-
-    # Loop through each matching element
-    for element in elements:
-        # Loop through each key to retry
-        for key in retry_keys:
-            # Check if element text is in list of possible values for the given key
-            if element.string is not None and element.string.lower().strip() in key_mapping[key]:
-                # Store matched key in list
-                keys_found.add(key)
-                # Get element text and add to dictionary
-                value = element.next_sibling.next_sibling
-                report_dict[key] = value.get_text().strip()
-        
-        # Exit loop if all keys have been matched
-        if len(keys_found) == len(key_mapping.keys()):
-            break
-
     # List keys to retry which have not been matched
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
