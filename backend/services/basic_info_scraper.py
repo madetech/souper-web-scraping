@@ -2,6 +2,7 @@ import logging
 from bs4 import BeautifulSoup, Tag
 import requests
 from models.basic import Report, Section
+import dateutil.parser as parser
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
@@ -151,11 +152,14 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
 
-def create_report_model(info_dict: dict, url: str) -> Report:
+def create_report_model(report_dict: dict, url: str) -> Report:
     report = Report()
-    report.assessment_date = info_dict.get("assessment_date", "")
-    report.overall_verdict = info_dict.get("result", "")
-    report.stage = info_dict.get("stage", "")
+    assessment_date_value = report_dict.get("assessment_date", "")
+    assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True)
+
+    report.assessment_date = assessment_date.date()
+    report.overall_verdict = report_dict.get("result", "")
+    report.stage = report_dict.get("stage", "")
     report.url = url
     report.name = url.split('/')[-1]
 
