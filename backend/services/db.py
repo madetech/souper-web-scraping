@@ -4,7 +4,6 @@ from sqlalchemy.engine import URL
 from models.basic import Report, Base
 from sqlalchemy.orm import Session
 
-
 def insert_entry(entry: Base, engine):
     with Session(engine) as session:
         session.add(entry)

@@ -1,5 +1,4 @@
 from sqlalchemy import text
-from sqlalchemy import text
 from services.db import souperDB
 
 db = souperDB()

@@ -1,10 +1,7 @@
-# from pprint import pprint
 import logging
 from bs4 import BeautifulSoup, Tag
 import requests
 from models.basic import Report, Section
-
-#import logging
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
