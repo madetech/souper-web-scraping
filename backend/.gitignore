@@ -1,0 +1,5 @@
+venv
+__pycache__/
+models/__pycache__/
+.env
+.DS_Store
