@@ -1,8 +1,8 @@
-import ReportList from './components/ReportList.js';
+import ReportList from './Components/ReportList.js';
 
 export default function App() {
   return (
-    <div ClassName="App">
+    <div className="App">
       <ReportList/>
     </div>
   )

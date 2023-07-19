@@ -1,5 +1,4 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState, useEffect }  from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import getList from "../RemoteUseCases/GetReportList";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,47 +30,40 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 },
 }));
   
-export default class ReportList extends React.Component {
-  state = {
-    reports: []
-  }
+export default function ReportList(props) {
+
+    const [report, setReport] = useState([]);
+
+    async function fetchData() {
+      setReport(await getList());
+    }
   
-  componentDidMount() {
-    const headers = {
-        "Content-Type": "application/json",
-      };
+    useEffect(() => {
+       fetchData();
+    }, []);
 
-    const url = "http://localhost:8008/report";
-
-    axios.get(url, { headers })
-    .then(res => {
-    const reports = res.data;
-    this.setState({ reports });
-    })
-  }
-
-  render() {
     return (
         <Box sx={{ p: 10 }}>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                     <TableRow>
-                        <StyledTableCell>Id</StyledTableCell>
                         <StyledTableCell>Name</StyledTableCell>
                         <StyledTableCell>Assessment date</StyledTableCell>
                         <StyledTableCell>Overall verdict</StyledTableCell>
+                        <StyledTableCell>Stage</StyledTableCell>
                     </TableRow>
                 </TableHead>
                     <TableBody>
-                        {this.state.reports.map((report) => (
-                        <StyledTableRow key={report.name}>
+                        { 
+                        report?.map((report) => (
+                          <StyledTableRow key={report.name}>
                             <StyledTableCell component="th" scope="row">
-                            {report.id}
+                            {report.name}
                             </StyledTableCell>
-                            <StyledTableCell>{report.name}</StyledTableCell>
                             <StyledTableCell>{report.assessment_date}</StyledTableCell>
                             <StyledTableCell>{report.overall_verdict}</StyledTableCell>
+                            <StyledTableCell>{report.stage}</StyledTableCell>
                         </StyledTableRow>
                         ))}
                     </TableBody>
@@ -78,5 +71,4 @@ export default class ReportList extends React.Component {
             </TableContainer>
         </Box>
     )
-  }
 }
