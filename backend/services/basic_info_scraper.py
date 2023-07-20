@@ -160,7 +160,7 @@ Live_stage_mapping = ["Live", "Live reassessment", "Live2"]
 
 def standardise_verdict_input(verdict_pass_mapping, verdict_fail_mapping, info_dict):
         if "result" not in info_dict:
-            return ""       
+            return None       
         elif info_dict["result"] in verdict_pass_mapping:
             return "Met"
         elif info_dict["result"] in verdict_fail_mapping:
@@ -172,7 +172,7 @@ def standardise_verdict_input(verdict_pass_mapping, verdict_fail_mapping, info_d
         
 def standardise_stage_input(Alpha_stage_mapping, Beta_stage_mapping, info_dict):
     if "stage" not in info_dict:
-        return ""
+        return None
     elif info_dict["stage"] in Alpha_stage_mapping:
         return "Alpha"
     elif info_dict["stage"] in Beta_stage_mapping:
