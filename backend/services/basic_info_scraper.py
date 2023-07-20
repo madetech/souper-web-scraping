@@ -154,10 +154,13 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
 
 def create_report_model(report_dict: dict, url: str) -> Report:
     report = Report()
-    assessment_date_value = report_dict.get("assessment_date", "")
-    assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True)
 
-    report.assessment_date = assessment_date.date()
+    try:
+        assessment_date_value = report_dict.get("assessment_date", "")
+        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date()
+    except:
+        report.assessment_date = ""
+
     report.overall_verdict = report_dict.get("result", "")
     report.stage = report_dict.get("stage", "")
     report.url = url
