@@ -25,4 +25,4 @@ def scrape_report_data():
 
 @app.get("/report", status_code=200)
 async def list_report():
-    return [{"id": "12", "assessment_date": "14/06/2023", "name": "anna", "overall_verdict": "pass"}, {"id": "13", "assessment_date": "13/06/2023", "name": "rose", "overall_verdict": "pass"}]
+    return [{"id": "12", "assessment_date": "14/06/2023", "name": "anna", "overall_verdict": "pass", "stage": "Alpha"}, {"id": "13", "assessment_date": "13/06/2023", "name": "rose", "overall_verdict": "pass", "stage": "beta"}]
