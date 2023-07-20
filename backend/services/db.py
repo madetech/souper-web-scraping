@@ -25,7 +25,10 @@ def upsert_report(report: Report, conn: Connection):
                 assessment_date=report.assessment_date
             ))
         
-    conn.execute(statement)
+    submit = conn.execute(statement)
+
+    for row in submit:
+        print(row)
     conn.commit()
     conn.close()
 

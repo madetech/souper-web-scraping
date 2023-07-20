@@ -22,12 +22,12 @@ class Report(Base):
     name: Mapped[str]
     url: Mapped[str] = mapped_column(unique=True)
     stage: Mapped[str] = mapped_column(nullable=True)
-    # sections: relationship("Section")
+    sections: Mapped[List["Section"]] = relationship()
 
 class Section(Base):
     __tablename__ = "section"
     id :Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
-    section_id = Column(Integer, ForeignKey("report.id"))
-    number: Mapped[int]
-    decision: Mapped[str] # default null
-    feedback: Mapped[str]
+    report_id = Column(Integer, ForeignKey("report.id"))
+    number: Mapped[int]= mapped_column(nullable=True)
+    decision: Mapped[str] = mapped_column(nullable=True)
+    feedback: Mapped[str] = mapped_column(nullable=True)

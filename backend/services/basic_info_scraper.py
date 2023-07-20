@@ -3,14 +3,15 @@ from bs4 import BeautifulSoup, Tag
 import requests
 from models.basic import Report, Section
 import dateutil.parser as parser
+from services.section_info_scraper import scrape_sections_html
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
 def get_reports() -> list[Report]:
-    #report_links = get_report_links()
-    report_links = ["/service-standard-reports/gov-uk-notify-beta-assessment"]
+    # report_links = get_report_links()
+    report_links = ["/service-standard-reports/get-security-clearance"]
     reports_models = []
 
     for link in report_links:
@@ -65,6 +66,7 @@ def scrape_report_html(content: str) -> dict:
     scrape_three(soup, key_mapping, report_dict, retry_keys)
                     
     # TODO find report name from page title eg. title_element = results.find_all("h1", {"class":"gem-c-title"})
+    report_dict["sections"] = scrape_sections_html(soup)
     return report_dict
 
 def scrape_one(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
@@ -162,5 +164,11 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     report.stage = report_dict.get("stage", None)
     report.url = url
     report.name = url.split('/')[-1]
+
+    for section_number in report_dict["sections"]:
+        section = Section()
+        section.number = section_number
+        section.decision = report_dict["sections"][section_number]
+        report.sections.append(section)
 
     return report
