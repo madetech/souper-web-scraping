@@ -1,4 +1,4 @@
-"""a
+"""Nullable section columns
 
 Revision ID: 1143610c6ffb
 Revises: 61c05288192f

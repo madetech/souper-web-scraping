@@ -1,7 +1,7 @@
 from sqlalchemy import Connection, create_engine
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.engine import URL
-from models.basic import Report, Base
+from models.basic import Report, Section, Base
 from sqlalchemy.orm import Session
 
 def insert_entry(entry: Base, engine):
@@ -11,7 +11,8 @@ def insert_entry(entry: Base, engine):
     session.close()
 
 def upsert_report(report: Report, conn: Connection):
-    statement = insert(Report.__table__).values(
+    report_table = Report.__table__
+    statement = insert(table).values(
             assessment_date=report.assessment_date,
             overall_verdict=report.overall_verdict,
             name=report.name,
@@ -23,12 +24,24 @@ def upsert_report(report: Report, conn: Connection):
                 overall_verdict=report.overall_verdict,
                 stage=report.stage,
                 assessment_date=report.assessment_date
-            ))
-        
-    submit = conn.execute(statement)
+            )
+        ).returning(report_table.c["id"])
 
-    for row in submit:
-        print(row)
+    for row in conn.execute(statement):
+        report_id = row[0]
+        
+    sections = []
+    for section in report.sections:
+        sections.append({
+            "report_id": report_id,
+            "number": section.number,
+            "decision": section.decision
+        })
+
+    # TODO: Update sections if already present using on_conflict_do_update
+    statement = insert(Section.__table__).values(sections)
+    conn.execute(statement)
+
     conn.commit()
     conn.close()
 
