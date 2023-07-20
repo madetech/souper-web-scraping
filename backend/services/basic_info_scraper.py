@@ -2,17 +2,15 @@ import logging
 from bs4 import BeautifulSoup, Tag
 import requests
 from models.basic import Report, Section
+import dateutil.parser as parser
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
-def get_report_info(url: str) -> dict:
-    info_dict = scrape_report_html(requests.get(url).content)
-    return info_dict
-
 def get_reports() -> list[Report]:
-    report_links = get_report_links()
+    #report_links = get_report_links()
+    report_links = ["/service-standard-reports/gov-uk-notify-beta-assessment"]
     reports_models = []
 
     for link in report_links:
@@ -151,11 +149,17 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
 
-def create_report_model(info_dict: dict, url: str) -> Report:
+def create_report_model(report_dict: dict, url: str) -> Report:
     report = Report()
-    report.assessment_date = info_dict.get("assessment_date", "")
-    report.overall_verdict = info_dict.get("result", "")
-    report.stage = info_dict.get("stage", "")
+
+    try:
+        assessment_date_value = report_dict.get("assessment_date", None)
+        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
+    except:
+        report.assessment_date = None
+
+    report.overall_verdict = report_dict.get("result", None)
+    report.stage = report_dict.get("stage", None)
     report.url = url
     report.name = url.split('/')[-1]
 
