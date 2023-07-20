@@ -9,8 +9,7 @@ reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
 def get_reports() -> list[Report]:
-    #report_links = get_report_links()
-    report_links = ["/service-standard-reports/gov-uk-notify-beta-assessment"]
+    report_links = get_report_links()
     reports_models = []
 
     for link in report_links:
