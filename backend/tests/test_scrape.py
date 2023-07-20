@@ -152,8 +152,8 @@ def test_create_report_model_with_missing_keys():
         "result": "Met"
     }
     report_model = create_report_model(report_dict, REPORT_URL)
-    assert report_model.assessment_date == ""
-    assert report_model.stage == ""
+    assert report_model.assessment_date == None
+    assert report_model.stage == None
 
 def test_create_report_model_with_invalid_date():
     report_dict = {
@@ -161,7 +161,7 @@ def test_create_report_model_with_invalid_date():
         "result": "Met",
         "stage": "Alpha"
     }
-    assert create_report_model(report_dict, REPORT_URL).assessment_date == ""
+    assert create_report_model(report_dict, REPORT_URL).assessment_date == None
 
 def test_create_report_model_with_valid_date():
     report_dict = {

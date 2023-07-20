@@ -9,7 +9,8 @@ reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
 def get_reports() -> list[Report]:
-    report_links = get_report_links()
+    #report_links = get_report_links()
+    report_links = ["/service-standard-reports/gov-uk-notify-beta-assessment"]
     reports_models = []
 
     for link in report_links:
@@ -152,13 +153,13 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     report = Report()
 
     try:
-        assessment_date_value = report_dict.get("assessment_date", "")
+        assessment_date_value = report_dict.get("assessment_date", None)
         report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
     except:
-        report.assessment_date = ""
+        report.assessment_date = None
 
-    report.overall_verdict = report_dict.get("result", "")
-    report.stage = report_dict.get("stage", "")
+    report.overall_verdict = report_dict.get("result", None)
+    report.stage = report_dict.get("stage", None)
     report.url = url
     report.name = url.split('/')[-1]
 
