@@ -8,10 +8,6 @@ import dateutil.parser as parser
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
-def get_report_info(url: str) -> dict:
-    info_dict = scrape_report_html(requests.get(url).content)
-    return info_dict
-
 def get_reports() -> list[Report]:
     report_links = get_report_links()
     reports_models = []
@@ -157,7 +153,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
 
     try:
         assessment_date_value = report_dict.get("assessment_date", "")
-        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date()
+        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
     except:
         report.assessment_date = ""
 
