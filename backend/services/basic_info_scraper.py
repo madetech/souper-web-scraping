@@ -151,11 +151,45 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
 
+verdict_pass_mapping = [ "Pass", "Met", "Pass with conditions", "Passed"]
+verdict_fail_mapping = ["Not Met", "Not met", "Not pass", "Not Pass"]
+Alpha_stage_mapping = ["Alpha","Alpha2", "alpha", "Alpha Review", "Alpha review", "Alpha (re-assessment)",
+                        "Alpha - reassessment", "Alpha reassessment"]
+Beta_stage_mapping = ["Beta", "Beta reassessment", "Beta2", "Public Beta", "Private Beta" ]
+Live_stage_mapping = ["Live", "Live reassessment", "Live2"]
+
+def standardise_verdict_input(verdict_pass_mapping, verdict_fail_mapping, info_dict):
+        if "result" not in info_dict:
+            return ""       
+        elif info_dict["result"] in verdict_pass_mapping:
+            return "Met"
+        elif info_dict["result"] in verdict_fail_mapping:
+            return "Not met"
+        else:
+            "TBC"
+
+
+        
+def standardise_stage_input(Alpha_stage_mapping, Beta_stage_mapping, info_dict):
+    if "stage" not in info_dict:
+        return ""
+    elif info_dict["stage"] in Alpha_stage_mapping:
+        return "Alpha"
+    elif info_dict["stage"] in Beta_stage_mapping:
+        return "Beta"
+    elif info_dict["stage"] in Live_stage_mapping:
+        return "Live"
+    else:
+        return "TBC"
+
+            
+
+
 def create_report_model(info_dict: dict, url: str) -> Report:
     report = Report()
     report.assessment_date = info_dict.get("assessment_date", "")
-    report.overall_verdict = info_dict.get("result", "")
-    report.stage = info_dict.get("stage", "")
+    report.overall_verdict = standardise_verdict_input(verdict_pass_mapping, verdict_fail_mapping, info_dict)
+    report.stage = standardise_stage_input(Alpha_stage_mapping, Beta_stage_mapping, info_dict)
     report.url = url
     report.name = url.split('/')[-1]
 
