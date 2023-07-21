@@ -1,9 +1,7 @@
 from services.section_info_scraper import get_decision, scrape_sections_html
 from bs4 import BeautifulSoup
 
-
-
-
+# scrape_sections_html tests
 def test_scrape_sections_html():
     with open('tests/data/report_html.txt', 'r') as f:
         report_html = f.read()

@@ -10,9 +10,7 @@ reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
 def get_reports() -> list[Report]:
-    # report_links = get_report_links()
-    # TODO: Remove when not testing
-    report_links = ["/service-standard-reports/get-security-clearance"]
+    report_links = get_report_links()
     reports_models = []
 
     for link in report_links:
@@ -166,10 +164,11 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     report.url = url
     report.name = url.split('/')[-1]
 
-    for section_number in report_dict["sections"]:
-        section = Section()
-        section.number = section_number
-        section.decision = report_dict["sections"][section_number]
-        report.sections.append(section)
+    if "sections" in report_dict:
+        for section_number in report_dict["sections"]:
+            section = Section()
+            section.number = section_number
+            section.decision = report_dict["sections"][section_number]
+            report.sections.append(section)
 
     return report
