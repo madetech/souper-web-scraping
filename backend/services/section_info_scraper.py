@@ -18,6 +18,6 @@ def scrape_sections_html(soup):
         section_decision_key = decision_heading.find_previous('h2').text.split('.')[0]
         section_decision_value = decision_heading.find_next_sibling('p')
 
-        sections_dict[section_decision_key] = section_decision_value.text
+        sections_dict[section_decision_key] = get_decision(section_decision_value.text)
 
     return sections_dict

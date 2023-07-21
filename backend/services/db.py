@@ -12,7 +12,7 @@ def insert_entry(entry: Base, engine):
 
 def upsert_report(report: Report, conn: Connection):
     report_table = Report.__table__
-    statement = insert(table).values(
+    statement = insert(report_table).values(
             assessment_date=report.assessment_date,
             overall_verdict=report.overall_verdict,
             name=report.name,
