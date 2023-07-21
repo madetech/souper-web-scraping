@@ -158,7 +158,7 @@ Alpha_stage_mapping = ["Alpha","Alpha2", "alpha", "Alpha Review", "Alpha review"
 Beta_stage_mapping = ["Beta", "Beta reassessment", "Beta2", "Public Beta", "Private Beta" ]
 Live_stage_mapping = ["Live", "Live reassessment", "Live2"]
 
-def standardise_verdict_input(verdict_pass_mapping, verdict_fail_mapping, info_dict):
+def standardise_verdict_input(info_dict):
         if "result" not in info_dict:
             return None       
         elif info_dict["result"] in verdict_pass_mapping:
@@ -170,7 +170,7 @@ def standardise_verdict_input(verdict_pass_mapping, verdict_fail_mapping, info_d
 
 
         
-def standardise_stage_input(Alpha_stage_mapping, Beta_stage_mapping, info_dict):
+def standardise_stage_input(info_dict):
     if "stage" not in info_dict:
         return None
     elif info_dict["stage"] in Alpha_stage_mapping:
@@ -188,8 +188,8 @@ def standardise_stage_input(Alpha_stage_mapping, Beta_stage_mapping, info_dict):
 def create_report_model(info_dict: dict, url: str) -> Report:
     report = Report()
     report.assessment_date = info_dict.get("assessment_date", "")
-    report.overall_verdict = standardise_verdict_input(verdict_pass_mapping, verdict_fail_mapping, info_dict)
-    report.stage = standardise_stage_input(Alpha_stage_mapping, Beta_stage_mapping, info_dict)
+    report.overall_verdict = standardise_verdict_input(info_dict)
+    report.stage = standardise_stage_input(info_dict)
     report.url = url
     report.name = url.split('/')[-1]
 
