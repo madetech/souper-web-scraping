@@ -11,6 +11,7 @@ def insert_entry(entry: Base, engine):
     session.close()
 
 def upsert_report(report: Report, conn: Connection):
+    # Insert report
     report_table = Report.__table__
     statement = insert(report_table).values(
         assessment_date=report.assessment_date,
@@ -19,6 +20,7 @@ def upsert_report(report: Report, conn: Connection):
         url=report.url,
         stage=report.stage
     )
+    # Update report if conflicted with unique constraint
     statement = statement.on_conflict_do_update(
         constraint="report_url_key",
         set_=dict(
@@ -27,20 +29,26 @@ def upsert_report(report: Report, conn: Connection):
             assessment_date=report.assessment_date
         )
     )
+    # Return the id of affected rows
     statement = statement.returning(report_table.c["id"])
 
+    # Execute statement and extract report_id from result
     for row in conn.execute(statement):
         report_id = row[0]
         
+    # Create list of section values with report_id
     sections = []
     for section in report.sections:
-        sections.append({
-            "report_id": report_id,
-            "number": section.number,
-            "decision": section.decision
-        })
+        sections.append(dict(
+            report_id=report_id,
+            number=section.number,
+            decision=section.decision
+        ))
 
+    # Bulk insert sections
     statement = insert(Section.__table__).values(sections)
+
+    # Update section if conflicted with unique constraint
     statement = statement.on_conflict_do_update(
         constraint="section_report_id_number_key",
         set_=dict(
@@ -54,15 +62,15 @@ def upsert_report(report: Report, conn: Connection):
 
 class souperDB:
      
-     # a method for printing data members
-     def getConnection(self):
-         DATABASE_URL = URL.create(
-            drivername="postgresql",
-            username="postgres",
-            password="password",
-            host="localhost",
-            database="postgres"
-        )
+    # a method for printing data members
+    def getConnection(self):
+        DATABASE_URL = URL.create(
+        drivername="postgresql",
+        username="postgres",
+        password="password",
+        host="localhost",
+        database="postgres"
+    )
 
-         engine = create_engine(DATABASE_URL, pool_pre_ping=False)
-         return engine.connect()
+        engine = create_engine(DATABASE_URL, pool_pre_ping=False)
+        return engine.connect()
