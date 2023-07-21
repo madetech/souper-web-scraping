@@ -25,12 +25,10 @@ def scrape_sections_html(soup) -> list[dict]:
         "14": "operate-a-reliable-service"
     }
 
-    section_element_ids = list(section_element_id_dict.values())
-
     sections = []
 
     for element_id in section_element_id_dict:
-        section_element = soup.find(["h2", "h3"], id=lambda id: id in section_element_ids)
+        section_element = soup.find(["h2", "h3"], id=section_element_id_dict[element_id])
         
         if section_element:
             section_decision = section_element.next_sibling.next_sibling
