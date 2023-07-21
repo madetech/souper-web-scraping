@@ -8,7 +8,7 @@ def test_scrape_sections_html():
         soup = BeautifulSoup(report_html, "html.parser")
 
         sections = scrape_sections_html(soup)
-        assert type(sections) == dict
+        assert type(sections) == list
         assert len(sections) == 14
 
 def test_get_decision_with_met_inputs():

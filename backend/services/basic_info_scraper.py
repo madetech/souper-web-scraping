@@ -165,10 +165,10 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     report.name = url.split('/')[-1]
 
     if "sections" in report_dict:
-        for section_number in report_dict["sections"]:
+        for report_section in report_dict["sections"]:
             section = Section()
-            section.number = section_number
-            section.decision = report_dict["sections"][section_number]
+            section.number = report_section["number"]
+            section.decision = report_section["decision"]
             report.sections.append(section)
 
     return report
