@@ -26,6 +26,10 @@ class Report(Base):
 
 class Section(Base):
     __tablename__ = "section"
+    __table_args__ = (
+        UniqueConstraint("report_id", "number", name="section_report_id_number_key"),
+    )
+
     id :Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
     report_id = Column(Integer, ForeignKey("report.id"))
     number: Mapped[int]= mapped_column(nullable=True)

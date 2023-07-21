@@ -13,19 +13,21 @@ def insert_entry(entry: Base, engine):
 def upsert_report(report: Report, conn: Connection):
     report_table = Report.__table__
     statement = insert(report_table).values(
-            assessment_date=report.assessment_date,
+        assessment_date=report.assessment_date,
+        overall_verdict=report.overall_verdict,
+        name=report.name,
+        url=report.url,
+        stage=report.stage
+    )
+    statement = statement.on_conflict_do_update(
+        constraint="report_url_key",
+        set_=dict(
             overall_verdict=report.overall_verdict,
-            name=report.name,
-            url=report.url,
-            stage=report.stage
-        ).on_conflict_do_update(
-            constraint="report_url_key",
-            set_=dict(
-                overall_verdict=report.overall_verdict,
-                stage=report.stage,
-                assessment_date=report.assessment_date
-            )
-        ).returning(report_table.c["id"])
+            stage=report.stage,
+            assessment_date=report.assessment_date
+        )
+    )
+    statement = statement.returning(report_table.c["id"])
 
     for row in conn.execute(statement):
         report_id = row[0]
@@ -38,8 +40,13 @@ def upsert_report(report: Report, conn: Connection):
             "decision": section.decision
         })
 
-    # TODO: Update sections if already present using on_conflict_do_update
     statement = insert(Section.__table__).values(sections)
+    statement = statement.on_conflict_do_update(
+        constraint="section_report_id_number_key",
+        set_=dict(
+            decision=statement.excluded.decision
+        )
+    )
     conn.execute(statement)
 
     conn.commit()
