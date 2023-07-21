@@ -11,11 +11,11 @@ class Base(DeclarativeBase):
 class Report(Base):
     __tablename__ = "report"
     id :Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
-    assessment_date: Mapped[str] = mapped_column(nullable=True)
-    overall_verdict: Mapped[str] = mapped_column(nullable=True)
+    assessment_date: Mapped[str | None] = mapped_column(nullable=True)
+    overall_verdict: Mapped[str | None] = mapped_column(nullable=True)
     name: Mapped[str]
     url: Mapped[str] = mapped_column(unique=True)
-    stage: Mapped[str] = mapped_column(nullable=True)
+    stage: Mapped[str | None] = mapped_column(nullable=True)
     # sections: relationship("Section")
 
 class ReportOut(BaseModel):

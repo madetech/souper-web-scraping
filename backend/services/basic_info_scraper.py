@@ -11,7 +11,6 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     report_links = get_report_links()
-    # report_links = ["/service-standard-reports/request-a-standard-or-enhanced-dbs-check"]
     reports_models = []
 
     for link in report_links:
@@ -150,13 +149,42 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
 
-def create_report_model(report_dict: dict, url: str) -> Report:
+def standardise_verdict_input(info_dict):
+    if "result" not in info_dict.keys():
+        return None 
+    match info_dict["result"]:
+
+        case  "Pass" | "Met" | "Pass with conditions" | "Passed":
+            return "Met"
+        case "Not Met" | "Not met" | "Not pass" | "Not Pass":
+            return "Not met"
+        case _ :
+            return "TBC"
+
+    
+            
+def standardise_stage_input(info_dict):
+    if "stage" not in info_dict.keys():
+        return None
+    match info_dict["stage"]:
+
+        case "Alpha" | "Alpha2" | "alpha" | "Alpha Review" | "Alpha review" | "Alpha (re-assessment)" | "Alpha - reassessment" | "Alpha reassessment" | "Alpha - reassessment" | "Alpha reassessment":
+            return "Alpha"
+        case "Beta" | "Beta reassessment" | "Beta2" | "Public Beta" | "Private Beta" :
+            return "Beta"
+        case "Live" | "Live reassessment" | "Live2":
+            return "Live"
+        case _ :
+            return "TBC"
+
+
+def create_report_model(info_dict: dict, url: str) -> Report:
 
     assessment_date = None
     assessment_date_value = None
 
-    if "assessment_date" in report_dict.keys():
-        assessment_date_value = report_dict.get("assessment_date")
+    if "assessment_date" in info_dict.keys():
+        assessment_date_value = info_dict.get("assessment_date")
 
     try:
         if assessment_date_value is not None:
@@ -164,10 +192,10 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     except:
         pass
 
-    report = Report(assessment_date=assessment_date,
-                    overall_verdict=report_dict.get("result", None),
-                    name=url.split('/')[-1],
-                    url=url,
-                    stage=report_dict.get("stage", None),
-                    )
+    report = Report()
+    report.assessment_date = assessment_date
+    report.overall_verdict = standardise_verdict_input(info_dict)
+    report.stage = standardise_stage_input(info_dict)
+    report.name = url.split('/')[-1]
+
     return report
