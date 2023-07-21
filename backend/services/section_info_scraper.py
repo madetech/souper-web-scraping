@@ -22,7 +22,7 @@ def scrape_sections_html(soup) -> list[dict]:
 
         existing_sections = list(filter(lambda sections: sections["number"] == section_number, sections))
 
-        if section_number != None or any(existing_sections):
+        if section_number != None and not any(existing_sections):
             sections.append(dict(
                 number=section_number,
                 decision=get_decision(section_decision.text)
