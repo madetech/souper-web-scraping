@@ -164,6 +164,8 @@ def standardise_verdict_input(info_dict):
     
             
 def standardise_stage_input(info_dict):
+    if "stage" not in info_dict.keys():
+        return None
     match info_dict["stage"]:
 
         case "Alpha" | "Alpha2" | "alpha" | "Alpha Review" | "Alpha review" | "Alpha (re-assessment)" | "Alpha - reassessment" | "Alpha reassessment" | "Alpha - reassessment" | "Alpha reassessment":
@@ -185,8 +187,6 @@ def create_report_model(info_dict: dict, url: str) -> Report:
     except:
         report.assessment_date = None
 
-
-    report.assessment_date = info_dict.get("assessment_date", "")
     report.overall_verdict = standardise_verdict_input(info_dict)
     report.stage = standardise_stage_input(info_dict)
     report.url = url
