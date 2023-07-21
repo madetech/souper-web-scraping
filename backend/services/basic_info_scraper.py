@@ -2,14 +2,11 @@ import logging
 from bs4 import BeautifulSoup, Tag
 import requests
 from models.basic import Report, Section
+import dateutil.parser as parser
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
-
-def get_report_info(url: str) -> dict:
-    info_dict = scrape_report_html(requests.get(url).content)
-    return info_dict
 
 def get_reports() -> list[Report]:
     report_links = get_report_links()
@@ -181,6 +178,14 @@ def standardise_stage_input(info_dict):
 
 def create_report_model(info_dict: dict, url: str) -> Report:
     report = Report()
+
+    try:
+        assessment_date_value = info_dict.get("assessment_date", None)
+        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
+    except:
+        report.assessment_date = None
+
+
     report.assessment_date = info_dict.get("assessment_date", "")
     report.overall_verdict = standardise_verdict_input(info_dict)
     report.stage = standardise_stage_input(info_dict)
