@@ -8,23 +8,35 @@ def get_decision(input) -> str:
 
 
 def scrape_sections_html(soup) -> list[dict]:
+    section_element_id_dict = {
+        "1": "understand-users-and-their-needs",
+        "2": "solve-a-whole-problem-for-users",
+        "3": "provide-a-joined-up-experience-across-all-channels",
+        "4": "make-the-service-simple-to-use",
+        "5": "make-sure-everyone-can-use-the-service",
+        "6": "have-a-multidisciplinary-team",
+        "7": "use-agile-ways-of-working",
+        "8": "iterate-and-improve-frequently",
+        "9": "create-a-secure-service-which-protects-users-privacy",
+        "10": "define-what-success-looks-like-and-publish-performance-data",
+        "11": "choose-the-right-tools-and-technology",
+        "12": "make-new-source-code-open",
+        "13": "use-and-contribute-to-open-standards-common-components-and-patterns",
+        "14": "operate-a-reliable-service"
+    }
+
+    section_element_ids = list(section_element_id_dict.values())
+
     sections = []
-    test = soup.find_all('h3', id = re.compile("decision"))
 
-    for decision_heading in test:
-        section_number_text = decision_heading.find_previous('h2').text.split('.')[0]
-        section_decision = decision_heading.find_next_sibling('p')
+    for element_id in section_element_id_dict:
+        section_element = soup.find(["h2", "h3"], id=lambda id: id in section_element_ids)
+        
+        if section_element:
+            section_decision = section_element.next_sibling.next_sibling
 
-        try:
-            section_number = int(section_number_text)
-        except:
-            section_number = None
-
-        existing_sections = list(filter(lambda sections: sections["number"] == section_number, sections))
-
-        if section_number != None and not any(existing_sections):
             sections.append(dict(
-                number=section_number,
+                number=int(element_id),
                 decision=get_decision(section_decision.text)
             ))
 
