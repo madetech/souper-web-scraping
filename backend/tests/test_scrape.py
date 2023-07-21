@@ -1,8 +1,10 @@
-from models.basic import Report
-from services.basic_info_scraper import get_reports, get_report_links, get_report_links_by_page, scrape_report_html, create_report_model
 import pytest
-import responses
 import requests
+import responses
+from models.report import Report
+from services.basic_info_scraper import (create_report_model, get_report_links,
+                                         get_report_links_by_page,
+                                         scrape_report_html, scrape_reports)
 
 REPORT_LIST_URL = "https://www.gov.uk/service-standard-reports"
 REPORT_URL = "https://www.gov.uk/service-standard-reports/get-security-clearance-test"
@@ -102,7 +104,7 @@ def test_api(mocked_report_response):
 
 # get_report_info_tests
 def test_get_reports(mocked_main_page_response):
-    report_list = get_reports()
+    report_list = scrape_reports()
     report = report_list[0]
     assert len(report_list) == 1
     assert report.assessment_date == "2022-03-23"
@@ -129,7 +131,7 @@ def test_get_report_links_returns_one(mocked_main_page_response_one):
     assert len(all_links) == total_link_count
 
 def test_get_reports_returns_list(mocked_main_page_response):
-    reports_list = get_reports()
+    reports_list = scrape_reports()
     assert type(reports_list) == list
 
 # get_report_links_by_page tests

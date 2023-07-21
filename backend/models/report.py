@@ -1,14 +1,8 @@
-from typing import List
-from typing import Optional
-from sqlalchemy import ForeignKey, UniqueConstraint
-from sqlalchemy import String
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text
+from typing import Any
 
-from sqlalchemy.ext.declarative import declarative_base
+from pydantic import BaseModel
+from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
@@ -24,10 +18,21 @@ class Report(Base):
     stage: Mapped[str] = mapped_column(nullable=True)
     # sections: relationship("Section")
 
+class ReportOut(BaseModel):
+    id: int
+    assessment_date:str
+    overall_verdict: str
+    name: str
+    url:str
+    stage: str
+
+    class Config:
+        orm_mode = True
+
 class Section(Base):
     __tablename__ = "section"
     id :Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
-    section_id = Column(Integer, ForeignKey("report.id"))
+    section_id: Any = Column(Integer, ForeignKey("report.id"))
     number: Mapped[int]
     decision: Mapped[str] # default null
     feedback: Mapped[str]

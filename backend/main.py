@@ -1,9 +1,16 @@
-from fastapi import FastAPI
-from services.basic_info_scraper import get_reports
-from services.db import souperDB, upsert_report
+from data import report_reader
+from data.database import get_database, souperDB
+from data.report_writer import upsert_report
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_pagination import LimitOffsetPage, add_pagination
+from models.report import ReportOut
+from services.basic_info_scraper import scrape_reports
+from sqlalchemy.orm import Session
 
 app = FastAPI()
+add_pagination(app)
+
 db = souperDB()
 
 origins = ["http://localhost:3000"]
@@ -18,11 +25,11 @@ app.add_middleware(
 
 @app.get("/scrape", status_code=201)
 def scrape_report_data():
-    report_data = get_reports()
+    report_data = scrape_reports()
     
     for report in report_data:
         upsert_report(report, db.getConnection())
 
-@app.get("/report", status_code=200)
-async def list_report():
-    return [{"id": "12", "assessment_date": "14/06/2023", "name": "anna", "overall_verdict": "pass", "stage": "Alpha"}, {"id": "13", "assessment_date": "13/06/2023", "name": "rose", "overall_verdict": "pass", "stage": "beta"}]
+@app.get("/reports", response_model=LimitOffsetPage[ReportOut])
+def get_reports(database: Session = Depends(get_database)):
+    return report_reader.get_reports(database)

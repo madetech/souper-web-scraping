@@ -1,8 +1,8 @@
-from sqlalchemy import Connection, create_engine
+from models.report import Base, Report
+from sqlalchemy import Connection
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.engine import URL
-from models.basic import Report, Base
 from sqlalchemy.orm import Session
+
 
 def insert_entry(entry: Base, engine):
     with Session(engine) as session:
@@ -28,18 +28,3 @@ def upsert_report(report: Report, conn: Connection):
     conn.execute(statement)
     conn.commit()
     conn.close()
-
-class souperDB:
-     
-     # a method for printing data members
-     def getConnection(self):
-         DATABASE_URL = URL.create(
-            drivername="postgresql",
-            username="postgres",
-            password="password",
-            host="localhost",
-            database="postgres"
-        )
-
-         engine = create_engine(DATABASE_URL, pool_pre_ping=False)
-         return engine.connect()

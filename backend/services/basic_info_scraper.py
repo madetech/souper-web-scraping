@@ -1,21 +1,22 @@
 import logging
-from bs4 import BeautifulSoup, Tag
-import requests
-from models.basic import Report, Section
+
 import dateutil.parser as parser
+import requests
+from bs4 import BeautifulSoup, Tag
+from models.report import Report
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
-def get_reports() -> list[Report]:
-    #report_links = get_report_links()
-    report_links = ["/service-standard-reports/gov-uk-notify-beta-assessment"]
+def scrape_reports() -> list[Report]:
+    report_links = get_report_links()
+    # report_links = ["/service-standard-reports/request-a-standard-or-enhanced-dbs-check"]
     reports_models = []
 
     for link in report_links:
         try:
-            report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").content)
+            report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").text)
             reports_models.append(create_report_model(report_dict, link))
         except Exception as e:
             logging.error(f"Failed to scrape report HTML for {link}: {e}")
@@ -150,17 +151,23 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     retry_keys[:] = list(all_keys - keys_found)
 
 def create_report_model(report_dict: dict, url: str) -> Report:
-    report = Report()
+
+    assessment_date = None
+    assessment_date_value = None
+
+    if "assessment_date" in report_dict.keys():
+        assessment_date_value = report_dict.get("assessment_date")
 
     try:
-        assessment_date_value = report_dict.get("assessment_date", None)
-        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
+        if assessment_date_value is not None:
+            assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
     except:
-        report.assessment_date = None
+        pass
 
-    report.overall_verdict = report_dict.get("result", None)
-    report.stage = report_dict.get("stage", None)
-    report.url = url
-    report.name = url.split('/')[-1]
-
+    report = Report(assessment_date=assessment_date,
+                    overall_verdict=report_dict.get("result", None),
+                    name=url.split('/')[-1],
+                    url=url,
+                    stage=report_dict.get("stage", None),
+                    )
     return report

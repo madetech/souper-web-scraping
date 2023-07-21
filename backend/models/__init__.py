@@ -1,1 +1,1 @@
-from models.basic import Base, Section, Report
+from models.report import Base, Report, Section
