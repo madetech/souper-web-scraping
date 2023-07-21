@@ -151,38 +151,32 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
 
-verdict_pass_mapping = [ "Pass", "Met", "Pass with conditions", "Passed"]
-verdict_fail_mapping = ["Not Met", "Not met", "Not pass", "Not Pass"]
-Alpha_stage_mapping = ["Alpha","Alpha2", "alpha", "Alpha Review", "Alpha review", "Alpha (re-assessment)",
-                        "Alpha - reassessment", "Alpha reassessment"]
-Beta_stage_mapping = ["Beta", "Beta reassessment", "Beta2", "Public Beta", "Private Beta" ]
-Live_stage_mapping = ["Live", "Live reassessment", "Live2"]
 
 def standardise_verdict_input(info_dict):
-        if "result" not in info_dict:
-            return None       
-        elif info_dict["result"] in verdict_pass_mapping:
+    if "result" not in info_dict.keys():
+        return None 
+    match info_dict["result"]:
+
+        case  "Pass" | "Met" | "Pass with conditions" | "Passed":
             return "Met"
-        elif info_dict["result"] in verdict_fail_mapping:
+        case "Not Met" | "Not met" | "Not pass" | "Not Pass":
             return "Not met"
-        else:
-            "TBC"
+        case _ :
+            return "TBC"
 
-
-        
-def standardise_stage_input(info_dict):
-    if "stage" not in info_dict:
-        return None
-    elif info_dict["stage"] in Alpha_stage_mapping:
-        return "Alpha"
-    elif info_dict["stage"] in Beta_stage_mapping:
-        return "Beta"
-    elif info_dict["stage"] in Live_stage_mapping:
-        return "Live"
-    else:
-        return "TBC"
-
+    
             
+def standardise_stage_input(info_dict):
+    match info_dict["stage"]:
+
+        case "Alpha" | "Alpha2" | "alpha" | "Alpha Review" | "Alpha review" | "Alpha (re-assessment)" | "Alpha - reassessment" | "Alpha reassessment" | "Alpha - reassessment" | "Alpha reassessment":
+            return "Alpha"
+        case "Beta" | "Beta reassessment" | "Beta2" | "Public Beta" | "Private Beta" :
+            return "Beta"
+        case "Live" | "Live reassessment" | "Live2":
+            return "Live"
+        case _ :
+            return "TBC"
 
 
 def create_report_model(info_dict: dict, url: str) -> Report:
