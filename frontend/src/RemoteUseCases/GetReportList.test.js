@@ -4,7 +4,7 @@ import axios from 'axios'
 import nock from 'nock';
 axios.defaults.adapter = 'http'
 
-it('renders without crashing', async () => {
+it('renders successfully', async () => {
 
   const scope = nock('http://localhost:8008')
   .get('/report')
