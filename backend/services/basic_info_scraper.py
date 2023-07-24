@@ -180,17 +180,17 @@ def standardise_stage_input(info_dict):
             return "TBC"
 
 
-def create_report_model(info_dict: dict, url: str) -> Report:
+def create_report_model(report_dict: dict, url: str) -> Report:
     report = Report()
 
     try:
-        assessment_date_value = info_dict.get("assessment_date", None)
+        assessment_date_value = report_dict.get("assessment_date", None)
         report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
     except:
         report.assessment_date = None
 
-    report.overall_verdict = standardise_verdict_input(info_dict)
-    report.stage = standardise_stage_input(info_dict)
+    report.overall_verdict = standardise_verdict_input(report_dict)
+    report.stage = standardise_stage_input(report_dict)
     report.url = url
     report.name = url.split('/')[-1]
 
