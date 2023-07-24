@@ -30,3 +30,9 @@ def test_get_decision_with_not_met_inputs():
 
     for input in not_met_input:
         assert get_decision(input) == "Not met"
+
+def test_get_decision_with_not_applicable_input():
+    na_input = ["N/A"]
+
+    for input in na_input:
+        assert get_decision(input == "N/A")

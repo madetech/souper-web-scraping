@@ -12,6 +12,7 @@ def scrape_sections_html(soup) -> list[dict]:
     sections = []
 
     scrape_one(soup, sections)
+    scrape_two(soup, sections)
 
     return sections
 
@@ -51,4 +52,23 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
                 break
 
 def scrape_two(soup: BeautifulSoup, sections: list[dict]):
+    if any(sections):
+        return
+
+    heading = soup.find("h2", id="digital-service-standard-points")
+    table = heading.find_next_sibling("table")
+    rows = table.find_all("tr")
+
+    for index, row in enumerate(rows):
+        if index == 0:
+            continue
+
+        cells = row.find_all("td")
+
+        if (len(cells) == 3):
+            number = cells[0].text
+            result = cells[2].text
+
+            print(f"number: {number}, result: {result}")
+
     return
