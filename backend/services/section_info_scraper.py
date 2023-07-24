@@ -1,30 +1,19 @@
 import re
 from bs4 import BeautifulSoup
 
-def get_decision(input) -> str:
+def get_decision(input: str) -> str:
     input = input.lower()
-    print(input)
-    if "met" in input:
+
+    if any(map(input.__contains__, ["not met", "not pass", "not meet"])):
         return "Not met"
+    elif any(map(input.__contains__, ["met", "pass", "passed"])):
+        return "Met"
     elif "tbc" in input:
-        return "tbc"
+        return "TBC"
     elif "n/a" in input:
-        return "n/a"
+        return "N/A"
     else:
         return "Read"
-
-# def get_decision(section_decision: str):
-
-#     match section_decision.lower().split():
-
-#         case [ *_, "met", "no" ]:
-#             return "met"
-#         case [*_, "n/a"]:
-#             return "N/A"
-#         case[ *_ ,"tbc"]:
-#             return "TBC"
-#         case _:
-#             return "read"
 
 def scrape_sections_html(soup) -> list[dict]:
     sections = []
@@ -39,7 +28,7 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
         "1": ["understand-users-and-their-needs", "understand-user-needs"],
         "2": ["solve-a-whole-problem-for-users", "do-ongoing-user-research"],
         "3": ["provide-a-joined-up-experience-across-all-channels"],
-        "4": ["make-the-service-simple-to-use"],
+        "4": ["make-the-service-simple-to-use", "use-agile-methods"],
         "5": ["make-sure-everyone-can-use-the-service"],
         "6": ["have-a-multidisciplinary-team"],
         "7": ["use-agile-ways-of-working", "understand-security-and-privacy-issues"],
@@ -59,25 +48,39 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
 
         for index, element_id in enumerate(element_ids):
             section_element = soup.find(["h2", "h3"], id=element_ids[index])
-            
-            if section_element:
-                section_decision = section_element.next_sibling.next_sibling
 
-                sections.append(dict(
-                    number=int(section_id),
-                    decision=get_decision(section_decision.text)
-                ))
+            if not section_element:
+                continue
+
+            section_decision = section_element.next_element.next_element
+
+            if not section_decision:
                 break
+
+            sections.append(dict(
+                number=int(section_id),
+                decision=get_decision(section_decision.text)
+            ))
+            break
 
 def scrape_two(soup: BeautifulSoup, sections: list[dict]):
     if any(sections):
         return
 
     heading = soup.find("h2", id="digital-service-standard-points")
+
+    if not heading:
+        return
+
     table = heading.find_next_sibling("table")
+
+    if not table:
+        return
+    
     rows = table.find_all("tr")
 
     for index, row in enumerate(rows):
+        # TODO: Get index of columns based on heading column text
         if index == 0:
             continue
 
@@ -87,7 +90,3 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
             number=int(cells[0].text),
             decision=get_decision(cells[2].text)
         ))
-
-        # print(f"number: {number}, result: {result}")
-
-    return

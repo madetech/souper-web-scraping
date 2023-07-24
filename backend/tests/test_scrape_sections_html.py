@@ -35,4 +35,4 @@ def test_get_decision_with_not_applicable_input():
     na_input = ["N/A"]
 
     for input in na_input:
-        assert get_decision(input == "N/A")
+        assert get_decision(input) == "N/A"

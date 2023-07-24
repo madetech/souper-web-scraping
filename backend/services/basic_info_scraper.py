@@ -163,8 +163,6 @@ def standardise_verdict_input(info_dict):
             return "Not met"
         case _ :
             return "TBC"
-
-    
             
 def standardise_stage_input(info_dict):
     if "stage" not in info_dict.keys():
@@ -179,7 +177,6 @@ def standardise_stage_input(info_dict):
             return "Live"
         case _ :
             return "TBC"
-
 
 def create_report_model(report_dict: dict, url: str) -> Report:
     report = Report()
