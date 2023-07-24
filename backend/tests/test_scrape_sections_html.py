@@ -11,6 +11,14 @@ def test_scrape_sections_html():
         assert type(sections) == list
         assert len(sections) == 14
 
+def test_scrape_tabular_section_html():
+    with open('tests/data/report_tabular_section_data.html', 'r') as f:
+        report_html = f.read()
+        soup = BeautifulSoup(report_html, "html.parser")
+
+        sections = scrape_sections_html(soup)
+        assert len(sections) == 18
+
 def test_get_decision_with_met_inputs():
     met_input = ["The service met point 1 of the standard"]
 
