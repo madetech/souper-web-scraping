@@ -2,14 +2,11 @@ import logging
 from bs4 import BeautifulSoup, Tag
 import requests
 from models.basic import Report, Section
+import dateutil.parser as parser
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
-
-def get_report_info(url: str) -> dict:
-    info_dict = scrape_report_html(requests.get(url).content)
-    return info_dict
 
 def get_reports() -> list[Report]:
     report_links = get_report_links()
@@ -151,11 +148,47 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
 
+
+def standardise_verdict_input(info_dict):
+    if "result" not in info_dict.keys():
+        return None 
+    match info_dict["result"]:
+
+        case  "Pass" | "Met" | "Pass with conditions" | "Passed":
+            return "Met"
+        case "Not Met" | "Not met" | "Not pass" | "Not Pass":
+            return "Not met"
+        case _ :
+            return "TBC"
+
+    
+            
+def standardise_stage_input(info_dict):
+    if "stage" not in info_dict.keys():
+        return None
+    match info_dict["stage"]:
+
+        case "Alpha" | "Alpha2" | "alpha" | "Alpha Review" | "Alpha review" | "Alpha (re-assessment)" | "Alpha - reassessment" | "Alpha reassessment" | "Alpha - reassessment" | "Alpha reassessment":
+            return "Alpha"
+        case "Beta" | "Beta reassessment" | "Beta2" | "Public Beta" | "Private Beta" :
+            return "Beta"
+        case "Live" | "Live reassessment" | "Live2":
+            return "Live"
+        case _ :
+            return "TBC"
+
+
 def create_report_model(info_dict: dict, url: str) -> Report:
     report = Report()
-    report.assessment_date = info_dict.get("assessment_date", "")
-    report.overall_verdict = info_dict.get("result", "")
-    report.stage = info_dict.get("stage", "")
+
+    try:
+        assessment_date_value = info_dict.get("assessment_date", None)
+        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
+    except:
+        report.assessment_date = None
+
+    report.overall_verdict = standardise_verdict_input(info_dict)
+    report.stage = standardise_stage_input(info_dict)
     report.url = url
     report.name = url.split('/')[-1]
 
