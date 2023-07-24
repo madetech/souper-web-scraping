@@ -2,11 +2,29 @@ import re
 from bs4 import BeautifulSoup
 
 def get_decision(input) -> str:
-    if "not" in input:
+    input = input.lower()
+    print(input)
+    if "met" in input:
         return "Not met"
+    elif "tbc" in input:
+        return "tbc"
+    elif "n/a" in input:
+        return "n/a"
     else:
-        return "Met"
+        return "Read"
 
+# def get_decision(section_decision: str):
+
+#     match section_decision.lower().split():
+
+#         case [ *_, "met", "no" ]:
+#             return "met"
+#         case [*_, "n/a"]:
+#             return "N/A"
+#         case[ *_ ,"tbc"]:
+#             return "TBC"
+#         case _:
+#             return "read"
 
 def scrape_sections_html(soup) -> list[dict]:
     sections = []
@@ -65,10 +83,11 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
 
         cells = row.find_all("td")
 
-        if (len(cells) == 3):
-            number = cells[0].text
-            result = cells[2].text
+        sections.append(dict(
+            number=int(cells[0].text),
+            decision=get_decision(cells[2].text)
+        ))
 
-            print(f"number: {number}, result: {result}")
+        # print(f"number: {number}, result: {result}")
 
     return
