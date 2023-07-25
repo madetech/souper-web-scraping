@@ -197,5 +197,6 @@ def create_report_model(info_dict: dict, url: str) -> Report:
     report.overall_verdict = standardise_verdict_input(info_dict)
     report.stage = standardise_stage_input(info_dict)
     report.name = url.split('/')[-1]
+    report.url = url
 
     return report
