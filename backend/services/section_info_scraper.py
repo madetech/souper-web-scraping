@@ -6,14 +6,14 @@ def get_decision(input: str) -> str:
 
     if any(map(input.__contains__, ["not met", "not pass", "not meet"])):
         return "Not met"
-    elif any(map(input.__contains__, ["met", "pass", "passed"])):
+    if any(map(input.__contains__, ["met", "pass", "passed"])):
         return "Met"
-    elif "tbc" in input:
+    if "tbc" in input:
         return "TBC"
-    elif "n/a" in input:
+    if "n/a" in input:
         return "N/A"
-    else:
-        return "Read"
+    
+    return "Read"
 
 def scrape_sections_html(soup) -> list[dict]:
     sections = []
