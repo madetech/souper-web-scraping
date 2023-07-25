@@ -5,7 +5,7 @@ export default async function getList() {
         headers: {'Access-Control-Allow-Origin': '*', "Content-Type": "application/json"}
     }).then(res =>  res.status === 200 ? res.data : res.status )
     .catch(err => err );
-    
+
     return result;
 
 }

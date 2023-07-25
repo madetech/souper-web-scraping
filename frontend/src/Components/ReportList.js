@@ -54,12 +54,12 @@ export default function ReportList(props) {
                         <StyledTableCell>Stage</StyledTableCell>
                     </TableRow>
                 </TableHead>
-                    <TableBody>
+                    <TableBody data-testid='tableTest'>
                         { 
                         report?.map((report) => (
-                          <StyledTableRow key={report.name}>
+                          <StyledTableRow key={report.id}>
                             <StyledTableCell component="th" scope="row">
-                            {report.name}
+                            {report.name}  
                             </StyledTableCell>
                             <StyledTableCell>{report.assessment_date}</StyledTableCell>
                             <StyledTableCell>{report.overall_verdict}</StyledTableCell>
