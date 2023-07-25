@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 def get_decision(input: str) -> str:
     input = input.lower()
-
+    print(input)
     if any(map(input.__contains__, ["not met", "not pass", "not meet"])):
         return "Not met"
     if any(map(input.__contains__, ["met", "pass", "passed"])):
@@ -43,6 +43,26 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
         "16": ["identify-performance-indicators"]
     }
 
+    # for section_id in section_element_id_dict.keys():
+    #     element_ids = section_element_id_dict[section_id]
+
+    #     for index, element_id in enumerate(element_ids):
+    #         section_element = soup.find(["h2", "h3"], id=element_ids[index])
+
+    #         if not section_element:
+    #             continue
+
+    #         section_decision = section_element.find_next_sibling().find_next_sibling()
+
+    #         if not section_decision:
+    #             break
+
+    #         sections.append(dict(
+    #             number=int(section_id),
+    #             decision=get_decision(section_decision.text)
+    #         ))
+    #         break
+
     for section_id in section_element_id_dict.keys():
         element_ids = section_element_id_dict[section_id]
 
@@ -51,8 +71,8 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
 
             if not section_element:
                 continue
-
-            section_decision = section_element.next_element.next_element
+            section_decision_heading = soup.find(text=re.compile('Decision'))
+            section_decision = section_decision_heading.find_next_sibling()
 
             if not section_decision:
                 break

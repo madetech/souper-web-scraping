@@ -11,7 +11,7 @@ BASE_URL = "https://www.gov.uk"
 
 def get_reports() -> list[Report]:
     # report_links = get_report_links()
-    report_links = ["/service-standard-reports/medical-examiners-examining-a-cause-of-death-alpha-reassessment"]
+    report_links = ["/service-standard-reports/apply-for-a-breathing-space-beta-assessment-report"]
     reports_models = []
 
     for link in report_links:
