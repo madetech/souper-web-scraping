@@ -71,8 +71,13 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
 
             if not section_element:
                 continue
-            section_decision_heading = soup.find(text=re.compile('Decision'))
-            section_decision = section_decision_heading.find_next_sibling()
+
+            decision_heading = section_element.find_next_sibling(lambda tag: tag.text == "Decision")
+
+            if not decision_heading:
+                continue
+
+            section_decision = decision_heading.find_next_sibling()
 
             if not section_decision:
                 break
