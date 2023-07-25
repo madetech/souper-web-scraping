@@ -46,16 +46,18 @@ def upsert_report(report: Report, conn: Connection):
         ))
 
     # Bulk insert sections
-    statement = insert(Section.__table__).values(sections)
+    if any(sections):
+
+        statement = insert(Section.__table__).values(sections)
 
     # Update section if conflicted with unique constraint
-    statement = statement.on_conflict_do_update(
-        constraint="section_report_id_number_key",
-        set_=dict(
-            decision=statement.excluded.decision
+        statement = statement.on_conflict_do_update(
+            constraint="section_report_id_number_key",
+            set_=dict(
+                decision=statement.excluded.decision
+            )
         )
-    )
-    conn.execute(statement)
+        conn.execute(statement)
 
     conn.commit()
     conn.close()
