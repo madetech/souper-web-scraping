@@ -3,7 +3,10 @@ import logging
 import dateutil.parser as parser
 import requests
 from bs4 import BeautifulSoup, Tag
-from models.report import Report
+import requests
+from models.report import Report, Section
+import dateutil.parser as parser
+from services.section_info_scraper import scrape_sections_html
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
@@ -11,8 +14,8 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     report_links = get_report_links()
+    # report_links = ["/service-standard-reports/get-security-clearance"]
     reports_models = []
-
     for link in report_links:
         try:
             report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").text)
@@ -65,6 +68,7 @@ def scrape_report_html(content: str) -> dict:
     scrape_three(soup, key_mapping, report_dict, retry_keys)
                     
     # TODO find report name from page title eg. title_element = results.find_all("h1", {"class":"gem-c-title"})
+    report_dict["sections"] = scrape_sections_html(soup)
     return report_dict
 
 def scrape_one(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
@@ -160,8 +164,6 @@ def standardise_verdict_input(info_dict):
             return "Not met"
         case _ :
             return "TBC"
-
-    
             
 def standardise_stage_input(info_dict):
     if "stage" not in info_dict.keys():
@@ -178,13 +180,13 @@ def standardise_stage_input(info_dict):
             return "TBC"
 
 
-def create_report_model(info_dict: dict, url: str) -> Report:
+def create_report_model(report_dict: dict, url: str) -> Report:
 
     assessment_date = None
     assessment_date_value = None
 
-    if "assessment_date" in info_dict.keys():
-        assessment_date_value = info_dict.get("assessment_date")
+    if "assessment_date" in report_dict.keys():
+        assessment_date_value = report_dict.get("assessment_date")
 
     try:
         if assessment_date_value is not None:
@@ -194,9 +196,16 @@ def create_report_model(info_dict: dict, url: str) -> Report:
 
     report = Report()
     report.assessment_date = assessment_date
-    report.overall_verdict = standardise_verdict_input(info_dict)
-    report.stage = standardise_stage_input(info_dict)
+    report.overall_verdict = standardise_verdict_input(report_dict)
+    report.stage = standardise_stage_input(report_dict)
     report.name = url.split('/')[-1]
     report.url = url
+
+    if "sections" in report_dict:
+        for report_section in report_dict["sections"]:
+            section = Section()
+            section.number = report_section["number"]
+            section.decision = report_section["decision"]
+            report.sections.append(section)
 
     return report
