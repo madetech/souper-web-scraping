@@ -11,9 +11,8 @@ BASE_URL = "https://www.gov.uk"
 
 def get_reports() -> list[Report]:
     report_links = get_report_links()
-    # report_links = ["/service-standard-reports/apply-for-a-breathing-space-beta-assessment-report"]
+    # report_links = ["/service-standard-reports/get-security-clearance"]
     reports_models = []
-
     for link in report_links:
         try:
             report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").content)

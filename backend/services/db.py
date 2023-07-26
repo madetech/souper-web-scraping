@@ -50,7 +50,7 @@ def upsert_report(report: Report, conn: Connection):
 
         statement = insert(Section.__table__).values(sections)
 
-    # Update section if conflicted with unique constraint
+        # Update section if conflicted with unique constraint
         statement = statement.on_conflict_do_update(
             constraint="section_report_id_number_key",
             set_=dict(
