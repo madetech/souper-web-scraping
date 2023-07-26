@@ -1,4 +1,4 @@
-from models.basic import Report
+from models.report import Report
 from tests.fixtures import REPORT_URL
 from services.basic_info_scraper import create_report_model
 
