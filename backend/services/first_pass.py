@@ -1,17 +1,18 @@
 # from pprint import pprint
-from bs4 import BeautifulSoup
-import requests
 import re
-from tabulate import tabulate
 import urllib.parse
-from models.basic import Report, Section
+
+import requests
+from bs4 import BeautifulSoup
+from models.report import Report, Section
+from tabulate import tabulate
+
 # had to manually install urllib3==1.26.6
 # import plotly.graph_objects as go
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 # import matplotlib.pyplot as plt
 # import plotly.express as px
 import pandas as pd
-
 
 # Assumptions:
 # One main page with sub pages, each of which is a report (and the report name is in the last element in the web address)
