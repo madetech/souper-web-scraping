@@ -1,14 +1,8 @@
+from typing import List
 
 from pydantic import BaseModel
 from sqlalchemy import Column, ForeignKey, Integer, UniqueConstraint
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from typing import List
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
-from sqlalchemy import Column, ForeignKey, Integer
-
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
@@ -32,8 +26,8 @@ class ReportOut(BaseModel):
     url:str
     stage: str
 
-    class Config:
-        orm_mode = True
+    class ConfigDict:
+        from_attributes = True
 
 
 class Section(Base):

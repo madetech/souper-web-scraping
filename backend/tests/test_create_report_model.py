@@ -1,6 +1,7 @@
-from models.basic import Report
-from tests.fixtures import REPORT_URL
+from models.report import Report
 from services.basic_info_scraper import create_report_model
+from tests.fixtures import REPORT_URL
+
 
 # create_report_model tests
 def test_create_report_model():

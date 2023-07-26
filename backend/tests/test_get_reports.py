@@ -1,9 +1,10 @@
+from services.basic_info_scraper import scrape_report_html, scrape_reports
 from tests.fixtures import REPORT_HTML_FILE, mocked_main_page_response
-from services.basic_info_scraper import get_reports, scrape_report_html
+
 
 # get_reports tests
 def test_get_reports(mocked_main_page_response):
-    report_list = get_reports()
+    report_list = scrape_reports()
     report = report_list[0]
     assert len(report_list) == 1
     assert report.assessment_date == "2022-03-23"
