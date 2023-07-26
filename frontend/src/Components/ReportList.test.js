@@ -8,11 +8,14 @@ useState: jest.fn()
 }));
 
 describe('<Reportlist />', () => {
-
   const page = 0;
   const setPage = jest.fn();
+  
   const rowsPerPage = 5;
   const setRowsPerPage = jest.fn();
+
+  const useStateMock = (useState) => [useState, jest.fn()];
+  const setReport = jest.fn();
   const report = [
     {
       id: "1",
@@ -44,25 +47,21 @@ describe('<Reportlist />', () => {
     },
     {
       id: "5",
-      assessment_date: "14/06/2023",
+      assessment_date: "14/07/2023",
       name: "emma",
       overall_verdict: "pass",
       stage: "Alpha"
     },
     {
       id: "6",
-      assessment_date: "14/06/2023",
+      assessment_date: "14/06/2022",
       name: "jenna",
       overall_verdict: "pass",
       stage: "Alpha"
     }
   ];
-  const setReport = jest.fn();
-  const setStateMock = jest.fn();
-  
-describe('render table first page ', () => {
-  beforeEach(() => {
-    const useStateMock = (useState) => [useState, setStateMock];
+
+  function renderReportListWithMock(page){
     useState.mockImplementation(useStateMock) 
     jest
       .spyOn(React, 'useState')
@@ -70,47 +69,45 @@ describe('render table first page ', () => {
       .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage]) 
       .mockImplementationOnce(() => [report, setReport]) 
 
-      render(<ReportList />);
-  });
+    render(<ReportList />);
+  }
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('renders table contents', () => { 
-      const text =  screen.getByText("anna")
-      expect(text).toBeInTheDocument();
+  describe('render table first page ', () => {
+    beforeEach(() => {
+      renderReportListWithMock(page)
     });
 
-  it('renders 5 table rows', () => {
-      const tableRows = screen.getByTestId('tableTest')
-      expect(report.length).toBe(6)
-      expect(tableRows.children.length).toBe(5);
-  });
-  }) 
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('renders table contents', () => { 
+        const text =  screen.getByText("anna")
+        expect(text).toBeInTheDocument();
+      });
+
+    it('renders 5 table rows', () => {
+        const tableRows = screen.getByTestId('tableTest')
+        
+        expect(report.length).toBe(6)
+        expect(tableRows.children.length).toBe(5);
+    });
+    }) 
 
   describe('render table next page ', () => {
     beforeEach(() => {
-      const useStateMock = (useState) => [useState, setStateMock];
-      useState.mockImplementation(useStateMock) 
-      jest
-        .spyOn(React, 'useState')
-        .mockImplementationOnce(() => [1, setPage]) 
-        .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage]) 
-        .mockImplementationOnce(() => [report, setReport]) 
-  
-        render(<ReportList />);
+      renderReportListWithMock(1)
     });
   
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it('renders only one table row', () => {
+    it('renders only one table row in the next page', () => {
         const tableRows = screen.getByTestId('tableTest')
+        
         expect(report.length).toBe(6)
         expect(tableRows.children.length).toBe(1);
     });
     }) 
-
 })
