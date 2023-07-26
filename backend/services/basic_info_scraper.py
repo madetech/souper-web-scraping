@@ -13,8 +13,8 @@ reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
-    report_links = get_report_links()
-    # report_links = ["/service-standard-reports/get-security-clearance"]
+    # report_links = get_report_links()
+    report_links = ["/service-standard-reports/get-security-clearance"]
     reports_models = []
     for link in report_links:
         try:
