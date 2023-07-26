@@ -1,20 +1,21 @@
 import logging
-from bs4 import BeautifulSoup, Tag
-import requests
-from models.basic import Report, Section
+
 import dateutil.parser as parser
+import requests
+from bs4 import BeautifulSoup, Tag
+from models.report import Report
 
 # needs to be from .env (os.getenv('BASE_URL'))
 reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
-def get_reports() -> list[Report]:
+def scrape_reports() -> list[Report]:
     report_links = get_report_links()
     reports_models = []
 
     for link in report_links:
         try:
-            report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").content)
+            report_dict = scrape_report_html(requests.get(f"{BASE_URL}{link}").text)
             reports_models.append(create_report_model(report_dict, link))
         except Exception as e:
             logging.error(f"Failed to scrape report HTML for {link}: {e}")
@@ -148,7 +149,6 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
 
-
 def standardise_verdict_input(info_dict):
     if "result" not in info_dict.keys():
         return None 
@@ -179,17 +179,24 @@ def standardise_stage_input(info_dict):
 
 
 def create_report_model(info_dict: dict, url: str) -> Report:
-    report = Report()
+
+    assessment_date = None
+    assessment_date_value = None
+
+    if "assessment_date" in info_dict.keys():
+        assessment_date_value = info_dict.get("assessment_date")
 
     try:
-        assessment_date_value = info_dict.get("assessment_date", None)
-        report.assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
+        if assessment_date_value is not None:
+            assessment_date = parser.parse(assessment_date_value, default=None, dayfirst=True).date().isoformat()
     except:
-        report.assessment_date = None
+        pass
 
+    report = Report()
+    report.assessment_date = assessment_date
     report.overall_verdict = standardise_verdict_input(info_dict)
     report.stage = standardise_stage_input(info_dict)
-    report.url = url
     report.name = url.split('/')[-1]
+    report.url = url
 
     return report

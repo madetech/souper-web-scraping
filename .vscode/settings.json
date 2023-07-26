@@ -1,0 +1,10 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticMode": "workspace",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "python.testing.pytestArgs": ["backend"],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+}
