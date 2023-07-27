@@ -41,14 +41,14 @@ export default function ReportList(props) {
     const emptyRows =
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - report.length) : 0;
     // Avoid a layout jump when reaching the last page with empty rows.
-    const handleChangePage = (
+    const handlePageChange = (
         event,
         newPage
       ) => {
           setPage(newPage);
       };
     
-      const handleChangeRowsPerPage = (
+      const handleRowsPerPageChange = (
         event,
       ) => {
         setRowsPerPage(parseInt(event.target.value, 10));
@@ -105,9 +105,9 @@ export default function ReportList(props) {
                         <TableRow>
                           <PaginationHelper 
                             page={page} 
-                            handleChangePage= {handleChangePage}
+                            handlePageChange= {handlePageChange}
                             rowsPerPage={rowsPerPage}
-                            handleChangeRowsPerPage={handleChangeRowsPerPage}
+                            handleRowsPerPageChange={handleRowsPerPageChange}
                             reportLength={report.length}
                           />
                         </TableRow>

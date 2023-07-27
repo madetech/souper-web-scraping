@@ -78,8 +78,8 @@ export default function PaginationHelper(props) {
             },
             native: true,
             }}
-            onPageChange={props.handleChangePage}
-            onRowsPerPageChange={props.handleChangeRowsPerPage}
+            onPageChange={props.handlePageChange}
+            onRowsPerPageChange={props.handleRowsPerPageChange}
             ActionsComponent={TablePaginationActions}
             />
     )

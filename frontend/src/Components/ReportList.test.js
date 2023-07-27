@@ -29,7 +29,7 @@ describe('<Reportlist />', () => {
     render(<ReportList />);
   }
 
-  describe('render table first page ', () => {
+  describe('render table first page', () => {
     beforeEach(() => {
       renderReportListWithMock(page)
     });
@@ -51,7 +51,7 @@ describe('<Reportlist />', () => {
     });
     }) 
 
-  describe('render table next page ', () => {
+  describe('render table next page', () => {
     beforeEach(() => {
       renderReportListWithMock(1)
     });
