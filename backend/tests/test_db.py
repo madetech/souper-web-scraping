@@ -4,7 +4,7 @@ from sqlalchemy import text
 db = souperDB()
 
 def test_dbConnection():
-    connection = db.getConnection()
+    connection = db.get_connection()
     trans = connection.begin()
     try:
         connection.execute(text('SELECT 1'))
