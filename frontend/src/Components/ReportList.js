@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import PaginationHelper from '../Helpers/PaginationHelper';
-import getList from "../RemoteUseCases/GetReportList";
+import getReportList from "../RemoteUseCases/ReportListFetcher";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -56,7 +56,7 @@ export default function ReportList(props) {
       };
     
     async function fetchData() {
-      setReport(await getList());
+      setReport(await getReportList());
     }
   
     useEffect(() => {
@@ -64,7 +64,6 @@ export default function ReportList(props) {
     }, []);
  
     return (
-      
         <Box sx={{ p: 10 }}>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">

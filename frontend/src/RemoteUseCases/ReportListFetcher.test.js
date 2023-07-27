@@ -1,6 +1,6 @@
 import axios from 'axios';
 import nock from 'nock';
-import getList from './GetReportList';
+import getReportList from './ReportListFetcher';
 axios.defaults.adapter = 'http'
 
 it('renders successfully', async () => {
@@ -12,7 +12,7 @@ it('renders successfully', async () => {
     'Content-type': 'application/json'
   });
 
-  await getList();
+  await getReportList();
 
   expect(scope.isDone()).toBe(true)
   nock.cleanAll()
