@@ -11,7 +11,7 @@ services:
     ports:
       - 8008:8000
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/postgres
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
     depends_on:
       - db
   db:

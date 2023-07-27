@@ -1,5 +1,8 @@
 from data.database import souperDB
+from dotenv import load_dotenv
 from sqlalchemy import text
+
+load_dotenv()
 
 db = souperDB()
 

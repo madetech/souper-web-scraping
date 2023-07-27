@@ -1,9 +1,7 @@
 import os
-from typing import Iterator
 
-from sqlalchemy import Connection, create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
-from sqlalchemy.orm import Session
 
 
 class souperDB:
@@ -16,10 +14,10 @@ class souperDB:
 
         DATABASE_URL = URL.create(
                     drivername="postgresql",
-                    username="postgres",
-                    password="password",
-                    host="localhost",
-                    database="postgres"
+                    username=self.user,
+                    password=self.password,
+                    host=self.host,
+                    database=self.database
                 )
 
         self.engine = create_engine(DATABASE_URL, pool_pre_ping=False)
