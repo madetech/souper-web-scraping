@@ -3,9 +3,7 @@ import logging
 import dateutil.parser as parser
 import requests
 from bs4 import BeautifulSoup, Tag
-import requests
 from models.report import Report, Section
-import dateutil.parser as parser
 from services.section_info_scraper import scrape_sections_html
 
 # needs to be from .env (os.getenv('BASE_URL'))
