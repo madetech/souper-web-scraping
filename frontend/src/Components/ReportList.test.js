@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
+import reports from "./../Fixtures/Reports";
 import ReportList from "./ReportList";
 
 jest.mock('react', () => ({
@@ -16,50 +17,6 @@ describe('<Reportlist />', () => {
 
   const useStateMock = (useState) => [useState, jest.fn()];
   const setReport = jest.fn();
-  const report = [
-    {
-      id: "1",
-      assessment_date: "14/06/2023",
-      name: "anna",
-      overall_verdict: "pass",
-      stage: "Alpha"
-    },
-    {
-      id: "2",
-      assessment_date: "14/06/2023",
-      name: "losy",
-      overall_verdict: "pass",
-      stage: "Alpha"
-    },
-    {
-      id: "3",
-      assessment_date: "14/06/2023",
-      name: "jack",
-      overall_verdict: "pass",
-      stage: "Alpha"
-    },
-    {
-      id: "4",
-      assessment_date: "14/06/2023",
-      name: "lucas",
-      overall_verdict: "pass",
-      stage: "Alpha"
-    },
-    {
-      id: "5",
-      assessment_date: "14/07/2023",
-      name: "emma",
-      overall_verdict: "pass",
-      stage: "Alpha"
-    },
-    {
-      id: "6",
-      assessment_date: "14/06/2022",
-      name: "jenna",
-      overall_verdict: "pass",
-      stage: "Alpha"
-    }
-  ];
 
   function renderReportListWithMock(page){
     useState.mockImplementation(useStateMock) 
@@ -67,7 +24,7 @@ describe('<Reportlist />', () => {
       .spyOn(React, 'useState')
       .mockImplementationOnce(() => [page, setPage]) 
       .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage]) 
-      .mockImplementationOnce(() => [report, setReport]) 
+      .mockImplementationOnce(() => [reports, setReport]) 
 
     render(<ReportList />);
   }
@@ -89,7 +46,7 @@ describe('<Reportlist />', () => {
     it('renders 5 table rows', () => {
         const tableRows = screen.getByTestId('tableTest')
         
-        expect(report.length).toBe(6)
+        expect(reports.length).toBe(6)
         expect(tableRows.children.length).toBe(5);
     });
     }) 
@@ -106,7 +63,7 @@ describe('<Reportlist />', () => {
     it('renders only one table row in the next page', () => {
         const tableRows = screen.getByTestId('tableTest')
         
-        expect(report.length).toBe(6)
+        expect(reports.length).toBe(6)
         expect(tableRows.children.length).toBe(1);
     });
     }) 
