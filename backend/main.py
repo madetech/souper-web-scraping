@@ -1,4 +1,6 @@
-from data import report_reader
+from typing import List
+from models.report import Section
+from data import report_reader, section_reader
 from data.database import get_database, souperDB
 from data.report_writer import upsert_report
 from fastapi import Depends, FastAPI
@@ -33,3 +35,10 @@ def scrape_report_data():
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
 def get_reports(database: Session = Depends(get_database)):
     return report_reader.get_reports(database)
+
+
+@app.get("/reports/{id}/sections")
+def get_sections(id, database: Session = Depends(get_database)):
+    return section_reader.get_sections(id, database)
+
+
