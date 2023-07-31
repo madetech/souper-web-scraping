@@ -9,8 +9,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
+import ModalHelper from '../Helpers/ModalHelper';
 import PaginationHelper from '../Helpers/PaginationHelper';
 import getReportList from "../RemoteUseCases/ReportListFetcher";
+import getSectionList from '../RemoteUseCases/SectionListFetcher';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,12 +34,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 },
 }));
 
-
 export default function ReportList(props) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [report, setReport] = useState([]);
-    
+    const [reportId, setReportId] = useState(0);
+
+    const [reportName, setReportName] = useState("");
+    const [section, setSection] = useState([]);
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => setOpen(false);
+    const handleOpen  = () => setOpen(true);
+   
     const emptyRows =
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - report.length) : 0;
     // Avoid a layout jump when reaching the last page with empty rows.
@@ -57,6 +65,7 @@ export default function ReportList(props) {
     
     async function fetchData() {
       setReport(await getReportList());
+      setSection(await getSectionList(reportId));
     }
   
     useEffect(() => {
@@ -64,6 +73,13 @@ export default function ReportList(props) {
     }, []);
  
     return (
+      <div>
+      <ModalHelper
+      open={open}
+      onClose={handleClose}
+      rowId = {reportId} 
+      reportName={reportName}
+      section={section}  />
         <Box sx={{ p: 10 }}>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -83,7 +99,10 @@ export default function ReportList(props) {
                             ? report.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             : report).map((row) => (
 
-                            <StyledTableRow key={row.id}>
+                            <StyledTableRow key={row.id} onClick={() => {
+                              handleOpen(row.id)
+                              setReportName(row.name)
+                              setReportId(row.id)}}>
                                 <StyledTableCell component="th" scope="row">
                                 {row.name}  
                                 </StyledTableCell>
@@ -114,5 +133,6 @@ export default function ReportList(props) {
                 </Table>
             </TableContainer>
         </Box>
+        </div>
     )
 }
