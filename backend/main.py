@@ -1,14 +1,16 @@
-from typing import List
-from models.report import Section
+
 from data import report_reader, section_reader
-from data.database import get_database, souperDB
+from data.database import souperDB
 from data.report_writer import upsert_report
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_pagination import LimitOffsetPage, add_pagination
 from models.report import ReportOut
 from services.basic_info_scraper import scrape_reports
-from sqlalchemy.orm import Session
+from sqlalchemy import Engine
+
+load_dotenv()
 
 app = FastAPI()
 add_pagination(app)
@@ -30,15 +32,15 @@ def scrape_report_data():
     report_data = scrape_reports()
     
     for report in report_data:
-        upsert_report(report, db.getConnection())
+        upsert_report(report, db.get_connection())
 
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
-def get_reports(database: Session = Depends(get_database)):
+def get_reports(database: Engine = Depends(db.get_engine)):
     return report_reader.get_reports(database)
 
 
 @app.get("/reports/{id}/sections")
-def get_sections(id, database: Session = Depends(get_database)):
+def get_sections(id, database: Engine = Depends(db.get_engine)):
     return section_reader.get_sections(id, database)
 
 
