@@ -1,7 +1,8 @@
+import enum
 from typing import List
 
 from pydantic import BaseModel
-from sqlalchemy import Column, ForeignKey, Integer, UniqueConstraint
+from sqlalchemy import Column, Enum, ForeignKey, Integer, UniqueConstraint
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -40,8 +41,27 @@ class Section(Base):
     report_id = Column(Integer, ForeignKey("report.id"))
     number: Mapped[int]= mapped_column(nullable=True)
     decision: Mapped[str] = mapped_column(nullable=True)
-    feedback: Mapped[str] = mapped_column(nullable=True)
     title: Mapped[str] = mapped_column(nullable= True)
+    feedback: Mapped[List["Feedback"]] = relationship()
 
+class FeedbackType(enum.Enum):
+    POSITIVE='positive'
+    CONSTRUCTIVE='constructive'
+
+FeedbackTypeEnum: Enum = Enum(
+    FeedbackType,
+    name="type",
+    create_constraint=True,
+    metadata=Base.metadata,
+    validate_strings=True
+)
+
+class Feedback(Base):
+    __tablename__ = "feedback"
+
+    id: Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
+    section_id = Column(Integer, ForeignKey("section.id"))
+    feedback: Mapped[str] = mapped_column(nullable=False)
+    type: Mapped[str] = mapped_column(nullable=False)
 
 

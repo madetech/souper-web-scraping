@@ -1,5 +1,6 @@
-import re
 from bs4 import BeautifulSoup
+from models.report import FeedbackType
+
 
 def get_decision(input: str) -> str:
     if any(map(input.__contains__, ["not met", "not pass", "not meet"])):
@@ -60,10 +61,24 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             if not section_decision:
                 break
 
+            feedback = []
+            positive_feedback_chunk = section_decision.find_next_sibling("ul")
+            for list_item in positive_feedback_chunk:
+                if list_item.text == "\n":
+                    continue
+                feedback.append((list_item.text, FeedbackType.POSITIVE))
+
+            constructive_feedback_chunk = positive_feedback_chunk.find_next_sibling("ul")
+            for list_item in constructive_feedback_chunk:
+                if list_item.text == "\n":
+                    continue
+                feedback.append((list_item.text, FeedbackType.CONSTRUCTIVE))
+
             sections.append(dict(
                 number=int(section_id),
                 decision=get_decision(section_decision.text),
-                title = section_element.text
+                title = section_element.text,
+                feedback = feedback
             ))
             break
 

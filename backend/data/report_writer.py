@@ -1,4 +1,4 @@
-from models.report import Base, Report, Section
+from models.report import Base, Feedback, Report, Section
 from sqlalchemy import Connection
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
@@ -33,8 +33,8 @@ def upsert_report(report: Report, conn: Connection):
     statement = statement.returning(report_table.c["id"])
 
     # Execute statement and extract report_id from result
-    for row in conn.execute(statement):
-        report_id = row[0]
+    for report_row in conn.execute(statement):
+        report_id = report_row[0]
         
         # Create list of section values with report_id
         sections = []
@@ -48,17 +48,32 @@ def upsert_report(report: Report, conn: Connection):
 
         # Bulk insert sections
         if any(sections):
-
+            section_table = Section.__table__
             statement = insert(Section.__table__).values(sections)
 
-        # Update section if conflicted with unique constraint
+            # Update section if conflicted with unique constraint
             statement = statement.on_conflict_do_update(
                 constraint="section_report_id_number_key",
                 set_=dict(
                     decision=statement.excluded.decision
                 )
             )
-        conn.execute(statement)
+
+            statement = statement.returning(section_table.c["id"])
+
+            for section_row in conn.execute(statement):
+                section_id = section_row[0]
+            
+                feedback = []
+                for feedback_line in section.feedback:
+                    feedback.append(dict(
+                        section_id = section_id,
+                        feedback = feedback_line.feedback,
+                        type = feedback_line.type
+                    ))
+
+                if any(feedback):
+                    statement = insert(Feedback.__table__).values(feedback)
 
     conn.commit()
     conn.close()
