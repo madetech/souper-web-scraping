@@ -1,13 +1,10 @@
 from typing import List
-from fastapi_pagination import LimitOffsetPage
-from fastapi_pagination.ext.sqlalchemy import paginate
-from models.report import Section 
-from sqlalchemy import select
+
+from models.report import Section
+from sqlalchemy import Engine
 from sqlalchemy.orm import Session
 
 
-def get_sections(id, database: Session) -> List[Section]:
-
-   return database.query(Section).filter(Section.report_id == id).all()
-
-
+def get_sections(id, engine: Engine) -> List[Section]:
+   with Session(engine) as session:
+      return session.query(Section).filter(Section.report_id == id).all()
