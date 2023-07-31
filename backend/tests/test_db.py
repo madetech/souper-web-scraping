@@ -1,10 +1,13 @@
 from data.database import souperDB
+from dotenv import load_dotenv
 from sqlalchemy import text
+
+load_dotenv()
 
 db = souperDB()
 
 def test_dbConnection():
-    connection = db.getConnection()
+    connection = db.get_connection()
     trans = connection.begin()
     try:
         connection.execute(text('SELECT 1'))
