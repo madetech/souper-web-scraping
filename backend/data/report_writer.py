@@ -42,7 +42,8 @@ def upsert_report(report: Report, conn: Connection):
             sections.append(dict(
                 report_id=report_id,
                 number=section.number,
-                decision=section.decision
+                decision=section.decision,
+                title = section.title
             ))
 
         # Bulk insert sections

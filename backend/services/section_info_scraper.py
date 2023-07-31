@@ -62,7 +62,8 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
 
             sections.append(dict(
                 number=int(section_id),
-                decision=get_decision(section_decision.text)
+                decision=get_decision(section_decision.text),
+                title = section_element.text
             ))
             break
 

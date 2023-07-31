@@ -204,6 +204,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
             section = Section()
             section.number = report_section["number"]
             section.decision = report_section["decision"]
+            section.title = report_section["title"]
             report.sections.append(section)
 
     return report
