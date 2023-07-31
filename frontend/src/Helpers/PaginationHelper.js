@@ -66,22 +66,22 @@ function TablePaginationActions(props) {
 
 export default function PaginationHelper(props) {
     return (
-            <TablePagination
+        <TablePagination
             rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
             colSpan={3}
             count={props.reportLength}
             rowsPerPage={props.rowsPerPage}
             page={props.page}
             SelectProps={{
-            inputProps: {
-                'aria-label': 'rows per page',
-            },
-            native: true,
+                inputProps: {
+                    'aria-label': 'rows per page',
+                },
+                native: true,
             }}
             onPageChange={props.handlePageChange}
             onRowsPerPageChange={props.handleRowsPerPageChange}
             ActionsComponent={TablePaginationActions}
-            />
+        />
     )
 }
 
