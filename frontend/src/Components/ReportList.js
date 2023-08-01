@@ -7,8 +7,8 @@ import TableFooter from '@mui/material/TableFooter';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import React, { useEffect, useState } from 'react';
-import ModalHelper from '../Helpers/ModalHelper';
 import PaginationHelper from '../Helpers/PaginationHelper';
+import SectionModalHelper from '../Helpers/SectionModalHelper';
 import StyledTableCell from '../Helpers/StyledTableCell';
 import StyledTableRow from '../Helpers/StyledTableRow';
 import getReportList from '../RemoteUseCases/ReportListFetcher';
@@ -66,7 +66,7 @@ export default function ReportList() {
 
   return (
     <Box>
-      <ModalHelper
+      <SectionModalHelper
         open={open}
         onClose={handleClose}
         rowId={reportId}
