@@ -3,55 +3,22 @@ import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import React from 'react';
-import Plot from 'react-plotly.js';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "50%",
-  bgcolor: "background.paper",
-  p: 8,
-  border: '1px solid #000',
-};
-
+//import Plot from 'react-plotly.js';
+import modalStyle from './ModalStyle';
+import StyledTableCell from './StyledTableCell';
+import StyledTableRow from './StyledTableRow';
 
 export default function ModalHelper(props) {
-
   let metNumbers = 0;
   let notMetNumbers = 0;
   let tbcNumbers = 0;
 
-  {
+  function sumOfDecisionByTypes() {
     (props.section).map(sec => {
       switch (sec.decision) {
         case 'Met':
@@ -64,20 +31,25 @@ export default function ModalHelper(props) {
     })
   }
 
+  sumOfDecisionByTypes();
+
   return (
     <Modal
       open={props.open}
       onClose={() => props.onClose()}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      data-testid='modalTest'
+      class='my-modal-class'
     >
-
-      <Box sx={style}>
+      
+      <Box sx={modalStyle}>
+      
         <Typography id="modal-modal-title" variant="h6" component="h1">
           {`Sections List: ${props.reportName}`}
         </Typography>
 
-        <Plot
+        {/* <Plot
           data={[
             {
               x: ["Met", "Not Met", "TBC"],
@@ -90,10 +62,10 @@ export default function ModalHelper(props) {
             { type: 'bar', x: ["Met", "Not Met", "TBC"], y: [metNumbers, notMetNumbers, tbcNumbers], name: "decision types" },
           ]}
           layout={{ width: 420, height: 340, title: 'Decisions Plot' }}
-        />
-
+        /> */}
 
         <TableContainer component={Paper}>
+
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -102,9 +74,11 @@ export default function ModalHelper(props) {
               </TableRow>
             </TableHead>
 
-            <TableBody data-testid='tableTest'>
+            <TableBody data-testid='modalTableTest'>
               {(props.section).map((sec) => (
+
                 <StyledTableRow key={sec.id}>
+                 
                   <StyledTableCell component="th" scope="row">
                     {sec.number}
                   </StyledTableCell>

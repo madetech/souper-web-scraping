@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 import reports from "./../Fixtures/Reports";
+import sections from "./../Fixtures/Sections";
 import ReportList from "./ReportList";
 
 jest.mock('react', () => ({
@@ -8,11 +9,11 @@ jest.mock('react', () => ({
   useState: jest.fn()
 }));
 
-jest.mock("react-plotly.js", () => ({
+/* jest.mock("react-plotly.js", () => ({
   __esModule: true,
   default: jest.fn(() => <div />),
 }));
-
+ */
 describe('<Reportlist />', () => {
   const page = 0;
   const setPage = jest.fn();
@@ -21,14 +22,21 @@ describe('<Reportlist />', () => {
   const setRowsPerPage = jest.fn();
 
   const useStateMock = (useState) => [useState, jest.fn()];
+
   const setReport = jest.fn();
+  const setSection = jest.fn();
+  const open = false;
+  const setOpen = jest.fn();
+  const reportId = 0;
+  const reportName = '';
+  const setReportId = jest.fn();
+  const setReportName = jest.fn();
 
   window.URL.createObjectURL = jest.fn();
 
   afterEach(() => {
     window.URL.createObjectURL.mockReset();
   });
-
 
   function renderReportListWithMock(page) {
     useState.mockImplementation(useStateMock)
@@ -37,6 +45,10 @@ describe('<Reportlist />', () => {
       .mockImplementationOnce(() => [page, setPage])
       .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage])
       .mockImplementationOnce(() => [reports, setReport])
+      .mockImplementationOnce(() => [reportId, setReportId])
+      .mockImplementationOnce(() => [reportName, setReportName])
+      .mockImplementationOnce(() => [sections, setSection])
+      .mockImplementationOnce(() => [open, setOpen])
 
     render(<ReportList />);
   }
@@ -79,4 +91,5 @@ describe('<Reportlist />', () => {
       expect(tableRows.children.length).toBe(1);
     });
   })
+
 })
