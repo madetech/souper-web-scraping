@@ -43,21 +43,23 @@ export default function ReportList() {
     setPage(0);
   };
 
-  async function fetchData() {
-    setReport(await getReportList());
-    setSection(await getSectionList(reportId));
-  }
-
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchReport = async () => {
+      setReport(await getReportList());
+    };
 
-  const handleRowclick = (
+   const fetchSection = async () => {
+      setSection(await getSectionList(reportId));
+    }; 
+
+    fetchReport();
+    fetchSection();
+}, [reportId])
+
+  const handleRowclick = async (
     row
   ) => {
     handleOpen();
-
-    {console.log(open)}
     setReportName(row.name);
     setReportId(row.id);
   };

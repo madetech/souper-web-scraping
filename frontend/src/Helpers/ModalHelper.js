@@ -40,7 +40,6 @@ export default function ModalHelper(props) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       data-testid='modalTest'
-      class='my-modal-class'
     >
       
       <Box sx={modalStyle}>
@@ -78,7 +77,6 @@ export default function ModalHelper(props) {
               {(props.section).map((sec) => (
 
                 <StyledTableRow key={sec.id}>
-                 
                   <StyledTableCell component="th" scope="row">
                     {sec.number}
                   </StyledTableCell>
