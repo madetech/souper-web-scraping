@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 from data.section_reader import get_sections
 from tests.data.section_fixtures import VALID_SECTIONS
