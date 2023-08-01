@@ -1,8 +1,9 @@
 import enum
 from typing import List
 
+import sqlalchemy
 from pydantic import BaseModel
-from sqlalchemy import Column, Enum, ForeignKey, Integer, UniqueConstraint
+from sqlalchemy import Column, ForeignKey, Integer, UniqueConstraint
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -48,20 +49,12 @@ class FeedbackType(enum.Enum):
     POSITIVE='positive'
     CONSTRUCTIVE='constructive'
 
-FeedbackTypeEnum: Enum = Enum(
-    FeedbackType,
-    name="type",
-    create_constraint=True,
-    metadata=Base.metadata,
-    validate_strings=True
-)
-
 class Feedback(Base):
     __tablename__ = "feedback"
 
     id: Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
     section_id = Column(Integer, ForeignKey("section.id"))
     feedback: Mapped[str] = mapped_column(nullable=False)
-    type: Mapped[str] = mapped_column(nullable=False)
-
-
+    type: Mapped[FeedbackType] = mapped_column(
+        sqlalchemy.Enum(FeedbackType, native_enum=False)
+    )

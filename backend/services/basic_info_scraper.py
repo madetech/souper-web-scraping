@@ -212,7 +212,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
                     feedback.feedback = feedback_item[0]
                     feedback.type = feedback_item[1]
                     
-                    section.feedback.append(feedback_item)
+                    section.feedback.append(feedback)
 
             report.sections.append(section)
 
