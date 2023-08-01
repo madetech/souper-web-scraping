@@ -41,6 +41,3 @@ class Section(Base):
     number: Mapped[int]= mapped_column(nullable=True)
     decision: Mapped[str] = mapped_column(nullable=True)
     feedback: Mapped[str] = mapped_column(nullable=True)
-
-
-
