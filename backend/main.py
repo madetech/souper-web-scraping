@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi_pagination import LimitOffsetPage, add_pagination
 from models.report import ReportOut
 from services.basic_info_scraper import scrape_reports
-from sqlalchemy import Engine
+from sqlalchemy.orm import Session
 
 load_dotenv()
 
@@ -35,12 +35,12 @@ def scrape_report_data():
         upsert_report(report, db.get_connection())
 
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
-def get_reports(database: Engine = Depends(db.get_engine)):
+def get_reports(database: Session = Depends(db.get_session)):
     return report_reader.get_reports(database)
 
 
 @app.get("/reports/{id}/sections")
-def get_sections(id, database: Engine = Depends(db.get_engine)):
+def get_sections(id, database: Session = Depends(db.get_session)):
     return section_reader.get_sections(id, database)
 
 

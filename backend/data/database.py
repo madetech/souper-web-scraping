@@ -2,6 +2,7 @@ import os
 
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
+from sqlalchemy.orm import sessionmaker
 
 
 class souperDB:
@@ -24,6 +25,9 @@ class souperDB:
 
     def get_engine(self):
         return self.engine
+    
+    def get_session(self):
+        return sessionmaker(self.engine)()
 
     def get_connection(self):
         return self.engine.connect()
