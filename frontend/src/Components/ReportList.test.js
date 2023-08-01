@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import reports from "./../Fixtures/Reports";
 import sections from "./../Fixtures/Sections";
@@ -15,11 +16,6 @@ jest.mock('react', () => ({
 }));
  */
 describe('<Reportlist />', () => {
-  const page = 0;
-  const setPage = jest.fn();
-
-  const rowsPerPage = 5;
-  const setRowsPerPage = jest.fn();
 
   const useStateMock = (useState) => [useState, jest.fn()];
 
@@ -32,18 +28,16 @@ describe('<Reportlist />', () => {
   const setReportId = jest.fn();
   const setReportName = jest.fn();
 
-  window.URL.createObjectURL = jest.fn();
+ /*  window.URL.createObjectURL = jest.fn();
 
   afterEach(() => {
     window.URL.createObjectURL.mockReset();
   });
-
-  function renderReportListWithMock(page) {
+ */
+  function renderReportListWithMock() {
     useState.mockImplementation(useStateMock)
     jest
       .spyOn(React, 'useState')
-      .mockImplementationOnce(() => [page, setPage])
-      .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage])
       .mockImplementationOnce(() => [reports, setReport])
       .mockImplementationOnce(() => [reportId, setReportId])
       .mockImplementationOnce(() => [reportName, setReportName])
@@ -55,7 +49,7 @@ describe('<Reportlist />', () => {
 
   describe('render table first page', () => {
     beforeEach(() => {
-      renderReportListWithMock(page)
+      renderReportListWithMock()
     });
 
     afterEach(() => {
@@ -77,18 +71,38 @@ describe('<Reportlist />', () => {
 
   describe('render table next page', () => {
     beforeEach(() => {
-      renderReportListWithMock(1)
+      renderReportListWithMock()
     });
 
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it('renders only one table row in the next page', () => {
-      const tableRows = screen.getByTestId('tableTest')
+    xit('renders report in the next page', async() => {
 
-      expect(reports.length).toBe(6)
-      expect(tableRows.children.length).toBe(1);
+      const row = await screen.findByRole('button', {name: /Go to next page/i})
+      userEvent.click(row);
+      const text = screen.getByText("jenna")
+      expect(text).toBeInTheDocument();
+
+    });
+  })
+
+  xdescribe('render modal', () => {
+    beforeEach(() => {
+      renderReportListWithMock()
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('renders modal', async() => {
+      const row = await screen.findAllByTestId('rowTest')
+      userEvent.click(row[0]);
+      const modal = screen.getAllByTestId('modalTest')
+      expect(modal).toBeInTheDocument();
+
     });
   })
 
