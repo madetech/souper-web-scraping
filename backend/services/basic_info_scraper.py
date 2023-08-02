@@ -204,7 +204,8 @@ def create_report_model(report_dict: dict, url: str) -> Report:
             section = Section()
             section.number = report_section["number"]
             section.decision = report_section["decision"]
-            section.title = report_section["title"]
+            if "title" in report_section.keys():
+                section.title = report_section["title"]
 
             if "feedback" in report_section:
                 for feedback_item in report_section["feedback"]:

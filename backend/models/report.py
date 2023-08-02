@@ -38,8 +38,8 @@ class Section(Base):
         UniqueConstraint("report_id", "number", name="section_report_id_number_key"),
     )
 
-    id :Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
-    report_id = Column(Integer, ForeignKey("report.id"))
+    id: Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
+    report_id: Mapped[int] = Column(Integer, ForeignKey("report.id"))
     number: Mapped[int]= mapped_column(nullable=True)
     decision: Mapped[str] = mapped_column(nullable=True)
     title: Mapped[str] = mapped_column(nullable= True)
