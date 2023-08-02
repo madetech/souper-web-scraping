@@ -11,8 +11,8 @@ reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
-    # report_links = get_report_links()
-    report_links = ["/service-standard-reports/get-security-clearance"]
+    report_links = get_report_links()
+    # report_links = ["/service-standard-reports/get-security-clearance"]
     reports_models = []
     for link in report_links:
         try:
@@ -50,6 +50,11 @@ def get_report_links_by_page(pageNum: int) -> list[str]:
 
     return links
 
+# def scrape_report_name(title: str):
+#     soup = BeautifulSoup(title, "html.parser")
+#     report_name = soup.find("h1", {"class":"gem-c-title"})
+
+
 def scrape_report_html(content: str) -> dict:
     soup = BeautifulSoup(content, "html.parser")
     report_dict = {}
@@ -64,8 +69,11 @@ def scrape_report_html(content: str) -> dict:
     scrape_one(soup, key_mapping, report_dict, retry_keys)
     scrape_two(soup, key_mapping, report_dict, retry_keys)
     scrape_three(soup, key_mapping, report_dict, retry_keys)
+     
                     
-    # TODO find report name from page title eg. title_element = results.find_all("h1", {"class":"gem-c-title"})
+    title_element = soup.find("h1")
+    report_dict["name"] = title_element.text.strip()
+
     report_dict["sections"] = scrape_sections_html(soup)
     return report_dict
 
@@ -182,6 +190,10 @@ def create_report_model(report_dict: dict, url: str) -> Report:
 
     assessment_date = None
     assessment_date_value = None
+    report_name = None
+
+    if "name" in report_dict.keys():
+        report_name = report_dict.get("name")
 
     if "assessment_date" in report_dict.keys():
         assessment_date_value = report_dict.get("assessment_date")
@@ -196,7 +208,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     report.assessment_date = assessment_date
     report.overall_verdict = standardise_verdict_input(report_dict)
     report.stage = standardise_stage_input(report_dict)
-    report.name = url.split('/')[-1]
+    report.name = report_name
     report.url = url
 
     if "sections" in report_dict:
