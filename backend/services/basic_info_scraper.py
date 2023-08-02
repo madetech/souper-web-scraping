@@ -50,10 +50,6 @@ def get_report_links_by_page(pageNum: int) -> list[str]:
 
     return links
 
-# def scrape_report_name(title: str):
-#     soup = BeautifulSoup(title, "html.parser")
-#     report_name = soup.find("h1", {"class":"gem-c-title"})
-
 
 def scrape_report_html(content: str) -> dict:
     soup = BeautifulSoup(content, "html.parser")
