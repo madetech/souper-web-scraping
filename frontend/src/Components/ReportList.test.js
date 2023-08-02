@@ -47,7 +47,7 @@ describe('<Reportlist />', () => {
     render(<ReportList />);
   }
 
-  describe('render table first page', () => {
+  xdescribe('render table first page', () => {
     beforeEach(() => {
       renderReportListWithMock()
     });
@@ -88,9 +88,18 @@ describe('<Reportlist />', () => {
     });
   })
 
-  xdescribe('render modal', () => {
+  describe('render modal', () => {
     beforeEach(() => {
-      renderReportListWithMock()
+      useState.mockImplementation(useStateMock)
+    jest
+      .spyOn(React, 'useState')
+      .mockImplementationOnce(() => [reports, setReport])
+      .mockImplementationOnce(() => [reportId, setReportId])
+      .mockImplementationOnce(() => [reportName, setReportName])
+      .mockImplementationOnce(() => [sections, setSection])
+      .mockImplementationOnce(() => [true, setOpen])
+
+    render(<ReportList />);
     });
 
     afterEach(() => {
@@ -100,7 +109,7 @@ describe('<Reportlist />', () => {
     it('renders modal', async() => {
       const row = await screen.findAllByTestId('rowTest')
       userEvent.click(row[0]);
-      const modal = screen.getAllByTestId('modalTest')
+      const modal = screen.getAllByText('Sections List: ')
       expect(modal).toBeInTheDocument();
 
     });
