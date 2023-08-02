@@ -28,11 +28,9 @@ app.add_middleware(
 )
 
 @app.get("/scrape", status_code=201)
-def scrape_report_data():
+def scrape_report_data(session: Session = Depends(db.get_session)):
     report_data = scrape_reports()
-    
-    for report in report_data:
-        upsert_report(report, db.get_connection())
+    upsert_report(report_data, session)
 
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
 def get_reports(database: Session = Depends(db.get_session)):

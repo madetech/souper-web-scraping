@@ -6,7 +6,7 @@ VALID_SECTIONS = [
         report_id=1,
         number=1,
         decision="Met",
-        feedback=None
+        feedback=[]
         
     ),
     Section(
@@ -14,6 +14,6 @@ VALID_SECTIONS = [
         report_id=1,
         number=2,
         decision="Not met",
-        feedback=None
+        feedback=[]
     )
 ]

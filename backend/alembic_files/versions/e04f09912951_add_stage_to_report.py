@@ -1,17 +1,16 @@
 """Add stage to report
 
 Revision ID: e04f09912951
-Revises: 823ef3f899d1
+Revises: 8e4c145587a3
 Create Date: 2023-07-14 14:13:09.209039
 
 """
-from alembic import op
 import sqlalchemy as sa
-
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = 'e04f09912951'
-down_revision = '823ef3f899d1'
+down_revision = '8e4c145587a3'
 branch_labels = None
 depends_on = None
 

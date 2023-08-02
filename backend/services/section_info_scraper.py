@@ -1,12 +1,14 @@
-import re
 from bs4 import BeautifulSoup
+from models.report import FeedbackType
+
 
 def get_decision(input: str) -> str:
-    if any(map(input.__contains__, ["not met", "not pass", "not meet"])):
+    lower_case_input = input.lower()
+    if any(map(lower_case_input.__contains__, ["not met", "not pass", "not meet"])):
         return "Not met"
-    if any(map(input.__contains__, ["met", "pass", "passed"])):
+    if any(map(lower_case_input.__contains__, ["met", "pass", "passed"])):
         return "Met"
-    if "tbc" in input:
+    if "tbc" in lower_case_input:
         return "TBC"
     
     return "N/A"
@@ -60,9 +62,26 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             if not section_decision:
                 break
 
+            feedback = []
+            positive_feedback_chunk = section_decision.find_next_sibling("ul")
+            if positive_feedback_chunk is not None:
+                for list_item in positive_feedback_chunk:
+                    if list_item.text == "\n":
+                        continue
+                    feedback.append((list_item.text, FeedbackType.POSITIVE))
+
+            constructive_feedback_chunk = positive_feedback_chunk.find_next_sibling("ul")
+            if constructive_feedback_chunk is not None:
+                for list_item in constructive_feedback_chunk:
+                    if list_item.text == "\n":
+                        continue
+                    feedback.append((list_item.text, FeedbackType.CONSTRUCTIVE))
+
             sections.append(dict(
                 number=int(section_id),
-                decision=get_decision(section_decision.text)
+                decision=get_decision(section_decision.text),
+                title = section_element.text,
+                feedback = feedback
             ))
             break
 
@@ -90,5 +109,6 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
 
         sections.append(dict(
             number=int(cells[0].text),
+            title=cells[1].text,
             decision=get_decision(cells[2].text)
         ))

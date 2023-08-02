@@ -3,7 +3,7 @@ import logging
 import dateutil.parser as parser
 import requests
 from bs4 import BeautifulSoup, Tag
-from models.report import Report, Section
+from models.report import Feedback, Report, Section
 from services.section_info_scraper import scrape_sections_html
 
 # needs to be from .env (os.getenv('BASE_URL'))
@@ -11,8 +11,8 @@ reports_url = "https://www.gov.uk/service-standard-reports?page="
 BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
-    report_links = get_report_links()
-    # report_links = ["/service-standard-reports/get-security-clearance"]
+    # report_links = get_report_links()
+    report_links = ["/service-standard-reports/get-security-clearance"]
     reports_models = []
     for link in report_links:
         try:
@@ -204,6 +204,17 @@ def create_report_model(report_dict: dict, url: str) -> Report:
             section = Section()
             section.number = report_section["number"]
             section.decision = report_section["decision"]
+            if "title" in report_section.keys():
+                section.title = report_section["title"]
+
+            if "feedback" in report_section:
+                for feedback_item in report_section["feedback"]:
+                    feedback = Feedback()
+                    feedback.feedback = feedback_item[0]
+                    feedback.type = feedback_item[1]
+                    
+                    section.feedback.append(feedback)
+
             report.sections.append(section)
 
     return report
