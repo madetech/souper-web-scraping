@@ -4,7 +4,8 @@ import urllib.parse
 
 import requests
 from bs4 import BeautifulSoup
-from models.report import Report, Section
+from models.report import Report
+from models.section import Section
 from tabulate import tabulate
 
 # had to manually install urllib3==1.26.6

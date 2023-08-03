@@ -1,4 +1,4 @@
-from models.report import Section
+from models.section import Section
 
 VALID_SECTIONS = [
     Section(

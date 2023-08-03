@@ -1,7 +1,7 @@
 
 from data import report_reader, section_reader
 from data.database import souperDB
-from data.report_writer import upsert_report
+from data.report_writer import upsert_reports
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -30,7 +30,7 @@ app.add_middleware(
 @app.get("/scrape", status_code=201)
 def scrape_report_data(session: Session = Depends(db.get_session)):
     report_data = scrape_reports()
-    upsert_report(report_data, session)
+    upsert_reports(report_data, session)
 
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
 def get_reports(database: Session = Depends(db.get_session)):
