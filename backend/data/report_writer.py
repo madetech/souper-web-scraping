@@ -4,12 +4,8 @@ from models.section import Section
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
-REPORT_TABLE = Report.__table__
-SECTION_TABLE = Section.__table__
-FEEDBACK_TABLE = Feedback.__table__
 
 def upsert_reports(reports: list[Report], session: Session):
-   
    for report in reports:
 
       report_id = upsert_report(report, session)
@@ -22,26 +18,30 @@ def upsert_reports(reports: list[Report], session: Session):
    session.commit()
 
 def upsert_report(report: Report, session: Session):
-   # Insert report
-      upsert_report_statement = insert(REPORT_TABLE).values(
-            assessment_date=report.assessment_date,
-            overall_verdict=report.overall_verdict,
-            name=report.name,
-            url=report.url,
-            stage=report.stage
-         ).on_conflict_do_update(
-            constraint="report_url_key",
-            set_=dict(
-                  overall_verdict=report.overall_verdict,
-                  stage=report.stage,
-                  assessment_date=report.assessment_date
-            )
-         ).returning(REPORT_TABLE.c["id"])
+    report_table = Report.__table__
       
-      row = session.execute(upsert_report_statement).fetchone()
-      return row[0] # report id
+    # Insert report
+    upsert_report_statement = insert(report_table).values(
+        assessment_date=report.assessment_date,
+        overall_verdict=report.overall_verdict,
+        name=report.name,
+        url=report.url,
+        stage=report.stage
+        ).on_conflict_do_update(
+        constraint="report_url_key",
+        set_=dict(
+                overall_verdict=report.overall_verdict,
+                stage=report.stage,
+                assessment_date=report.assessment_date
+        )
+        ).returning(report_table.c["id"])
+    
+    row = session.execute(upsert_report_statement).fetchone()
+    return row[0] # report id
 
 def upsert_report_section(section: Section, report_id: int, session: Session):
+    section_table = Section.__table__
+
     section_to_insert = dict(
                report_id=report_id,
                number=section.number,
@@ -49,20 +49,22 @@ def upsert_report_section(section: Section, report_id: int, session: Session):
                decision=section.decision
         )
 
-    upsert_section_statement = insert(SECTION_TABLE).values(section_to_insert)
+    upsert_section_statement = insert(section_table).values(section_to_insert)
     upsert_section_statement = upsert_section_statement.on_conflict_do_update(
                                 constraint="section_report_id_number_key",
                                 set_=dict(
                                     decision=upsert_section_statement.excluded.decision,
                                     title=upsert_section_statement.excluded.title,
                                 )
-                            ).returning(SECTION_TABLE.c["id"])
+                            ).returning(section_table.c["id"])
 
     inserted_section = session.execute(upsert_section_statement).fetchone()
 
     return inserted_section[0] # section id
 
 def bulk_upsert_feedback(section: Section, section_id: int, session: Session):
+    feedback_table = Feedback.__table__
+    
     feedbacks_to_insert = []
 
     for feedback_item in section.feedback:
@@ -73,4 +75,4 @@ def bulk_upsert_feedback(section: Section, section_id: int, session: Session):
         ))
 
     if any(feedbacks_to_insert):
-      session.execute(insert(FEEDBACK_TABLE).values(feedbacks_to_insert))
+      session.execute(insert(feedback_table).values(feedbacks_to_insert))
