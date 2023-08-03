@@ -75,4 +75,4 @@ def bulk_upsert_feedback(section: Section, section_id: int, session: Session):
         ))
 
     if any(feedbacks_to_insert):
-      session.execute(insert(feedback_table).values(feedbacks_to_insert))
+      session.execute(insert(feedback_table).values(feedbacks_to_insert).on_conflict_do_nothing())

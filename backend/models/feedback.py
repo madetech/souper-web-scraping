@@ -1,10 +1,9 @@
 import enum
 
 import sqlalchemy
-from sqlalchemy import Column, ForeignKey, Integer
-from sqlalchemy.orm import Mapped, mapped_column
-
 from models.base import Base
+from sqlalchemy import Column, ForeignKey, Integer, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column
 
 
 class FeedbackType(enum.Enum):
@@ -14,6 +13,9 @@ class FeedbackType(enum.Enum):
 
 class Feedback(Base):
     __tablename__ = "feedback"
+    __table_args__ = (
+        UniqueConstraint("section_id", "feedback", "type", name="feedback_section_id_feedback_type_key"),
+    )
 
     id: Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
     section_id = Column(Integer, ForeignKey("section.id"))
