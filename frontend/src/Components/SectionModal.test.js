@@ -9,11 +9,14 @@ jest.mock('react', () => ({
 }));
 
 const open = true;
-
+const setOpen = jest.fn();
 
 function mockStateImlementation() {
   const useStateMock = (useState) => [useState, jest.fn()];
   useState.mockImplementation(useStateMock)
+  jest
+  .spyOn(React, 'useState')
+  .mockImplementationOnce(() => [open, setOpen])
 }
 
 xdescribe('<SectionModal />', () => {
@@ -25,7 +28,7 @@ xdescribe('<SectionModal />', () => {
   afterAll(() => {
     jest.resetAllMocks();
  });
-  const handleClose = jest.fn();
+  const handleClose = jest.fn(setOpen(false));
 
   describe('render modal', () => {
     it('renders table contents', async () => {
@@ -37,7 +40,7 @@ xdescribe('<SectionModal />', () => {
       reportName={'anna'}
       section={sections} />);
       
-      const text =  screen.getByText("Sections List: anna")
+      const text =  screen.getAllByTestId("modalTest")
       expect(text).toBeInTheDocument();
     });
   })

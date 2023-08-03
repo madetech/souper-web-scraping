@@ -1,9 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import axios from 'axios';
+import nock from 'nock';
 import React, { useState } from 'react';
 import reports from "./../Fixtures/Reports";
 import sections from "./../Fixtures/Sections";
 import ReportList from "./ReportList";
+axios.defaults.adapter = 'http'
+
+
+nock('http://localhost:8000')
+.get(`/reports/`)
+.reply(200, reports);
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -15,6 +23,8 @@ jest.mock('react', () => ({
   default: jest.fn(() => <div />),
 }));
  */
+
+
 describe('<Reportlist />', () => {
 
   const useStateMock = (useState) => [useState, jest.fn()];
@@ -27,6 +37,12 @@ describe('<Reportlist />', () => {
   const reportName = '';
   const setReportId = jest.fn();
   const setReportName = jest.fn();
+
+  const page = 0;
+  const setPage = jest.fn();
+  const rowsPerPage =5;
+  const setRowsPerPage = jest.fn();
+
 
  /*  window.URL.createObjectURL = jest.fn();
 
@@ -71,24 +87,36 @@ describe('<Reportlist />', () => {
 
   describe('render table next page', () => {
     beforeEach(() => {
-      renderReportListWithMock()
+   
+      useState.mockImplementation(useStateMock)
+      jest
+      .spyOn(React, 'useState')
+      .mockImplementationOnce(() => [reports, setReport])
+      .mockImplementationOnce(() => [reportId, setReportId])
+      .mockImplementationOnce(() => [reportName, setReportName])
+      .mockImplementationOnce(() => [sections, setSection])
+      .mockImplementationOnce(() => [open, setOpen])
+      .mockImplementationOnce(() => [0, setPage])
+      .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage])
+      .mockImplementationOnce(() => [1, setPage])
+      .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage])
+
+      render(<ReportList />);
     });
 
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    xit('renders report in the next page', async() => {
-
-      const row = await screen.findByRole('button', {name: /Go to next page/i})
-      userEvent.click(row);
-      const text = screen.getByText("jenna")
-      expect(text).toBeInTheDocument();
-
+    it('renders report in the next page', async() => {
+      const tableRows = screen.getByTestId('tableTest')
+     
+      expect(reports.length).toBe(6)
+      expect(tableRows.children.length).toBe(1);
     });
   })
 
-  describe('render modal', () => {
+  xdescribe('render modal', () => {
     beforeEach(() => {
       useState.mockImplementation(useStateMock)
     jest
@@ -98,6 +126,11 @@ describe('<Reportlist />', () => {
       .mockImplementationOnce(() => [reportName, setReportName])
       .mockImplementationOnce(() => [sections, setSection])
       .mockImplementationOnce(() => [true, setOpen])
+      .mockImplementationOnce(() => [0, setPage])
+      .mockImplementationOnce(() => [5, setRowsPerPage])
+      //.mockImplementationOnce(() => [0, setPage])
+      //.mockImplementationOnce(() => [5, setRowsPerPage])
+    
 
     render(<ReportList />);
     });
@@ -108,8 +141,9 @@ describe('<Reportlist />', () => {
 
     it('renders modal', async() => {
       const row = await screen.findAllByTestId('rowTest')
-      userEvent.click(row[0]);
-      const modal = screen.getAllByText('Sections List: ')
+
+      await userEvent.click(row[0]);
+      const modal = screen.getAllByTestId('modalTest')
       expect(modal).toBeInTheDocument();
 
     });

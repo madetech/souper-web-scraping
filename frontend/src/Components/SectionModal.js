@@ -15,6 +15,7 @@ export default function SectionModal(props) {
       aria-describedby="modal-modal-description"
       data-testid='modalTest'
     >
+      
       <Box sx={modalStyle}>
         <Typography id="modal-modal-title" variant="h6" component="h1">
           {`Sections List: ${props.reportName}`}

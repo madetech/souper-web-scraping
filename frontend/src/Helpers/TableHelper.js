@@ -4,8 +4,8 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import * as React from 'react';
+import Paginationhelper from './PaginationHelper';
 import { StyledTableCell, StyledTableRow } from './TableProperties';
 
 export default function TableHelper(props) {
@@ -62,9 +62,8 @@ export default function TableHelper(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 50, { value: -1, label: 'All' }]}
-          component="div"
+
+        <Paginationhelper
           count={props.rows.length}
           rowsPerPage={rowsPerPage}
           page={page}

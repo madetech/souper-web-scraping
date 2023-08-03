@@ -7,6 +7,7 @@ import { reportColumns } from '../Helpers/TableProperties';
 import getReportList from '../RemoteUseCases/ReportListFetcher';
 import getSectionList from '../RemoteUseCases/SectionListFetcher';
 import SectionModal from './SectionModal';
+
 export default function ReportList() {
   const [report, setReport] = useState([]);
   const [reportId, setReportId] = useState(0);
