@@ -4,4 +4,4 @@ __pycache__
 .DS_Store
 .pytest_cache
 .vscode
-.node_modules
+node_modules

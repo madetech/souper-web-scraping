@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import PaginationHelper from '../Helpers/PaginationHelper';
 
@@ -27,13 +26,12 @@ describe('<PaginationHelper />', () => {
     mockStateImlementation()
   });
 
-
   afterAll(() => {
     jest.resetAllMocks();
   });
 
   describe('render pagination', () => {
-    it('trigger next page button', async () => {
+    it('trigger next page button', () => {
       const onChangePageNo = jest.fn();
       const onRowsPerPageChange = jest.fn();
       render(
@@ -48,9 +46,30 @@ describe('<PaginationHelper />', () => {
         />,
       );
 
-      const user = userEvent.setup();
       const nextPageButton = screen.getByRole("button", { name: 'Go to next page' });
-      await user.click(nextPageButton);
+      fireEvent.click(nextPageButton);
+
+      expect(onRowsPerPageChange).toHaveBeenCalledTimes(0);
+      expect(onChangePageNo).toHaveBeenCalledTimes(1);
+    });
+
+    it('trigger previous page button', () => {
+      const onChangePageNo = jest.fn();
+      const onRowsPerPageChange = jest.fn();
+      render(
+        <PaginationHelper
+          rowsPerPageOptions={[5, 10, 50, { value: -1, label: 'All' }]}
+          component="div"
+          count={6}
+          rowsPerPage={rowsPerPage}
+          page={1}
+          onPageChange={onChangePageNo}
+          onRowsPerPageChange={onRowsPerPageChange}
+        />,
+      );
+
+      const nextPageButton = screen.getByRole("button", { name: 'Go to previous page' });
+      fireEvent.click(nextPageButton);
 
       expect(onRowsPerPageChange).toHaveBeenCalledTimes(0);
       expect(onChangePageNo).toHaveBeenCalledTimes(1);
