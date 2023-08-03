@@ -3,7 +3,9 @@ import logging
 import dateutil.parser as parser
 import requests
 from bs4 import BeautifulSoup, Tag
-from models.report import Feedback, Report, Section
+from models.feedback import Feedback
+from models.report import Report
+from models.section import Section
 from services.section_info_scraper import scrape_sections_html
 
 # needs to be from .env (os.getenv('BASE_URL'))

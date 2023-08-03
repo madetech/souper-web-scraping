@@ -1,6 +1,6 @@
 from typing import List
 
-from models.report import Section
+from models.section import Section
 from sqlalchemy.orm import Session
 
 
