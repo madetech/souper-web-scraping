@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, PageElement
 from models.feedback import FeedbackType
 
 
@@ -46,7 +46,7 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
     for section_id in section_element_id_dict.keys():
         element_ids = section_element_id_dict[section_id]
 
-        for index, element_id in enumerate(element_ids):
+        for index, _ in enumerate(element_ids):
             section_element = soup.find(["h2", "h3"], id=element_ids[index])
 
             if not section_element:
@@ -63,28 +63,8 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
                 break
 
             feedback = []
-            positive_feedback_heading = soup.find("h3", id=strain_by_partial_id("what-the-team-has-done-well"))
-            
-            if positive_feedback_heading:
-                positive_feedback_chunk = positive_feedback_heading.find_next_sibling("ul")
-
-                if positive_feedback_chunk:
-                    for list_item in positive_feedback_chunk:
-                        if list_item.text == "\n":
-                            continue
-                        feedback.append((list_item.text, FeedbackType.POSITIVE))
-
-
-            constructive_feedback_heading = soup.find("h3", id=strain_by_partial_id("what-the-team-needs-to-explore"))
-            
-            if constructive_feedback_heading:
-                constructive_feedback_chunk = constructive_feedback_heading.find_next_sibling("ul")
-
-                if constructive_feedback_chunk:
-                    for list_item in constructive_feedback_chunk:
-                        if list_item.text == "\n":
-                            continue
-                        feedback.append((list_item.text, FeedbackType.CONSTRUCTIVE))
+            feedback.extend(extract_feedback(section_decision, "what-the-team-has-done-well", FeedbackType.POSITIVE))
+            feedback.extend(extract_feedback(section_decision, "what-the-team-needs-to-explore", FeedbackType.CONSTRUCTIVE))
 
             sections.append(dict(
                 number=int(section_id),
@@ -93,6 +73,20 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
                 feedback = feedback
             ))
             break
+
+def extract_feedback(element: PageElement, partial_id: str, feedback_type: FeedbackType) -> list[tuple[str,FeedbackType]]:
+    feedback = []
+    heading = element.find_next_sibling("h3", id=strain_by_partial_id(partial_id))
+            
+    if heading:
+        feedback_chunk = heading.find_next_sibling("ul")
+
+        if feedback_chunk:
+            for list_item in feedback_chunk:
+                if list_item.text != "\n":
+                    feedback.append((list_item.text, feedback_type))
+    
+    return feedback
 
 def strain_by_partial_id(id: str):
     return lambda x: x and x.startswith(id)
