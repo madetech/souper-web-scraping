@@ -1,5 +1,9 @@
-from services.basic_info_scraper import get_report_links, get_report_links_by_page
-from tests.fixtures import mocked_report_list_all_response, mocked_main_page_response_one, mocked_report_list_page_response
+from services.basic_info_scraper import (get_report_links,
+                                         get_report_links_by_page)
+from tests.test_fixtures.report_html_fixtures import (
+    mocked_main_page_response_one, mocked_report_list_all_response,
+    mocked_report_list_page_response)
+
 
 # get_report_links tests
 def test_get_report_links_returns_expected_links(mocked_report_list_all_response):
