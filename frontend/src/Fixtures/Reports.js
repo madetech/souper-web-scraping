@@ -43,4 +43,10 @@ const reports = [
   }
 ];
 
-export default reports;
+const reportColumns = [
+  { id: 'name', label: 'Name', minWidth: 170 },
+  { id: 'assessment_date', label: 'Assessment date', minWidth: 170 },
+  { id: 'overall_verdict', label: 'Overall verdict', minWidth: 170 },
+  { id: 'stage', label: 'Stage', minWidth: 170 },
+];
+export { reportColumns, reports };
