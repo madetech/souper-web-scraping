@@ -5,6 +5,7 @@ from data.report_writer import upsert_reports
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi_pagination import LimitOffsetPage, add_pagination
 from models.report import ReportOut
 from services.basic_info_scraper import scrape_reports
@@ -26,6 +27,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 @app.get("/scrape", status_code=201)
 def scrape_report_data(session: Session = Depends(db.get_session)):
