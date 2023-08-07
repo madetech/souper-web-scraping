@@ -84,7 +84,7 @@ def extract_feedback(element: PageElement, partial_id: str, feedback_type: Feedb
         if feedback_chunk:
             for list_item in feedback_chunk:
                 if list_item.text != "\n":
-                    feedback.append((list_item.text, feedback_type))
+                    feedback.append((list_item.text.strip(), feedback_type))
     
     return feedback
 
