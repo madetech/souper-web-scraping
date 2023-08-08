@@ -1,5 +1,5 @@
 
-from data import report_reader, section_reader
+from data import feedback_reader, report_reader, section_reader
 from data.database import souperDB
 from data.report_writer import upsert_reports
 from dotenv import load_dotenv
@@ -42,3 +42,6 @@ def get_sections(id, database: Session = Depends(db.get_session)):
     return section_reader.get_sections(id, database)
 
 
+@app.get("/sections/{id}/feedback")
+def get_feedback(id, database: Session = Depends(db.get_session)):
+    return feedback_reader.get_feedback(id, database)
