@@ -1,9 +1,10 @@
-from services.section_info_scraper import get_decision, scrape_sections_html
 from bs4 import BeautifulSoup
+from services.section_info_scraper import get_decision, scrape_sections_html
+
 
 # scrape_sections_html tests
 def test_scrape_sections_html():
-    with open('tests/data/report_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_html.txt', 'r') as f:
         report_html = f.read()
         soup = BeautifulSoup(report_html, "html.parser")
 
@@ -12,7 +13,7 @@ def test_scrape_sections_html():
         assert len(sections) == 14
 
 def test_scrape_tabular_section_html():
-    with open('tests/data/report_tabular_section_data.html', 'r') as f:
+    with open('tests/test_fixtures/report_tabular_section_data.html', 'r') as f:
         report_html = f.read()
         soup = BeautifulSoup(report_html, "html.parser")
 
