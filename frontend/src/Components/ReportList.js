@@ -48,7 +48,7 @@ export default function ReportList() {
         reportName={reportName}
         section={section} />
       <Box sx={reportTableStyle}>
-        <Typography id="modal-modal-title" variant="h6" component="h1">
+        <Typography id="modal-modal-title" variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>
           Report List
         </Typography>
         <TableHelper

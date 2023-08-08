@@ -7,6 +7,11 @@ jest.mock('react', () => ({
   useState: jest.fn()
 }));
 
+jest.mock("react-plotly.js", () => ({
+  __esModule: true,
+  default: jest.fn(() => <div />),
+}));
+
 const open = true;
 const setOpen = jest.fn();
 
