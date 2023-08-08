@@ -1,6 +1,6 @@
 import axios from 'axios';
 import nock from 'nock';
-import getSectionList from './SectionListFetcher';
+import getSectionList from '../../RemoteUseCases/SectionListFetcher';
 axios.defaults.adapter = 'http'
 
 it('renders successfully', async () => {

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
-import PaginationHelper from '../Helpers/PaginationHelper';
+import PaginationHelper from '../../Helpers/PaginationHelper';
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),

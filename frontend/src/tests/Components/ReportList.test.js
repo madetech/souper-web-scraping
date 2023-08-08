@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
-import { reports } from "./../Fixtures/Reports";
-import sections from "./../Fixtures/Sections";
-import ReportList from "./ReportList";
+import ReportList from "../../Components/ReportList";
+import { reports } from "../Fixtures/Reports";
+import { sections } from "../Fixtures/Sections";
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
