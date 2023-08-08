@@ -1,7 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
-import { reportColumns, reports } from '../Fixtures/Reports';
-import TableHelper from '../Helpers/TableHelper';
+import TableHelper from '../../Helpers/TableHelper';
+import { reportColumns, reports } from "../Fixtures/Reports";
+
 jest.mock('react', () => ({
     ...jest.requireActual('react'),
     useState: jest.fn()

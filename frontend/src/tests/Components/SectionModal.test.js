@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
-import sections from "./../Fixtures/Sections";
-import SectionModal from './SectionModal';
+import SectionModal from "../../Components/SectionModal";
+import sections from "../Fixtures/Sections";
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: jest.fn()
