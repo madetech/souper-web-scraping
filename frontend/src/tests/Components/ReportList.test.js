@@ -2,15 +2,20 @@ import { render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 import ReportList from "../../Components/ReportList";
 import { reports } from "../Fixtures/Reports";
-import { sections } from "../Fixtures/Sections";
+import sections from "../Fixtures/Sections";
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: jest.fn()
 }));
 
-describe('<Reportlist />', () => {
+jest.mock("react-plotly.js", () => ({
+  __esModule: true,
+  default: jest.fn(() => <div />),
+}));
 
+
+describe('<Reportlist />', () => {
   const useStateMock = (useState) => [useState, jest.fn()];
 
   const setReport = jest.fn();
