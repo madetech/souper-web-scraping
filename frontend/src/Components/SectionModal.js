@@ -1,10 +1,8 @@
-import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp';
-import { IconButton } from '@mui/material';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import Modalhelper from '../Helpers/ModalHelper';
-import { iconStyle, modalStyle } from '../Helpers/ModalStyle';
 import PlotHelper from '../Helpers/PlotHelper';
 import TableHelper from '../Helpers/TableHelper';
 import { sectionColumns } from "../Helpers/TableProperties";
@@ -49,36 +47,31 @@ export default function SectionModal(props) {
       open={props.open}
       onClose={props.onClose}
     >
-      <Box sx={modalStyle}>
-        <Typography id="modal-modal-title" variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>
-          {`Sections List: ${props.reportName}`}
-        </Typography>
+      <Typography id="modal-modal-title" variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>
+        {`Sections List: ${props.reportName}`}
+      </Typography>
 
-        <FeedbackModal open={open}
-          onClose={handleClose}
-          sectionTitle={sectionTitle}
-          sectionId={sectionId}
+      <FeedbackModal open={open}
+        onClose={handleClose}
+        sectionTitle={sectionTitle}
+        sectionId={sectionId}
+      />
+
+      <TableHelper
+        style={{ pt: 2 }}
+        rows={props.section}
+        columns={sectionColumns}
+        onRowClickHandler={rowSectionClickHandler}
+      />
+
+      <Box sx={{ pt: 2, pl: 8 }}>
+        <PlotHelper
+          xAxis={["Met", "Not Met", "TBC"]}
+          yAxis={[metNumbers, notMetNumbers, tbcNumbers]}
+          title={'Decisions Plot'}
+          trace={'decision trace'}
+          traceType={'decision types'}
         />
-
-        <TableHelper
-          style={{ pt: 2 }}
-          rows={props.section}
-          columns={sectionColumns}
-          onRowClickHandler={rowSectionClickHandler}
-        />
-        <IconButton onClick={() => props.onClose()} style={iconStyle}>
-          <HighlightOffSharpIcon />
-        </IconButton>
-
-        <Box sx={{ pt: 2, pl: 8 }}>
-          <PlotHelper 
-            xAxis={["Met", "Not Met", "TBC"]}
-            yAxis={[metNumbers, notMetNumbers, tbcNumbers]}
-            title= {'Decisions Plot'}
-            trace={'decision trace'}
-            traceType={'decision types'}
-          />
-        </Box>
       </Box>
     </Modalhelper>
   )
