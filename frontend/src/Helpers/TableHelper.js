@@ -45,7 +45,7 @@ export default function TableHelper(props) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id} data-testid="rowTest" onClick={() => handleRowClick(row)}>      
+                    <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id} data-testid="rowTest" onClick={() => handleRowClick(row)}>
                       {props.columns.map((column) => {
                         const value = row[column.id];
                         return (

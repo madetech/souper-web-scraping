@@ -34,7 +34,6 @@ export default function FeedbackModal(props) {
           columns={feedbackColumns}
           onRowClickHandler={null}
         />
-
         <IconButton onClick={props.onClose} style={iconStyle}>
           <HighlightOffSharpIcon />
         </IconButton>

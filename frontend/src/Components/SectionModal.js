@@ -69,8 +69,8 @@ export default function SectionModal(props) {
         <IconButton onClick={() => props.onClose()} style={iconStyle}>
           <HighlightOffSharpIcon />
         </IconButton>
-        <Box sx={{ pt: 2, pl: 8 }}>
 
+        <Box sx={{ pt: 2, pl: 8 }}>
           <PlotHelper 
             xAxis={["Met", "Not Met", "TBC"]}
             yAxis={[metNumbers, notMetNumbers, tbcNumbers]}
@@ -79,7 +79,6 @@ export default function SectionModal(props) {
             traceType={'decision types'}
           />
         </Box>
-
       </Box>
     </Modalhelper>
   )
