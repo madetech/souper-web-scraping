@@ -25,6 +25,10 @@ export default function TableHelper(props) {
     return props.onRowClickHandler ? props.onRowClickHandler(row) : null;
   }
 
+  function sortBy(a, b){
+   return a.type > b.type ||  a.decision > b.decision ||  a.overall_verdict > b.overall_verdict
+  }
+
   return (
     <Box sx={props.style}>
       <Paper sx={{ minwidth: 700 }}>
@@ -43,6 +47,7 @@ export default function TableHelper(props) {
             <TableBody data-testid="tableTest">
               {props.rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .sort((a, b) => sortBy(a,b) ? 1 : -1)
                 .map((row) => {
                   return (
                     <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id} data-testid="rowTest" onClick={() => handleRowClick(row)}>
