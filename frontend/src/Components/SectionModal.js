@@ -1,29 +1,21 @@
 import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp';
 import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
+import Modalhelper from '../Helpers/ModalHelper';
 import { iconStyle, modalStyle } from '../Helpers/ModalStyle';
 import TableHelper from '../Helpers/TableHelper';
-import { feedbackColumns, sectionColumns } from "../Helpers/TableProperties";
-import getFeedbackList from '../RemoteUseCases/FeedbackListFetcher';
+import { sectionColumns } from "../Helpers/TableProperties";
+import FeedbackModal from './FeebackModal';
 
 export default function SectionModal(props) {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
-  const [feedback, setFeedback] = useState([]);
   const [sectionId, setSectionId] = useState(0);
   const [sectionTitle, setSectionTitle] = useState("");
-
-  useEffect(() => {
-    const fetchFeedback = async () => {
-      setFeedback(await getFeedbackList(sectionId));
-    };
-    fetchFeedback();
-  }, [sectionId])
 
   const rowSectionClickHandler = async (
     row
@@ -53,40 +45,20 @@ export default function SectionModal(props) {
   sumOfDecisionByTypes();
 
   return (
-    <Modal
+    <Modalhelper
       open={props.open}
-      onClose={() => props.onClose()}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      data-testid='modalTest'
+      onClose={props.onClose}
     >
       <Box sx={modalStyle}>
         <Typography id="modal-modal-title" variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>
           {`Sections List: ${props.reportName}`}
         </Typography>
 
-        <Modal
-          open={open}
+        <FeedbackModal open={open}
           onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={modalStyle}>
-            <Typography id="modal-modal-title" variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>
-              {`Feedback List for ${sectionTitle}`}
-            </Typography>
-            <TableHelper
-              style={{ pt: 2 }}
-              rows={feedback}
-              columns={feedbackColumns}
-              onRowClickHandler={null}
-            />
-
-            <IconButton onClick={handleClose} style={iconStyle}>
-              <HighlightOffSharpIcon />
-            </IconButton>
-          </Box>
-        </Modal>
+          sectionTitle={sectionTitle}
+          sectionId={sectionId}
+        />
 
         <TableHelper
           style={{ pt: 2 }}
@@ -116,7 +88,7 @@ export default function SectionModal(props) {
         </Box>
 
       </Box>
-    </Modal>
+    </Modalhelper>
   )
 }
 
