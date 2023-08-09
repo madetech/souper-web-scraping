@@ -1,10 +1,8 @@
 import TablePagination from '@mui/material/TablePagination';
 import * as React from 'react';
 
-export default function Paginationhelper(props) {
+export default function PaginationHelper(props) {
   return (
-
-
     <TablePagination
       rowsPerPageOptions={[5, 10, 50, { value: -1, label: 'All' }]}
       component="div"
@@ -18,9 +16,7 @@ export default function Paginationhelper(props) {
           'data-testid': 'rowsDropDown',
         },
         native: true,
-        }}
+      }}
     />
-
-
   );
 }

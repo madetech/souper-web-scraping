@@ -10,10 +10,17 @@ const modalStyle = {
   border: '1px solid #000', maxHeight: '80%', overflowY: 'auto'
 };
 
+const iconStyle = {
+  position: "absolute",
+  top: "0",
+  right: "0",
+  color: "black"
+}
 const reportTableStyle = {
   position: "absolute",
   width: "90%",
   p: 6,
 };
 
-export { modalStyle, reportTableStyle };
+export { iconStyle, modalStyle, reportTableStyle };
+
