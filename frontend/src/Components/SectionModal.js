@@ -3,9 +3,9 @@ import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
-import Plot from 'react-plotly.js';
 import Modalhelper from '../Helpers/ModalHelper';
 import { iconStyle, modalStyle } from '../Helpers/ModalStyle';
+import PlotHelper from '../Helpers/PlotHelper';
 import TableHelper from '../Helpers/TableHelper';
 import { sectionColumns } from "../Helpers/TableProperties";
 import FeedbackModal from './FeebackModal';
@@ -70,20 +70,13 @@ export default function SectionModal(props) {
           <HighlightOffSharpIcon />
         </IconButton>
         <Box sx={{ pt: 2, pl: 8 }}>
-          <Plot
-            sx={{ pt: 2, pl: 8 }}
-            data={[
-              {
-                x: ["Met", "Not Met", "TBC"],
-                y: [metNumbers, notMetNumbers, tbcNumbers],
-                type: 'scatter',
-                mode: 'lines+markers',
-                marker: { color: 'red' },
-                name: "decision trace",
-              },
-              { type: 'bar', x: ["Met", "Not Met", "TBC"], y: [metNumbers, notMetNumbers, tbcNumbers], name: "decision types" },
-            ]}
-            layout={{ width: 450, height: 350, title: 'Decisions Plot' }}
+
+          <PlotHelper 
+            xAxis={["Met", "Not Met", "TBC"]}
+            yAxis={[metNumbers, notMetNumbers, tbcNumbers]}
+            title= {'Decisions Plot'}
+            trace={'decision trace'}
+            traceType={'decision types'}
           />
         </Box>
 

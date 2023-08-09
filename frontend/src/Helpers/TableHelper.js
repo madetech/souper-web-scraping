@@ -5,7 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import * as React from 'react';
-import Paginationhelper from './PaginationHelper';
+import PaginationHelper from './PaginationHelper';
 import { StyledTableCell, StyledTableRow } from './TableProperties';
 
 export default function TableHelper(props) {
@@ -63,7 +63,7 @@ export default function TableHelper(props) {
           </Table>
         </TableContainer>
 
-        <Paginationhelper
+        <PaginationHelper
           count={props.rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
