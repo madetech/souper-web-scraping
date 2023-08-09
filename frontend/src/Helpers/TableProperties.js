@@ -14,6 +14,11 @@ const sectionColumns = [
     { id: 'decision', label: 'Decision', minWidth: 170 },
 ];
 
+const feedbackColumns = [
+  { id: 'feedback', label: 'Feedback', minWidth: 170 },
+  { id: 'type', label: 'Type', minWidth: 170 },
+];
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -34,5 +39,5 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
   }));
 
-export { StyledTableCell, StyledTableRow, reportColumns, sectionColumns };
+export { StyledTableCell, StyledTableRow, feedbackColumns, reportColumns, sectionColumns };
 
