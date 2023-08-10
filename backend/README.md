@@ -19,20 +19,49 @@ e.g, Can we determine if a larger proportion of the Digital Services presented b
 ## How to Run
 - clone repo
 - Install docker
-- (build) docker-compose up -d --build
-- (run) docker-compose -f docker-compose.yml up
-- (stop) docker-compose down -v
-- (stop all containers) docker-compose down --volumes
 
-### To add database tables
-- alembic revision --autogenerate -m “New tables”
-- alembic upgrade head
+**Note: run `make` or `make help` in project root for other useful make options**
+
+### Build and run the DB container
+`make start-db`
+
+or
+
+```
+cd backend
+docker-compose -f docker-compose.yml up -d db
+```
+
+### Destroying containers
+`make destroy-containers`
+
+or
+
+```
+cd backend
+docker-compose down -v
+```
+
+### Settings up the database
+`make db-migrations`
+
+or
+
+```
+cd backend
+alembic upgrade head
+```
+
+### Generating Alembic migrations
+
+This is only necessary when making changes to models/schema
+`alembic revision --autogenerate -m “<descriptive message here>”`
 
 ## How to Work (No Docker but db)
-- create virtual environment 'python<version> -m venv <virtual-environment-name>'
-- activate virtual environment 'source /venv/bin/activate'
-- install requirements 'pip install -r requirements.txt'
-- start db 'docker-compose -f docker-compose.yml up -d db'
+- create virtual environment `python<version> -m venv <virtual-environment-name>`
+- activate virtual environment `source /venv/bin/activate`
+- install python dependencies: `make pinstall` from project root or `pip install -r requirements.txt`
+- start db: `make start-db` from project root or `docker-compose -f docker-compose.yml up -d db`
 - run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server
 - Run tests        
 
