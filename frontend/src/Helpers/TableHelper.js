@@ -45,8 +45,7 @@ export default function TableHelper(props) {
             </TableHead>
 
             <TableBody data-testid="tableTest">
-            
-              {props.rows
+              {props.rows.length > 0 && props.rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .sort((a, b) => sortBy(a,b) ? 1 : -1)
                 .map((row) => {
