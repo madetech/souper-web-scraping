@@ -4,13 +4,13 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import * as React from 'react';
+import React, { useState } from 'react';
 import PaginationHelper from './PaginationHelper';
 import { StyledTableCell, StyledTableRow } from './TableProperties';
 
 export default function TableHelper(props) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
@@ -45,6 +45,7 @@ export default function TableHelper(props) {
             </TableHead>
 
             <TableBody data-testid="tableTest">
+            
               {props.rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .sort((a, b) => sortBy(a,b) ? 1 : -1)
