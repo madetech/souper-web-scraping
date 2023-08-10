@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import axios from 'axios';
 import React from 'react';
 import FeedbackModal from "../../Components/FeebackModal";
@@ -6,33 +6,71 @@ import feedback from "../Fixtures/Feedback";
 
 jest.mock("axios");
 
+const handleClose = jest.fn();
+
 describe('<FeedbackModalHelper />', () => {
-    describe('render modal', () => {
-        it('modal shows the feedback list and a close button', async () => {
-            const handleClose = jest.fn();
+  beforeEach(async () => {
+    await axios.get.mockImplementationOnce(() => Promise.resolve({
+      status: 200,
+      data: feedback
 
-            await axios.get.mockImplementationOnce(() => Promise.resolve({
-                status: 200,
-                data: feedback
+    }))
 
-            }))
+    const baseProps = {
+      sectionId: 1,
+      sectionTitle: "section one",
+    };
 
-            const baseProps = {
-                sectionId: 1,
-                sectionTitle: "section one",
-            };
+    await act(async () => render(
+      <FeedbackModal {...baseProps} open={true} onClose={handleClose} />,
+    ));
 
-            await act(async () => render(
-                <FeedbackModal {...baseProps} open={true} onClose={handleClose} />,
-            ));
+  });
 
-            const tableRows = screen.getByTestId('tableTest')
-
-            expect(screen.getByText('Feedback List for section one')).toBeInTheDocument();
-            expect(tableRows.children.length).toBe(feedback.length);
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
 
 
-        });
-    })
+  describe('render modal', () => {
+    it('shows the feedback list', async () => {
+      const tableRows = screen.getByTestId('tableTest')
+      expect(screen.getByText('Feedback List for section one')).toBeInTheDocument();
+      expect(tableRows.children.length).toBe(5);
+    });
+
+    it('renders the next page', async () => {
+      const tableRows = screen.getByTestId('tableTest')
+
+      const nextPageButton = screen.getByRole("button", { name: 'Go to next page' });
+      fireEvent.click(nextPageButton);
+
+      expect(tableRows.children.length).toBe(1);
+    });
+
+    it('renders the previous page', async () => {
+      const tableRows = screen.getByTestId('tableTest')
+
+      const nextPageButton = screen.getByRole("button", { name: 'Go to next page' });
+      fireEvent.click(nextPageButton);
+
+      const prevPageButton = screen.getByRole("button", { name: 'Go to previous page' });
+      fireEvent.click(prevPageButton);
+
+      expect(tableRows.children.length).toBe(5);
+    });
+
+    it('renders all feedback in single row', async () => {
+      const tableRows = screen.getByTestId('tableTest')
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+      expect(tableRows.children.length).toBe(6);
+    });
+
+    it('closes the modal', async () => {
+      fireEvent.click(screen.getByTestId('HighlightOffSharpIcon'))
+
+      expect(handleClose).toHaveBeenCalledTimes(1)
+    });
+  })
 })
 

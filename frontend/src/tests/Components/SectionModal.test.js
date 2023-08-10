@@ -11,6 +11,7 @@ jest.mock("react-plotly.js", () => ({
 describe('<SectionModal />', () => {
   beforeEach(() => {
     const setOpen = jest.fn(x => open)
+    const handleClose = jest.fn();
     React.useState = jest.fn()
       .mockImplementationOnce(open => [open, setOpen])
 
@@ -27,7 +28,6 @@ describe('<SectionModal />', () => {
   });
 
   describe('render modal', () => {
-    const handleClose = jest.fn();
     it('renders table contents', async () => {
       expect(screen.getByText('Sections List: anna')).toBeInTheDocument();
     });

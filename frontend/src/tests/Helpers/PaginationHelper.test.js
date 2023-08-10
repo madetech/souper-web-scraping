@@ -31,7 +31,7 @@ describe('<PaginationHelper />', () => {
   });
 
   describe('render pagination', () => {
-    it('trigger next page button', () => {
+    it('triggers next page button', () => {
       const onChangePageNo = jest.fn();
       const onRowsPerPageChange = jest.fn();
       render(
@@ -53,7 +53,7 @@ describe('<PaginationHelper />', () => {
       expect(onChangePageNo).toHaveBeenCalledTimes(1);
     });
 
-    it('trigger previous page button', () => {
+    it('triggers previous page button', () => {
       const onChangePageNo = jest.fn();
       const onRowsPerPageChange = jest.fn();
       render(
@@ -68,14 +68,14 @@ describe('<PaginationHelper />', () => {
         />,
       );
 
-      const nextPageButton = screen.getByRole("button", { name: 'Go to previous page' });
-      fireEvent.click(nextPageButton);
+      const prevPageButton = screen.getByRole("button", { name: 'Go to previous page' });
+      fireEvent.click(prevPageButton);
 
       expect(onRowsPerPageChange).toHaveBeenCalledTimes(0);
       expect(onChangePageNo).toHaveBeenCalledTimes(1);
     });
 
-    it('change the number of rows per page', async () => {
+    it('changes the number of rows per page', async () => {
       
       const onChangePageNo = jest.fn();
       const onRowsPerPageChange = jest.fn();
@@ -91,11 +91,8 @@ describe('<PaginationHelper />', () => {
         />,
       );
 
-      fireEvent.change(
-        screen.getByRole('combobox'),
-        screen.getByRole('option', {name: 10}),
-      )
-
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+      
       expect(onRowsPerPageChange).toHaveBeenCalledTimes(1);
       expect(onChangePageNo).toHaveBeenCalledTimes(0);
     });
