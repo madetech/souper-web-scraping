@@ -1,63 +1,35 @@
-import { render, screen } from '@testing-library/react';
-import React, { useState } from 'react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import axios from 'axios';
+import React from 'react';
 import ReportList from "../../Components/ReportList";
 import { reports } from "../Fixtures/Reports";
-import sections from "../Fixtures/Sections";
 
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: jest.fn()
-}));
+jest.mock("axios");
+
+jest.mock('../../Components/SectionModal', () => () =>
+  <div data-testid="sectionTest" />
+);
 
 jest.mock("react-plotly.js", () => ({
   __esModule: true,
   default: jest.fn(() => <div />),
 }));
 
-
 describe('<Reportlist />', () => {
-  const useStateMock = (useState) => [useState, jest.fn()];
-
-  const setReport = jest.fn();
-  const setSection = jest.fn();
-  const open = false;
-  const setOpen = jest.fn();
-  const reportId = 0;
-  const reportName = '';
-  const sectionTitle = '';
-  const setSectionTitle = jest.fn();
-  const setReportId = jest.fn();
-  const setReportName = jest.fn();
-  const feedback = [];
-  const sectionId = 0;
-  const setFeedback = jest.fn();
-  const setSectionId = jest.fn();
-
-  const page = 0;
-  const setPage = jest.fn();
-  const rowsPerPage = 5;
-  const setRowsPerPage = jest.fn();
-
-  function renderReportListWithMock() {
-    useState.mockImplementation(useStateMock)
-    jest
-      .spyOn(React, 'useState')
-      .mockImplementationOnce(() => [reports, setReport])
-      .mockImplementationOnce(() => [reportId, setReportId])
-      .mockImplementationOnce(() => [reportName, setReportName])
-      .mockImplementationOnce(() => [sections, setSection])
-      .mockImplementationOnce(() => [open, setOpen])
-
-    render(<ReportList />);
-  }
-
   describe('render table first page', () => {
-    beforeEach(() => {
-      renderReportListWithMock()
-    });
+    beforeEach(async () => {
+      await axios.get.mockImplementationOnce(() => Promise.resolve({
+        status: 200,
+        data: { items: reports }
+      }))
 
-    afterEach(() => {
-      jest.clearAllMocks();
+      await act(async () =>
+        render(<ReportList />),
+      );
+    })
+
+    afterAll(() => {
+      jest.resetAllMocks();
     });
 
     it('renders table contents', () => {
@@ -65,46 +37,48 @@ describe('<Reportlist />', () => {
       expect(text).toBeInTheDocument();
     });
 
-    it('renders 5 table rows', () => {
+    it('renders reports in the first row', () => {
       const tableRows = screen.getByTestId('tableTest')
-
       expect(reports.length).toBe(6)
       expect(tableRows.children.length).toBe(5);
     });
-  })
 
-  describe('render table next page', () => {
-    beforeEach(() => {
-
-      useState.mockImplementation(useStateMock)
-      jest
-        .spyOn(React, 'useState')
-        .mockImplementationOnce(() => [reports, setReport])
-        .mockImplementationOnce(() => [reportId, setReportId])
-        .mockImplementationOnce(() => [reportName, setReportName])
-        .mockImplementationOnce(() => [sections, setSection])
-        .mockImplementationOnce(() => [open, setOpen])
-        .mockImplementationOnce(() => [open, setOpen])
-        .mockImplementationOnce(() => [feedback, setFeedback])
-        .mockImplementationOnce(() => [sectionId, setSectionId])
-        .mockImplementationOnce(() => [sectionTitle, setSectionTitle])
-        .mockImplementationOnce(() => [0, setPage])
-        .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage])
-        .mockImplementationOnce(() => [1, setPage])
-        .mockImplementationOnce(() => [rowsPerPage, setRowsPerPage])
-
-      render(<ReportList />);
-    });
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('renders report in the next page', async () => {
+    it('renders the next page', async () => {
       const tableRows = screen.getByTestId('tableTest')
 
-      expect(reports.length).toBe(6)
+      const nextPageButton = screen.getByRole("button", { name: 'Go to next page' });
+      fireEvent.click(nextPageButton);
+
       expect(tableRows.children.length).toBe(1);
     });
+
+    it('renders the previous page', async () => {
+      const tableRows = screen.getByTestId('tableTest')
+
+      const nextPageButton = screen.getByRole("button", { name: 'Go to next page' });
+      fireEvent.click(nextPageButton);
+
+      const prevPageButton = screen.getByRole("button", { name: 'Go to previous page' });
+      fireEvent.click(prevPageButton);
+
+      expect(tableRows.children.length).toBe(5);
+    });
+
+    it('renders all reports in a single row', async () => {
+      const tableRows = screen.getByTestId('tableTest')
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+      expect(tableRows.children.length).toBe(reports.length);
+    });
+
+    it('renders section modal', async () => {
+      const rowSectionClickHandler = screen.getAllByTestId("rowTest")[0];
+      fireEvent.click(rowSectionClickHandler);
+
+      expect(screen.getByTestId(/sectionTest/)).toBeInTheDocument()
+    });
+
+    it('does not renders section modal', async () => {
+      expect(screen.queryByTestId(/sectionTest/)).toBeFalsy();
+    });
   })
-})
+  })

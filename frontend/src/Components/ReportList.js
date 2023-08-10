@@ -34,12 +34,14 @@ export default function ReportList() {
 
   return (
     <Box>
-      <SectionModal
-        open={open}
-        onClose={handleClose}
-        rowId={reportId}
-        reportName={reportName}
-        reportId={reportId}/>
+      {open &&
+        <SectionModal
+          open={open}
+          onClose={handleClose}
+          rowId={reportId}
+          reportName={reportName}
+          reportId={reportId}
+          data-testid='sectionTest' />}
       <Box sx={reportTableStyle}>
         <Typography id="modal-modal-title" variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>
           Report List

@@ -69,7 +69,7 @@ describe('<SectionModal />', () => {
     it('renders all sections in a single row', async () => {
       const tableRows = screen.getByTestId('tableTest')
       fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
-      expect(tableRows.children.length).toBe(7);
+      expect(tableRows.children.length).toBe(sections.length);
     });
 
     it('closes the modal', async () => {
@@ -88,6 +88,5 @@ describe('<SectionModal />', () => {
     it('does not renders feedback modal', async () => {
       expect(screen.queryByTestId(/feedbackTest/)).toBeFalsy();
     });
-
   })
 })

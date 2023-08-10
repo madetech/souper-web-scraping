@@ -64,7 +64,7 @@ describe('<FeedbackModalHelper />', () => {
     it('renders all feedback in a single row', async () => {
       const tableRows = screen.getByTestId('tableTest')
       fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
-      expect(tableRows.children.length).toBe(6);
+      expect(tableRows.children.length).toBe(feedback.length);
     });
 
     it('closes the modal', async () => {
