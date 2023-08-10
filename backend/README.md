@@ -1,21 +1,3 @@
-# souper-web-scraping
-Collecting information from 
-[Service Standard Reports](https://www.gov.uk/service-standard-reports "Service Standard Reports")
-
-Used in analysing the outcomes of Service Assessments and the reports produced.
-Looking for patterns in data and stats that are behind them.
-
-e.g, Can we determine if a larger proportion of the Digital Services presented by government DO NOT have appropriate service monitoring in place, in terms of meeting Service Standard number 14, i.e.: Monitoring the status of your service.
-
-## Week 1/2
-- Get basic data (reports and section)
-- Input into DB
-- Flask app to handle requests
-
-## Week 2/2
-- Display results
-- Do further analysis
-
 ## Building & running the database
 
 1. Clone repo
@@ -44,13 +26,15 @@ e.g, Can we determine if a larger proportion of the Digital Services presented b
 
 **Note: run `make` or `make help` in project root for other useful make options**
 
-### Generating Alembic migrations
+### Database operations and maintenance
+
+#### Generating Alembic migrations
 
 This is only necessary when making changes to models/schema
 
 `alembic revision --autogenerate -m “<descriptive message here>”`
 
-### Destroying containers
+#### Destroying containers
 
 If you need to teardown the DB:
 
