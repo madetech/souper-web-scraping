@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import axios from 'axios';
 import React from 'react';
-import FeedbackModal from "../../Components/FeebackModal";
+import FeedbackModal from "../../Components/FeedbackModal";
 import feedback from "../Fixtures/Feedback";
 
 jest.mock("axios");
@@ -36,6 +36,7 @@ describe('<FeedbackModalHelper />', () => {
     it('shows the feedback list', async () => {
       const tableRows = screen.getByTestId('tableTest')
       expect(screen.getByText('Feedback List for section one')).toBeInTheDocument();
+      expect(feedback.length).toBe(6)
       expect(tableRows.children.length).toBe(5);
     });
 
@@ -60,7 +61,7 @@ describe('<FeedbackModalHelper />', () => {
       expect(tableRows.children.length).toBe(5);
     });
 
-    it('renders all feedback in single row', async () => {
+    it('renders all feedback in a single row', async () => {
       const tableRows = screen.getByTestId('tableTest')
       fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
       expect(tableRows.children.length).toBe(6);

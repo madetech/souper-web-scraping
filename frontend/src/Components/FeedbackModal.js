@@ -23,6 +23,7 @@ export default function FeedbackModal(props) {
       <Typography id="modal-modal-title" variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>
         {`Feedback List for ${props.sectionTitle}`}
       </Typography>
+     
       <TableHelper
         style={{ pt: 2 }}
         rows={feedback}
