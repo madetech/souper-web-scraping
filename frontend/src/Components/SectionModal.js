@@ -1,19 +1,31 @@
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import Modalhelper from '../Helpers/ModalHelper';
 import PlotHelper from '../Helpers/PlotHelper';
 import TableHelper from '../Helpers/TableHelper';
 import { sectionColumns } from "../Helpers/TableProperties";
-import FeedbackModal from './FeebackModal';
+import getSectionList from '../RemoteUseCases/SectionListFetcher';
+import FeedbackModal from './FeedbackModal';
 
 export default function SectionModal(props) {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+  const [section, setSection] = useState([]);
   const [sectionId, setSectionId] = useState(0);
   const [sectionTitle, setSectionTitle] = useState("");
+
+
+  useEffect(() => {
+    const fetchSection = async () => {
+      setSection(await getSectionList(props.reportId));
+    };
+
+    fetchSection();
+  }, [props.reportId])
 
   const rowSectionClickHandler = async (
     row
@@ -28,16 +40,18 @@ export default function SectionModal(props) {
   let tbcNumbers = 0;
 
   function sumOfDecisionByTypes() {
-    (props.section).map(sec => {
-      switch (sec.decision) {
-        case 'Met':
-          return metNumbers = metNumbers + 1;
-        case 'Not met':
-          return notMetNumbers = notMetNumbers + 1;
-        default:
-          return tbcNumbers = tbcNumbers + 1;
-      }
-    })
+    {
+      section.length > 0 && (section).map(sec => {
+        switch (sec.decision) {
+          case 'Met':
+            return metNumbers = metNumbers + 1;
+          case 'Not met':
+            return notMetNumbers = notMetNumbers + 1;
+          default:
+            return tbcNumbers = tbcNumbers + 1;
+        }
+      })
+    }
   }
 
   sumOfDecisionByTypes();
@@ -51,15 +65,18 @@ export default function SectionModal(props) {
         {`Sections List: ${props.reportName}`}
       </Typography>
 
-      <FeedbackModal open={open}
-        onClose={handleClose}
-        sectionTitle={sectionTitle}
-        sectionId={sectionId}
-      />
+      {open &&
+        <FeedbackModal open={open}
+          onClose={handleClose}
+          sectionTitle={sectionTitle}
+          sectionId={sectionId}
+          data-testid='feedbackTest'
+        />
+      }
 
       <TableHelper
         style={{ pt: 2 }}
-        rows={props.section}
+        rows={section}
         columns={sectionColumns}
         onRowClickHandler={rowSectionClickHandler}
       />
