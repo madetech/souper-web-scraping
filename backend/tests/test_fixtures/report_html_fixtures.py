@@ -3,14 +3,14 @@ import responses
 
 REPORT_LIST_URL = "https://www.gov.uk/service-standard-reports"
 REPORT_URL = "https://www.gov.uk/service-standard-reports/get-security-clearance-test"
-REPORT_HTML_FILE = "tests/data/report_html.txt"
+REPORT_HTML_FILE = "tests/test_fixtures/report_html.txt"
 
 @pytest.fixture
 def mocked_report_list_all_response():
-    with open('tests/data/report_list_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_list_html.txt', 'r') as f:
         report_list = f.read()
 
-    with open('tests/data/report_list_empty_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_list_empty_html.txt', 'r') as f:
         report_list_empty = f.read()
     
     with responses.RequestsMock() as rsps:
@@ -28,7 +28,7 @@ def mocked_report_list_all_response():
 
 @pytest.fixture
 def mocked_report_list_page_response():
-    with open('tests/data/report_list_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_list_html.txt', 'r') as f:
         report_list = f.read()
     
     with responses.RequestsMock() as rsps:
@@ -41,7 +41,7 @@ def mocked_report_list_page_response():
 
 @pytest.fixture
 def mocked_report_response():
-    with open('tests/data/report_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_html.txt', 'r') as f:
         report_content = f.read()
 
     with responses.RequestsMock() as rsps:
@@ -54,11 +54,11 @@ def mocked_report_response():
 
 @pytest.fixture
 def mocked_main_page_response():
-    with open('tests/data/report_list_one.html', 'r') as f:
+    with open('tests/test_fixtures/report_list_one.html', 'r') as f:
         page_content = f.read()
-    with open('tests/data/report_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_html.txt', 'r') as f:
         report_content = f.read()
-    with open('tests/data/report_list_empty_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_list_empty_html.txt', 'r') as f:
         report_list_empty = f.read()
 
     with responses.RequestsMock() as rsps:
@@ -77,9 +77,9 @@ def mocked_main_page_response():
 
 @pytest.fixture
 def mocked_main_page_response_one():
-    with open('tests/data/report_list_one.html', 'r') as f:
+    with open('tests/test_fixtures/report_list_one.html', 'r') as f:
         page_content = f.read()
-    with open('tests/data/report_list_empty_html.txt', 'r') as f:
+    with open('tests/test_fixtures/report_list_empty_html.txt', 'r') as f:
         report_list_empty = f.read()
 
     with responses.RequestsMock() as rsps:

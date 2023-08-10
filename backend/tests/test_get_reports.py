@@ -1,5 +1,6 @@
 from services.basic_info_scraper import scrape_report_html, scrape_reports
-from tests.fixtures import REPORT_HTML_FILE, mocked_main_page_response
+from tests.test_fixtures.report_html_fixtures import (
+    REPORT_HTML_FILE, mocked_main_page_response)
 
 
 # get_reports tests

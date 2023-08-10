@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
 from data.section_reader import get_sections
-from tests.data.section_fixtures import VALID_SECTIONS
+from tests.test_fixtures.section_fixtures import VALID_SECTIONS
 
 
 @patch('data.section_reader.Session')

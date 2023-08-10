@@ -4,6 +4,9 @@ from logging.config import fileConfig
 from alembic import context
 from dotenv import load_dotenv
 from models.base import Base
+from models.feedback import Feedback
+from models.report import Report
+from models.section import Section
 from sqlalchemy import URL, engine_from_config, pool
 
 # this is the Alembic Config object, which provides
@@ -36,7 +39,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [Base.metadata] #, Report.metadata, Section.metadata]
+target_metadata = [Base.metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

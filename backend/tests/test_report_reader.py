@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 from data.report_reader import get_reports
 from fastapi_pagination import LimitOffsetPage
-from tests.data.report_fixtures import VALID_REPORTS
+from tests.test_fixtures.report_fixtures import VALID_REPORTS
 
 
 @patch('data.report_reader.paginate')
