@@ -1,53 +1,40 @@
 import { render, screen } from '@testing-library/react';
-import React, { useState } from 'react';
+import React from 'react';
 import SectionModal from "../../Components/SectionModal";
 import sections from "../Fixtures/Sections";
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: jest.fn()
-}));
 
 jest.mock("react-plotly.js", () => ({
   __esModule: true,
   default: jest.fn(() => <div />),
 }));
 
-const open = true;
-const setOpen = jest.fn();
-
-function mockStateImlementation() {
-  const useStateMock = (useState) => [useState, jest.fn()];
-  useState.mockImplementation(useStateMock)
-  jest
-  .spyOn(React, 'useState')
-  .mockImplementationOnce(() => [open, setOpen])
-}
-
 describe('<SectionModal />', () => {
   beforeEach(() => {
-    mockStateImlementation()
-  });
+    const setOpen = jest.fn(x => open)
+    React.useState = jest.fn()
+      .mockImplementationOnce(open => [open, setOpen])
 
+      render(<SectionModal
+        open={true}
+        onClose={() => handleClose()}
+        rowId={1}
+        reportName={'anna'}
+        section={sections} />);
+  });
   
   afterAll(() => {
     jest.resetAllMocks();
- });
-  
+  });
 
   describe('render modal', () => {
     const handleClose = jest.fn();
     it('renders table contents', async () => {
+      expect(screen.getByText('Sections List: anna')).toBeInTheDocument();
+    });
 
-      render(<SectionModal 
-      open={open} 
-      onClose={() => handleClose()}
-      rowId={1}
-      reportName={'anna'}
-      section={sections} />);
-      
-      const modal = screen.getAllByTestId("modalTest");
-      screen.debug()
-     // await waitFor(() => screen.debug);
+    it('renders all section', () => {
+      const tableRows = screen.getByTestId('tableTest')
+      expect(tableRows.children.length).toBe(sections.length);
     });
   })
 })
