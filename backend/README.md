@@ -16,23 +16,44 @@ e.g, Can we determine if a larger proportion of the Digital Services presented b
 - Display results
 - Do further analysis
 
-## How to Run
-- clone repo
-- Install docker
+## Building & running the database
+
+1. Clone repo
+1. Install docker
+1.  Build and run the DB container
+
+    `make start-db`
+
+    or
+
+    ```
+    cd backend
+    docker-compose -f docker-compose.yml up -d db
+    ```
+
+1. Setting up the database
+
+    `make db-migrate`
+
+    or
+
+    ```
+    cd backend
+    alembic upgrade head
+    ```
 
 **Note: run `make` or `make help` in project root for other useful make options**
 
-### Build and run the DB container
-`make start-db`
+### Generating Alembic migrations
 
-or
+This is only necessary when making changes to models/schema
 
-```
-cd backend
-docker-compose -f docker-compose.yml up -d db
-```
+`alembic revision --autogenerate -m “<descriptive message here>”`
 
 ### Destroying containers
+
+If you need to teardown the DB:
+
 `make destroy-containers`
 
 or
@@ -42,28 +63,23 @@ cd backend
 docker-compose down -v
 ```
 
-### Settings up the database
-`make db-migrations`
+## Building & running the API
+1. Create virtual environment `python3 -m venv venv`
+1. Activate virtual environment `source /venv/bin/activate`
+1. Install python dependencies: `make pinstall` from repository root or `pip install -r requirements.txt` from backend directory
+1. Start db: `make start-db` from repository root or `docker-compose -f docker-compose.yml up -d db` from backend directory
+1. Run app using uvicorn: `uvicorn main:app --reload`
+
+## Run tests
+
+From repository root: `make ptest`
 
 or
 
 ```
 cd backend
-alembic upgrade head
+pytest -v
 ```
-
-### Generating Alembic migrations
-
-This is only necessary when making changes to models/schema
-`alembic revision --autogenerate -m “<descriptive message here>”`
-
-## How to Work (No Docker but db)
-- create virtual environment `python<version> -m venv <virtual-environment-name>`
-- activate virtual environment `source /venv/bin/activate`
-- install python dependencies: `make pinstall` from project root or `pip install -r requirements.txt`
-- start db: `make start-db` from project root or `docker-compose -f docker-compose.yml up -d db`
-- run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server
-- Run tests        
 
 ## Plan
 - API (FastAPI)
