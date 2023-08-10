@@ -4,7 +4,8 @@ const sections = [
     number: "1",
     decision: "met"
   },
-  { id: 2,
+  {
+    id: 2,
     number: "2",
     decision: "Not met"
   },
@@ -17,6 +18,16 @@ const sections = [
     id: 4,
     number: "4",
     decision: "TBC"
+  },
+  {
+    id: 5,
+    number: "5",
+    decision: "met"
+  },
+  {
+    id: 6,
+    number: "6",
+    decision: "Not met"
   }
 ];
 
