@@ -90,6 +90,10 @@ def scrape_report_html(content: str) -> dict:
     title_element = soup.find("h1")
     report_dict["name"] = title_element.text.strip()
 
+    service_provider = soup.find("td", string="Service provider:").find_next('td')
+    print(service_provider.text)
+    report_dict["service_provider"] = service_provider.text
+
     report_dict["sections"] = scrape_sections_html(soup)
     return report_dict
 
@@ -212,9 +216,13 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     assessment_date = None
     assessment_date_value = None
     report_name = None
+    service_provider_name = None
 
     if "name" in report_dict.keys():
         report_name = report_dict.get("name")
+
+    if "servicer_provider" in report_dict.keys():
+        service_provider_name = report_dict.get("service_provider")
 
     if "assessment_date" in report_dict.keys():
         assessment_date_value = report_dict.get("assessment_date")
@@ -232,6 +240,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     report.stage = standardise_stage_input(report_dict)
     report.name = report_name
     report.url = url
+    report.service_provider = service_provider_name
 
     if "sections" in report_dict:
         for report_section in report_dict["sections"]:
