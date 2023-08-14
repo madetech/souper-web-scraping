@@ -11,6 +11,7 @@ def test_get_reports(mocked_main_page_response):
     assert report.assessment_date == "2022-03-23"
     assert report.overall_verdict == "Not met"
     assert report.stage == "Alpha"
+    assert report.service_provider == "UK Security Vetting (Cabinet Office)"
 
 # scrape_report_html tests
 def test_scrape_report_html_extracts_data():

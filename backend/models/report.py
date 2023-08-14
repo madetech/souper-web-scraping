@@ -16,6 +16,7 @@ class Report(Base):
     url: Mapped[str] = mapped_column(unique=True)
     stage: Mapped[str] = mapped_column(nullable=True)
     sections: Mapped[List["Section"]] = relationship()
+    service_provider: Mapped[str] = mapped_column(nullable=True)
 
 class ReportOut(BaseModel):
     id: int
@@ -24,6 +25,7 @@ class ReportOut(BaseModel):
     name: str
     url:str
     stage: str
+    service_provider: str
 
     class ConfigDict:
         from_attributes = True
