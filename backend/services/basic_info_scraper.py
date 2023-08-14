@@ -17,8 +17,8 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     LOGGER.info("Retrieving report links")
-    # report_links = get_report_links()
-    report_links = ["/service-standard-reports/get-security-clearance"]
+    report_links = get_report_links()
+    # report_links = ["/service-standard-reports/get-security-clearance"]
     # report_links = ["/service-standard-reports/platform-as-a-service-paas"]
     reports_models = []
     number_of_reports = len(report_links)
@@ -221,7 +221,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     if "name" in report_dict.keys():
         report_name = report_dict.get("name")
 
-    if "servicer_provider" in report_dict.keys():
+    if "service_provider" in report_dict.keys():
         service_provider_name = report_dict.get("service_provider")
 
     if "assessment_date" in report_dict.keys():
