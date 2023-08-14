@@ -39,10 +39,12 @@ def upsert_report(report: Report, session: Session):
         overall_verdict=report.overall_verdict,
         name=report.name,
         url=report.url,
-        stage=report.stage
+        stage=report.stage,
+        service_provider = report.service_provider
     ).on_conflict_do_update(
         constraint="report_url_key",
         set_=dict(
+            service_provider = report.service_provider,
             overall_verdict=report.overall_verdict,
             stage=report.stage,
             assessment_date=report.assessment_date
