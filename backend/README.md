@@ -1,40 +1,69 @@
-# souper-web-scraping
-Collecting information from 
-[Service Standard Reports](https://www.gov.uk/service-standard-reports "Service Standard Reports")
+## Building & running the database
 
-Used in analysing the outcomes of Service Assessments and the reports produced.
-Looking for patterns in data and stats that are behind them.
+1. Clone repo
+1. Install docker
+1.  Build and run the DB container
 
-e.g, Can we determine if a larger proportion of the Digital Services presented by government DO NOT have appropriate service monitoring in place, in terms of meeting Service Standard number 14, i.e.: Monitoring the status of your service.
+    `make start-db`
 
-## Week 1/2
-- Get basic data (reports and section)
-- Input into DB
-- Flask app to handle requests
+    or
 
-## Week 2/2
-- Display results
-- Do further analysis
+    ```
+    cd backend
+    docker-compose -f docker-compose.yml up -d db
+    ```
 
-## How to Run
-- clone repo
-- Install docker
-- (build) docker-compose up -d --build
-- (run) docker-compose -f docker-compose.yml up
-- (stop) docker-compose down -v
-- (stop all containers) docker-compose down --volumes
+1. Setting up the database
 
-### To add database tables
-- alembic revision --autogenerate -m “New tables”
-- alembic upgrade head
+    `make db-migrate`
 
-## How to Work (No Docker but db)
-- create virtual environment 'python<version> -m venv <virtual-environment-name>'
-- activate virtual environment 'source /venv/bin/activate'
-- install requirements 'pip install -r requirements.txt'
-- start db 'docker-compose -f docker-compose.yml up -d db'
-- run app through uvicorn to make it async for requests (uvicorn main:app --reload) *asgi server
-- Run tests        
+    or
+
+    ```
+    cd backend
+    alembic upgrade head
+    ```
+
+**Note: run `make` or `make help` in project root for other useful make options**
+
+### Database operations and maintenance
+
+#### Generating Alembic migrations
+
+This is only necessary when making changes to models/schema
+
+`alembic revision --autogenerate -m “<descriptive message here>”`
+
+#### Destroying containers
+
+If you need to teardown the DB:
+
+`make destroy-containers`
+
+or
+
+```
+cd backend
+docker-compose down -v
+```
+
+## Building & running the API
+1. Create virtual environment `python3 -m venv venv`
+1. Activate virtual environment `source /venv/bin/activate`
+1. Install python dependencies: `make pinstall` from repository root or `pip install -r requirements.txt` from backend directory
+1. Start db: `make start-db` from repository root or `docker-compose -f docker-compose.yml up -d db` from backend directory
+1. Run app using uvicorn: `uvicorn main:app --reload`
+
+## Run tests
+
+From repository root: `make ptest`
+
+or
+
+```
+cd backend
+pytest -v
+```
 
 ## Plan
 - API (FastAPI)
