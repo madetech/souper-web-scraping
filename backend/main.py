@@ -36,9 +36,8 @@ app.add_middleware(
 )
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
-# .1 #If this is spammed does that mean it still performs db connection attempts
 @app.get("/scrape", status_code=201)
-def scrape_report_data(session: Session = Depends(db.get_session)): #.1
+def scrape_report_data(session: Session = Depends(db.get_session)):
     if not app.is_scraping:
         app.is_scraping = True
         report_data = scrape_reports()
