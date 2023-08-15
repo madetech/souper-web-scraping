@@ -1,5 +1,6 @@
 import logging
 
+import re
 import dateutil.parser as parser
 import requests
 from bs4 import BeautifulSoup, Tag
@@ -87,12 +88,14 @@ def scrape_report_html(content: str) -> dict:
     scrape_two(soup, key_mapping, report_dict, retry_keys)
     scrape_three(soup, key_mapping, report_dict, retry_keys)
 
+    # scrape title for each report
     title_element = soup.find("h1")
     report_dict["name"] = title_element.text.strip()
 
-    service_provider = soup.find("td", string="Service provider:").find_next('td')
-    print(service_provider.text)
-    report_dict["service_provider"] = service_provider.text
+    # scrape service provider for each report.
+    service_provider = soup.find("td", string=re.compile("Service provider*"))
+    if service_provider is not None:
+        report_dict["service_provider"] = service_provider.find_next('td').text.strip()
 
     report_dict["sections"] = scrape_sections_html(soup)
     return report_dict
@@ -124,6 +127,7 @@ def scrape_one(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
     retry_keys[:] = list(all_keys - keys_found)
 
 
+
 def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
     if not any(retry_keys):
         return
@@ -151,7 +155,6 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
     # List keys to retry which have not been matched
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
-
 
 def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
     if not any(retry_keys):
@@ -209,6 +212,7 @@ def standardise_stage_input(info_dict):
             return "Live"
         case _:
             return "TBC"
+        
 
 
 def create_report_model(report_dict: dict, url: str) -> Report:
@@ -216,7 +220,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     assessment_date = None
     assessment_date_value = None
     report_name = None
-    service_provider_name = None
+    service_provider_name = "N/A"
 
     if "name" in report_dict.keys():
         report_name = report_dict.get("name")

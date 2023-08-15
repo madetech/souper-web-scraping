@@ -69,7 +69,7 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             sections.append(dict(
                 number=int(section_id),
                 decision=get_decision(section_decision.text),
-                title = section_element.text,
+                title = section_element.text.strip(),
                 feedback = feedback
             ))
             break
@@ -112,9 +112,12 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
             continue
 
         cells = row.find_all("td")
+        offset = 0
+        if cells[0].text=='\u2028' or cells[0].text=='\xa0':
+            offset = 1
 
         sections.append(dict(
-            number=int(cells[0].text),
-            title=cells[1].text,
-            decision=get_decision(cells[2].text)
+            number=int(cells[0 + offset].text),
+            title=cells[1 + offset].text.strip(),
+            decision=get_decision(cells[2 + offset].text)
         ))
