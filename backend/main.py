@@ -20,6 +20,9 @@ logging.basicConfig(level=logging.INFO) # Change this to logging.DEBUG to see mo
 app = FastAPI()
 add_pagination(app)
 
+# Block scrape until previous complete
+app.is_scraping = False
+
 db = souperDB()
 
 origins = ["http://localhost:3000"]
@@ -36,8 +39,15 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 @app.get("/scrape", status_code=201)
 def scrape_report_data(session: Session = Depends(db.get_session)):
-    report_data = scrape_reports()
-    upsert_reports(report_data, session)
+    if not app.is_scraping:
+        app.is_scraping = True
+        report_data = scrape_reports()
+        upsert_reports(report_data, session)
+        app.is_scraping = False
+        return "Scraped"
+    else:
+        return "Busy!"
+        
 
 
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
