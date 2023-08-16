@@ -18,9 +18,10 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     LOGGER.info("Retrieving report links")
-    report_links = get_report_links()
+    # report_links = get_report_links()
     # report_links = ["/service-standard-reports/get-security-clearance"]
-    # report_links = ["/service-standard-reports/platform-as-a-service-paas"]
+    # report_links = ["/service-standard-reports/biometric-residence-permits-beta"]
+    report_links = ["/service-standard-reports/manage-your-loan-alpha-assessment"]
     reports_models = []
     number_of_reports = len(report_links)
     LOGGER.info(f"Processing {number_of_reports} reports")
@@ -93,9 +94,11 @@ def scrape_report_html(content: str) -> dict:
     report_dict["name"] = title_element.text.strip()
 
     # scrape service provider for each report.
-    service_provider = soup.find("td", string=re.compile("Service provider*"))
-    if service_provider is not None:
-        report_dict["service_provider"] = service_provider.find_next('td').text.strip()
+    scrape_service_provider(soup, report_dict)
+    scrape_service_provider_two(soup, report_dict)
+    # service_provider = soup.find("td", string=re.compile("Service provider*"))
+    # if service_provider is not None:
+    #     report_dict["service_provider"] = service_provider.find_next('td').text.strip()
 
     report_dict["sections"] = scrape_sections_html(soup)
     return report_dict
@@ -184,6 +187,18 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
     # List keys to retry which have not been matched
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
+
+
+def scrape_service_provider(soup: BeautifulSoup, report_dict: dict):
+    service_provider = soup.find("td", string=re.compile("Service provider*"))
+    if service_provider is not None:
+        report_dict["service_provider"] = service_provider.find_next('td').text.strip()
+
+def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
+    if "service_provider" not in report_dict.keys():
+        service_provider = soup.find(string=re.compile("Department / Agency*"))
+        if service_provider is not None:
+            report_dict["service_provider"] = service_provider.next.next.text.strip()
 
 
 def standardise_verdict_input(info_dict):
