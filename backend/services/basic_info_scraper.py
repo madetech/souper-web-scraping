@@ -98,10 +98,6 @@ def scrape_report_html(content: str) -> dict:
     scrape_service_provider(soup, report_dict)
     scrape_service_provider_two(soup, report_dict)
 
-    # service_provider = soup.find("td", string=re.compile("Service provider*"))
-    # if service_provider is not None:
-    #     report_dict["service_provider"] = service_provider.find_next('td').text.strip()
-
     report_dict["sections"] = scrape_sections_html(soup)
     return report_dict
 
@@ -195,12 +191,6 @@ def scrape_service_provider(soup: BeautifulSoup, report_dict: dict):
     service_provider = soup.find("td", string=re.compile("(?i)(service )?provider(:)?"))
     if service_provider is not None:
         report_dict["service_provider"] = service_provider.find_next('td').text.strip()
-
-# def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
-#     if "service_provider" not in report_dict.keys():
-#         service_provider = soup.find(string=re.compile("Department / Agency*"))
-#         if service_provider is not None:
-#             report_dict["service_provider"] = service_provider.next.next.text.strip()
 
 def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
     if "service_provider" not in report_dict.keys():
