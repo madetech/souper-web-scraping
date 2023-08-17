@@ -4,6 +4,8 @@ ENV POSTGRES_PASSWORD ${POSTGRES_PASSWORD}
 ENV POSTGRES_USER ${POSTGRES_USER}
 ENV POSTGRES_DB ${POSTGRES_DB}
 
+EXPOSE 5432
+
 # Copy .env to app root
 COPY .env .
 
@@ -38,9 +40,6 @@ COPY .env .
 # # pull the official docker image
 FROM python:3.10-slim
 
-# # set work directory
-# WORKDIR /app
-
 # Set the working directory
 WORKDIR /app/backend
 
@@ -55,6 +54,9 @@ ENV DATABASE_URL postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${PO
 
 # # install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+
+# # Populate tables
+# RUN alembic upgrade head
 
 # # Expose the FastAPI port
 EXPOSE 8000
