@@ -33,6 +33,12 @@ describe('<FeedbackModalHelper />', () => {
 
 
   describe('render modal', () => {
+
+    function expectRowTextContentToActual(array) {
+      array.map((column, index) => (
+        expect(screen.getAllByTestId('rowTest')[index]?.children.item(1)?.textContent).toEqual(column)
+      ))
+    }
     it('shows the feedback list', async () => {
       const tableRows = screen.getByTestId('tableTest')
       expect(screen.getByText('Feedback List for section one')).toBeInTheDocument();
@@ -65,6 +71,38 @@ describe('<FeedbackModalHelper />', () => {
       const tableRows = screen.getByTestId('tableTest')
       fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
       expect(tableRows.children.length).toBe(feedback.length);
+    });
+
+    it('sorts column', async () => {
+      fireEvent.click(screen.getAllByTestId('ArrowDownwardIcon')[0])
+      expect(screen.getByText("sorted ascending")).toBeInTheDocument();
+
+      fireEvent.click(screen.getAllByTestId('ArrowDownwardIcon')[0])
+      expect(screen.getByText("sorted descending")).toBeInTheDocument();
+    });
+
+    it('sorts type column in ascending order ', async () => {
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+      const unSortedFeedbackType = ["positive", "constructive", "positive", "constructive", "constructive", "positive"]
+
+      expectRowTextContentToActual(unSortedFeedbackType)
+
+    
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+      
+      const sortedFeedbackType = ["constructive", "constructive", "constructive", "positive", "positive", "positive"]
+      expectRowTextContentToActual(sortedFeedbackType)
+    });
+
+    it('sorts type column in decending order ', async () => {
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+
+      const feedbackType = ["positive", "positive", "positive", "constructive", "constructive", "constructive"]
+
+      expectRowTextContentToActual(feedbackType)
     });
 
     it('closes the modal', async () => {
