@@ -32,6 +32,11 @@ describe('<Reportlist />', () => {
       jest.resetAllMocks();
     });
 
+    function expectRowTextContentToActual(array) {
+      array.map((column, index) => (
+        expect(screen.getAllByTestId('rowTest')[index].children.item(1)?.textContent).toEqual(column)
+      ))
+    }
     it('renders table contents', () => {
       const text = screen.getByText("anna")
       expect(text).toBeInTheDocument();
@@ -70,6 +75,40 @@ describe('<Reportlist />', () => {
       expect(tableRows.children.length).toBe(reports.length);
     });
 
+    it('sorts column', async () => {
+      fireEvent.click(screen.getAllByTestId('ArrowDownwardIcon')[0])
+      expect(screen.getByText("sorted ascending")).toBeInTheDocument();
+
+      fireEvent.click(screen.getAllByTestId('ArrowDownwardIcon')[0])
+      expect(screen.getByText("sorted descending")).toBeInTheDocument();
+    });
+
+    it('sorts assessment date column in ascending order ', async () => {
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+
+      const unSortedAssessmentDateColumn = [
+        "2022-02-03", "2021-11-11", "2019-10-09", "2023-02-05", "2020-12-12", "2022-11-10",
+      ];
+
+      expectRowTextContentToActual(unSortedAssessmentDateColumn)
+
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+
+      const sortedAssessmentDateColumn = ["2019-10-09", "2020-12-12", "2021-11-11", "2022-02-03", "2022-11-10", "2023-02-05"]
+      expectRowTextContentToActual(sortedAssessmentDateColumn)
+    });
+
+    it('sorts assessment date column in decending order ', async () => {
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+
+      const assessmentDateColumn = ["2023-02-05", "2022-11-10", "2022-02-03", "2021-11-11", "2020-12-12","2019-10-09"]
+
+      expectRowTextContentToActual(assessmentDateColumn)
+    });
+
     it('renders section modal', async () => {
       const rowSectionClickHandler = screen.getAllByTestId("rowTest")[0];
       fireEvent.click(rowSectionClickHandler);
@@ -81,4 +120,4 @@ describe('<Reportlist />', () => {
       expect(screen.queryByTestId(/sectionTest/)).toBeFalsy();
     });
   })
-  })
+})
