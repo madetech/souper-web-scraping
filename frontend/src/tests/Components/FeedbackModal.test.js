@@ -83,15 +83,15 @@ describe('<FeedbackModalHelper />', () => {
 
     it('sorts type column in ascending order ', async () => {
       fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
-      const unSortedFeedbackType = ["positive", "constructive", "positive", "constructive", "constructive", "positive"]
+      const unSortedFeedbackColumn = ["positive", "constructive", "positive", "constructive", "constructive", "positive"]
 
-      expectRowTextContentToActual(unSortedFeedbackType)
+      expectRowTextContentToActual(unSortedFeedbackColumn)
 
     
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
       
-      const sortedFeedbackType = ["constructive", "constructive", "constructive", "positive", "positive", "positive"]
-      expectRowTextContentToActual(sortedFeedbackType)
+      const sortedFeedbackColumn = ["constructive", "constructive", "constructive", "positive", "positive", "positive"]
+      expectRowTextContentToActual(sortedFeedbackColumn)
     });
 
     it('sorts type column in decending order ', async () => {
@@ -100,9 +100,9 @@ describe('<FeedbackModalHelper />', () => {
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
 
-      const feedbackType = ["positive", "positive", "positive", "constructive", "constructive", "constructive"]
+      const feedbackTypeColumn= ["positive", "positive", "positive", "constructive", "constructive", "constructive"]
 
-      expectRowTextContentToActual(feedbackType)
+      expectRowTextContentToActual(feedbackTypeColumn)
     });
 
     it('closes the modal', async () => {
