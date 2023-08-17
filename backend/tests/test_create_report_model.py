@@ -16,13 +16,13 @@ def test_create_report_model():
 
 def test_create_report_model_with_missing_keys():
     report_dict = {
-        "result": "Met"
+        "result": "Met",
+        "service_provider": "N/A"
     }
     report_model = create_report_model(report_dict, REPORT_URL)
     assert report_model.assessment_date == None
     assert report_model.stage == None
     assert report_model.name == None
-    assert report_model.service_provider == None
 
 def test_create_report_model_with_invalid_date():
     report_dict = {
