@@ -87,9 +87,9 @@ describe('<FeedbackModalHelper />', () => {
 
       expectRowTextContentToActual(unSortedFeedbackColumn)
 
-    
+
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
-      
+
       const sortedFeedbackColumn = ["constructive", "constructive", "constructive", "positive", "positive", "positive"]
       expectRowTextContentToActual(sortedFeedbackColumn)
     });
@@ -100,7 +100,7 @@ describe('<FeedbackModalHelper />', () => {
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
 
-      const feedbackTypeColumn= ["positive", "positive", "positive", "constructive", "constructive", "constructive"]
+      const feedbackTypeColumn = ["positive", "positive", "positive", "constructive", "constructive", "constructive"]
 
       expectRowTextContentToActual(feedbackTypeColumn)
     });

@@ -38,10 +38,8 @@ describe('<SectionModal />', () => {
     });
 
     function expectRowTextContentToActual(array) {
-    
       array.map((column, index) => (
-       console.log(screen.getAllByTestId('rowTest')[1].children.item(1)?.textContent),
-       expect(screen.getAllByTestId('rowTest')[index].children.item(1)?.textContent).toEqual(column)
+        expect(screen.getAllByTestId('rowTest')[index].children.item(1)?.textContent).toEqual(column)
       ))
     }
 
@@ -91,15 +89,15 @@ describe('<SectionModal />', () => {
 
     it('sorts decision column in ascending order ', async () => {
       fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
-      
+
       const unSortedDecisionList = [
-        "Met", "Not met", "Met", "TBC", "Met","Not met","Not met"
+        "Met", "Not met", "Met", "TBC", "Met", "Not met", "Not met"
       ];
-     
+
       expectRowTextContentToActual(unSortedDecisionList)
 
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
-      
+
       const sortedDecisionList = ["Met", "Met", "Met", "Not met", "Not met", "Not met", "TBC"]
       expectRowTextContentToActual(sortedDecisionList)
     });

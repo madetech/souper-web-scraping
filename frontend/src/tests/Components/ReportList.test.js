@@ -104,7 +104,7 @@ describe('<Reportlist />', () => {
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
       fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
 
-      const assessmentDateColumn = ["2023-02-05", "2022-11-10", "2022-02-03", "2021-11-11", "2020-12-12","2019-10-09"]
+      const assessmentDateColumn = ["2023-02-05", "2022-11-10", "2022-02-03", "2021-11-11", "2020-12-12", "2019-10-09"]
 
       expectRowTextContentToActual(assessmentDateColumn)
     });
