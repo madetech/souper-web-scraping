@@ -49,7 +49,7 @@ docker-compose down -v
 
 ## Building & running the API
 1. Create virtual environment `python3 -m venv venv`
-1. Activate virtual environment `source /venv/bin/activate`
+1. Activate virtual environment `source venv/bin/activate`
 1. Install python dependencies: `make pinstall` from repository root or `pip install -r requirements.txt` from backend directory
 1. Start db: `make start-db` from repository root or `docker-compose -f docker-compose.yml up -d db` from backend directory
 1. Run app using uvicorn: `uvicorn main:app --reload`

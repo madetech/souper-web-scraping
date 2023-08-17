@@ -1,49 +1,64 @@
-# Use the official Node.js image as the base image
-FROM node:20
-
-# Set the working directory
+FROM postgres:15-alpine
 WORKDIR /app
+ENV POSTGRES_PASSWORD ${POSTGRES_PASSWORD}
+ENV POSTGRES_USER ${POSTGRES_USER}
+ENV POSTGRES_DB ${POSTGRES_DB}
 
-# COPY frontend/package*.json ./
-COPY frontend ./
+# Copy .env to app root
+COPY .env .
 
-WORKDIR /app/frontend
+# COPY world.sql /docker-entrypoint-initdb.d/
 
-# Install Node.js dependencies
-RUN npm install
+# # Use the official Node.js image as the base image
+# FROM node:20
 
-# Build the React application
-RUN npm run build
+# # Set the working directory
+# WORKDIR /app/frontend
 
-# Expose the React app port
-EXPOSE 3000
+# # COPY frontend/package*.json ./
+# COPY frontend/ /app/frontend/
 
-# Start the React app
-CMD ["npm", "start"]
+# RUN ls /app/frontend
+# RUN ls /app/frontend/src
+
+# # Install Node.js dependencies
+# RUN npm install
+
+# # # Build the React application
+# RUN npm run build --prod
+
+# # Expose the React app port
+# EXPOSE 3000
+
+# # Start the React app
+# CMD ["npm", "start"]
 
 # Dockerfile
 
-# pull the official docker image
+# # pull the official docker image
 FROM python:3.8-slim
 
-# set work directory
-WORKDIR /app
+# # set work directory
+# WORKDIR /app
 
-# set env variables
+# Set the working directory
+WORKDIR /app/backend
+
+COPY backend/ /app/backend/
+
+RUN ls /app/backend
+
+# # set env variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV DATABASE_URL postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
 
-COPY frontend ./
+# # install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /app/frontend
-
-# install dependencies
-COPY backend/requirements.txt /app/backend/requirements.txt
-RUN pip install --no-cache-dir -r /app/backend/requirements.txt
-
-# Expose the FastAPI port
+# # Expose the FastAPI port
 EXPOSE 8000
 
-# Start the FastAPI application
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# # Start the FastAPI application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
