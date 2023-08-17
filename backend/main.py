@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO) # Change this to logging.DEBUG to see more detail in logs
+logging.basicConfig(level=logging.DEBUG) # TODO DEBUG # Change this to logging.DEBUG to see more detail in logs
 
 app = FastAPI()
 add_pagination(app)
@@ -36,6 +36,10 @@ app.add_middleware(
 )
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
+@app.get("/alive", status_code=200)
+def alive():
+    return "yes"
+
 @app.get("/scrape", status_code=201)
 def scrape_report_data(session: Session = Depends(db.get_session)):
     if not app.is_scraping:
@@ -43,8 +47,7 @@ def scrape_report_data(session: Session = Depends(db.get_session)):
         report_data = scrape_reports()
         upsert_reports(report_data, session)
         app.is_scraping = False
-        
-
+          
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
 def get_reports(database: Session = Depends(db.get_session)):
     return report_reader.get_reports(database)

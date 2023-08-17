@@ -1,3 +1,7 @@
+docker build --progress=plain --no-cache
+docker build --progress=plain --no-cache -t souper .
+docker container run -dp 8000:8000 -t souper
+
 # souper-web-scraping
 Collecting information from 
 [Service Standard Reports](https://www.gov.uk/service-standard-reports "Service Standard Reports")
