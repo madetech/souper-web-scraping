@@ -2,16 +2,15 @@
 FROM node:20
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /app/frontend
 
-# Copy package.json and package-lock.json to the working directory
-COPY frontend/package*.json ./
+COPY public ./public
+COPY src ./src
+COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm install
-
-# Copy the application code
-COPY frontend ./
+# RUN npm install
+RUN NODE_ENV=development npm install
 
 # Build the React application
 RUN npm run build
