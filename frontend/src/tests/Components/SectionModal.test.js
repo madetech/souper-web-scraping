@@ -31,17 +31,20 @@ describe('<SectionModal />', () => {
     afterAll(() => {
       jest.resetAllMocks();
     });
+
+   
+
     it('renders table contents', async () => {
       expect(screen.getByText('Sections List: anna')).toBeInTheDocument();
     });
 
     it('renders sections in the first row', () => {
-      const tableRows = screen.getByTestId('tableTest')
+      const tableRows = screen.getAllByTestId('tableTest')[0]
       expect(tableRows.children.length).toBe(5);
     });
 
     it('renders the next page', async () => {
-      const tableRows = screen.getByTestId('tableTest')
+      const tableRows = screen.getAllByTestId('tableTest')[0]
 
       const nextPageButton = screen.getByRole("button", { name: 'Go to next page' });
       fireEvent.click(nextPageButton);
@@ -50,7 +53,7 @@ describe('<SectionModal />', () => {
     });
 
     it('renders the previous page', async () => {
-      const tableRows = screen.getByTestId('tableTest')
+      const tableRows = screen.getAllByTestId('tableTest')[0]
 
       const nextPageButton = screen.getByRole("button", { name: 'Go to next page' });
       fireEvent.click(nextPageButton);
@@ -62,7 +65,7 @@ describe('<SectionModal />', () => {
     });
 
     it('renders all sections in a single row', async () => {
-      const tableRows = screen.getByTestId('tableTest')
+      const tableRows = screen.getAllByTestId('tableTest')[0]
       fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
       expect(tableRows.children.length).toBe(sections.length);
     });
@@ -74,10 +77,24 @@ describe('<SectionModal />', () => {
     });
 
     it('renders feedback modal', async () => {
-      const rowSectionClickHandler = screen.getAllByTestId("rowTest")[0];
+      const rowSectionClickHandler = screen.getAllByTestId("sectionRowTest")[0];
       fireEvent.click(rowSectionClickHandler);
 
       expect(screen.getByTestId(/feedbackTest/)).toBeInTheDocument()
+    });
+
+    it('renders table showing totals for each decision type', async () => {
+      const decisionRows = screen.getAllByTestId('decisionRowTest');
+
+      expect(decisionRows[0]?.children.item(0)?.textContent).toEqual("Met")     
+      expect(decisionRows[0]?.children.item(1)?.textContent).toEqual("3")
+
+      expect(decisionRows[1]?.children.item(0)?.textContent).toEqual("Not Met")
+      expect(decisionRows[1]?.children.item(1)?.textContent).toEqual("3")
+
+      expect(decisionRows[2]?.children.item(0)?.textContent).toEqual("TBC")
+      expect(decisionRows[2]?.children.item(1)?.textContent).toEqual("1")
+
     });
 
     it('does not renders feedback modal', async () => {

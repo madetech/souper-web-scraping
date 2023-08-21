@@ -66,7 +66,7 @@ describe('<Reportlist />', () => {
     });
 
     it('renders section modal', async () => {
-      const rowSectionClickHandler = screen.getAllByTestId("rowTest")[0];
+      const rowSectionClickHandler = screen.getAllByTestId("reportRowTest")[0];
       fireEvent.click(rowSectionClickHandler);
 
       expect(screen.getByTestId(/sectionTest/)).toBeInTheDocument()

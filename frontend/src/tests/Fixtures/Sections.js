@@ -2,7 +2,7 @@ const sections = [
   {
     id: 1,
     number: "1",
-    decision: "met",
+    decision: "Met",
     title: "Section one"
   },
   {
@@ -14,7 +14,7 @@ const sections = [
   {
     id: 3,
     number: "3",
-    decision: "met",
+    decision: "Met",
     title: "Section three"
   },
   {
@@ -26,7 +26,7 @@ const sections = [
   {
     id: 5,
     number: "5",
-    decision: "met",
+    decision: "Met",
     title: "Section five"
   },
   {
@@ -37,7 +37,7 @@ const sections = [
   },
   {
     id: 7,
-    number: "6",
+    number: "7",
     decision: "Not met",
     title: "Section seven"
   }

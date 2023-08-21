@@ -100,11 +100,11 @@ export default function TableHelper(props) {
                 .sort(getComparator(order, orderBy))
                 .map((row) => {
                   return (
-                    <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id} data-testid="rowTest" onClick={() => handleRowClick(row)}>
+                    <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id} data-testid={props.rowTestId} onClick={() => handleRowClick(row)}>
                       {props.columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <StyledTableCell key={column.id} align={column.align}>
+                          <StyledTableCell key={column.id} align={column.align}>        
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
@@ -118,13 +118,14 @@ export default function TableHelper(props) {
           </Table>
         </TableContainer>
 
+        {props.rows.length > 5 &&
         <PaginationHelper
           count={props.rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleRowsPerPageChange}
-        />
+        />}
       </Paper>
     </Box>
   );

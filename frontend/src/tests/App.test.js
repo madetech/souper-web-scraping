@@ -9,12 +9,5 @@ describe('<App />', () => {
     const text = screen.getAllByRole("table");
     expect(text[0]).toBeInTheDocument();
   });
-
-  it('renders pagination', async () => {
-    render(<App />);
-
-    const text = screen.getAllByText("Rows per page:");
-    expect(text[0]).toBeInTheDocument();
-  });
 })
 
