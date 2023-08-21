@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 
 import React, { useEffect, useState } from 'react';
 import Modalhelper from '../Helpers/ModalHelper';
-import PlotHelper from '../Helpers/PlotHelper';
 import TableHelper from '../Helpers/TableHelper';
 import { sectionColumns } from "../Helpers/TableProperties";
 import getSectionList from '../RemoteUseCases/SectionListFetcher';
@@ -82,13 +81,13 @@ export default function SectionModal(props) {
       />
 
       <Box sx={{ pt: 2, pl: 8 }}>
-        <PlotHelper
+        {/* <PlotHelper
           xAxis={["Met", "Not Met", "TBC"]}
           yAxis={[metNumbers, notMetNumbers, tbcNumbers]}
           title={'Decisions Plot'}
           trace={'decision trace'}
           traceType={'decision types'}
-        />
+        /> */}
       </Box>
     </Modalhelper>
   )

@@ -9,11 +9,6 @@ jest.mock('../../Components/FeedbackModal', () => () =>
   <div data-testid="feedbackTest" />
 );
 
-jest.mock("react-plotly.js", () => ({
-  __esModule: true,
-  default: jest.fn(() => <div />),
-}));
-
 const handleClose = jest.fn();
 
 describe('<SectionModal />', () => {

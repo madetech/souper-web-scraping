@@ -10,11 +10,6 @@ jest.mock('../../Components/SectionModal', () => () =>
   <div data-testid="sectionTest" />
 );
 
-jest.mock("react-plotly.js", () => ({
-  __esModule: true,
-  default: jest.fn(() => <div />),
-}));
-
 describe('<Reportlist />', () => {
   describe('render table first page', () => {
     beforeEach(async () => {
