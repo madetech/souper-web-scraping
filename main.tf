@@ -11,13 +11,35 @@ resource "aws_vpc" "main" {
   }
 }
 
-resource "aws_subnet" "main_subnet" {
+/* Public subnet */
+resource "aws_subnet" "souper_subnet_public" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "172.32.0.0/24"  # Change this to your desired subnet CIDR block
+  count                   = 1
+  cidr_block              = "172.32.0.0/24"
+  availability_zone       = "eu-west-2c"
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "souper-subnet-public-1"
+  }
+}
+
+resource "aws_subnet" "souper_subnet_private_1" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "172.32.2.0/24"  # Change this to your desired subnet CIDR block
   availability_zone      = "eu-west-2a"    # Change this to your desired availability zone within the region
 
   tags = {
-    Name = "souper-subnet-1"
+    Name = "souper-subnet-private-1"
+  }
+}
+
+resource "aws_subnet" "souper_subnet_private_2" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "172.32.4.0/24"  # Change this to your desired subnet CIDR block
+  availability_zone      = "eu-west-2b"    # Change this to your desired availability zone within the region
+
+  tags = {
+    Name = "souper-subnet-private-2"
   }
 }
 

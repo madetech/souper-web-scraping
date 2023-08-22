@@ -1,4 +1,8 @@
-copilot env init -n test --import-vpc-id vpc-0fc0c8f2ef1a0a03f --import-public-subnets subnet-0bf192b5dd6b69353,subnet-0e84a756ecfe675d8,subnet-0e85448003c9363e6 --import-private-subnets subnet-02b1d1c235d8b7b0a,subnet-021979e65464bffa5,subnet-0968fa1ad198daed9
+copilot env init -n test --import-vpc-id vpc-0fc0c8f2ef1a0a03f --import-public-subnets subnet-0bf192b5dd6b69353 --import-private-subnets subnet-02e30c47c3f7e1073
+
+copilot env init -n souper-scrape-prod --import-vpc-id vpc-0fc0c8f2ef1a0a03f --import-public-subnets subnet-0bf192b5dd6b69353, subnet-0d2e2adab762b69bb --import-private-subnets subnet-02e30c47c3f7e1073, subnet-0c95e599d11257ca8
+
+https://github.com/kataring/aws-copilot-redash
 
 https://towardsthecloud.com/aws-copilot-cli-deploy-containers-tutorial
 
@@ -13,3 +17,10 @@ terraform apply
 This Terraform configuration sets up a VPC, two security groups (one for the database and one for the backend), and configures their inbound and outbound rules as described in the previous responses. Make sure to customize the region, port numbers, and security rules as needed.
 
 Please note that this is just a basic example, and in a real-world scenario, you might need to integrate this with your existing infrastructure, configure your FastAPI and PostgreSQL resources, and manage other resources like subnets, route tables, and network ACLs. Also, remember to follow Terraform best practices and security guidelines when managing your infrastructure as code.
+
+Server safety:
+example.com:80
+
+EC2 instance
+Reverse proxy NGINX
+Bastion host

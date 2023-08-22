@@ -1,0 +1,28 @@
+# The manifest for the "souper-scrape-prod" environment.
+# Read the full specification for the "Environment" type at:
+#  https://aws.github.io/copilot-cli/docs/manifest/environment/
+
+# Your environment name will be used in naming your resources like VPC, cluster, etc.
+name: souper-scraper-prod
+type: Environment
+
+# Import your own VPC and subnets or configure how they should be created.
+network:
+  vpc:
+    id: vpc-0fc0c8f2ef1a0a03f
+    subnets:
+      private:
+        - id: subnet-02e30c47c3f7e1073
+        - id: subnet-0c95e599d11257ca8
+      public:
+        - id: subnet-0e2b4e9a541fc177f
+        - id: subnet-0d2e2adab762b69bb
+
+# Configure the load balancers in your environment, once created.
+# http:
+#   public:
+#   private:
+
+# Configure observability for your environment resources.
+observability:
+  container_insights: false

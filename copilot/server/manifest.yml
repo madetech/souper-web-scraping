@@ -1,0 +1,44 @@
+# The manifest for the "server" service.
+# Read the full specification for the "Load Balanced Web Service" type at:
+#  https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/
+
+# Your service name will be used in naming your resources like log groups, ECS services, etc.
+name: server
+type: Load Balanced Web Service
+
+# Distribute traffic to your service.
+http:
+  # Requests to this path will be forwarded to your service.
+  # To match all requests you can use the "/" path.
+  path: '/'
+  # You can specify a custom health check path. The default is "/".
+  healthcheck: '/ping'
+
+# Configuration for your containers and service.
+image:
+  location: redash/redash:latest
+  # Port exposed through your container to route traffic to it.
+  port: 5000
+
+cpu: 512       # Number of CPU units for the task.
+memory: 1024   # Amount of memory in MiB used by the task.
+count: 1       # Number of tasks that should be running in your service.
+exec: true     # Enable running commands in your container.
+command: "server"
+
+variables:
+  PYTHONUNBUFFERED: 0
+  REDASH_LOG_LEVEL: "INFO"
+  REDASH_DATE_FORMAT: "YYYY-MM-DD"
+  REDASH_WEB_WORKERS: 4
+
+environments:
+  test:
+    secrets:
+      REDASH_REDIS_URL: /redash/test/server/REDIS_URL
+      REDASH_DATABASE_URL: /redash/test/server/DATABASE_URL
+  production:
+    secrets:
+      REDASH_REDIS_URL: /redash/production/server/REDIS_URL
+      REDASH_DATABASE_URL: /redash/production/server/DATABASE_URL
+
