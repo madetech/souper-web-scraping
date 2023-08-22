@@ -36,6 +36,13 @@ describe('<SectionModal />', () => {
     afterAll(() => {
       jest.resetAllMocks();
     });
+
+    function expectRowTextContentToActual(array) {
+      array.map((column, index) => (
+        expect(screen.getAllByTestId('rowTest')[index].children.item(1)?.textContent).toEqual(column)
+      ))
+    }
+
     it('renders table contents', async () => {
       expect(screen.getByText('Sections List: anna')).toBeInTheDocument();
     });
@@ -72,6 +79,39 @@ describe('<SectionModal />', () => {
       expect(tableRows.children.length).toBe(sections.length);
     });
 
+    it('sorts column', async () => {
+      fireEvent.click(screen.getAllByTestId('ArrowDownwardIcon')[0])
+      expect(screen.getByText("sorted ascending")).toBeInTheDocument();
+
+      fireEvent.click(screen.getAllByTestId('ArrowDownwardIcon')[0])
+      expect(screen.getByText("sorted descending")).toBeInTheDocument();
+    });
+
+    it('sorts decision column in ascending order ', async () => {
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+
+      const unSortedDecisionList = [
+        "Met", "Not met", "Met", "TBC", "Met", "Not met", "Not met"
+      ];
+
+      expectRowTextContentToActual(unSortedDecisionList)
+
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+
+      const sortedDecisionList = ["Met", "Met", "Met", "Not met", "Not met", "Not met", "TBC"]
+      expectRowTextContentToActual(sortedDecisionList)
+    });
+
+    it('sorts decision column in decending order ', async () => {
+      fireEvent.change(screen.getByTestId('rowsDropDown'), { target: { value: 10 } })
+
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+      fireEvent.click(screen.queryAllByTestId('ArrowDownwardIcon')[1])
+
+      const descisionList = ["TBC", "Not met", "Not met", "Not met", "Met", "Met", "Met"]
+
+      expectRowTextContentToActual(descisionList)
+    });
     it('closes the modal', async () => {
       fireEvent.click(screen.getByTestId('HighlightOffSharpIcon'))
 
