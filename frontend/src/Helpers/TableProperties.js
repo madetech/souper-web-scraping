@@ -3,20 +3,20 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 
 const reportColumns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'assessment_date', label: 'Assessment date', minWidth: 170 },
-  { id: 'overall_verdict', label: 'Overall verdict', minWidth: 170 },
-  { id: 'stage', label: 'Stage', minWidth: 170 },
+  { id: 'name', label: 'Name' },
+  { id: 'assessment_date', label: 'Assessment date' },
+  { id: 'overall_verdict', label: 'Overall verdict' },
+  { id: 'stage', label: 'Stage' },
 ];
 
 const sectionColumns = [
-  { id: 'number', label: 'Section Number', minWidth: 170 },
-  { id: 'decision', label: 'Decision', minWidth: 170 },
+  { id: 'number', label: 'Section Number' },
+  { id: 'decision', label: 'Decision' },
 ];
 
 const feedbackColumns = [
-  { id: 'feedback', label: 'Feedback', minWidth: 170 },
-  { id: 'type', label: 'Type', minWidth: 170 },
+  { id: 'feedback', label: 'Feedback' },
+  { id: 'type', label: 'Type' },
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
