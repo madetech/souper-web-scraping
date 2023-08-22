@@ -36,7 +36,7 @@ describe('<FeedbackModalHelper />', () => {
 
     function expectRowTextContentToActual(array) {
       array.map((column, index) => (
-        expect(screen.getAllByTestId('rowTest')[index]?.children.item(1)?.textContent).toEqual(column)
+        expect(screen.getAllByTestId('feedbackRowTest')[index]?.children.item(1)?.textContent).toEqual(column)
       ))
     }
     it('shows the feedback list', async () => {

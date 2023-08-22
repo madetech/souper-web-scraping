@@ -29,7 +29,7 @@ describe('<Reportlist />', () => {
 
     function expectRowTextContentToActual(array) {
       array.map((column, index) => (
-        expect(screen.getAllByTestId('rowTest')[index].children.item(1)?.textContent).toEqual(column)
+        expect(screen.getAllByTestId('reportRowTest')[index].children.item(1)?.textContent).toEqual(column)
       ))
     }
     it('renders table contents', () => {
