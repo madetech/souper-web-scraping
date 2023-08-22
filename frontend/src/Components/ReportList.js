@@ -51,6 +51,7 @@ export default function ReportList() {
           rows={report}
           columns={reportColumns}
           onRowClickHandler={rowClickHandler}
+          rowTestId={"reportRowTest"}
         />
       </Box>
     </Box>

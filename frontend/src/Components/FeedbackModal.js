@@ -29,6 +29,7 @@ export default function FeedbackModal(props) {
         rows={feedback}
         columns={feedbackColumns}
         onRowClickHandler={null}
+        rowTestId={"feedbackRowTest"}
       />
     </Modalhelper>
   )

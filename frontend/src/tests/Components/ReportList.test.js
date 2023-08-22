@@ -10,11 +10,6 @@ jest.mock('../../Components/SectionModal', () => () =>
   <div data-testid="sectionTest" />
 );
 
-jest.mock("react-plotly.js", () => ({
-  __esModule: true,
-  default: jest.fn(() => <div />),
-}));
-
 describe('<Reportlist />', () => {
   describe('render table first page', () => {
     beforeEach(async () => {
@@ -34,7 +29,7 @@ describe('<Reportlist />', () => {
 
     function expectRowTextContentToActual(array) {
       array.map((column, index) => (
-        expect(screen.getAllByTestId('rowTest')[index].children.item(1)?.textContent).toEqual(column)
+        expect(screen.getAllByTestId('reportRowTest')[index].children.item(1)?.textContent).toEqual(column)
       ))
     }
     it('renders table contents', () => {
@@ -110,7 +105,7 @@ describe('<Reportlist />', () => {
     });
 
     it('renders section modal', async () => {
-      const rowSectionClickHandler = screen.getAllByTestId("rowTest")[0];
+      const rowSectionClickHandler = screen.getAllByTestId("reportRowTest")[0];
       fireEvent.click(rowSectionClickHandler);
 
       expect(screen.getByTestId(/sectionTest/)).toBeInTheDocument()

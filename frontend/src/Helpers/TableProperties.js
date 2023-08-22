@@ -14,6 +14,10 @@ const sectionColumns = [
   { id: 'decision', label: 'Decision', minWidth: 170 },
 ];
 
+const decisionColumns = [
+  { id: 'decisionType', label: 'Decision', minWidth: 170 },
+  { id: 'total', label: 'Total', minWidth: 170 },
+]
 const feedbackColumns = [
   { id: 'feedback', label: 'Feedback', minWidth: 170 },
   { id: 'type', label: 'Type', minWidth: 170 },
@@ -39,5 +43,5 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export { StyledTableCell, StyledTableRow, feedbackColumns, reportColumns, sectionColumns };
+export { StyledTableCell, StyledTableRow, feedbackColumns, reportColumns, sectionColumns, decisionColumns };
 

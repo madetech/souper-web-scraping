@@ -4,9 +4,8 @@ import Typography from '@mui/material/Typography';
 
 import React, { useEffect, useState } from 'react';
 import Modalhelper from '../Helpers/ModalHelper';
-import PlotHelper from '../Helpers/PlotHelper';
 import TableHelper from '../Helpers/TableHelper';
-import { sectionColumns } from "../Helpers/TableProperties";
+import { sectionColumns, decisionColumns } from "../Helpers/TableProperties";
 import getSectionList from '../RemoteUseCases/SectionListFetcher';
 import FeedbackModal from './FeedbackModal';
 
@@ -47,15 +46,27 @@ export default function SectionModal(props) {
             return metNumbers = metNumbers + 1;
           case 'Not met':
             return notMetNumbers = notMetNumbers + 1;
-          default:
+          case 'TBC':
             return tbcNumbers = tbcNumbers + 1;
+          default:
+            return 0;
         }
       })
     }
   }
 
   sumOfDecisionByTypes();
-
+  const decison = [
+    {
+      id: '1', decisionType: "Met", total: metNumbers
+    },
+    {
+      id: '2', decisionType: "Not Met", total: notMetNumbers
+    },
+    {
+      id: '3', decisionType: "TBC", total: tbcNumbers
+    },
+  ]
   return (
     <Modalhelper
       open={props.open}
@@ -79,17 +90,16 @@ export default function SectionModal(props) {
         rows={section}
         columns={sectionColumns}
         onRowClickHandler={rowSectionClickHandler}
+        rowTestId={"sectionRowTest"}
       />
 
-      <Box sx={{ pt: 2, pl: 8 }}>
-        <PlotHelper
-          xAxis={["Met", "Not Met", "TBC"]}
-          yAxis={[metNumbers, notMetNumbers, tbcNumbers]}
-          title={'Decisions Plot'}
-          trace={'decision trace'}
-          traceType={'decision types'}
-        />
-      </Box>
+      <TableHelper
+        style={{ pt: 6, pl: 10, pr: 10}}
+        rows={decison}
+        columns={decisionColumns}
+        rowTestId={"decisionRowTest"}
+        onRowClickHandler={rowSectionClickHandler}
+      />
     </Modalhelper>
   )
 }

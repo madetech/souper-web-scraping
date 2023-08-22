@@ -37,7 +37,7 @@ const sections = [
   },
   {
     id: 7,
-    number: "6",
+    number: "7",
     decision: "Not met",
     title: "Section seven"
   }

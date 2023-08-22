@@ -41,6 +41,7 @@ describe('<TableHelper />', () => {
                     columns={reportColumns}
                     rows={reports}
                     onRowClickHandler={row}
+                    rowTestId={"rowTest"}
                 />
             )
 
