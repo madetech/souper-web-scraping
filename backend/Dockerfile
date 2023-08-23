@@ -10,6 +10,7 @@ COPY . .
 # set env variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV DATABASE_URL postgresql://eu-west-2:551085516078@arn:aws/secretsmanager
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt

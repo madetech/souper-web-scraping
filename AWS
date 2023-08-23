@@ -1,3 +1,14 @@
+https://github.com/aws/copilot-cli/wiki/Developing-With-Environment-Variables/35856bd30861110ffbb3086d0c686b57b2a3b345
+
+Storage type: Aurora Serverless
+Workload name: souper-backend
+Storage resource name: souper-backend-cluster
+Lifecycle:  No, the storage should be created and deleted at the environment level
+Database engine: PostgreSQL
+Initial database name: souper_main
+✔ Wrote CloudFormation template at copilot/environments/addons/souper-backend-cluster.yml
+✔ Wrote CloudFormation parameters at copilot/environments/addons/addons.parameters.yml
+
 copilot env init -n test --import-vpc-id vpc-0fc0c8f2ef1a0a03f --import-public-subnets subnet-0bf192b5dd6b69353 --import-private-subnets subnet-02e30c47c3f7e1073
 
 copilot env init -n souper-scrape-prod --import-vpc-id vpc-0fc0c8f2ef1a0a03f --import-public-subnets subnet-0bf192b5dd6b69353, subnet-0d2e2adab762b69bb --import-private-subnets subnet-02e30c47c3f7e1073, subnet-0c95e599d11257ca8

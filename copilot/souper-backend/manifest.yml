@@ -12,7 +12,7 @@ env_file: .env
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
-  path: 'souper-backend'
+  path: '/'
   # You can specify a custom health check path. The default is "/".
   healthcheck: '/alive'
 
@@ -29,16 +29,29 @@ count: 1       # Number of tasks that should be running in your service.
 exec: true     # Enable running commands in your container.
 network:
   connect: true # Enable Service Connect for intra-environment traffic between services.
+  vpc:
+  security_groups:
+    - from_cfn: ${COPILOT_APPLICATION_NAME}-${COPILOT_ENVIRONMENT_NAME}-souperbackendclusterSecurityGroup
 
 # storage:
   # readonly_fs: true       # Limit to read-only access to mounted root filesystems.
  
 # Optional fields for more advanced use-cases.
 #
+# postgresql://<username>:<password>@<host>:<port>/<database_name>
+
 variables:                    # Pass environment variables as key value pairs.
-  DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres
+  LOG_LEVEL: info
+  DATABASE_URL: postgresql://eu-west-2:551085516078@arn:aws/secretsmanager
   # DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-#  LOG_LEVEL: info
+  # arn:aws:secretsmanager:eu-west-2:551085516078:secret:souperbackendclusterAuroraS-2JjeXgtniAvc-uzYQ0W
+  # The JSON secret that holds the database username and password.
+  # Fields are 'host', 'port', 'dbname', 'username', 'password', 'dbClusterIdentifier' and 'engine'
+
+
+secrets:
+  DB_SECRET:
+    from_cfn: ${COPILOT_APPLICATION_NAME}-${COPILOT_ENVIRONMENT_NAME}-souperbackendclusterAuroraSecret
 
 #secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
 #  GITHUB_TOKEN: GITHUB_TOKEN  # The key is the name of the environment variable, the value is the name of the SSM parameter.
