@@ -8,6 +8,9 @@ https://towardsthecloud.com/aws-copilot-cli-deploy-containers-tutorial
 
 copilot storage init -t Aurora
 
+frontend/
+docker build -m 4g -t frontend:latest .
+
 Run the following commands in the terminal:
 csharp
 Copy code

@@ -6,13 +6,15 @@
 name: souper-backend
 type: Load Balanced Web Service
 
+env_file: .env
+
 # Distribute traffic to your service.
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
   path: 'souper-backend'
   # You can specify a custom health check path. The default is "/".
-  # healthcheck: '/'
+  healthcheck: '/alive'
 
 # Configuration for your containers and service.
 image:
@@ -33,7 +35,9 @@ network:
  
 # Optional fields for more advanced use-cases.
 #
-#variables:                    # Pass environment variables as key value pairs.
+variables:                    # Pass environment variables as key value pairs.
+  DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres
+  # DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
 #  LOG_LEVEL: info
 
 #secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.

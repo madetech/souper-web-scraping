@@ -4,10 +4,11 @@ FROM node:latest
 # Set the working directory
 WORKDIR /app/frontend
 
-COPY public ./public
+COPY public .
 COPY src ./src
 COPY package.json ./
 
+# Do we need to create these directories?
 RUN mkdir -p ./build
 RUN mkdir -p ./node_modules
 
