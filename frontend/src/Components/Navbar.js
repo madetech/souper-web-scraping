@@ -1,48 +1,60 @@
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { Typography } from '@mui/material';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import LoadingButton from '@mui/lab/LoadingButton';
 import Alert from '@mui/material/Alert';
-import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
-import { useRef } from 'react';
+import React, { useState } from 'react';
+import runScrape from '../RemoteUseCases/RunScraper';
 import "../styles/main.css";
 import logo from './Navbar/logo.png';
 
 export default function Navbar(props) {
-  const navRef = useRef();
+  const [scrapeProgress, setScrapeProgress] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
+  const [loading, setLoading] = useState(false);
+  
+  const handleClickOpenDialog = async () => {
+    setLoading(true)
+    setOpenDialog(true);
+    setScrapeProgress(await runScrape())
+  };
+
+  const handleCloseDialog = (value) => {
+    setOpenDialog(false);
+  };
 
   return (
     <header>
-      <nav ref={navRef}>
+      <nav>
         <img src={logo} alt="logo" />
         {<Box className="nav-links">
-          <Button variant="text" sx={{ color: 'black', textTransform: "none" }} onClick={props.onOpen}>
-            Run Scrape
-          </Button>
-          
-          {props.progress == "201" ?
-            <Dialog onClose={props.onClose}
-              open={props.open}
+        
+          <LoadingButton
+            color='success'
+            onClick={() => handleClickOpenDialog()}
+            loading={scrapeProgress == "201" ?  false : loading}
+            loadingPosition="start"
+            startIcon={<GetAppIcon />}
+            sx={{ color: 'black', textTransform: "none" }}
+            variant="text"
+          >
+           Run scrape
+          </LoadingButton>
+
+          {scrapeProgress == "201" ?
+            <Dialog onClose={() => handleCloseDialog()}
+              open={openDialog}
             >
               <Alert
                 iconMapping={{
                   success: <CheckCircleOutlineIcon fontSize="inherit" />,
                 }}
               >
-                All records scrapped successfully
+                All records scraped successfully
               </Alert>
             </Dialog>
-            :
-            <Backdrop
-              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={props.open}
-              onClick={props.onClose}
-            >
-              <CircularProgress style={{ 'color': 'darkgreen' }} />
-              <Typography sx={{ pl: 2 }}>Scrapping in progress...</Typography>
-            </Backdrop>
+            : null
           }
         </Box>}
       </nav>
