@@ -45,6 +45,7 @@ variables:                    # Pass environment variables as key value pairs.
   DATABASE_URL: postgresql://eu-west-2:551085516078@arn:aws/secretsmanager
   # DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
   # arn:aws:secretsmanager:eu-west-2:551085516078:secret:souperbackendclusterAuroraS-2JjeXgtniAvc-uzYQ0W
+  # arn:aws:secretsmanager:eu-west-2:551085516078:secret:souperpostgresAuroraSecret-QTiSSe1J4gl4-96PCOo
   # The JSON secret that holds the database username and password.
   # Fields are 'host', 'port', 'dbname', 'username', 'password', 'dbClusterIdentifier' and 'engine'
 

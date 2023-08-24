@@ -36,10 +36,6 @@ app.add_middleware(
 )
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
-# @app.get("/souper-scraper/alive", status_code=200)
-# def alive2():
-#     return "yes2"
-
 @app.get("/souper-scraper/alive", status_code=200)
 @app.get("/alive", status_code=200)
 def alive():
