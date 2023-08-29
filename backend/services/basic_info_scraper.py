@@ -18,7 +18,8 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     LOGGER.info("Retrieving report links")
-    report_links = get_report_links()
+    # report_links = get_report_links()
+    report_links = ["/service-standard-reports/get-security-clearance"]
     reports_models = []
     number_of_reports = len(report_links)
     LOGGER.info(f"Processing {number_of_reports} reports")
@@ -193,7 +194,7 @@ def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
     if "service_provider" not in report_dict.keys():
         service_provider = soup.find(string=re.compile("(?i)(department) ?\/ ?Agency(:)?"))
         if service_provider is not None:
-            report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.get_text())
+            report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.get_text().strip())
 
 
 def standardise_verdict_input(info_dict):

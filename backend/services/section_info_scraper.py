@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup, PageElement
 from models.feedback import FeedbackType
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 def get_decision(input: str) -> str:
@@ -39,6 +40,13 @@ section_element_id_dict = {
     "15": ["collect-performance-data"],
     "16": ["identify-performance-indicators"]
 }
+
+def analyse_feedback(feedback):
+    si_obj = SentimentIntensityAnalyzer()
+    sentiment_dict = si_obj.polarity_scores(feedback)
+    positive_percentage = sentiment_dict['pos']*100
+    neutral_percentage = sentiment_dict['neu']*100
+    negative_percentage = sentiment_dict['neg']*100
 
 
 def scrape_one(soup: BeautifulSoup, sections: list[dict]):

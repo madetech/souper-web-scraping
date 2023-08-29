@@ -25,3 +25,4 @@ urllib3==2.0.3
 uvicorn==0.22.0
 virtualenv==20.19.0
 pydantic==2.0.3
+vaderSentiment==3.3.2
