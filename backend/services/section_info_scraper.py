@@ -41,12 +41,18 @@ section_element_id_dict = {
     "16": ["identify-performance-indicators"]
 }
 
-def analyse_feedback(feedback):
+
+def analyse_feedback(feedback_string):
+
     si_obj = SentimentIntensityAnalyzer()
-    sentiment_dict = si_obj.polarity_scores(feedback)
-    positive_percentage = sentiment_dict['pos']*100
-    neutral_percentage = sentiment_dict['neu']*100
+    sentiment_dict = si_obj.polarity_scores(feedback_string)
     negative_percentage = sentiment_dict['neg']*100
+    positive_percentage = sentiment_dict['pos']*100
+
+    return positive_percentage, negative_percentage
+
+
+
 
 
 def scrape_one(soup: BeautifulSoup, sections: list[dict]):
@@ -73,6 +79,15 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             feedback = []
             feedback.extend(extract_feedback(section_decision, "what-the-team-has-done-well", FeedbackType.POSITIVE))
             feedback.extend(extract_feedback(section_decision, "what-the-team-needs-to-explore", FeedbackType.CONSTRUCTIVE))
+        
+
+            feedback_concat = []
+            feedback_string = ' '
+            for text in feedback:
+                feedback_concat.insert(0,text[0])
+    
+            analyse_feedback(feedback_string.join(feedback_concat))
+
 
             sections.append(dict(
                 number=int(section_id),
