@@ -47,6 +47,7 @@ def analyse_feedback(feedback_string):
     si_obj = SentimentIntensityAnalyzer()
     sentiment_dict = si_obj.polarity_scores(feedback_string)
     analysed_percentages.insert(0,sentiment_dict['neg']*100)
+    analysed_percentages.insert(0,sentiment_dict['neu']*100)
     analysed_percentages.insert(0,sentiment_dict['pos']*100)
 
     return analysed_percentages
@@ -86,6 +87,7 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             feedback.extend(extract_feedback(section_decision, "what-the-team-has-done-well", FeedbackType.POSITIVE))
             feedback.extend(extract_feedback(section_decision, "what-the-team-needs-to-explore", FeedbackType.CONSTRUCTIVE))
             feedback_text = extract_text_from_feedback(feedback)
+            analyse_feedback(feedback_text)
             
 
             sections.append(dict(
@@ -94,7 +96,8 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
                 title = section_element.text.strip(),
                 feedback = feedback,
                 positive_feedback_percentage = analyse_feedback(feedback_text)[0],
-                negative_feedback_percentage = analyse_feedback(feedback_text)[1]
+                neutral_feedback_percentage = analyse_feedback(feedback_text)[1],
+                negative_feedback_percentage = analyse_feedback(feedback_text)[2]
             ))
             break
 
