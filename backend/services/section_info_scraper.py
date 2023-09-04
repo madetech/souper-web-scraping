@@ -87,7 +87,7 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             feedback.extend(extract_feedback(section_decision, "what-the-team-has-done-well", FeedbackType.POSITIVE))
             feedback.extend(extract_feedback(section_decision, "what-the-team-needs-to-explore", FeedbackType.CONSTRUCTIVE))
             feedback_text = extract_text_from_feedback(feedback)
-            analyse_feedback(feedback_text)
+            analysed_feedback = analyse_feedback(feedback_text)
             
 
             sections.append(dict(
@@ -95,9 +95,9 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
                 decision=get_decision(section_decision.text),
                 title = section_element.text.strip(),
                 feedback = feedback,
-                positive_feedback_percentage = analyse_feedback(feedback_text)[0],
-                neutral_feedback_percentage = analyse_feedback(feedback_text)[1],
-                negative_feedback_percentage = analyse_feedback(feedback_text)[2]
+                positive_feedback_percentage = analysed_feedback[0],
+                neutral_feedback_percentage = analysed_feedback[1],
+                negative_feedback_percentage = analysed_feedback[2],
             ))
             break
 
