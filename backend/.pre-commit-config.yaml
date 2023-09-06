@@ -3,7 +3,7 @@ repos:
   hooks:
   -   id: tests
       name: run tests
-      entry: pipenv run pytest
+      entry: ../scripts/pre-commit.sh
       language: system
       types: [python]
       stages: [commit]
