@@ -6,4 +6,4 @@ repos:
       entry: pytest -v
       language: system
       types: [python]
-      stages: [push]
+      stages: [commit]
