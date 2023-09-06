@@ -3,7 +3,7 @@ repos:
   hooks:
   -   id: tests
       name: run tests
-      entry: pip3 run pytest
+      entry: pipenv run pytest
       language: system
       types: [python]
       stages: [commit]
