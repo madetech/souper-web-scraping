@@ -3,7 +3,7 @@ repos:
   hooks:
   -   id: tests
       name: run tests
-      entry: backend/run-tests.sh
+      entry: backend/run-tests.sh -v
       language: script
       types: [python]
       stages: [commit]
