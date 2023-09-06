@@ -3,7 +3,7 @@ repos:
   hooks:
   -   id: tests
       name: run tests
-      entry: /Users/sam.fallowfield/Documents/python/souper-web-scraping/backend/run-tests.sh
-      language: system
+      entry: backend/run-tests.sh
+      language: script
       types: [python]
       stages: [commit]
