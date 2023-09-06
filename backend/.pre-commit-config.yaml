@@ -4,7 +4,6 @@ repos:
   -   id: tests
       name: run tests
       entry: ./run-tests.sh
-      language: system
+      language: script
       types: [python]
       stages: [commit]
-      pass_filenames: false
