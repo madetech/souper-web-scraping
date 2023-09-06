@@ -7,3 +7,4 @@ repos:
       language: script
       types: [python]
       stages: [commit]
+      always_run: true

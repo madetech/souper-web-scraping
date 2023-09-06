@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-py.test
+cd backend
+pytest
