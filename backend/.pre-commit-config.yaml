@@ -4,6 +4,6 @@ repos:
   -   id: tests
       name: run tests
       entry: /Users/sam.fallowfield/Documents/python/souper-web-scraping/backend/run-tests.sh
-      language: script
+      language: system
       types: [python]
       stages: [commit]
