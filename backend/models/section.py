@@ -19,3 +19,6 @@ class Section(Base):
     decision: Mapped[str] = mapped_column(nullable=True)
     title: Mapped[str] = mapped_column(nullable= True)
     feedback: Mapped[List["Feedback"]] = relationship()
+    positive_language_percent: Mapped[float] = mapped_column(nullable=True)
+    constructive_language_percent: Mapped[float] = mapped_column(nullable=True)
+    neutral_language_percent: Mapped[float] = mapped_column(nullable=True)

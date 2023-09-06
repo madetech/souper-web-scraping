@@ -62,7 +62,10 @@ def upsert_report_section(section: Section, report_id: int, session: Session):
         report_id=report_id,
         number=section.number,
         title=section.title,
-        decision=section.decision
+        decision=section.decision,
+        positive_language_percent=section.positive_language_percent,
+        constructive_language_percent = section.constructive_language_percent,
+        neutral_language_percent = section.neutral_language_percent
     )
 
     upsert_section_statement = insert(section_table).values(section_to_insert)

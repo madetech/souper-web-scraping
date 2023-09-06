@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup, PageElement
 from models.feedback import FeedbackType
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 def get_decision(input: str) -> str:
@@ -41,6 +42,26 @@ section_element_id_dict = {
 }
 
 
+def analyse_feedback(feedback_string):
+    analysed_percentages =[]
+    si_obj = SentimentIntensityAnalyzer()
+    sentiment_dict = si_obj.polarity_scores(feedback_string)
+    analysed_percentages.insert(0,sentiment_dict['neg']*100)
+    analysed_percentages.insert(0,sentiment_dict['neu']*100)
+    analysed_percentages.insert(0,sentiment_dict['pos']*100)
+
+    return analysed_percentages
+
+def extract_text_from_feedback(feedback):
+    feedback_concat = []
+    feedback_string = ' '
+    for text in feedback:
+        feedback_concat.insert(0,text[0])
+    return feedback_string.join(feedback_concat)
+
+
+
+
 def scrape_one(soup: BeautifulSoup, sections: list[dict]):
 
     for section_id in section_element_id_dict.keys():
@@ -65,12 +86,18 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             feedback = []
             feedback.extend(extract_feedback(section_decision, "what-the-team-has-done-well", FeedbackType.POSITIVE))
             feedback.extend(extract_feedback(section_decision, "what-the-team-needs-to-explore", FeedbackType.CONSTRUCTIVE))
+            feedback_text = extract_text_from_feedback(feedback)
+            analysed_feedback = analyse_feedback(feedback_text)
+            
 
             sections.append(dict(
                 number=int(section_id),
                 decision=get_decision(section_decision.text),
                 title = section_element.text.strip(),
-                feedback = feedback
+                feedback = feedback,
+                positive_feedback_percentage = analysed_feedback[0],
+                neutral_feedback_percentage = analysed_feedback[1],
+                negative_feedback_percentage = analysed_feedback[2],
             ))
             break
 
