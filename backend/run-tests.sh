@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 cd backend
-py.test -v
+pytest --tb=line
