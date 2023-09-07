@@ -54,7 +54,7 @@ docker-compose down -v
 1. Start db: `make start-db` from repository root or `docker-compose -f docker-compose.yml up -d db` from backend directory
 1. Run app using uvicorn: `uvicorn main:app --reload`
 
-## Note for running the application
+## Note for running the application!
 - if you are running into a module not found error for 'VaderSentiment'
   we have currently found that installing vader outside of the VENV allows it to work.
   looking for permanent solution 
