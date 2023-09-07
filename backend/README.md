@@ -65,6 +65,9 @@ cd backend
 pytest -v
 ```
 
+## Set up pre-commit hooks
+- pip3 install pre-commit
+
 ## Plan
 - API (FastAPI)
 - ORM (SQL Alchemy)
