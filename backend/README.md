@@ -65,8 +65,9 @@ cd backend
 pytest -v
 ```
 
-## Set up pre-commit hooks
+## Set up pre-commit hooks (run commands in the backend DIR)
 - pip3 install pre-commit
+- pre-commit install
 
 ## Plan
 - API (FastAPI)
