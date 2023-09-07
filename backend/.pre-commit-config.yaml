@@ -1,0 +1,10 @@
+repos:
+- repo: local
+  hooks:
+  -   id: tests
+      name: run tests
+      entry: backend/run-tests.sh
+      language: script
+      types: [python]
+      stages: [commit]
+      always_run: true
