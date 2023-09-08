@@ -57,6 +57,17 @@ export default function TableHelper(props) {
     return props.onRowClickHandler ? props.onRowClickHandler(row) : null;
   }
 
+  function columnWidths(column){
+    switch (column) {
+      case "name":
+        return "40%";
+      case "feedback":
+        return "80%";
+      default:
+        return "20%";
+    }
+  }
+  
   const createSortHandler = (property) => (
     event
   ) => {
@@ -75,7 +86,9 @@ export default function TableHelper(props) {
                   <StyledTableCell
                     key={headCell.id}
                     sortDirection={orderBy === headCell.id ? order : false}
+                    width={ columnWidths(headCell.id)}
                   >
+                    {console.log(headCell.id)}
                     <TableSortLabel
                       active={true}
                       direction={orderBy === headCell.id ? order : "asc"}
