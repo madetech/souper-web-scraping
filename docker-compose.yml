@@ -6,9 +6,11 @@ services:
     image: frontend-i
     build: ./frontend
     ports:
-      - 8080:80
+      - 8080:3000
     environment:
       - BACKEND_URL=${BACKEND_URL}
+      - BACKEND_HOST=${BACKEND_HOST}
+      - BACKEND_PORT=${BACKEND_PORT}
 
   backend:
     build: ./backend
