@@ -25,7 +25,7 @@ app.is_scraping = False
 
 db = souperDB()
 
-origins = ["http://localhost:3000"]
+origins = ["http://localhost:8080"]
 
 app.add_middleware(
     CORSMiddleware,
