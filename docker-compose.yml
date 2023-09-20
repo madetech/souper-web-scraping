@@ -4,13 +4,12 @@ services:
   frontend:
     container_name: frontend-c
     image: frontend-i
-    build: ./frontend
+    build: 
+      context: ./frontend
+      args:
+        REACT_APP_HOST_IP_ADDRESS: http://localhost:8081/reports
     ports:
       - 8080:3000
-    environment:
-      - BACKEND_URL=${BACKEND_URL}
-      - BACKEND_HOST=${BACKEND_HOST}
-      - BACKEND_PORT=${BACKEND_PORT}
 
   backend:
     build: ./backend

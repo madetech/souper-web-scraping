@@ -3,6 +3,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev
 COPY . .
+ARG REACT_APP_HOST_IP_ADDRESS
+
+ENV REACT_APP_HOST_IP_ADDRESS $REACT_APP_HOST_IP_ADDRESS
 RUN npm run build
 
 EXPOSE 3000
