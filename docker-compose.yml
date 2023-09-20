@@ -7,7 +7,7 @@ services:
     build: 
       context: ./frontend
       args:
-        REACT_APP_HOST_IP_ADDRESS: http://localhost:8081/reports
+        REACT_APP_BACKEND_URL: http://localhost:8081
     ports:
       - 8080:3000
 
