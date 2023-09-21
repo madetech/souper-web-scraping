@@ -1,5 +1,5 @@
-
 import logging
+import os
 
 from data import feedback_reader, report_reader, section_reader
 from data.database import souperDB
@@ -25,7 +25,7 @@ app.is_scraping = False
 
 db = souperDB()
 
-origins = ["http://localhost:8080"]
+origins = [os.getenv('REACT_APP_FRONTEND')]
 
 app.add_middleware(
     CORSMiddleware,

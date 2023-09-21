@@ -7,7 +7,7 @@ const hostname = process.env.BACKEND_HOST;
 const port = process.env.BACKEND_PORT;
 
 var corsOptions = {
-    origin: 'http://localhost:8080'
+    origin: `${process.envREACT_APP_BACKEND_URL}`
 }
 
 app.use(cors(corsOptions))
