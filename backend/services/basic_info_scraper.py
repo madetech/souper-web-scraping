@@ -89,7 +89,8 @@ def scrape_report_html(content: str) -> dict:
 
     # scrape title for each report
     title_element = soup.find("h1")
-    report_dict["name"] = title_element.text.strip()
+    if title_element:
+        report_dict["name"] = title_element.text.strip()
 
     # scrape service provider for each report.
 
@@ -143,9 +144,12 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
             if element.string is not None and element.string.lower().strip() in key_mapping[key]:
                 # Store matched key in list
                 keys_found.add(key)
-                # Get element text and add to dictionary
-                value = element.next_sibling.next_sibling
-                report_dict[key] = value.get_text().strip()
+                # Get element text and add to dictionary. Want to get the element after the next one
+                next_element = element.next_sibling
+                if next_element:
+                    target_element = next_element.next_sibling
+                    if target_element:
+                        report_dict[key] = target_element.get_text().strip()
 
         # Exit loop if all keys have been matched
         if len(keys_found) == len(key_mapping.keys()):
@@ -188,13 +192,18 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
 def scrape_service_provider(soup: BeautifulSoup, report_dict: dict):
     service_provider = soup.find("td", string=re.compile("(?i)(service )?provider(:)?"))
     if service_provider is not None:
-        report_dict["service_provider"] = service_provider.find_next('td').text.strip()
+        report_dict["service_provider"] = service_provider.find_next('td')
+        if report_dict["service_provider"]:
+            report_dict["service_provider"].text.strip()
 
 def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
     if "service_provider" not in report_dict.keys():
         service_provider = soup.find(string=re.compile("(?i)(department) ?\/ ?Agency(:)?"))
         if service_provider is not None:
-            report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.get_text().strip())
+            if service_provider.parent:
+                if service_provider.parent.parent:
+                    if service_provider.parent.parent.get_text():
+                        report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.get_text().strip())
 
 
 def standardise_verdict_input(info_dict):
