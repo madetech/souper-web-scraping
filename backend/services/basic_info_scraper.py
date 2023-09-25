@@ -133,7 +133,7 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
         return
     elements = []
     #content = soup.find("div", {"class": "gem-c-govspeak govuk-govspeak"})
-    content = soup.select('div.gem-c-govspeak govuk-govspeak > p strong')
+    elements = soup.select('div.gem-c-govspeak.govuk-govspeak > p strong')
 
     #if content:
     #    elements = content.find('p, strong')
