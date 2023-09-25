@@ -193,9 +193,11 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
 def scrape_service_provider(soup: BeautifulSoup, report_dict: dict):
     service_provider = soup.find("td", string=re.compile("(?i)(service )?provider(:)?"))
     if service_provider is not None:
-        report_dict["service_provider"] = service_provider.find_next('td')
-        if report_dict["service_provider"]:
-            report_dict["service_provider"].text.strip()
+        if service_provider.find_next('td'):
+            next = service_provider.find_next('td')
+            if next:
+                text = next.text
+                report_dict["service_provider"] = text.strip()
 
 def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
     if "service_provider" not in report_dict.keys():
@@ -209,7 +211,7 @@ def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
 
 def standardise_verdict_input(info_dict):
     if "result" not in info_dict.keys():
-        return None
+        return "N/A"
     match info_dict["result"]:
 
         case  "Pass" | "Met" | "Pass with conditions" | "Passed":
@@ -222,7 +224,7 @@ def standardise_verdict_input(info_dict):
 
 def standardise_stage_input(info_dict):
     if "stage" not in info_dict.keys():
-        return None
+        return "N/A"
     match info_dict["stage"]:
 
         case "Alpha" | "Alpha2" | "alpha" | "Alpha Review" | "Alpha review" | "Alpha (re-assessment)" | "Alpha - reassessment" | "Alpha reassessment" | "Alpha - reassessment" | "Alpha reassessment":
@@ -238,16 +240,20 @@ def standardise_stage_input(info_dict):
 
 def create_report_model(report_dict: dict, url: str) -> Report:
 
-    assessment_date = None
+    assessment_date = ""
     assessment_date_value = None
-    report_name = None
+    report_name = ""
     service_provider_name = "N/A"
 
     if "name" in report_dict.keys():
         report_name = report_dict.get("name")
+        if not report_name:
+            report_name  = ""
 
     if "service_provider" in report_dict.keys():
         service_provider_name = report_dict.get("service_provider")
+        if not service_provider_name:
+            service_provider_name = "N/A"
 
     if "assessment_date" in report_dict.keys():
         assessment_date_value = report_dict.get("assessment_date")
@@ -260,6 +266,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
         pass
 
     report = Report()
+
     report.assessment_date = assessment_date
     report.overall_verdict = standardise_verdict_input(report_dict)
     report.stage = standardise_stage_input(report_dict)

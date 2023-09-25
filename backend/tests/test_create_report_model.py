@@ -20,9 +20,9 @@ def test_create_report_model_with_missing_keys():
         "service_provider": "N/A"
     }
     report_model = create_report_model(report_dict, REPORT_URL)
-    assert report_model.assessment_date == None
-    assert report_model.stage == None
-    assert report_model.name == None
+    assert report_model.assessment_date == ""
+    assert report_model.stage == "N/A"
+    assert report_model.name == ""
 
 def test_create_report_model_with_invalid_date():
     report_dict = {
@@ -32,7 +32,7 @@ def test_create_report_model_with_invalid_date():
         "name": "get security clearance",
         "service_provider": "HMRC"
     }
-    assert create_report_model(report_dict, REPORT_URL).assessment_date == None
+    assert create_report_model(report_dict, REPORT_URL).assessment_date == ""
 
 def test_create_report_model_with_valid_date():
     report_dict = {
