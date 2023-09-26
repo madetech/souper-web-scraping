@@ -27,18 +27,13 @@ def test_scrape_two_skips_if_no_retry_keys():
     soup = BeautifulSoup(content, "html.parser")
     report_dict = {}
     retry_keys = []
-
     key_mapping = {
         "assessment_date": ["assessment date:", "reassessment date:"],
         "stage": ["stage", "stage:", "assessment stage", "assessment stage:", "moving to:"],
         "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
     }
-    #dict = scrape_two(soup, key_mapping, report_dict, retry_keys)
-    #assert dict == ''
-
     scrape_two(soup, key_mapping, report_dict, retry_keys)
     assert report_dict == {}
-
 
 def test_scrape_two_with_retry_keys():
     with open(MISFORMAT_REPORT_HTML_FILE, 'r') as f:
@@ -46,14 +41,10 @@ def test_scrape_two_with_retry_keys():
     soup = BeautifulSoup(content, "html.parser")
     report_dict = {}
     retry_keys = ["assessment_date", "stage", "result"]
-
     key_mapping = {
         "assessment_date": ["assessment date:", "reassessment date:"],
         "stage": ["stage", "stage:", "assessment stage", "assessment stage:", "moving to:"],
         "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
     }
-    #dict = scrape_two(soup, key_mapping, report_dict, retry_keys)
-    #assert dict == ''
-
     scrape_two(soup, key_mapping, report_dict, retry_keys)
     assert report_dict["result"] == 'Pass'
