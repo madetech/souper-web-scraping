@@ -6,7 +6,7 @@ REPORT_URL = "https://www.gov.uk/service-standard-reports/get-security-clearance
 REPORT_HTML_FILE = "tests/test_fixtures/report_html.txt"
 
 # These are for reports which hit the 'scrape_two' method, i.e. reports which are formatted in a less standard way.
-MISFORMAT_REPORT_URL = "https://www.gov.uk/service-standard-reports/tell-us-about-a-death-alpha-assessment"
+MISFORMAT_REPORT_URL = "https://www.gov.uk/service-standard-reports/car-tax-statutory-off-road-notification-sorn-and-vehicle-enquiry"
 MISFORMAT_REPORT_HTML_FILE = "tests/test_fixtures/misformat_report_html.txt"
 
 @pytest.fixture

@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 9]><html class="lte-ie8 govuk-template" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="govuk-template" lang="en">
 <!--<![endif]-->
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta property="og:description" content="The report from the alpha assessment for DWP's tell us about a death service on 10 May 2018.">
-<meta property="og:title" content="Tell us about a death alpha assessment">
-<meta property="og:url" content="https://www.gov.uk/service-standard-reports/tell-us-about-a-death-alpha-assessment">
+<meta property="og:description" content="The report from the beta assessment for DVLA's Car tax, Statutory Off Road Notification (SORN) and Vehicle Enquiry service on 14 January 2014.">
+<meta property="og:title" content="Car tax, Statutory Off Road Notification and Vehicle Enquiry - Beta Assessment">
+<meta property="og:url" content="https://www.gov.uk/service-standard-reports/car-tax-statutory-off-road-notification-sorn-and-vehicle-enquiry">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="GOV.UK">
 <meta name="twitter:card" content="summary">
-<meta name="description" content="The report from the alpha assessment for DWP's tell us about a death service on 10 May 2018.">
+<meta name="description" content="The report from the beta assessment for DVLA's Car tax, Statutory Off Road Notification (SORN) and Vehicle Enquiry service on 14 January 2014.">
 <meta name="govuk:taxon-slugs" content="technology-guidance-technology-guidance-digital-service-standard">
 <meta name="govuk:taxon-slug" content="technology-guidance-technology-guidance-digital-service-standard">
 <meta name="govuk:taxon-ids" content="84630bce-4c1c-4406-a38a-e8c41967b8f7">
@@ -17,17 +18,17 @@
 <meta name="govuk:themes" content="government/all">
 <meta name="govuk:analytics:organisations" content="&lt;OT1329&gt;">
 <meta name="govuk:primary-publishing-organisation" content="Central Digital and Data Office">
-<meta name="govuk:public-updated-at" content="2018-08-06T14:35:15Z">
-<meta name="govuk:updated-at" content="2023-02-07T12:06:28Z">
-<meta name="govuk:first-published-at" content="2018-08-06T14:35:15Z">
-<meta name="govuk:content-id" content="ebbef15f-06ec-40cf-aaba-6a613432fd09">
+<meta name="govuk:public-updated-at" content="2017-01-05T16:46:03Z">
+<meta name="govuk:updated-at" content="2023-02-07T12:06:37Z">
+<meta name="govuk:first-published-at" content="2017-01-05T16:46:03Z">
+<meta name="govuk:content-id" content="f6b53bf6-5e86-46d3-b8f4-f1ff5b325f5a">
 <meta name="govuk:schema-name" content="specialist_document">
 <meta name="govuk:rendering-app" content="government-frontend">
 <meta name="govuk:publishing-app" content="specialist-publisher">
 <meta name="govuk:format" content="service_standard_report">
     <meta charset="utf-8">
     <title lang="en">
-      Tell us about a death alpha assessment - GOV.UK
+      Car tax, Statutory Off Road Notification and Vehicle Enquiry - Beta Assessment - GOV.UK
   </title>
 
     <script src="/assets/static/govuk_publishing_components/vendor/lux/lux-measurer-505eef3e243b1d08ea7c4b945ebe1ae146d896db61366e415b30cc1bcd84cbdc.js" async="async"></script>
@@ -55,7 +56,7 @@
 
     
   <link rel="stylesheet" href="/assets/government-frontend/application-a4f6d631ba21c73ea52b03a432bcf7e16dfbd376598c6e1502f8b8d01c0fe14f.css" media="all">
-<link rel="canonical" href="https://www.gov.uk/service-standard-reports/tell-us-about-a-death-alpha-assessment">
+<link rel="canonical" href="https://www.gov.uk/service-standard-reports/car-tax-statutory-off-road-notification-sorn-and-vehicle-enquiry">
 <link rel="stylesheet" href="/assets/government-frontend/views/_specialist-document-587a34394a2eb9f0ffcabc46295d4a0408278cdf8b80dcc2af2a8c68a22ce811.css">
 <link rel="stylesheet" href="/assets/government-frontend/govuk_publishing_components/components/_lead-paragraph-d0c303cb65d94ea441c60e551d6eb863bff824daf603b796c69a29283351d8c9.css">
 <link rel="stylesheet" href="/assets/government-frontend/govuk_publishing_components/components/_metadata-353cb9a5f4ebea8bc16dd77959790cb8efa6ccb4a3ad372fc51c0295fbd7819a.css">
@@ -70,7 +71,7 @@
 <meta name="govuk:rendering-application" content="government-frontend">
 </head>
   <body class="gem-c-layout-for-public govuk-template__body">
-    <script nonce="+52ww8GYQgjn6AAKHezI9w==">
+    <script nonce="Lt0L2Pl5L8Rt9IkZgs0Yvg==">
 //<![CDATA[
       document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
 
@@ -153,7 +154,7 @@
                 Menu
               </span>
 </a>
-            <button aria-controls="super-navigation-menu-d172f812" aria-expanded="false" aria-label="Show navigation menu" class="gem-c-layout-super-navigation-header__navigation-top-toggle-button" data-text-for-hide="Hide navigation menu" data-text-for-show="Show navigation menu" data-toggle-desktop-group="top" data-toggle-mobile-group="top" data-tracking-key="menu" data-ga4-event='{"event_name":"select_content","type":"header menu bar","text":"Menu","index":{"index_section":1,"index_section_count":2},"section":"Menu"}' hidden="hidden" id="super-navigation-menu-d172f812-toggle" type="button">
+            <button aria-controls="super-navigation-menu-2db6ed80" aria-expanded="false" aria-label="Show navigation menu" class="gem-c-layout-super-navigation-header__navigation-top-toggle-button" data-text-for-hide="Hide navigation menu" data-text-for-show="Show navigation menu" data-toggle-desktop-group="top" data-toggle-mobile-group="top" data-tracking-key="menu" data-ga4-event='{"event_name":"select_content","type":"header menu bar","text":"Menu","index":{"index_section":1,"index_section_count":2},"section":"Menu"}' hidden="hidden" id="super-navigation-menu-2db6ed80-toggle" type="button">
               <span class="gem-c-layout-super-navigation-header__navigation-top-toggle-button-inner">Menu</span>
 </button>          </div>
 
@@ -186,7 +187,7 @@
         </div>
       </div>
 
-      <div id="super-navigation-menu-d172f812" hidden class="gem-c-layout-super-navigation-header__navigation-dropdown-menu">
+      <div id="super-navigation-menu-2db6ed80" hidden class="gem-c-layout-super-navigation-header__navigation-dropdown-menu">
         <div class="govuk-width-container">
           <div class="govuk-grid-row gem-c-layout-super-navigation-header__navigation-items">
 
@@ -308,9 +309,9 @@
               <form class="gem-c-layout-super-navigation-header__search-form" id="search" data-module="ga4-form-tracker" data-ga4-form='{ "event_name": "search", "type": "header menu bar", "section": "Search GOV.UK", "action": "search", "url": "/search/all" }' data-ga4-form-include-text action="/search" method="get" role="search" aria-label="Site-wide">
                 
 <div class="gem-c-search govuk-!-display-none-print  gem-c-search--large gem-c-search--on-white gem-c-search--separate-label" data-module="gem-toggle-input-class-on-focus">
-    <label for="search-main-f2e32f64" class="govuk-label govuk-label--m">Search GOV.UK</label>
+    <label for="search-main-a3dfffeb" class="govuk-label govuk-label--m">Search GOV.UK</label>
   <div class="gem-c-search__item-wrapper">
-    <input enterkeyhint="search" class="gem-c-search__item gem-c-search__input js-class-toggle" id="search-main-f2e32f64" name="q" title="Search" type="search" value="">
+    <input enterkeyhint="search" class="gem-c-search__item gem-c-search__input js-class-toggle" id="search-main-a3dfffeb" name="q" title="Search" type="search" value="">
     <div class="gem-c-search__item gem-c-search__submit-wrapper">
       <button class="gem-c-search__submit" type="submit" data-track-category="headerClicked" data-track-action="searchSubmitted" data-track-label="/search/all" data-track-dimension="Search on GOV.UK" data-track-dimension-index="29" data-module="gem-track-click" enterkeyhint="search">
         Search
@@ -396,13 +397,13 @@
 <div class="gem-c-title govuk-!-margin-top-8 govuk-!-margin-bottom-8">
 
   <h1 class="gem-c-title__text govuk-heading-l">
-    Tell us about a death alpha assessment
+    Car tax, Statutory Off Road Notification and Vehicle Enquiry - Beta Assessment
   </h1>
 </div>
   </div>
   
   <div class="govuk-grid-column-two-thirds">
-      <p class="gem-c-lead-paragraph">The report from the alpha assessment for DWP's tell us about a death service on 10 May 2018.</p>
+      <p class="gem-c-lead-paragraph">The report from the beta assessment for DVLA's Car tax, Statutory Off Road Notification (SORN) and Vehicle Enquiry service on 14 January 2014.</p>
 
   </div>
 </div>
@@ -418,7 +419,7 @@
 
       </dd>
       <dt class="gem-c-metadata__term">Published</dt>
-      <dd class="gem-c-metadata__definition">6 August 2018</dd>
+      <dd class="gem-c-metadata__definition">5 January 2017</dd>
   </dl>
 </div>
     </div>
@@ -433,7 +434,7 @@
       <div class="app-c-important-metadata app-c-important-metadata--bottom-margin">
     <dl class="app-c-important-metadata__list" data-module="gem-track-click">
       <dt class="app-c-important-metadata__term">Assessment date: </dt>
-      <dd class="app-c-important-metadata__definition">10 May 2018</dd>
+      <dd class="app-c-important-metadata__definition">15 January 2014</dd>
     </dl>
   </div>
 
@@ -445,65 +446,32 @@
       Contents
 </h2>
     <ol class="gem-c-contents-list__list">
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--parent">
-          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 1" data-track-label="#the-service-met-the-standard-because" data-track-options='{"dimension29":"The service met the Standard because"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":1},"index_total":7}' href="#the-service-met-the-standard-because">The service met the Standard because</a>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 1" data-track-label="#outcome-of-service-assessment" data-track-options='{"dimension29":"Outcome of service assessment"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":1},"index_total":7}' href="#outcome-of-service-assessment">Outcome of service assessment</a>
 
         </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--parent">
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
           <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 2" data-track-label="#about-the-service" data-track-options='{"dimension29":"About the service"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":2},"index_total":7}' href="#about-the-service">About the service</a>
 
-            <ol class="gem-c-contents-list__nested-list">
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 2:1" data-track-label="#description" data-track-options='{"dimension29":"Description"}' href="#description">Description</a>
-                </li>
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 2:2" data-track-label="#service-users" data-track-options='{"dimension29":"Service users"}' href="#service-users">Service users</a>
-                </li>
-            </ol>
         </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--parent">
-          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 3" data-track-label="#detail" data-track-options='{"dimension29":"Detail"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":3},"index_total":7}' href="#detail">Detail</a>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 3" data-track-label="#reasons" data-track-options='{"dimension29":"Reasons"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":3},"index_total":7}' href="#reasons">Reasons</a>
 
-            <ol class="gem-c-contents-list__nested-list">
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 3:1" data-track-label="#user-needs" data-track-options='{"dimension29":"User needs"}' href="#user-needs">User needs</a>
-                </li>
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 3:2" data-track-label="#team" data-track-options='{"dimension29":"Team"}' href="#team">Team</a>
-                </li>
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 3:3" data-track-label="#technology" data-track-options='{"dimension29":"Technology"}' href="#technology">Technology</a>
-                </li>
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 3:4" data-track-label="#design" data-track-options='{"dimension29":"Design"}' href="#design">Design</a>
-                </li>
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 3:5" data-track-label="#analytics" data-track-options='{"dimension29":"Analytics"}' href="#analytics">Analytics</a>
-                </li>
-            </ol>
         </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--parent">
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
           <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 4" data-track-label="#recommendations" data-track-options='{"dimension29":"Recommendations"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":4},"index_total":7}' href="#recommendations">Recommendations</a>
 
-            <ol class="gem-c-contents-list__nested-list">
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 4:1" data-track-label="#to-pass-the-next-assessment-the-service-team-must" data-track-options='{"dimension29":"To pass the next assessment, the service team must"}' href="#to-pass-the-next-assessment-the-service-team-must">To pass the next assessment, the service team must</a>
-                </li>
-                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
-                  <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="nested_content_item 4:2" data-track-label="#the-service-team-should-also" data-track-options='{"dimension29":"The service team should also"}' href="#the-service-team-should-also">The service team should also</a>
-                </li>
-            </ol>
         </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--parent">
-          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 5" data-track-label="#next-steps" data-track-options='{"dimension29":"Next Steps"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":5},"index_total":7}' href="#next-steps">Next Steps</a>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 5" data-track-label="#other-recommendations" data-track-options='{"dimension29":"Other Recommendations"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":5},"index_total":7}' href="#other-recommendations">Other Recommendations</a>
 
         </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--parent">
-          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 6" data-track-label="#get-advice-and-guidance" data-track-options='{"dimension29":"Get advice and guidance"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":6},"index_total":7}' href="#get-advice-and-guidance">Get advice and guidance</a>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 6" data-track-label="#next-steps" data-track-options='{"dimension29":"Next Steps"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":6},"index_total":7}' href="#next-steps">Next Steps</a>
 
         </li>
-        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--parent">
-          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 7" data-track-label="#digital-service-standard-points" data-track-options='{"dimension29":"Digital Service Standard points"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":7},"index_total":7}' href="#digital-service-standard-points">Digital Service Standard points</a>
+        <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--dashed">
+          <a class="gem-c-contents-list__link govuk-link govuk-link--no-underline" data-track-category="contentsClicked" data-track-action="content_item 7" data-track-label="#summary" data-track-options='{"dimension29":"Summary"}' data-ga4-link='{"event_name":"navigation","type":"content","section":"Contents","index":{"index_link":7},"index_total":7}' href="#summary">Summary</a>
 
         </li>
     </ol>
@@ -516,278 +484,96 @@
         
 <div class="gem-c-govspeak govuk-govspeak " data-module="govspeak">
     
-          <table>
-  <tbody>
-    <tr>
-      <td>From:</td>
-      <td><a href="https://www.gov.uk/government/organisations/central-digital-and-data-office">Central Digital and Data Office</a></td>
-    </tr>
-    <tr>
-      <td>Assessment date:</td>
-      <td>10 May 2018</td>
-    </tr>
-    <tr>
-      <td>Stage:</td>
-      <td>Alpha</td>
-    </tr>
-    <tr>
-      <td>Result:</td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>Service provider:</td>
-      <td>Department for Work and Pensions</td>
-    </tr>
-  </tbody>
-</table>
+          <p><strong>Department / Agency:</strong><br>
+<abbr title="Department for Transport">DfT</abbr> / <abbr title="Driver and Vehicle Licensing Agency">DVLA</abbr></p>
 
-<h2 id="the-service-met-the-standard-because">The service met the Standard because:</h2>
+<p><strong>Date of Assessment:</strong><br>
+15/1/2014</p>
 
-<ul>
-  <li>It will improve the lives of bereaved citizens</li>
-  <li>The service team is performing well, crossing organisational boundaries to work with other in the same Department and across government</li>
-  <li>The panel was impressed by the work done to improve the interface for agents - it has been optimised for the organic nature of a phone call, to avoid asking end users to answer questions in a particular order or repeat information or at a very stressful time for them</li>
-</ul>
+<p><strong>Moving to:</strong><br>
+Public Beta</p>
 
-<p>The panel would like to commend the service team on an Alpha that has been run well and will help to improve the lives of bereaved citizens.</p>
+<p><strong>Result:</strong><br>
+Pass</p>
+
+<p><strong>Lead Assessor:</strong><br>
+H. Garrett</p>
+
+<p><strong>Service Manager:</strong><br>
+N. Walters</p>
+
+<p><strong>Digital Leader:</strong><br>
+B. Etheridge</p>
+
+<hr>
+
+<h2 id="outcome-of-service-assessment">Outcome of service assessment</h2>
+
+<p>The Car tax, <abbr title="Car tax, Statutory Off Road Notification">SORN</abbr> &amp; Vehicle Enquiry service was seeking permission to continue development and move to Public Beta.</p>
+
+<p>After reviewing the service <abbr title="Government Digital Services">GDS</abbr> have concluded the Car tax, <abbr title="Car tax, Statutory Off Road Notification">SORN</abbr> &amp; Vehicle Enquiry service has shown sufficient progress and evidence of meeting the pre-April 2014 criteria and should proceed to Public Beta.</p>
+
+<p><abbr title="Government Digital Services">GDS</abbr> were very impressed by the pace at which the new service has been delivered and the capacity to iterate quickly.</p>
 
 <h2 id="about-the-service">About the service</h2>
 
-<h3 id="description">Description</h3>
+<p>Users will be able to apply for a new tax disc, take their vehicle off the road by declaring Statutory Off Road Notification, or use the vehicle enquiry service to check what information <abbr title="Driver and Vehicle Licensing Agency">DVLA</abbr> holds on its database about a vehicle.</p>
 
-<p>Tell Us About a Death (TUAaD) is a service that enables bereaved citizens to inform us that someone has died prior to formal death registration, this information is then shared with other government departments and services and the bereaved citizen is then directed to other services that can support them.</p>
+<h2 id="reasons">Reasons</h2>
 
-<h3 id="service-users">Service users</h3>
-
-<p>Bereaved Citizens, these can range from family members to care home workers, anyone whom is able to register a death.</p>
-
-<h2 id="detail">Detail</h2>
-
-<h3 id="user-needs">User needs</h3>
-
-<p>The team has conducted an impressive amount of research with users of the services: bereaved people, registrars, telephone agents, tell us once, bereavement service team, hospices and funeral directors. It was clear that they were aware of any of the pain points of the current services. The team were also aware of how backend processes impacted on users’ experience. They had taken into account that users could be satisfied with the service when they used it but didn’t realised there might be problems further down the line. Consideration of users who might need assisted digital support was evident throughout the discovery and alpha phase and was, more importantly considered in the context of the service.</p>
-
-<p>The team had a good plan in place for beta, with a focus on testing the riskiest assumptions. They had an impressive plan to have call agents embedded within the team during this phase. This will allow for fast feedback and iteration. There was also a plan to continue work on a public digital interface.</p>
-
-<h3 id="team">Team</h3>
-
-<p>The core service team had the multidisciplinary skills needed for Alpha and will bring on new skills for Beta - the team may wish to consider improving the ratio of permanent to interim team members in Beta.</p>
-
-<p>The core team also collaborates with colleagues in other areas of the end-to-end service, and receives support from senior stakeholders. There are also strong links with other government departments. The service team works with agility and is working well together.</p>
-
-<h3 id="technology">Technology</h3>
-
-<ul>
-  <li>What technical choices have you made and why - language, framework, deployment, integration, 3rd parties?</li>
-</ul>
-
-<p>Source code will be in GitHub with RESTful APIs. No code has been written for this solution yet as this at the early stage. JIRA is used to store the user stories in the backlog. Confluence will be used for document storing and management.</p>
-
-<p>Service will be hosted in AWS (to be consistent with other apps that DWP host in AWS) in the London Region in a Single Availability Zone. The S3 Bucket – stored between Availability Zones for robustness. SFT will be used for transferring out to ATAS2.</p>
-
-<p>Dev and QA environments are being setup while staging and production environments to be done.</p>
-
-<p>MVP (private Beta) will not integrate Verify but rather the agent will follow DWP guidelines when reporting the deceased person over the phone with the informant. This will be restricted to ‘internal use’ by the DWP agents. Further testing to prove the research to make this service publicly available is needed but can be done at a later phase.</p>
-
-<p>Technical team includes a technical architect and a developer who were present during alpha.</p>
-
-<ul>
-  <li>How do you plan to make the service open - open source, open standards, open data, common platforms?</li>
-</ul>
-
-<p>Today’s version of the service shares the data with 8 different departments (GDPR and other implications to be considered and validated).</p>
-
-<p>Various emails will be sent to the various departments e.g. HMRC to cancel the passport, DVLA to cancel the driving license, etc.</p>
-
-<p>Production code in GitHub, this project team working with another internal team, Fit Note, to get the code in GitHub.</p>
-
-<ul>
-  <li>How will you ensure the service is safe for users - data privacy, security threats, fraud vectors?</li>
-</ul>
-
-<p>ADFS will be used to authenticate and authorise users. Secure groups within AWS subnet to manage control over groups. Key Management Store (KMS) will be used to encrypt and decrypt data at the db level (RBaC VPC within AWS). Information passed within the SubNets and Security Groups (ELB between each Security Group).</p>
-
-<p>Security threats: token-based for passing data between the front end to data store. Cloud Watch to be run on AWS to monitor the activities within the instances.</p>
-
-<p>Fraud: the unique code from the registrar letter ‘may’ prevent people to commit fraud and report.</p>
-
-<ul>
+<ol>
   <li>
-    <p>What other distinct options have you tried/tested?</p>
-
-    <p>Tested with the agent and informant (role play) and produced a video.</p>
+    <p>The new service is a significant improvement on the legacy service and has focused on meeting user needs, acting on customer feedback and usability issues associated with the legacy service.</p>
   </li>
-</ul>
-
-<p>Further testing in next stage - TBC.</p>
-
-<ul>
-  <li>What are your technology plans for private beta?</li>
-</ul>
-
-<p>Service will be hosted in AWS and use ADFS to obtain the list of the authorised users. The are a number of roles that will control the authentication to the service by the agents. PostgreSQL database being used with NodeJS and using RedHat. MVP (private Beta) will not integrate Verify but rather the agent will follow DWP guidelines when reporting the deceased person over the phone with the informant.</p>
-
-<p>The product will be developed by the inhouse development team and AWS is the only vendor who will provide the infrastructure.</p>
-
-<ul>
-  <li>What plans do you have if your service is unavailability for any length of time?</li>
-</ul>
-
-<p>If the service is down the agent will need to take manual notes. When the service is live this will be LB on AWS - Auto Scaling Groups – if server fails it will be restarted. Logs from the issues that agents face during the submission of the data are captured using Prometheus.</p>
-
-<p>Service desk / support type issues: TechNow team will pick up the tickets. Triaging and first line support will be done by TechNow.</p>
-
-<p>Internal / external teams (perm/contractors/vendors/etc.)</p>
-
-<h3 id="design">Design</h3>
-
-<p>The service team has iterated a number of prototypes to research both the citizen- and agent-facing aspects of the service. Based on research findings they made the decision to focus on a phone service for their MVP. This will be complimented by a digital service for the agents receiving the calls, which will allow them to capture information more easily and keep track of their cases.</p>
-
-<p>The panel was impressed by the work done to improve the interface for agents. It has been optimised for the organic nature of a phone call, to avoid asking end users to answer questions in a particular order or repeat information or at a very stressful time for them. During private beta, the agents will be co-located with the service team. This will only help further improvements to the service.</p>
-
-<p>The interaction design has been informed by collaboration with designers of other case-working systems within DWP and across government. Whilst this ensures a level of consistency, the panel recommends that the team has another look at the ‘tabs within tabs’ pattern used. This could cause problems for agents working on multiple things at once, as well as being difficult to implement for users with certain access needs.</p>
-
-<p>A lot of work has also been done on the paper ‘bookends’ of the service: a leaflet handed out to end users by registrars after a death, and the letter they receive after using the service. The team is well aware that one of their biggest design challenges is getting users to the service in the first place, and it is good to see them focusing on this.</p>
-
-<p>A citizen-facing online service has been prototyped too, although it will not be the initial focus for private beta. The panel is concerned that the team will take a long time to learn whether an online channel is sufficiently viable for this service to justify its cost. Although the research indicates that users would use an online service, it isn’t the same as finding out whether they actually do. The panel recommends finding a way to quickly test this assumption with real users in a private beta context.</p>
-
-<h3 id="analytics">Analytics</h3>
-
-<p>The service team will measure the mandatory KPIs and has also identified a range of additional KPIs by which to measure the value of their service, and has spoken with the GOV.UK performance platform team. The service team outlined the challenges of measuring some of these KPIs - the panel highlighted the importance of benchmarking ‘as is’ performance at the beginning of Beta, even if this requires assumptions and confidence measures - so that their can be objective assessment of improvement in value at the end of Beta.</p>
+  <li>
+    <p>The service can be iteratively improved at pace and the existing team will continue to develop the service, with plans to iterate based on analysis of data following beta launch.</p>
+  </li>
+  <li>
+    <p>The service has the appropriate security and privacy protections in place.</p>
+  </li>
+</ol>
 
 <h2 id="recommendations">Recommendations</h2>
 
-<h3 id="to-pass-the-next-assessment-the-service-team-must">To pass the next assessment, the service team must:</h3>
+<p>To be addressed as soon as possible after the service has passed to public beta and a condition of making the beta the default option on the <a rel="external" href="http://gov.uk/">GOV.UK</a> service start pages.</p>
 
-<ul>
-  <li>Benchmark current performance against agreed KPIs at the beginning of Beta.</li>
-</ul>
+<ol>
+  <li>
+    <p>Design and content snag list feedback to be actioned to ensure departures from the style guide are addressed.</p>
+  </li>
+  <li>
+    <p>The team should establish a regular series of face-to-face user research, integrated into sprint cycles.</p>
+  </li>
+  <li>
+    <p>The team should carry out testing of the beta service with people with a range of disabilities and consult the <abbr title="Government Digital Services">GDS</abbr> accessibility team for recommendations.</p>
+  </li>
+</ol>
 
-<h3 id="the-service-team-should-also">The service team should also:</h3>
+<h2 id="other-recommendations">Other Recommendations</h2>
 
-<ul>
-  <li>consider improving the ratio of permanent to interim team members in Beta.</li>
-  <li>find a way to quickly test the assumption that citizens will use an online service with real users in a private beta context</li>
-  <li>ensure that enough research time is in place to manage both the integration of the beta telephone service and the research to understand the digital service.</li>
-</ul>
+<ol>
+  <li>
+    <p>Design resource should be brought within team to ensure someone owns the design and design changes (as a result of feedback/data analysis) can be delivered quickly.</p>
+  </li>
+  <li>
+    <p>Implement plan to separate secret code separate from platform and publish non-sensitive code as open source on GitHub or a similar public repository.</p>
+  </li>
+  <li>
+    <p>It is not currently possible to bookmark or link to the results page (state maintained via secret code passed back and forth in page/form). This should be addressed to enable a change in state to show a new URL.</p>
+  </li>
+  <li>
+    <p>Fix the style 404 page.</p>
+  </li>
+</ol>
 
 <h2 id="next-steps">Next Steps</h2>
 
-<p>You should follow the recommendations made in this report and adhere to <a href="https://www.gov.uk/service-manual/technology/get-a-domain-name">guidance on engaging with GOV.UK</a> before arranging your next assessment.</p>
+<p>This service has been given approval to launch as a Public Beta service.</p>
 
-<h2 id="get-advice-and-guidance">Get advice and guidance</h2>
+<h2 id="summary">Summary</h2>
 
-<p>The team can get advice and guidance on the next stage of development by:</p>
+<p>In summary, <abbr title="Government Digital Services">GDS</abbr> are very pleased to report that this service is on track to meet the service standard. <abbr title="Government Digital Services">GDS</abbr> are very pleased to be adding a digital service to <a rel="external" href="http://gov.uk/">GOV.UK</a> that is on track to demonstrate it is so good users will prefer to use it.</p>
 
-<ul>
-  <li>searching the <a href="https://www.gov.uk/service-manual/">Government Service Design Manual</a>
-</li>
-  <li>asking the <a rel="external" href="http://ukgovernmentdigital.slack.com">cross-government slack community</a>
-</li>
-  <li>contacting the Service Assessment team</li>
-</ul>
-
-<h2 id="digital-service-standard-points">Digital Service Standard points</h2>
-
-<table>
-  <tbody>
-    <tr>
-      <td>Point</td>
-      <td>Description</td>
-      <td>Result</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-1">Understanding user needs</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-2">Improving the service based on user research and usability testing</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-3">Having a sustainable, multidisciplinary team in place</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-4">Building using agile, iterative and user-centred methods</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-5">Iterating and improving the service on a frequent basis</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-6">Evaluating tools, systems, and ways of procuring them</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-7">Managing data, security level, legal responsibilities, privacy issues and risks</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-8">Making code available as open source</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-9">Using open standards and common government platforms</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-10">Testing the end-to-end service, and browser and device testing</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-11">Planning for the service being taken temporarily offline</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-12">Creating a simple and intuitive service</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-13">Ensuring consistency with the design and style of GOV.UK</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-14">Encouraging digital take-up</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>15</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-15">Using analytics tools to collect and act on performance data</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>16</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-16">Defining KPIs and establishing performance benchmarks</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-17">Reporting performance data on the Performance Platform</a></td>
-      <td>Met</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td><a href="https://www.gov.uk/service-manual/digital-by-default#criterion-18">Testing the service with the minister responsible for it</a></td>
-      <td>Met</td>
-    </tr>
-  </tbody>
-</table>
 
 
 </div>
@@ -796,7 +582,7 @@
 
       <div class="responsive-bottom-margin">
         <div class="app-c-published-dates" lang="en">
-    Published 6 August 2018
+    Published 5 January 2017
 </div>
 
       </div>
@@ -821,20 +607,17 @@
 <div class="gem-c-contextual-sidebar">
 
       <div class="gem-c-related-navigation" data-module="gem-track-click ga4-link-tracker">
-      <h2 id="related-nav-related_items-4c8e246f" class="gem-c-related-navigation__main-heading" data-track-count="sidebarRelatedItemSection">
+      <h2 id="related-nav-related_items-4c2b2d49" class="gem-c-related-navigation__main-heading" data-track-count="sidebarRelatedItemSection">
         Related content
       </h2>
 
 
 
-      <nav role="navigation" class="gem-c-related-navigation__nav-section" aria-labelledby="related-nav-related_items-4c8e246f" data-module="gem-toggle">
+      <nav role="navigation" class="gem-c-related-navigation__nav-section" aria-labelledby="related-nav-related_items-4c2b2d49" data-module="gem-toggle">
 
 
   <ul class="gem-c-related-navigation__link-list">
-        <li class="gem-c-related-navigation__link"><a class="govuk-link govuk-link gem-c-related-navigation__section-link govuk-link gem-c-related-navigation__section-link--sidebar  govuk-link gem-c-related-navigation__section-link--other" data-track-category="relatedLinkClicked" data-track-action="1.1 Related content" data-track-label="/service-standard-reports/driver-examiner-service-alpha-assessment" data-track-options='{"dimension28":"4","dimension29":"Driver examiner service alpha assessment"}' data-ga4-link='{"event_name":"navigation","type":"related content","index":{"index_section":"1","index_link":"1","index_section_count":"1"},"index_total":"4","section":"Related content"}' href="/service-standard-reports/driver-examiner-service-alpha-assessment">Driver examiner service alpha assessment</a></li>
-        <li class="gem-c-related-navigation__link"><a class="govuk-link govuk-link gem-c-related-navigation__section-link govuk-link gem-c-related-navigation__section-link--sidebar  govuk-link gem-c-related-navigation__section-link--other" data-track-category="relatedLinkClicked" data-track-action="1.2 Related content" data-track-label="/service-standard-reports/gov-uk-design-system-alpha-reassessment" data-track-options='{"dimension28":"4","dimension29":"GOV.UK design system alpha reassessment "}' data-ga4-link='{"event_name":"navigation","type":"related content","index":{"index_section":"1","index_link":"2","index_section_count":"1"},"index_total":"4","section":"Related content"}' href="/service-standard-reports/gov-uk-design-system-alpha-reassessment">GOV.UK design system alpha reassessment </a></li>
-        <li class="gem-c-related-navigation__link"><a class="govuk-link govuk-link gem-c-related-navigation__section-link govuk-link gem-c-related-navigation__section-link--sidebar  govuk-link gem-c-related-navigation__section-link--other" data-track-category="relatedLinkClicked" data-track-action="1.3 Related content" data-track-label="/service-standard-reports/apply-for-replace-or-renew-a-tachograph-driver-card-company-card-alpha-assessment" data-track-options='{"dimension28":"4","dimension29":"Apply for, replace or renew a tachograph driver card/company card alpha assessment"}' data-ga4-link='{"event_name":"navigation","type":"related content","index":{"index_section":"1","index_link":"3","index_section_count":"1"},"index_total":"4","section":"Related content"}' href="/service-standard-reports/apply-for-replace-or-renew-a-tachograph-driver-card-company-card-alpha-assessment">Apply for, replace or renew a tachograph driver card/company card alpha assessment</a></li>
-        <li class="gem-c-related-navigation__link"><a class="govuk-link govuk-link gem-c-related-navigation__section-link govuk-link gem-c-related-navigation__section-link--sidebar  govuk-link gem-c-related-navigation__section-link--other" data-track-category="relatedLinkClicked" data-track-action="1.4 Related content" data-track-label="/service-standard-reports/apply-for-a-blue-badge-beta-assessment" data-track-options='{"dimension28":"4","dimension29":"Apply for a Blue Badge beta assessment"}' data-ga4-link='{"event_name":"navigation","type":"related content","index":{"index_section":"1","index_link":"4","index_section_count":"1"},"index_total":"4","section":"Related content"}' href="/service-standard-reports/apply-for-a-blue-badge-beta-assessment">Apply for a Blue Badge beta assessment</a></li>
+        <li class="gem-c-related-navigation__link"><a class="govuk-link govuk-link gem-c-related-navigation__section-link govuk-link gem-c-related-navigation__section-link--sidebar  govuk-link gem-c-related-navigation__section-link--other" data-track-category="relatedLinkClicked" data-track-action="1.1 Related content" data-track-label="/make-a-sorn" data-track-options='{"dimension28":"1","dimension29":"Register your vehicle as off the road (SORN)"}' data-ga4-link='{"event_name":"navigation","type":"related content","index":{"index_section":"1","index_link":"1","index_section_count":"1"},"index_total":"1","section":"Related content"}' href="/make-a-sorn">Register your vehicle as off the road (SORN)</a></li>
 
   </ul>
 </nav>
@@ -910,7 +693,7 @@
     <div class="govuk-grid-column-two-thirds">
       <div class="gem-c-feedback__error-summary gem-c-feedback__js-show js-errors" tabindex="-1" hidden></div>
 
-      <input type="hidden" name="url" value="https://www.gov.uk/service-standard-reports/tell-us-about-a-death-alpha-assessment">
+      <input type="hidden" name="url" value="https://www.gov.uk/service-standard-reports/car-tax-statutory-off-road-notification-sorn-and-vehicle-enquiry">
 
       <h3 class="gem-c-feedback__form-heading">Help us improve GOV.UK</h3>
       <p id="feedback_explanation" class="gem-c-feedback__form-paragraph">Don’t include personal or financial information like your National Insurance number or credit card details.</p>
@@ -923,13 +706,13 @@
       
 <div class="gem-c-textarea govuk-form-group govuk-!-margin-bottom-6">
     
-  <label for="textarea-8e4eb8fb" class="gem-c-label govuk-label">What were you doing?</label>
+  <label for="textarea-56cd43e9" class="gem-c-label govuk-label">What were you doing?</label>
 
 
 
 
 
-  <textarea name="what_doing" class="govuk-textarea" id="textarea-8e4eb8fb" rows="3" spellcheck="true" aria-describedby="feedback_explanation">
+  <textarea name="what_doing" class="govuk-textarea" id="textarea-56cd43e9" rows="3" spellcheck="true" aria-describedby="feedback_explanation">
 </textarea>
     
 </div>
@@ -937,13 +720,13 @@
       
 <div class="gem-c-textarea govuk-form-group govuk-!-margin-bottom-6">
     
-  <label for="textarea-5e11182b" class="gem-c-label govuk-label">What went wrong?</label>
+  <label for="textarea-a8c85f2e" class="gem-c-label govuk-label">What went wrong?</label>
 
 
 
 
 
-  <textarea name="what_wrong" class="govuk-textarea" id="textarea-5e11182b" rows="3" spellcheck="true">
+  <textarea name="what_wrong" class="govuk-textarea" id="textarea-a8c85f2e" rows="3" spellcheck="true">
 </textarea>
     
 </div>
@@ -963,7 +746,7 @@
 </form>
 
 
-<script nonce="+52ww8GYQgjn6AAKHezI9w==">
+<script nonce="Lt0L2Pl5L8Rt9IkZgs0Yvg==">
 //<![CDATA[
   document.addEventListener("DOMContentLoaded", function () {
     var input = document.querySelector("#giraffe"),
@@ -986,7 +769,7 @@
       <div class="gem-c-feedback__error-summary js-errors" tabindex="-1" hidden></div>
 
       <input name="email_survey_signup[survey_id]" type="hidden" value="footer_satisfaction_survey">
-      <input name="email_survey_signup[survey_source]" type="hidden" value="/service-standard-reports/tell-us-about-a-death-alpha-assessment">
+      <input name="email_survey_signup[survey_source]" type="hidden" value="/service-standard-reports/car-tax-statutory-off-road-notification-sorn-and-vehicle-enquiry">
 
       <h3 class="gem-c-feedback__form-heading">Help us improve GOV.UK</h3>
       <p id="survey_explanation" class="gem-c-feedback__form-paragraph">To help us improve GOV.UK, we’d like to know more about your visit today. We’ll send you a link to a feedback form. It will take only 2 minutes to fill in. Don’t worry we won’t send you spam or share your email address with anyone.</p>
@@ -995,7 +778,7 @@
 <div class="govuk-form-group">
 
             
-  <label for="input-92409bb9" class="gem-c-label govuk-label">Email address</label>
+  <label for="input-79af2914" class="gem-c-label govuk-label">Email address</label>
 
 
 
@@ -1004,7 +787,7 @@
 
 
     
-    <input aria-describedby="survey_explanation" autocomplete="email" class="gem-c-input govuk-input" id="input-92409bb9" name="email_survey_signup[email_address]" spellcheck="false" type="email">
+    <input aria-describedby="survey_explanation" autocomplete="email" class="gem-c-input govuk-input" id="input-79af2914" name="email_survey_signup[email_address]" spellcheck="false" type="email">
 </div>
 
       
@@ -1163,12 +946,12 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://www.gov.uk/service-standard-reports/tell-us-about-a-death-alpha-assessment"
+    "@id": "https://www.gov.uk/service-standard-reports/car-tax-statutory-off-road-notification-sorn-and-vehicle-enquiry"
   },
-  "name": "Tell us about a death alpha assessment",
-  "datePublished": "2018-08-06T14:35:15Z",
-  "dateModified": "2018-08-06T14:35:15Z",
-  "text": "The report from the alpha assessment for DWP's tell us about a death service on 10 May 2018.",
+  "name": "Car tax, Statutory Off Road Notification and Vehicle Enquiry - Beta Assessment",
+  "datePublished": "2017-01-05T16:46:03Z",
+  "dateModified": "2017-01-05T16:46:03Z",
+  "text": "The report from the beta assessment for DVLA's Car tax, Statutory Off Road Notification (SORN) and Vehicle Enquiry service on 14 January 2014.",
   "publisher": {
     "@type": "Organization",
     "name": "GOV.UK",
@@ -1188,9 +971,9 @@
     "name": "Central Digital and Data Office",
     "url": "https://www.gov.uk/government/organisations/central-digital-and-data-office"
   },
-  "headLine": "Tell us about a death alpha assessment",
-  "description": "The report from the alpha assessment for DWP's tell us about a death service on 10 May 2018.",
-  "articleBody": "\u003ctable\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003ctd\u003eFrom:\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/government/organisations/central-digital-and-data-office\"\u003eCentral Digital and Data Office\u003c/a\u003e\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003eAssessment date:\u003c/td\u003e\n      \u003ctd\u003e10 May 2018\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003eStage:\u003c/td\u003e\n      \u003ctd\u003eAlpha\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003eResult:\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003eService provider:\u003c/td\u003e\n      \u003ctd\u003eDepartment for Work and Pensions\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n\n\u003ch2 id=\"the-service-met-the-standard-because\"\u003eThe service met the Standard because:\u003c/h2\u003e\n\n\u003cul\u003e\n  \u003cli\u003eIt will improve the lives of bereaved citizens\u003c/li\u003e\n  \u003cli\u003eThe service team is performing well, crossing organisational boundaries to work with other in the same Department and across government\u003c/li\u003e\n  \u003cli\u003eThe panel was impressed by the work done to improve the interface for agents - it has been optimised for the organic nature of a phone call, to avoid asking end users to answer questions in a particular order or repeat information or at a very stressful time for them\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eThe panel would like to commend the service team on an Alpha that has been run well and will help to improve the lives of bereaved citizens.\u003c/p\u003e\n\n\u003ch2 id=\"about-the-service\"\u003eAbout the service\u003c/h2\u003e\n\n\u003ch3 id=\"description\"\u003eDescription\u003c/h3\u003e\n\n\u003cp\u003eTell Us About a Death (TUAaD) is a service that enables bereaved citizens to inform us that someone has died prior to formal death registration, this information is then shared with other government departments and services and the bereaved citizen is then directed to other services that can support them.\u003c/p\u003e\n\n\u003ch3 id=\"service-users\"\u003eService users\u003c/h3\u003e\n\n\u003cp\u003eBereaved Citizens, these can range from family members to care home workers, anyone whom is able to register a death.\u003c/p\u003e\n\n\u003ch2 id=\"detail\"\u003eDetail\u003c/h2\u003e\n\n\u003ch3 id=\"user-needs\"\u003eUser needs\u003c/h3\u003e\n\n\u003cp\u003eThe team has conducted an impressive amount of research with users of the services: bereaved people, registrars, telephone agents, tell us once, bereavement service team, hospices and funeral directors. It was clear that they were aware of any of the pain points of the current services. The team were also aware of how backend processes impacted on users’ experience. They had taken into account that users could be satisfied with the service when they used it but didn’t realised there might be problems further down the line. Consideration of users who might need assisted digital support was evident throughout the discovery and alpha phase and was, more importantly considered in the context of the service.\u003c/p\u003e\n\n\u003cp\u003eThe team had a good plan in place for beta, with a focus on testing the riskiest assumptions. They had an impressive plan to have call agents embedded within the team during this phase. This will allow for fast feedback and iteration. There was also a plan to continue work on a public digital interface.\u003c/p\u003e\n\n\u003ch3 id=\"team\"\u003eTeam\u003c/h3\u003e\n\n\u003cp\u003eThe core service team had the multidisciplinary skills needed for Alpha and will bring on new skills for Beta - the team may wish to consider improving the ratio of permanent to interim team members in Beta.\u003c/p\u003e\n\n\u003cp\u003eThe core team also collaborates with colleagues in other areas of the end-to-end service, and receives support from senior stakeholders. There are also strong links with other government departments. The service team works with agility and is working well together.\u003c/p\u003e\n\n\u003ch3 id=\"technology\"\u003eTechnology\u003c/h3\u003e\n\n\u003cul\u003e\n  \u003cli\u003eWhat technical choices have you made and why - language, framework, deployment, integration, 3rd parties?\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eSource code will be in GitHub with RESTful APIs. No code has been written for this solution yet as this at the early stage. JIRA is used to store the user stories in the backlog. Confluence will be used for document storing and management.\u003c/p\u003e\n\n\u003cp\u003eService will be hosted in AWS (to be consistent with other apps that DWP host in AWS) in the London Region in a Single Availability Zone. The S3 Bucket – stored between Availability Zones for robustness. SFT will be used for transferring out to ATAS2.\u003c/p\u003e\n\n\u003cp\u003eDev and QA environments are being setup while staging and production environments to be done.\u003c/p\u003e\n\n\u003cp\u003eMVP (private Beta) will not integrate Verify but rather the agent will follow DWP guidelines when reporting the deceased person over the phone with the informant. This will be restricted to ‘internal use’ by the DWP agents. Further testing to prove the research to make this service publicly available is needed but can be done at a later phase.\u003c/p\u003e\n\n\u003cp\u003eTechnical team includes a technical architect and a developer who were present during alpha.\u003c/p\u003e\n\n\u003cul\u003e\n  \u003cli\u003eHow do you plan to make the service open - open source, open standards, open data, common platforms?\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eToday’s version of the service shares the data with 8 different departments (GDPR and other implications to be considered and validated).\u003c/p\u003e\n\n\u003cp\u003eVarious emails will be sent to the various departments e.g. HMRC to cancel the passport, DVLA to cancel the driving license, etc.\u003c/p\u003e\n\n\u003cp\u003eProduction code in GitHub, this project team working with another internal team, Fit Note, to get the code in GitHub.\u003c/p\u003e\n\n\u003cul\u003e\n  \u003cli\u003eHow will you ensure the service is safe for users - data privacy, security threats, fraud vectors?\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eADFS will be used to authenticate and authorise users. Secure groups within AWS subnet to manage control over groups. Key Management Store (KMS) will be used to encrypt and decrypt data at the db level (RBaC VPC within AWS). Information passed within the SubNets and Security Groups (ELB between each Security Group).\u003c/p\u003e\n\n\u003cp\u003eSecurity threats: token-based for passing data between the front end to data store. Cloud Watch to be run on AWS to monitor the activities within the instances.\u003c/p\u003e\n\n\u003cp\u003eFraud: the unique code from the registrar letter ‘may’ prevent people to commit fraud and report.\u003c/p\u003e\n\n\u003cul\u003e\n  \u003cli\u003e\n    \u003cp\u003eWhat other distinct options have you tried/tested?\u003c/p\u003e\n\n    \u003cp\u003eTested with the agent and informant (role play) and produced a video.\u003c/p\u003e\n  \u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eFurther testing in next stage - TBC.\u003c/p\u003e\n\n\u003cul\u003e\n  \u003cli\u003eWhat are your technology plans for private beta?\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eService will be hosted in AWS and use ADFS to obtain the list of the authorised users. The are a number of roles that will control the authentication to the service by the agents. PostgreSQL database being used with NodeJS and using RedHat. MVP (private Beta) will not integrate Verify but rather the agent will follow DWP guidelines when reporting the deceased person over the phone with the informant.\u003c/p\u003e\n\n\u003cp\u003eThe product will be developed by the inhouse development team and AWS is the only vendor who will provide the infrastructure.\u003c/p\u003e\n\n\u003cul\u003e\n  \u003cli\u003eWhat plans do you have if your service is unavailability for any length of time?\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003cp\u003eIf the service is down the agent will need to take manual notes. When the service is live this will be LB on AWS - Auto Scaling Groups – if server fails it will be restarted. Logs from the issues that agents face during the submission of the data are captured using Prometheus.\u003c/p\u003e\n\n\u003cp\u003eService desk / support type issues: TechNow team will pick up the tickets. Triaging and first line support will be done by TechNow.\u003c/p\u003e\n\n\u003cp\u003eInternal / external teams (perm/contractors/vendors/etc.)\u003c/p\u003e\n\n\u003ch3 id=\"design\"\u003eDesign\u003c/h3\u003e\n\n\u003cp\u003eThe service team has iterated a number of prototypes to research both the citizen- and agent-facing aspects of the service. Based on research findings they made the decision to focus on a phone service for their MVP. This will be complimented by a digital service for the agents receiving the calls, which will allow them to capture information more easily and keep track of their cases.\u003c/p\u003e\n\n\u003cp\u003eThe panel was impressed by the work done to improve the interface for agents. It has been optimised for the organic nature of a phone call, to avoid asking end users to answer questions in a particular order or repeat information or at a very stressful time for them. During private beta, the agents will be co-located with the service team. This will only help further improvements to the service.\u003c/p\u003e\n\n\u003cp\u003eThe interaction design has been informed by collaboration with designers of other case-working systems within DWP and across government. Whilst this ensures a level of consistency, the panel recommends that the team has another look at the ‘tabs within tabs’ pattern used. This could cause problems for agents working on multiple things at once, as well as being difficult to implement for users with certain access needs.\u003c/p\u003e\n\n\u003cp\u003eA lot of work has also been done on the paper ‘bookends’ of the service: a leaflet handed out to end users by registrars after a death, and the letter they receive after using the service. The team is well aware that one of their biggest design challenges is getting users to the service in the first place, and it is good to see them focusing on this.\u003c/p\u003e\n\n\u003cp\u003eA citizen-facing online service has been prototyped too, although it will not be the initial focus for private beta. The panel is concerned that the team will take a long time to learn whether an online channel is sufficiently viable for this service to justify its cost. Although the research indicates that users would use an online service, it isn’t the same as finding out whether they actually do. The panel recommends finding a way to quickly test this assumption with real users in a private beta context.\u003c/p\u003e\n\n\u003ch3 id=\"analytics\"\u003eAnalytics\u003c/h3\u003e\n\n\u003cp\u003eThe service team will measure the mandatory KPIs and has also identified a range of additional KPIs by which to measure the value of their service, and has spoken with the GOV.UK performance platform team. The service team outlined the challenges of measuring some of these KPIs - the panel highlighted the importance of benchmarking ‘as is’ performance at the beginning of Beta, even if this requires assumptions and confidence measures - so that their can be objective assessment of improvement in value at the end of Beta.\u003c/p\u003e\n\n\u003ch2 id=\"recommendations\"\u003eRecommendations\u003c/h2\u003e\n\n\u003ch3 id=\"to-pass-the-next-assessment-the-service-team-must\"\u003eTo pass the next assessment, the service team must:\u003c/h3\u003e\n\n\u003cul\u003e\n  \u003cli\u003eBenchmark current performance against agreed KPIs at the beginning of Beta.\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch3 id=\"the-service-team-should-also\"\u003eThe service team should also:\u003c/h3\u003e\n\n\u003cul\u003e\n  \u003cli\u003econsider improving the ratio of permanent to interim team members in Beta.\u003c/li\u003e\n  \u003cli\u003efind a way to quickly test the assumption that citizens will use an online service with real users in a private beta context\u003c/li\u003e\n  \u003cli\u003eensure that enough research time is in place to manage both the integration of the beta telephone service and the research to understand the digital service.\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch2 id=\"next-steps\"\u003eNext Steps\u003c/h2\u003e\n\n\u003cp\u003eYou should follow the recommendations made in this report and adhere to \u003ca href=\"https://www.gov.uk/service-manual/technology/get-a-domain-name\"\u003eguidance on engaging with GOV.UK\u003c/a\u003e before arranging your next assessment.\u003c/p\u003e\n\n\u003ch2 id=\"get-advice-and-guidance\"\u003eGet advice and guidance\u003c/h2\u003e\n\n\u003cp\u003eThe team can get advice and guidance on the next stage of development by:\u003c/p\u003e\n\n\u003cul\u003e\n  \u003cli\u003esearching the \u003ca href=\"https://www.gov.uk/service-manual/\"\u003eGovernment Service Design Manual\u003c/a\u003e\n\u003c/li\u003e\n  \u003cli\u003easking the \u003ca rel=\"external\" href=\"http://ukgovernmentdigital.slack.com\"\u003ecross-government slack community\u003c/a\u003e\n\u003c/li\u003e\n  \u003cli\u003econtacting the Service Assessment team\u003c/li\u003e\n\u003c/ul\u003e\n\n\u003ch2 id=\"digital-service-standard-points\"\u003eDigital Service Standard points\u003c/h2\u003e\n\n\u003ctable\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003ctd\u003ePoint\u003c/td\u003e\n      \u003ctd\u003eDescription\u003c/td\u003e\n      \u003ctd\u003eResult\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e1\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-1\"\u003eUnderstanding user needs\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e2\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-2\"\u003eImproving the service based on user research and usability testing\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e3\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-3\"\u003eHaving a sustainable, multidisciplinary team in place\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e4\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-4\"\u003eBuilding using agile, iterative and user-centred methods\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e5\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-5\"\u003eIterating and improving the service on a frequent basis\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e6\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-6\"\u003eEvaluating tools, systems, and ways of procuring them\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e7\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-7\"\u003eManaging data, security level, legal responsibilities, privacy issues and risks\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e8\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-8\"\u003eMaking code available as open source\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e9\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-9\"\u003eUsing open standards and common government platforms\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e10\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-10\"\u003eTesting the end-to-end service, and browser and device testing\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e11\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-11\"\u003ePlanning for the service being taken temporarily offline\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e12\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-12\"\u003eCreating a simple and intuitive service\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e13\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-13\"\u003eEnsuring consistency with the design and style of GOV.UK\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e14\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-14\"\u003eEncouraging digital take-up\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e15\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-15\"\u003eUsing analytics tools to collect and act on performance data\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e16\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-16\"\u003eDefining KPIs and establishing performance benchmarks\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e17\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-17\"\u003eReporting performance data on the Performance Platform\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e18\u003c/td\u003e\n      \u003ctd\u003e\u003ca href=\"https://www.gov.uk/service-manual/digital-by-default#criterion-18\"\u003eTesting the service with the minister responsible for it\u003c/a\u003e\u003c/td\u003e\n      \u003ctd\u003eMet\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\n"
+  "headLine": "Car tax, Statutory Off Road Notification and Vehicle Enquiry - Beta Assessment",
+  "description": "The report from the beta assessment for DVLA's Car tax, Statutory Off Road Notification (SORN) and Vehicle Enquiry service on 14 January 2014.",
+  "articleBody": "\u003cp\u003e\u003cstrong\u003eDepartment / Agency:\u003c/strong\u003e\u003cbr\u003e\n\u003cabbr title=\"Department for Transport\"\u003eDfT\u003c/abbr\u003e / \u003cabbr title=\"Driver and Vehicle Licensing Agency\"\u003eDVLA\u003c/abbr\u003e\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003eDate of Assessment:\u003c/strong\u003e\u003cbr\u003e\n15/1/2014\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003eMoving to:\u003c/strong\u003e\u003cbr\u003e\nPublic Beta\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003eResult:\u003c/strong\u003e\u003cbr\u003e\nPass\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003eLead Assessor:\u003c/strong\u003e\u003cbr\u003e\nH. Garrett\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003eService Manager:\u003c/strong\u003e\u003cbr\u003e\nN. Walters\u003c/p\u003e\n\n\u003cp\u003e\u003cstrong\u003eDigital Leader:\u003c/strong\u003e\u003cbr\u003e\nB. Etheridge\u003c/p\u003e\n\n\u003chr\u003e\n\n\u003ch2 id=\"outcome-of-service-assessment\"\u003eOutcome of service assessment\u003c/h2\u003e\n\n\u003cp\u003eThe Car tax, \u003cabbr title=\"Car tax, Statutory Off Road Notification\"\u003eSORN\u003c/abbr\u003e \u0026amp; Vehicle Enquiry service was seeking permission to continue development and move to Public Beta.\u003c/p\u003e\n\n\u003cp\u003eAfter reviewing the service \u003cabbr title=\"Government Digital Services\"\u003eGDS\u003c/abbr\u003e have concluded the Car tax, \u003cabbr title=\"Car tax, Statutory Off Road Notification\"\u003eSORN\u003c/abbr\u003e \u0026amp; Vehicle Enquiry service has shown sufficient progress and evidence of meeting the pre-April 2014 criteria and should proceed to Public Beta.\u003c/p\u003e\n\n\u003cp\u003e\u003cabbr title=\"Government Digital Services\"\u003eGDS\u003c/abbr\u003e were very impressed by the pace at which the new service has been delivered and the capacity to iterate quickly.\u003c/p\u003e\n\n\u003ch2 id=\"about-the-service\"\u003eAbout the service\u003c/h2\u003e\n\n\u003cp\u003eUsers will be able to apply for a new tax disc, take their vehicle off the road by declaring Statutory Off Road Notification, or use the vehicle enquiry service to check what information \u003cabbr title=\"Driver and Vehicle Licensing Agency\"\u003eDVLA\u003c/abbr\u003e holds on its database about a vehicle.\u003c/p\u003e\n\n\u003ch2 id=\"reasons\"\u003eReasons\u003c/h2\u003e\n\n\u003col\u003e\n  \u003cli\u003e\n    \u003cp\u003eThe new service is a significant improvement on the legacy service and has focused on meeting user needs, acting on customer feedback and usability issues associated with the legacy service.\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eThe service can be iteratively improved at pace and the existing team will continue to develop the service, with plans to iterate based on analysis of data following beta launch.\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eThe service has the appropriate security and privacy protections in place.\u003c/p\u003e\n  \u003c/li\u003e\n\u003c/ol\u003e\n\n\u003ch2 id=\"recommendations\"\u003eRecommendations\u003c/h2\u003e\n\n\u003cp\u003eTo be addressed as soon as possible after the service has passed to public beta and a condition of making the beta the default option on the \u003ca rel=\"external\" href=\"http://gov.uk/\"\u003eGOV.UK\u003c/a\u003e service start pages.\u003c/p\u003e\n\n\u003col\u003e\n  \u003cli\u003e\n    \u003cp\u003eDesign and content snag list feedback to be actioned to ensure departures from the style guide are addressed.\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eThe team should establish a regular series of face-to-face user research, integrated into sprint cycles.\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eThe team should carry out testing of the beta service with people with a range of disabilities and consult the \u003cabbr title=\"Government Digital Services\"\u003eGDS\u003c/abbr\u003e accessibility team for recommendations.\u003c/p\u003e\n  \u003c/li\u003e\n\u003c/ol\u003e\n\n\u003ch2 id=\"other-recommendations\"\u003eOther Recommendations\u003c/h2\u003e\n\n\u003col\u003e\n  \u003cli\u003e\n    \u003cp\u003eDesign resource should be brought within team to ensure someone owns the design and design changes (as a result of feedback/data analysis) can be delivered quickly.\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eImplement plan to separate secret code separate from platform and publish non-sensitive code as open source on GitHub or a similar public repository.\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eIt is not currently possible to bookmark or link to the results page (state maintained via secret code passed back and forth in page/form). This should be addressed to enable a change in state to show a new URL.\u003c/p\u003e\n  \u003c/li\u003e\n  \u003cli\u003e\n    \u003cp\u003eFix the style 404 page.\u003c/p\u003e\n  \u003c/li\u003e\n\u003c/ol\u003e\n\n\u003ch2 id=\"next-steps\"\u003eNext Steps\u003c/h2\u003e\n\n\u003cp\u003eThis service has been given approval to launch as a Public Beta service.\u003c/p\u003e\n\n\u003ch2 id=\"summary\"\u003eSummary\u003c/h2\u003e\n\n\u003cp\u003eIn summary, \u003cabbr title=\"Government Digital Services\"\u003eGDS\u003c/abbr\u003e are very pleased to report that this service is on track to meet the service standard. \u003cabbr title=\"Government Digital Services\"\u003eGDS\u003c/abbr\u003e are very pleased to be adding a digital service to \u003ca rel=\"external\" href=\"http://gov.uk/\"\u003eGOV.UK\u003c/a\u003e that is on track to demonstrate it is so good users will prefer to use it.\u003c/p\u003e\n\n"
 }
 </script><script type="application/ld+json">
   {

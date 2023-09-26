@@ -133,9 +133,6 @@ def scrape_one(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
 def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
     if not any(retry_keys):
         return
-    
-    #content = soup.find("div", {"class": "gem-c-govspeak govuk-govspeak"})
-    #elements = content.select("p strong")
 
     elements = []
     elements = soup.select('div.gem-c-govspeak.govuk-govspeak > p strong')
