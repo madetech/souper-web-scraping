@@ -67,7 +67,8 @@ def get_report_links_by_page(pageNum: int) -> list[str]:
     for result in results:
         if isinstance(result, Tag):
             link = result.find("a")
-            links.append(link["href"])
+            if link:
+                links.append(link["href"])
 
     return links
 
@@ -83,6 +84,7 @@ def scrape_report_html(content: str) -> dict:
         "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
     }
 
+    # This is to cover different report formats and make sure the information is extracted for each type
     scrape_one(soup, key_mapping, report_dict, retry_keys)
     scrape_two(soup, key_mapping, report_dict, retry_keys)
     scrape_three(soup, key_mapping, report_dict, retry_keys)
@@ -131,14 +133,14 @@ def scrape_one(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
 def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
     if not any(retry_keys):
         return
-    elements = []
+    
     #content = soup.find("div", {"class": "gem-c-govspeak govuk-govspeak"})
+    #elements = content.select("p strong")
+
+    elements = []
     elements = soup.select('div.gem-c-govspeak.govuk-govspeak > p strong')
 
-    #if content:
-    #    elements = content.find('p, strong')
     keys_found = set()
-
     # Loop through each matching element
     for element in elements:
         # Loop through each key to retry
@@ -161,6 +163,7 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
     # List keys to retry which have not been matched
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
+
 
 def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
     if not any(retry_keys):

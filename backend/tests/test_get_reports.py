@@ -1,7 +1,7 @@
-from services.basic_info_scraper import scrape_report_html, scrape_reports
+from services.basic_info_scraper import scrape_report_html, scrape_reports, scrape_two, scrape_one, scrape_three
 from tests.test_fixtures.report_html_fixtures import (
-    REPORT_HTML_FILE, mocked_main_page_response)
-
+    REPORT_HTML_FILE, MISFORMAT_REPORT_HTML_FILE, mocked_main_page_response)
+from bs4 import BeautifulSoup
 
 # get_reports tests
 def test_get_reports(mocked_main_page_response):
@@ -20,3 +20,21 @@ def test_scrape_report_html_extracts_data():
     assert scrape_report_html(content)["assessment_date"] == "23 March 2022"
     assert scrape_report_html(content)["result"] == "Not met"
     assert scrape_report_html(content)["stage"] == "Alpha"
+
+def test_scrape_two_skips_if_no_retry_keys():
+    with open(MISFORMAT_REPORT_HTML_FILE, 'r') as f:
+        content = f.read()
+    soup = BeautifulSoup(content, "html.parser")
+    report_dict = {}
+    retry_keys = []
+
+    key_mapping = {
+        "assessment_date": ["assessment date:", "reassessment date:"],
+        "stage": ["stage", "stage:", "assessment stage", "assessment stage:", "moving to:"],
+        "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
+    }
+    #dict = scrape_two(soup, key_mapping, report_dict, retry_keys)
+    #assert dict == ''
+
+    scrape_two(soup, key_mapping, report_dict, retry_keys)
+    assert report_dict == {}
