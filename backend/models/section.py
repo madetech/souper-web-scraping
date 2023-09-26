@@ -14,7 +14,7 @@ class Section(Base):
     )
 
     id: Mapped[int] = mapped_column(index=True, primary_key=True, autoincrement="auto")
-    report_id: Mapped[int] = Column(Integer, ForeignKey("report.id"))
+    report_id: Mapped[int] = Column(Integer, ForeignKey("report.id")) # type: ignore https://github.com/microsoft/pylance-release/discussions/3005
     number: Mapped[int]= mapped_column(nullable=True)
     decision: Mapped[str] = mapped_column(nullable=True)
     title: Mapped[str] = mapped_column(nullable= True)
