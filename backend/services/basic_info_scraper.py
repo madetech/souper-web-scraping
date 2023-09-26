@@ -3,7 +3,7 @@ import logging
 import re
 import dateutil.parser as parser
 import requests
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, Tag, NavigableString
 from models.feedback import Feedback
 from models.report import Report
 from models.section import Section
@@ -66,10 +66,9 @@ def get_report_links_by_page(pageNum: int) -> list[str]:
 
     for result in results:
         if isinstance(result, Tag):
-            link = result.find("a")
-            if link:
-                links.append(link["href"])
-
+            element = result.find("a")
+            if element and isinstance(element, Tag):
+                links.append(element.get("href"))
     return links
 
 
