@@ -200,13 +200,16 @@ def scrape_service_provider(soup: BeautifulSoup, report_dict: dict):
                 report_dict["service_provider"] = text.strip()
 
 def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
-    if "service_provider" not in report_dict.keys():
-        service_provider = soup.find(string=re.compile("(?i)(department) ?\/ ?Agency(:)?"))
-        if service_provider is not None:
-            if service_provider.parent:
-                if service_provider.parent.parent:
-                    if service_provider.parent.parent.get_text():
-                        report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.get_text().strip())
+    DEPARTMENT_OR_AGENCY = re.compile(r"(?i)(department) ?/ ?Agency(:)?")
+    if service_provider := report_dict.get("service_provider"):
+        pass
+    else:
+        service_provider = soup.find(string=DEPARTMENT_OR_AGENCY)
+    
+        if service_provider and service_provider.parent and service_provider.parent.parent:
+            grandparent = service_provider.parent.parent
+            if gp_text := grandparent.get_text():
+                report_dict["service_provider"] = DEPARTMENT_OR_AGENCY.sub("", gp_text.strip())
 
 
 def standardise_verdict_input(info_dict):
