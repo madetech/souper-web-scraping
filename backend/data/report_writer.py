@@ -5,6 +5,7 @@ from models.report import Report
 from models.section import Section
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
+from sqlalchemy import Table
 
 LOGGER = logging.getLogger(__name__)
 
@@ -19,9 +20,11 @@ def upsert_reports(reports: list[Report], session: Session):
 
         LOGGER.debug("Upserting sections and feedback")
         for section in report.sections:
-            section_id = upsert_report_section(section, report_id, session)
-
-            bulk_upsert_feedback(section, section_id, session)
+            section_id = None
+            if report_id:
+                section_id = upsert_report_section(section, report_id, session)
+            if section_id:
+                bulk_upsert_feedback(section, section_id, session)
 
         LOGGER.debug(f"Upsert of report {index} completed")
         index += 1
@@ -32,9 +35,10 @@ def upsert_reports(reports: list[Report], session: Session):
 
 def upsert_report(report: Report, session: Session):
     report_table = Report.__table__
-
+    #report = Report()
+    #table = Table
     # Insert report
-    upsert_report_statement = insert(report_table).values(
+    upsert_report_statement = insert(report_table).values( #type: ignore - I think this is legal, VSCode just can't see that FromClause is an instance of Table
         assessment_date=report.assessment_date,
         overall_verdict=report.overall_verdict,
         name=report.name,
@@ -52,7 +56,8 @@ def upsert_report(report: Report, session: Session):
     ).returning(report_table.c["id"])
 
     row = session.execute(upsert_report_statement).fetchone()
-    return row[0]  # report id
+    if row:
+        return row[0]  # report id
 
 
 def upsert_report_section(section: Section, report_id: int, session: Session):
@@ -68,7 +73,7 @@ def upsert_report_section(section: Section, report_id: int, session: Session):
         neutral_language_percent = section.neutral_language_percent
     )
 
-    upsert_section_statement = insert(section_table).values(section_to_insert)
+    upsert_section_statement = insert(section_table).values(section_to_insert) #type: ignore - I think this is legal, VSCode just can't see that FromClause is an instance of Table
     upsert_section_statement = upsert_section_statement.on_conflict_do_update(
         constraint="section_report_id_number_key",
         set_=dict(
@@ -78,8 +83,8 @@ def upsert_report_section(section: Section, report_id: int, session: Session):
     ).returning(section_table.c["id"])
 
     inserted_section = session.execute(upsert_section_statement).fetchone()
-
-    return inserted_section[0]  # section id
+    if inserted_section:
+        return inserted_section[0]  # section id
 
 
 def bulk_upsert_feedback(section: Section, section_id: int, session: Session):
@@ -95,5 +100,5 @@ def bulk_upsert_feedback(section: Section, section_id: int, session: Session):
         ))
 
     if any(feedbacks_to_insert):
-        session.execute(insert(feedback_table).values(
+        session.execute(insert(feedback_table).values( #type: ignore - I think this is legal, VSCode just can't see that FromClause is an instance of Table
             feedbacks_to_insert).on_conflict_do_nothing())
