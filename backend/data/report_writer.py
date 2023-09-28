@@ -85,6 +85,8 @@ def upsert_report_section(section: Section, report_id: int, session: Session):
     inserted_section = session.execute(upsert_section_statement).fetchone()
     if inserted_section:
         return inserted_section[0]  # section id
+    else:
+        return None
 
 
 def bulk_upsert_feedback(section: Section, section_id: int, session: Session):
