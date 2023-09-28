@@ -56,6 +56,8 @@ def upsert_report(report: Report, session: Session):
     row = session.execute(upsert_report_statement).fetchone()
     if row:
         return row[0]  # report id
+    else:
+        return None
 
 
 def upsert_report_section(section: Section, report_id: int, session: Session):
