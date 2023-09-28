@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup, PageElement
+from bs4 import BeautifulSoup, PageElement, NavigableString
 from models.feedback import FeedbackType
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
@@ -73,7 +73,7 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
             if not section_element:
                 continue
 
-            decision_heading = section_element.find_next_sibling(lambda tag: "Decision" in tag.text)
+            decision_heading = section_element.find_next_sibling(lambda tag: "Decision" in tag.text) # type: ignore
 
             if not decision_heading:
                 continue
@@ -110,8 +110,8 @@ def extract_feedback(element: PageElement, partial_id: str, feedback_type: Feedb
 
         if feedback_chunk:
             for list_item in feedback_chunk:
-                if list_item.text != "\n":
-                    feedback.append((list_item.text.strip(), feedback_type))
+                if list_item.text != "\n": # type: ignore
+                    feedback.append((list_item.text.strip(), feedback_type)) # type: ignore
     
     return feedback
 
@@ -131,13 +131,13 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
 
     if not table:
         return
-    
-    rows = table.find_all("tr")
+    rows = []
+    if not isinstance(table, NavigableString):
+        rows = table.find_all("tr") # type: ignore
 
     for index, row in enumerate(rows):
         if index == 0:
             continue
-
         cells = row.find_all("td")
         offset = 0
         if cells[0].text=='\u2028' or cells[0].text=='\xa0':

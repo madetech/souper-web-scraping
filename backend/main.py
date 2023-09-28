@@ -21,7 +21,8 @@ app = FastAPI()
 add_pagination(app)
 
 # Block scrape until previous complete
-app.is_scraping = False
+app.is_scraping = False # type: ignore - VSCode complains about this but it should be a legal declaration
+# https://github.com/tiangolo/fastapi/issues/592
 
 db = souperDB()
 
@@ -38,11 +39,11 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 @app.get("/scrape", status_code=201)
 def scrape_report_data(session: Session = Depends(db.get_session)):
-    if not app.is_scraping:
-        app.is_scraping = True
+    if not app.is_scraping: # type: ignore
+        app.is_scraping = True # type: ignore
         report_data = scrape_reports()
         upsert_reports(report_data, session)
-        app.is_scraping = False
+        app.is_scraping = False # type: ignore
         
 
 @app.get("/reports", response_model=LimitOffsetPage[ReportOut])
