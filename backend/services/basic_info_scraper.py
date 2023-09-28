@@ -3,7 +3,7 @@ import logging
 import re
 import dateutil.parser as parser
 import requests
-from bs4 import BeautifulSoup, Tag, NavigableString
+from bs4 import BeautifulSoup, Tag
 from models.feedback import Feedback
 from models.report import Report
 from models.section import Section
@@ -133,7 +133,6 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
     if not any(retry_keys):
         return
 
-    elements = []
     elements = soup.select('div.gem-c-govspeak.govuk-govspeak > p strong')
 
     keys_found = set()

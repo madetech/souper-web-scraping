@@ -1,4 +1,4 @@
-from services.basic_info_scraper import scrape_report_html, scrape_reports, scrape_two, scrape_one, scrape_three
+from services.basic_info_scraper import scrape_report_html, scrape_reports, scrape_two
 from tests.test_fixtures.report_html_fixtures import (
     REPORT_HTML_FILE, MISFORMAT_REPORT_HTML_FILE, mocked_main_page_response)
 from bs4 import BeautifulSoup

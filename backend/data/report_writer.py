@@ -5,7 +5,6 @@ from models.report import Report
 from models.section import Section
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
-from sqlalchemy import Table
 
 LOGGER = logging.getLogger(__name__)
 
@@ -35,8 +34,7 @@ def upsert_reports(reports: list[Report], session: Session):
 
 def upsert_report(report: Report, session: Session):
     report_table = Report.__table__
-    #report = Report()
-    #table = Table
+
     # Insert report
     upsert_report_statement = insert(report_table).values( #type: ignore - I think this is legal, VSCode just can't see that FromClause is an instance of Table
         assessment_date=report.assessment_date,

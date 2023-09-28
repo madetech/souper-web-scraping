@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup, PageElement, Tag, NavigableString
+from bs4 import BeautifulSoup, PageElement, NavigableString
 from models.feedback import FeedbackType
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
@@ -140,7 +140,6 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
             continue
         cells = row.find_all("td")
         offset = 0
-        #cells = []
         if cells[0].text=='\u2028' or cells[0].text=='\xa0':
             offset = 1
 
