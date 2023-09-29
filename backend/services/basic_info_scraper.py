@@ -212,7 +212,7 @@ def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
         if service_provider and service_provider.parent and service_provider.parent.parent:
             grandparent = service_provider.parent.parent
             if gp_text := grandparent.get_text():
-                report_dict["service_provider"] = DEPARTMENT_OR_AGENCY.sub("", gp_text.strip())
+                report_dict["service_provider"] = DEPARTMENT_OR_AGENCY.sub("", gp_text.replace("\n"," "))
 
 
 def standardise_verdict_input(info_dict):
