@@ -18,9 +18,9 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     LOGGER.info("Retrieving report links")
-    # report_links = get_report_links()
+    report_links = get_report_links()
     # report_links = ["/service-standard-reports/get-security-clearance"]
-    report_links = ["/service-standard-reports/apply-for-legal-aid-alpha-assessment"]
+    # report_links = ["/service-standard-reports/apply-for-legal-aid-alpha-assessment"]
     # report_links = ["/service-standard-reports/business-properties-rental-information-beta-assessment"]
     # report_links = ["/service-standard-reports/check-your-state-pension-beta-assessment"]
     reports_models = []
