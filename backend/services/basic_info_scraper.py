@@ -69,9 +69,9 @@ def get_report_links_by_page(pageNum: int) -> list[str]:
 
     for result in results:
         if isinstance(result, Tag):
-            link = result.find("a")
-            links.append(link["href"])
-
+            element = result.find("a")
+            if element and isinstance(element, Tag):
+                links.append(element.get("href"))
     return links
 
 
@@ -86,13 +86,15 @@ def scrape_report_html(content: str) -> dict:
         "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
     }
 
+    # This is to cover different report formats and make sure the information is extracted for each type
     scrape_one(soup, key_mapping, report_dict, retry_keys)
     scrape_two(soup, key_mapping, report_dict, retry_keys)
     scrape_three(soup, key_mapping, report_dict, retry_keys)
 
     # scrape title for each report
     title_element = soup.find("h1")
-    report_dict["name"] = title_element.text.strip()
+    if title_element:
+        report_dict["name"] = title_element.text.strip()
 
     # scrape service provider for each report.
 
@@ -134,10 +136,9 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
     if not any(retry_keys):
         return
 
-    content = soup.find("div", {"class": "gem-c-govspeak govuk-govspeak"})
-    elements = content.select("p strong")
-    keys_found = set()
+    elements = soup.select('div.gem-c-govspeak.govuk-govspeak > p strong')
 
+    keys_found = set()
     # Loop through each matching element
     for element in elements:
         # Loop through each key to retry
@@ -146,9 +147,12 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
             if element.string is not None and element.string.lower().strip() in key_mapping[key]:
                 # Store matched key in list
                 keys_found.add(key)
-                # Get element text and add to dictionary
-                value = element.next_sibling.next_sibling
-                report_dict[key] = value.get_text().strip()
+                # Get element text and add to dictionary. Want to get the element after the next one
+                next_element = element.next_sibling
+                if next_element:
+                    target_element = next_element.next_sibling
+                    if target_element:
+                        report_dict[key] = target_element.get_text().strip()
 
         # Exit loop if all keys have been matched
         if len(keys_found) == len(key_mapping.keys()):
@@ -157,6 +161,7 @@ def scrape_two(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_di
     # List keys to retry which have not been matched
     all_keys = set(list(key_mapping.keys()))
     retry_keys[:] = list(all_keys - keys_found)
+
 
 def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_dict: dict, retry_keys: list):
     if not any(retry_keys):
@@ -191,18 +196,28 @@ def scrape_three(soup: BeautifulSoup, key_mapping: dict[str, list[str]], report_
 def scrape_service_provider(soup: BeautifulSoup, report_dict: dict):
     service_provider = soup.find("td", string=re.compile("(?i)(service )?provider(:)?"))
     if service_provider is not None:
-        report_dict["service_provider"] = service_provider.find_next('td').text.strip()
+        if service_provider.find_next('td'):
+            next = service_provider.find_next('td')
+            if next:
+                text = next.text
+                report_dict["service_provider"] = text.strip()
 
 def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
-    if "service_provider" not in report_dict.keys():
-        service_provider = soup.find(string=re.compile("(?i)(department) ?\/ ?Agency(:)?"))
-        if service_provider is not None:
-            report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.text.replace("\n"," "))
+    DEPARTMENT_OR_AGENCY = re.compile(r"(?i)(department) ?/ ?Agency(:)?")
+    if service_provider := report_dict.get("service_provider"):
+        pass
+    else:
+        service_provider = soup.find(string=DEPARTMENT_OR_AGENCY)
+    
+        if service_provider and service_provider.parent and service_provider.parent.parent:
+            grandparent = service_provider.parent.parent
+            if gp_text := grandparent.get_text():
+                report_dict["service_provider"] = DEPARTMENT_OR_AGENCY.sub("", gp_text.strip())
 
 
 def standardise_verdict_input(info_dict):
     if "result" not in info_dict.keys():
-        return None
+        return "N/A"
     match info_dict["result"]:
 
         case  "Pass" | "Met" | "Pass with conditions" | "Passed":
@@ -215,7 +230,7 @@ def standardise_verdict_input(info_dict):
 
 def standardise_stage_input(info_dict):
     if "stage" not in info_dict.keys():
-        return None
+        return "N/A"
     match info_dict["stage"]:
 
         case "Alpha" | "Alpha2" | "alpha" | "Alpha Review" | "Alpha review" | "Alpha (re-assessment)" | "Alpha - reassessment" | "Alpha reassessment" | "Alpha - reassessment" | "Alpha reassessment":
@@ -231,16 +246,20 @@ def standardise_stage_input(info_dict):
 
 def create_report_model(report_dict: dict, url: str) -> Report:
 
-    assessment_date = None
+    assessment_date = ""
     assessment_date_value = None
-    report_name = None
+    report_name = ""
     service_provider_name = "N/A"
 
     if "name" in report_dict.keys():
         report_name = report_dict.get("name")
+        if not report_name:
+            report_name  = ""
 
     if "service_provider" in report_dict.keys():
         service_provider_name = report_dict.get("service_provider")
+        if not service_provider_name:
+            service_provider_name = "N/A"
 
     if "assessment_date" in report_dict.keys():
         assessment_date_value = report_dict.get("assessment_date")
@@ -253,6 +272,7 @@ def create_report_model(report_dict: dict, url: str) -> Report:
         pass
 
     report = Report()
+
     report.assessment_date = assessment_date
     report.overall_verdict = standardise_verdict_input(report_dict)
     report.stage = standardise_stage_input(report_dict)

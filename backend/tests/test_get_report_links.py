@@ -21,3 +21,4 @@ def test_get_report_links_by_page_returns_expected_links(mocked_report_list_page
     page_links = get_report_links_by_page(1)
     links_per_page = 50
     assert len(page_links) == links_per_page
+    assert page_links[1] == "/service-standard-reports/declare-your-business-trade-and-cost-information-alpha-assessment-report"
