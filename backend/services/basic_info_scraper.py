@@ -280,16 +280,21 @@ def create_report_model(report_dict: dict, url: str) -> Report:
     if "sections" in report_dict:
         for report_section in report_dict["sections"]:
             section = Section()
-            section.number = report_section["number"]
-            section.decision = report_section["decision"]
+            if "number" in report_section.keys():
+                section.number = report_section["number"]
+            if "decision" in report_section.keys():
+                section.decision = report_section["decision"]
             if "title" in report_section.keys():
                 section.title = report_section["title"]
-            section.positive_language_percent = report_section["positive_feedback_percentage"]
-            section.constructive_language_percent = report_section["negative_feedback_percentage"]
-            section.neutral_language_percent = report_section["neutral_feedback_percentage"]
+            if "positive_feedback_percentage" in report_section.keys():
+                section.positive_language_percent = report_section["positive_feedback_percentage"]
+            if "negative_feedback_percentage" in report_section.keys():
+                section.constructive_language_percent = report_section["negative_feedback_percentage"]
+            if "neutral_feedback_percentage" in report_section.keys():
+                section.neutral_language_percent = report_section["neutral_feedback_percentage"]
             
 
-            if "feedback" in report_section:
+            if "feedback" in report_section.keys():
                 for feedback_item in report_section["feedback"]:
                     feedback = Feedback()
                     feedback.feedback = feedback_item[0]
