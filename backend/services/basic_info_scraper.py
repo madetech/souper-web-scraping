@@ -18,8 +18,11 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     LOGGER.info("Retrieving report links")
-    report_links = get_report_links()
+    # report_links = get_report_links()
     # report_links = ["/service-standard-reports/get-security-clearance"]
+    report_links = ["/service-standard-reports/apply-for-legal-aid-alpha-assessment"]
+    # report_links = ["/service-standard-reports/business-properties-rental-information-beta-assessment"]
+    # report_links = ["/service-standard-reports/check-your-state-pension-beta-assessment"]
     reports_models = []
     number_of_reports = len(report_links)
     LOGGER.info(f"Processing {number_of_reports} reports")
@@ -194,7 +197,7 @@ def scrape_service_provider_two(soup: BeautifulSoup, report_dict: dict):
     if "service_provider" not in report_dict.keys():
         service_provider = soup.find(string=re.compile("(?i)(department) ?\/ ?Agency(:)?"))
         if service_provider is not None:
-            report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.get_text().strip())
+            report_dict["service_provider"] = re.sub("(?i)(department) ?\/ ?Agency(:)?","",service_provider.parent.parent.text.replace("\n"," "))
 
 
 def standardise_verdict_input(info_dict):
@@ -264,9 +267,12 @@ def create_report_model(report_dict: dict, url: str) -> Report:
             section.decision = report_section["decision"]
             if "title" in report_section.keys():
                 section.title = report_section["title"]
-            section.positive_language_percent = report_section["positive_feedback_percentage"]
-            section.constructive_language_percent = report_section["negative_feedback_percentage"]
-            section.neutral_language_percent = report_section["neutral_feedback_percentage"]
+            if "positive_feedback_percentage" in report_section.keys():
+                section.positive_language_percent = report_section["positive_feedback_percentage"]
+            if "negative_feedback_percentage" in report_section.keys():
+                section.constructive_language_percent = report_section["negative_feedback_percentage"]
+            if "neutral_feedback_percentage" in report_section.keys():
+                section.neutral_language_percent = report_section["neutral_feedback_percentage"]
             
 
             if "feedback" in report_section:
