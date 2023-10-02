@@ -54,7 +54,7 @@ docker-compose down -v
 1. Start db: `make start-db` from repository root or `docker-compose -f docker-compose.yml up -d db` from backend directory
 1. Run app using uvicorn: `uvicorn main:app --reload`
 
-## Note for running the application!
+### Note for running the application!
 - if you are running into a module not found error for 'VaderSentiment'
   we have currently found that installing vader outside of the VENV allows it to work.
   looking for permanent solution 
@@ -73,10 +73,10 @@ pytest -v
 ```
 
 
-## Set up pre-commit hooks (run commands in the backend DIR)
+### Set up pre-commit hooks (run commands in the backend DIR)
 - pre-commit install
 
-## Plan
+### Plan
 - API (FastAPI)
 - ORM (SQL Alchemy)
 - Database to cache data (Postgres)
@@ -90,11 +90,11 @@ pytest -v
 - Reload end-point must be not be able to run until
   previous reload is complete
 
-## Outputs
+### Outputsß
 - JSON output of passes per service (assessment vs reassessment)
 - Plotly graph of pass and failure
 
-## Testing (Arrange, Act, Assert)
+### Testing (Arrange, Act, Assert)
 - Functional Test on API endpoints
 - Mocking service
 

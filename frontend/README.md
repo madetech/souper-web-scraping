@@ -1,4 +1,4 @@
-## Setup
+## Frontend setup
 
 ### Install nvm (optional, but recommended)
 
@@ -42,7 +42,7 @@ npm install
 
 ### Run
 
-**NOTE: npm commands must be run from the `frontend` directory. make commands must be run from the repository root directory**
+**NOTE: npm commands must be run from the `frontend` directory. `make` commands must be run from the repository root directory**
 
 #### `npm start` or `make jsrun`
 
@@ -61,7 +61,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### Build
 
-#### `npm run build` or make `jsbuild`
+#### `npm run build` or `make jsbuild`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
