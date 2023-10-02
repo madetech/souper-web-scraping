@@ -121,6 +121,22 @@ def strain_by_partial_id(id: str):
 def scrape_two(soup: BeautifulSoup, sections: list[dict]):
     if any(sections):
         return
+    
+    feedback = []
+    feedback_title = soup.find("h2",id="the-service-met-the-standard-because")
+    if feedback_title:
+        feedback_chunk = feedback_title
+        if feedback_chunk:
+            for list_item in feedback_chunk:
+                if list_item.text != "\n": #type: ignore
+                    feedback.append((list_item.text.strip)) # type: ignore
+    sections.append(dict(
+        number = 0,
+        title = feedback_title,
+        feedback = feedback
+
+    ))
+
 
     heading = soup.find("h2", id="digital-service-standard-points")
 

@@ -18,11 +18,11 @@ BASE_URL = "https://www.gov.uk"
 
 def scrape_reports() -> list[Report]:
     LOGGER.info("Retrieving report links")
-    report_links = get_report_links()
+    # report_links = get_report_links()
     # report_links = ["/service-standard-reports/get-security-clearance"]
     # report_links = ["/service-standard-reports/apply-for-legal-aid-alpha-assessment"]
     # report_links = ["/service-standard-reports/business-properties-rental-information-beta-assessment"]
-    # report_links = ["/service-standard-reports/check-your-state-pension-beta-assessment"]
+    report_links = ["/service-standard-reports/buy-a-prescription-prepayment-certificate-beta-assessment"]
     reports_models = []
     number_of_reports = len(report_links)
     LOGGER.info(f"Processing {number_of_reports} reports")
@@ -284,7 +284,8 @@ def create_report_model(report_dict: dict, url: str) -> Report:
         for report_section in report_dict["sections"]:
             section = Section()
             section.number = report_section["number"]
-            section.decision = report_section["decision"]
+            if "decision" in report_section.keys():
+                section.decision = report_section["decision"]
             if "title" in report_section.keys():
                 section.title = report_section["title"]
             if "positive_feedback_percentage" in report_section.keys():
