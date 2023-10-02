@@ -14,10 +14,19 @@ export default function Navbar(props) {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   
+//   useEffect(() => {
+//     const handleClickOpenDialog = async () => {
+//     setLoading(true)
+//     setOpenDialog(true);
+//     setScrapeProgress(await runScrape());
+//   };
+
+//   handleClickOpenDialog();
+// }, [])
   const handleClickOpenDialog = async () => {
     setLoading(true)
     setOpenDialog(true);
-    setScrapeProgress(await runScrape())
+    setScrapeProgress(await runScrape());
   };
 
   const handleCloseDialog = (value) => {
