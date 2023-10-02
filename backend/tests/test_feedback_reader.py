@@ -16,17 +16,14 @@ def test_get_feedback_from_database(mock_session):
     assert feedbacks == VALID_FEEDBACK
     assert feedbacks.count == VALID_FEEDBACK.count
 
+
+# Trying to mock part of the 'mock_session.query.return_value.filter.return_value.all.return_value' so that we can test the session ID 
+# part, which has no effect if it is mocked to VALID_FEEDBACK
+
 # @patch('data.feedback_reader.Session')
 # def test_get_feedback_returns_none_without_id(mock_session):
-#     #mock_session.query.return_value = Query([Feedback], session=mock_session)
-#     #mock_session.query.return_value = mock_session.query(Feedback)
-#     #assert mock_session.query.return_value == None
-#     #assert mock_session.query.return_value.filter(Feedback.section_id == id).all()[0] == None
-
-# # q = Query([User, Address], session=some_session
-# # q = some_session.query(User, Address)
+#     mock_session.query.return_value = None # Not sure what to set this to
+#     assert mock_session.query.return_value == None
 
 #     feedbacks = get_feedback(0, mock_session)
 #     assert feedbacks[0].id == None
-#     #assert feedbacks == VALID_FEEDBACK
-#     #assert feedbacks.count == VALID_FEEDBACK.count
