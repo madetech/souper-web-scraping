@@ -38,9 +38,8 @@ cd frontend
 npm install
 ```
 
-## Scripts
 
-### Run
+## Run
 
 **NOTE: npm commands must be run from the `frontend` directory. `make` commands must be run from the repository root directory**
 

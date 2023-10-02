@@ -1,0 +1,20 @@
+.PHONY: $(MAKECMDGOALS)
+
+init:
+	aws-vault exec managed-services-tooling -- copilot svc init
+
+deploy:
+	aws-vault exec managed-services-tooling -- copilot svc deploy
+
+delete:
+	aws-vault exec managed-services-tooling -- copilot svc delete
+logs:
+	aws-vault exec managed-services-tooling -- copilot svc logs
+status:
+	aws-vault exec managed-services-tooling -- copilot svc status
+show:
+	aws-vault exec managed-services-tooling -- copilot svc show
+pipeline-init:
+	aws-vault exec managed-services-tooling -- copilot pipeline init
+pipeline-deploy:
+	aws-vault exec managed-services-tooling -- copilot pipeline deploy
