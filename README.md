@@ -13,6 +13,10 @@ The single command to start all three parts is:
 
 `docker-compose up --build --force-recreate -d`
 
+In your project directory you will need a .env, like the .env.example. Ask a project colleague for specific information about filling in the template.
+
+The web interface will be visible at the REACT_APP_FRONTEND specified in your .env file. To start a scrape, go to `BACKEND_HOST:REACT_APP_BACKEND_PORT/scrape` (the 'Run scrape' button doesn't actually run a scrape yet). It may take a while. Once completed you will see entries in your database and the REACT_APP_FRONTEND address will show a list of reports scraped and some of their information.
+
 # Design information
 The database is Postgres, and database migrations make use of [Alembic] (https://alembic.sqlalchemy.org/en/latest/ "Alembic") which works with SLQAlchemy.
 The frontend is built with React, and the backend is written in Python (requires Python >= 3.10).
