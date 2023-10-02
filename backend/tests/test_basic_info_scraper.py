@@ -1,5 +1,5 @@
 from models.report import Report
-from services.basic_info_scraper import create_report_model, get_report_links, get_report_links_by_page, scrape_report_html, scrape_reports, scrape_two
+from services.basic_info_scraper import create_report_model, get_report_links, get_report_links_by_page, scrape_report_html, scrape_reports, scrape_one, scrape_two
 from tests.test_fixtures.report_html_fixtures import (
     mocked_main_page_response_one, mocked_report_list_all_response,
     mocked_report_list_page_response, REPORT_HTML_FILE, MISFORMAT_REPORT_HTML_FILE, REPORT_URL, mocked_main_page_response)
@@ -157,16 +157,16 @@ def test_scrape_two_with_retry_keys():
     scrape_two(soup, key_mapping, report_dict, retry_keys)
     assert report_dict["result"] == 'Pass'
 
-# def test_scrape_one_with_retry_keys():
-#     with open(REPORT_HTML_FILE, 'r') as f:
-#         content = f.read()
-#     soup = BeautifulSoup(content, "html.parser")
-#     report_dict = {}
-#     retry_keys = ["assessment_date", "stage", "result"]
-#     key_mapping = {
-#         "assessment_date": ["assessment date:", "reassessment date:"],
-#         "stage": ["stage", "stage:", "assessment stage", "assessment stage:", "moving to:"],
-#         "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
-#     }
-#     scrape_one(soup, key_mapping, report_dict, retry_keys)
-#     assert report_dict["result"] == 'Not met'
+def test_scrape_one_with_retry_keys():
+    with open(REPORT_HTML_FILE, 'r') as f:
+        content = f.read()
+    soup = BeautifulSoup(content, "html.parser")
+    report_dict = {}
+    retry_keys = ["assessment_date", "stage", "result"]
+    key_mapping = {
+        "assessment_date": ["assessment date:", "reassessment date:"],
+        "stage": ["stage", "stage:", "assessment stage", "assessment stage:", "moving to:"],
+        "result": ["result", "result:", "assessment result", "result of assessment:", "result of reassessment", "result of reassessment:"],
+    }
+    scrape_one(soup, key_mapping, report_dict, retry_keys)
+    assert report_dict["result"] == 'Not met'
