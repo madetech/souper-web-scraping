@@ -89,7 +89,7 @@ pytest -v
 - Reload end-point must be not be able to run until
   previous reload is complete
 
-### Outputsß
+### Outputs
 - JSON output of passes per service (assessment vs reassessment)
 - Plotly graph of pass and failure
 
