@@ -125,11 +125,11 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
     feedback = []
     feedback_title = soup.find("h2",id="the-service-met-the-standard-because")
     if feedback_title:
-        feedback_chunk = feedback_title
+        feedback_chunk = feedback_title.find_next_sibling("ul")
         if feedback_chunk:
             for list_item in feedback_chunk:
                 if list_item.text != "\n": #type: ignore
-                    feedback.append((list_item.text.strip)) # type: ignore
+                    feedback.append((list_item.text.strip(), FeedbackType.POSITIVE)) # type: ignore
     sections.append(dict(
         number = 0,
         title = feedback_title,
