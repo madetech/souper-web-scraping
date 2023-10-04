@@ -9,11 +9,12 @@ e.g, Can we determine if a larger proportion of the Digital Services presented b
 
 # Quick setup
 The application consists of three components: frontend, backend and database.
+
+In your project directory you will need a .env, like the .env.example. Ask a project colleague for specific information about filling in the template.
+
 The single command to start all three parts is:
 
 `docker-compose up --build --force-recreate -d`
-
-In your project directory you will need a .env, like the .env.example. Ask a project colleague for specific information about filling in the template.
 
 The web interface will be visible at the REACT_APP_FRONTEND specified in your .env file. To start a scrape, click the 'Run scrape' button in the top right corner. It may take a while. Once completed you will see entries in your database and the REACT_APP_FRONTEND address will show a list of reports scraped and some of their information.
 
