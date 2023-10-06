@@ -1,9 +1,9 @@
-# The manifest for the "production" environment.
+# The manifest for the "souper-3" environment.
 # Read the full specification for the "Environment" type at:
 #  https://aws.github.io/copilot-cli/docs/manifest/environment/
 
 # Your environment name will be used in naming your resources like VPC, cluster, etc.
-name: production
+name: souper-3
 type: Environment
 
 # Import your own VPC and subnets or configure how they should be created.
@@ -16,8 +16,6 @@ type: Environment
 #   public:
 #   private:
 
-# Configure observability for your environment resources. 
+# Configure observability for your environment resources.
 observability:
   container_insights: false
-
-# 
