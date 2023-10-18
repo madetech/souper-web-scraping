@@ -7,7 +7,7 @@ const hostname = process.env.BACKEND_HOST;
 const port = process.env.BACKEND_PORT;
 
 var corsOptions = {
-    origin: `${process.envREACT_APP_BACKEND_URL}`
+    origin: `${process.env.REACT_APP_BACKEND_URL}`
 }
 
 app.use(cors(corsOptions))
@@ -19,5 +19,9 @@ app.get('/', function (_, res, _) {
     res.sendFile('index.html');
   });
 
+
 app.listen(3000);
 
+// app.listen(3000, () => {
+//   console.log("Your app is listening on port " + listener.address().port);
+// });
