@@ -7,7 +7,7 @@ services:
     build: 
       context: ./frontend
       args:
-        REACT_APP_BACKEND_URL: http://localhost:8081
+        REACT_APP_BACKEND_URL: http://backend
     ports:
       - 8080:3000
 
@@ -15,8 +15,6 @@ services:
     build: ./backend
     container_name: backend-c
     image: backend-i
-    ports:
-      - 8081:8000
     depends_on:
       - db
     command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0"
