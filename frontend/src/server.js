@@ -16,7 +16,36 @@ app.use(express.static(path.join(process.cwd(), 'build')));
 
 app.get('/', function (_, res, _) {
     res.sendFile('index.html');
+
   });
+
+app.get('/reports', function(_, res) {
+  axios.get(`${backend_url}/reports`)
+  .then(backend_res => backend_res.status === 200 ? res.json(backend_res.data.items) : res.status(backend_res.status))
+  .catch(err => err);
+});
+
+app.get(`/reports/:id/sections`, function(req,res) {
+  var id = req.params['id']
+  axios.get(`/reports/${id}/sections`)
+  .then(backend_res => backend_res.status === 200 ? res.json(backend_res.data) : res.status(backend_res.status))
+  .catch(err => err);
+});
+
+app.get(`/sections/:id/feedback`, function(req,res) {
+  var id = req.params['id']
+  axios.get(`sections/${id}/feedback`)
+  .then(backend_res => backend_res.status === 200 ? res.json(backend_res.data) : res.status(backend_res.status))
+  .catch(err => err);
+
+})
+
+app.post('/scrape', function(req, res) {
+  axios.post(`${backend_url}/scrape`)
+  .then(backend_res => res.status(backend_res.status))
+  .catch(err => err);
+  
+});
 
 app.get('/reports', function (_, res, next) {
   axios.get(`${backend_url}/reports`)

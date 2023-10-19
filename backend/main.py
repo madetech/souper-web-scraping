@@ -25,6 +25,7 @@ app.is_scraping = False # type: ignore - VSCode complains about this but it shou
 # https://github.com/tiangolo/fastapi/issues/592
 
 db = souperDB()
+logging.info(f"Database connection at {db}, status {db.get_connection}")
 
 origins = [os.getenv('REACT_APP_FRONTEND')]
 
