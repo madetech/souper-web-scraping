@@ -7,7 +7,7 @@ services:
     build: 
       context: ./frontend
       args:
-        REACT_APP_BACKEND_URL: http://backend
+        REACT_APP_BACKEND_URL: http://backend:8000
     ports:
       - 8080:3000
 
