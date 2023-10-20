@@ -34,7 +34,7 @@ variables:                    # Pass environment variables as key value pairs.
 #   POSTGRES_DB: ${SOUPERDB_SECRET["dbname"]}
 #   POSTGRES_USER: ${SOUPERDB_SECRET["username"]}
 #   POSTGRES_PASSWORD: ${SOUPERDB_SECRET["password"]}
-  REACT_APP_FRONTEND: http://frontend-2
+  REACT_APP_FRONTEND: http://frontend-2:3000
 
     # environment:
     #   - POSTGRES_HOST=${POSTGRES_HOST}

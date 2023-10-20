@@ -35,7 +35,7 @@ network:
 # Optional fields for more advanced use-cases.
 #
 variables:                    # Pass environment variables as key value pairs.
-  REACT_APP_BACKEND_URL: http://backend-2
+  REACT_APP_BACKEND_URL: http://backend-2:8000
 #  LOG_LEVEL: info
 
 #secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
