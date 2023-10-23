@@ -17,12 +17,15 @@ load_dotenv()
 
 new_dict = {}
 json = os.getenv('SOUPERDB_SECRET')
-if json:
-    json = json.replace('"', '').replace('{', '').replace('}', '')
-    list = json.split(',')
-    for item in list:
-        sublist = item.split(':')
-        new_dict[sublist[0]] = sublist[1]
+
+if not json:
+    raise AttributeError("Environmental variable SOUPERDB_SECRET is not set.")
+
+json = json.replace('"', '').replace('{', '').replace('}', '')
+list = json.split(',')
+for item in list:
+    sublist = item.split(':')
+    new_dict[sublist[0]] = sublist[1]
         
 user = new_dict["username"]
 password = new_dict["password"]

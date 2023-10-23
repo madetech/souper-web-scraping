@@ -10,12 +10,16 @@ class souperDB:
     def __init__(self) -> None:
         new_dict = {}
         json = os.getenv('SOUPERDB_SECRET')
-        if json:
-            json = json.replace('"', '').replace('{', '').replace('}', '')
-            list = json.split(',')
-            for item in list:
-                sublist = item.split(':')
-                new_dict[sublist[0]] = sublist[1]
+        LOGGER.info(f" json string : {json}")
+        if not json:
+            raise AttributeError("Environmental variable SOUPERDB_SECRET is not set.")
+
+        
+        json = json.replace('"', '').replace('{', '').replace('}', '')
+        list = json.split(',')
+        for item in list:
+            sublist = item.split(':')
+            new_dict[sublist[0]] = sublist[1]
 
         self.user = new_dict["username"]
         self.password = new_dict["password"]

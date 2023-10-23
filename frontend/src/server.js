@@ -40,8 +40,8 @@ axios.get(`${backend_url}/sections/${id}/feedback`)
 .catch(next);
 })
 
-app.get('/scrape', function(req, res, next) {
-  axios.get(`${backend_url}/scrape`)
+app.get('/scrape', async function(req, res, next) {
+  await axios.get(`${backend_url}/scrape`)
   .then(backend_res => res.sendStatus(backend_res.status))
   .catch(next);
 })
