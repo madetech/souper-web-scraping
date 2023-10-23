@@ -15,11 +15,23 @@ config = context.config
 
 load_dotenv()
 
-user = os.getenv('POSTGRES_USER')
-password = os.getenv('POSTGRES_PASSWORD')
-host = os.getenv('POSTGRES_HOST')
-port = os.getenv('POSTGRES_PORT')
-database = os.getenv('POSTGRES_DB')
+new_dict = {}
+json = os.getenv('SOUPERDB_SECRET')
+
+if not json:
+    raise AttributeError("Environmental variable SOUPERDB_SECRET is not set.")
+
+json = json.replace('"', '').replace('{', '').replace('}', '')
+list = json.split(',')
+for item in list:
+    sublist = item.split(':')
+    new_dict[sublist[0]] = sublist[1]
+        
+user = new_dict["username"]
+password = new_dict["password"]
+host = new_dict["host"]
+port = new_dict["port"]
+database = new_dict["dbname"]
 
 url = URL.create(
                     drivername="postgresql",
