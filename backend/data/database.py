@@ -10,7 +10,7 @@ class souperDB:
     def __init__(self) -> None:
         new_dict = {}
         json = os.getenv('SOUPERDB_SECRET')
-        LOGGER.info(f" json string : {json}")
+
         if not json:
             raise AttributeError("Environmental variable SOUPERDB_SECRET is not set.")
 
