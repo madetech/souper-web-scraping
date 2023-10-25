@@ -31,12 +31,14 @@ function getComparator(
 }
 
 export default function TableHelper(props) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(0); // offset = page * rowsPerPage
+  const [offset, setOffset] = useState(page*rowsPerPage)
+  const [rowsPerPage, setRowsPerPage] = useState(5); // limit = rowsPerPage
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
+    // props.onPageChangeHandler()
   };
 
   const handleRowsPerPageChange = (event) => {
@@ -108,7 +110,7 @@ export default function TableHelper(props) {
 
 
             <TableBody data-testid="tableTest">
-              {props.rows.length > 0 && props.rows
+              {props.rows && props.rows.length > 0 && props.rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .sort(getComparator(order, orderBy))
                 .map((row) => {
@@ -131,9 +133,9 @@ export default function TableHelper(props) {
           </Table>
         </TableContainer>
 
-        {props.rows.length > 5 &&
+        {props.rows && props.rows.length > 5 &&
         <PaginationHelper
-          count={props.rows.length}
+          count={props.total}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handlePageChange}

@@ -24,6 +24,8 @@ export default function ReportList() {
     fetchReport();
   }, [])
 
+  const reportsPageChangeHandler = async () => {};
+  
   const rowClickHandler = async (
     row
   ) => {
@@ -48,10 +50,12 @@ export default function ReportList() {
         </Typography>
         <TableHelper
           style={{ pt: 4 }}
-          rows={report}
+          rows={report.items}
+          total={report.total}
           columns={reportColumns}
           onRowClickHandler={rowClickHandler}
           rowTestId={"reportRowTest"}
+          onPageChangeHandler={reportsPageChangeHandler}
         />
       </Box>
     </Box>

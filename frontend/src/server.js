@@ -24,6 +24,7 @@ app.get('/reports', function (_, res, next) {
   .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
   .catch(next);
 
+
 })
 
 app.get('/reports/:id/sections', function (req, res, next) {
