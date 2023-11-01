@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
-from fastapi_pagination import LimitOffsetPage, add_pagination
 from models.report import ReportOut
 from services.basic_info_scraper import scrape_reports
 from sqlalchemy.orm import Session
@@ -18,7 +17,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO) # Change this to logging.DEBUG to see more detail in logs
 
 app = FastAPI()
-add_pagination(app)
+
 
 # Block scrape until previous complete
 app.is_scraping = False # type: ignore - VSCode complains about this but it should be a legal declaration
@@ -47,7 +46,7 @@ def scrape_report_data(session: Session = Depends(db.get_session)):
         app.is_scraping = False # type: ignore
         
 
-@app.get("/reports", response_model=LimitOffsetPage[ReportOut])
+@app.get("/reports", response_model=list[ReportOut])
 def get_reports(database: Session = Depends(db.get_session)):
     return report_reader.get_reports(database)
 
