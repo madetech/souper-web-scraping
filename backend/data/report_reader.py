@@ -5,8 +5,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 
-def get_reports(session: Session) -> list[ReportOut]:
+def get_reports(session: Session) -> list[Report]:
         with session:
-                return session.query(ReportOut).all()
+                return session.query(Report).all()
              
 
