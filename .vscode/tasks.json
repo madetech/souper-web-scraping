@@ -1,0 +1,58 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "install",
+			"path": "frontend",
+			"group": "clean",
+			"problemMatcher": [],
+			"label": "npm: install - frontend",
+			"detail": "install dependencies from package"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "frontend",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: build - frontend",
+			"detail": "react-scripts build"
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"path": "frontend",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: test - frontend",
+			"detail": "react-scripts test"
+		},
+		{
+			"type": "shell",
+			"command": "source",
+			"args": ["venv/bin/activate"],
+			"label": "Activate virtual environment",
+			"options": {
+				"cwd": "${workspaceFolder}/backend"
+			},
+		},
+		{
+			"type": "shell",
+			"command": "pytest",
+			"args": ["-v"],
+			"label": "Run python tests",
+			"options": {
+				"cwd": "${workspaceFolder}/backend"
+			},
+			"dependsOrder": "sequence",
+			"dependsOn": [ "Activate virtual environment" ]
+		}
+	]
+}
