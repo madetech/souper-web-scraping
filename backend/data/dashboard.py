@@ -1,4 +1,4 @@
-def getCounts(session: Session):
+def get_counts(session: Session):
     with session:
         resultSet = session.query('Get *').all()
         print(resultSet)
