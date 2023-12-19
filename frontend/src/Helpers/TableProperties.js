@@ -12,6 +12,9 @@ const reportColumns = [
 const sectionColumns = [
   { id: 'number', label: 'Section Number' },
   { id: 'decision', label: 'Decision' },
+  // { id: 'positive_language_percent', label: 'Positive Language %'},
+  // { id: 'neutral_language_percent', label: 'Neutral Language %'},
+  // { id: 'constructive_language_percent', label: 'Constructive Language %'},
 ];
 
 const decisionColumns = [

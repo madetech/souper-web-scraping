@@ -52,7 +52,7 @@ export default function Navbar(props) {
                   success: <CheckCircleOutlineIcon fontSize="inherit" />,
                 }}
               >
-                All records scraped successfully
+                All records scraped successfully please allow a few minutes for analysis to complete
               </Alert>
             </Dialog>
             : null

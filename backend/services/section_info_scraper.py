@@ -95,9 +95,9 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
                 decision=get_decision(section_decision.text),
                 title = section_element.text.strip(),
                 feedback = feedback,
-                positive_feedback_percentage = analysed_feedback[0],
-                neutral_feedback_percentage = analysed_feedback[1],
-                negative_feedback_percentage = analysed_feedback[2],
+                positive_feedback_percentage = round(analysed_feedback[0], 2),
+                neutral_feedback_percentage = round(analysed_feedback[1], 2),
+                negative_feedback_percentage = round(analysed_feedback[2], 2),
             ))
             break
 

@@ -1,14 +1,12 @@
 {
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.diagnosticMode": "workspace",
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true
-    },
-    "python.defaultInterpreterPath": "backend/venv/bin/python",
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
-    "python.testing.cwd": "${workspaceFolder}/backend",
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.diagnosticMode": "workspace",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "python.defaultInterpreterPath": "backend/venv/bin/python",
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.cwd": "${workspaceFolder}/backend",
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }
