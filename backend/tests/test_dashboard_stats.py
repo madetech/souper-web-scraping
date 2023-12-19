@@ -1,12 +1,13 @@
 import unittest
 from unittest.mock import patch
 
-from backend.data import dashboard
+from data import dashboard
 
 
 class DashboardStatsTest(unittest.TestCase):
-    @patch("", return_value='[["alpha", 10, 20], ["beta", 30, 20], ["live", 40, 10]]')
+    @patch("backend.data.session.query", return_value='[]')
     def test_get_counts(self):
-        expected = [["alpha", 10, 20], ["beta", 30, 20], ["live", 40, 10]]
-        result = dashboard.getCounts()
+        expected = [[["Stage", "Count"],["Alpha", 250],["Beta", 420],["Live", 290]], [["Stage", "Count"],["Alpha", 37],["Beta", 60],["Live", 70]]]
+        result = dashboard.getCounts(None)
         self.assertEqual(result, expected)
+        
