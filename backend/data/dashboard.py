@@ -1,6 +1,10 @@
+
+from sqlalchemy.orm import Session
+
+
 def get_counts(session: Session):
     with session:
-        resultSet = session.query('Get *').all()
+        resultSet = session.query().all()
         print(resultSet)
         results = __format_count_output(resultSet)
     return results

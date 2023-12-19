@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from data import dashboard
+from backend.data import dashboard
 
 
 class DashboardStatsTest(unittest.TestCase):
