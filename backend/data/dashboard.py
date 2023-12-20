@@ -13,12 +13,21 @@ def get_counts(session: Session):
     return __format_count_output(result_set)
 
 def __format_count_output(result_set):
-    """ Should look like this
-    [[["Stage", "Count"],["Alpha", 250],["Beta", 420],["Live", 290]], [["Stage", "Count"],["Alpha", 37],["Beta", 60],["Live", 70]]]
-        """
     sorted_result_set = sorted(
         result_set,
-        key=lambda result: (result.overall_verdict, result.stage)
+        key=lambda result: (result.stage)
         )
-    print(sorted_result_set)
-    return sorted_result_set
+
+    met = [["Stage", "Count"]]
+    not_met = [["Stage", "Count"]]
+
+    for result in sorted_result_set:
+        entry = [result.stage, result.count]
+        if 'Met' in result:
+            met.append(entry)
+        else:
+            not_met.append(entry)
+
+    formatted_output = [met, not_met]
+
+    return formatted_output
