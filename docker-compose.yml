@@ -15,6 +15,9 @@ services:
     build: ./backend
     container_name: backend-c
     image: backend-i
+    # delete lines 19 & 20 before going to prod. this is for testing purposes only 
+    ports:
+      - 8081:8000
     depends_on:
       - db
     command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0"

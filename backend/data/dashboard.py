@@ -11,8 +11,8 @@ def get_counts(session: Session):
             .all()
         )
         
-    for result in result_set:
-        print(f"Stage: {result.stage}, Type: {result.overall_verdict}, Count: {result.count}")
+    # for result in result_set:
+    #     print(f"Stage: {result.stage}, Type: {result.overall_verdict}, Count: {result.count}")
     return result_set
 
 def __format_count_output(resultSet):

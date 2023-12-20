@@ -1,6 +1,6 @@
 import logging
 import os
-
+from data import dashboard
 from data import feedback_reader, report_reader, section_reader
 from data.database import souperDB
 from data.report_writer import upsert_reports
@@ -59,3 +59,8 @@ def get_sections(id, database: Session = Depends(db.get_session)):
 @app.get("/sections/{id}/feedback")
 def get_feedback(id, database: Session = Depends(db.get_session)):
     return feedback_reader.get_feedback(id, database)
+
+
+@app.get("/dashboard")
+def get_graph_data(session:Session = Depends(db.get_session)):
+    return dashboard.get_counts(session)
