@@ -23,7 +23,7 @@ def __format_count_output(result_set):
 
     for result in sorted_result_set:
         entry = [result.stage, result.count]
-        if 'Met' in result:
+        if 'MET' == result.overall_verdict.upper():
             met.append(entry)
         else:
             not_met.append(entry)
