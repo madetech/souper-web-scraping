@@ -1,6 +1,6 @@
 import logging
 import os
-from data import dashboard
+from backend.data.charts import counts_by_result_type
 from data import feedback_reader, report_reader, section_reader
 from data.database import souperDB
 from data.report_writer import upsert_reports
@@ -61,6 +61,6 @@ def get_feedback(id, database: Session = Depends(db.get_session)):
     return feedback_reader.get_feedback(id, database)
 
 
-@app.get("/dashboard")
-def get_graph_data(session:Session = Depends(db.get_session)):
-    return dashboard.get_counts(session)
+# @app.get("/dashboard")
+# def get_graph_data(session:Session = Depends(db.get_session)):
+#     return counts_by_result_type.get_counts(session)

@@ -1,16 +1,16 @@
 import unittest
 from unittest.mock import patch
-from backend.tests.test_fixtures.dashboard_fixtures import TYPE_COUNT
+from tests.test_fixtures.chart_fixtures import RESULT_TYPE_COUNT
 
-from backend.data import dashboard
+from backend.data.charts import counts_by_result_type
 
 
 class DashboardStatsTest(unittest.TestCase):
-    @patch('data.dashboard.Session')
-    def test_get_counts(self, mock_session):
-        mock_session.query.return_value.all.return_value = TYPE_COUNT
+    @patch('data.charts.Session')
+    def test_get_result_type_counts(self, mock_session):
+        mock_session.query.return_value.all.return_value = RESULT_TYPE_COUNT
         expected = [[["Stage", "Count"],["Alpha", 20],["Beta", 10],["Live", 35]], [["Stage", "Count"],["Alpha", 5],["Beta", 8],["Live", 7]]]
-        result = dashboard.get_counts(mock_session)
+        result = counts_by_result_type.get_result_type_counts(mock_session)
 
         self.assertEqual(result, expected)
         
