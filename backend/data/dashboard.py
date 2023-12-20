@@ -1,13 +1,19 @@
+from sqlalchemy import func
 from models.report import Report
 from sqlalchemy.orm import Session
 
 
 def get_counts(session: Session):
     with session:
-        resultSet = session.query(Report).filter(Report.stage == "Alpha").count() # TODO: Fix this to be the correct query: Just pull count of one element first
-        print(resultSet)
-        results = __format_count_output(resultSet)
-    return results
+            result_set = (
+            session.query(Report.stage, Report.overall_verdict, func.count().label('count'))
+            .group_by(Report.stage, Report.overall_verdict)
+            .all()
+        )
+        
+    for result in result_set:
+        print(f"Stage: {result.stage}, Type: {result.overall_verdict}, Count: {result.count}")
+    return result_set
 
 def __format_count_output(resultSet):
     """ Should look like this
