@@ -5,15 +5,26 @@ import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import React, { useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import runScrape from '../RemoteUseCases/RunScraper';
 import "../styles/main.css";
 import logo from './Navbar/logo.png';
+import ChartModal from './ChartModal';
 
 export default function Navbar(props) {
   const [scrapeProgress, setScrapeProgress] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
+  const [openChartDialog, setOpenChartDialog] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const handleClickOpenChartDialog = async () => {
+    setOpenChartDialog(true);
+    ChartModal()
+  }
+
+  const handleClickCloseChartDialog = async () => {
+    setOpenChartDialog(false);
+  }
 
   const handleClickOpenDialog = async () => {
     setLoading(true);
@@ -27,9 +38,20 @@ export default function Navbar(props) {
 
   return (
     <header>
+
       <nav>
         <img src={logo} alt="logo" />
         {<Box className="nav-links">
+        
+        <LoadingButton
+          color='success'
+          onClick={() => handleClickOpenChartDialog()}
+          startIcon={<GetAppIcon />}
+          sx={{ color: 'black', textTransform: "none" }}
+          variant="text"
+        >
+         View Chart
+        </LoadingButton>
         
           <LoadingButton
             color='success'

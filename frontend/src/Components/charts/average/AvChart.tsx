@@ -15,7 +15,7 @@ export const options = {
   seriesType: "bars",
 };
 
-export function App() {
+export function AverageChart() {
   return (
     <Chart
       chartType="ComboChart"
