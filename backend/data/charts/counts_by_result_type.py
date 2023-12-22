@@ -19,7 +19,6 @@ def get_result_type_counts(session: Session):
     except Exception as e:
          LOGGER.error(f"Error '{e}' failed to retrieve counts from DB.")
          
-        
     return __format_output(result_set)
 
 def __format_output(result_set):
