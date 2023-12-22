@@ -13,6 +13,7 @@ def get_result_type_counts(session: Session):
         with session:
                 result_set = (
                 session.query(Report.stage, Report.overall_verdict, func.count().label('count'))
+                .group_by(Report.stage, Report.overall_verdict)
                 .all()
             )
     except Exception as e:
@@ -26,17 +27,20 @@ def __format_output(result_set):
         result_set,
         key=lambda result: (result.stage)
         )
+    print(result_set)
 
     # referring to the met / not met standards given to each report.
     met = [["Stage", "Count"]]
-    not_met = [["Stage", "Count"]]
+    not_met = [["Stage", "Count"], ["Alpha", 0], ["Beta", 0], ["Live", 0] ]
 
     for result in sorted_result_set:
         column_detail = [result.stage, result.count]
         if 'MET' == result.overall_verdict.upper():
             met.append(column_detail)
         else:
-            not_met.append(column_detail)
+            for stage in not_met:
+                 if stage[0] == result.stage:
+                      stage[1] += result.count
 
     formatted_output = [met, not_met]
 
