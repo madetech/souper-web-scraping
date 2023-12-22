@@ -1,5 +1,4 @@
 import logging
-
 import re
 import dateutil.parser as parser
 import requests

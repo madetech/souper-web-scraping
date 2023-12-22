@@ -1,15 +1,23 @@
+import logging
 from sqlalchemy import func
 from models.report import Report
 from sqlalchemy.orm import Session
 
+LOGGER = logging.getLogger(__name__)  
+
 # Takes in input from the report table in DB, filters data into sorted arrays based on the stage and number of reports which are used to 
 # create React charts for frontend.
 def get_result_type_counts(session: Session):
-    with session:
-            result_set = (
-            session.query(Report.stage, Report.overall_verdict, func.count().label('count'))
-            .all()
-        )
+    result_set = None
+    try:
+        with session:
+                result_set = (
+                session.query(Report.stage, Report.overall_verdict, func.count().label('count'))
+                .all()
+            )
+    except Exception as e:
+         LOGGER.error(f"Error '{e}' failed to retrieve counts from DB.")
+         
         
     return __format_output(result_set)
 
