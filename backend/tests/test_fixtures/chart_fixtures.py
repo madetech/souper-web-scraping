@@ -17,9 +17,10 @@ EXPECTED_RESULT_COUNT = [["Stage", "Met", "Not Met"],["Alpha", 20, 5],["Beta", 1
 MockAverageResult = namedtuple('MockResult', ['stage', 'name', 'overall_verdict', 'assessment_date'])
 RESULT_TYPE_PERIOD = [
     MockAverageResult(stage='Alpha', name='Rep1', overall_verdict='Not Met', assessment_date='10/01/2020'),
+    MockAverageResult(stage='Alpha', name='Rep1', overall_verdict='Not Met', assessment_date='8/01/2020'),
     MockAverageResult(stage='Alpha', name='Rep1', overall_verdict='Met', assessment_date='12/01/2020'),
     MockAverageResult(stage='Alpha', name='Rep2', overall_verdict='Not Met', assessment_date='20/01/2020'),
-    MockAverageResult(stage='Alpha', name='Rep2', overall_verdict='Met', assessment_date='14/01/2020'),
+    MockAverageResult(stage='Alpha', name='Rep2', overall_verdict='Met', assessment_date='28/01/2020'),
     MockAverageResult(stage='Alpha', name='Rep3', overall_verdict='Met', assessment_date='15/02/2020'),
     MockAverageResult(stage='Beta', name='Rep4', overall_verdict='Not Met', assessment_date='10/01/2020'),
     MockAverageResult(stage='Beta', name='Rep5', overall_verdict='Not Met', assessment_date='20/01/2020'),
@@ -28,4 +29,4 @@ RESULT_TYPE_PERIOD = [
     MockAverageResult(stage='Live', name='Rep7', overall_verdict='Met', assessment_date='10/03/2020'),
 ]
 
-EXPECTED_RESULT_PERIOD = [["Stage", "Average",  "Median"],["Alpha", 3, 3],["Beta", 5, 5],["Live", 0, 0]]
+EXPECTED_RESULT_PERIOD = [["Stage", "Average",  "Median"],["Alpha", 6, 6],["Beta", 5, 5],["Live", 0, 0]]

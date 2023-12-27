@@ -20,3 +20,38 @@ class DashboardStatsTest(unittest.TestCase):
 
         self.assertEqual(result, EXPECTED_RESULT_PERIOD)
         
+    def test_get_average_round_down(self):
+        input = [4, 5, 6, 6, 7, 8, 7]
+        expected_result = 6
+        result = average_by_result_type.get_average(input)
+        self.assertEqual(result, expected_result)
+        
+    def test_get_average_round_up(self):
+        input = [5, 6, 7, 7, 8, 9]
+        expected_result = 7
+        result = average_by_result_type.get_average(input)
+        self.assertEqual(result, expected_result)
+    
+    def test_get_median_for_even_number_of_values_round_down(self):
+        input = [1, 3, 6, 7, 9, 10, 13, 4]
+        expected_result = 6
+        result = average_by_result_type.get_median(input)
+        self.assertEqual(result, expected_result)
+    
+    def test_get_median_for_even_number_of_values_round_up(self):
+        input = [5, 6, 7, 7, 8, 9]
+        expected_result = 7
+        result = average_by_result_type.get_median(input)
+        self.assertEqual(result, expected_result)
+    
+    def test_get_median_for_odd_number_of_values_round_down(self):
+        input = [6, 7, 7, 8, 9]
+        expected_result = 7
+        result = average_by_result_type.get_median(input)
+        self.assertEqual(result, expected_result)
+    
+    def test_get_median_for_odd_number_of_values_round_up(self):
+        input = [6, 6, 7, 7, 8]
+        expected_result = 7
+        result = average_by_result_type.get_median(input)
+        self.assertEqual(result, expected_result)
