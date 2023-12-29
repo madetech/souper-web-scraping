@@ -19,6 +19,8 @@ class DashboardStatsTest(unittest.TestCase):
         result = average_by_result_type.get_result_type_averages(mock_session)
 
         self.assertEqual(result, EXPECTED_RESULT_PERIOD)
+
+    # TODO: Needs another test?
         
     def test_get_average_round_down(self):
         input = [4, 5, 6, 6, 7, 8, 7]
@@ -31,6 +33,8 @@ class DashboardStatsTest(unittest.TestCase):
         expected_result = 7
         result = average_by_result_type.get_average(input)
         self.assertEqual(result, expected_result)
+
+    # TODO: Needs another test?
     
     def test_get_median_for_even_number_of_values_round_down(self):
         input = [1, 3, 6, 7, 9, 10, 13, 4]
@@ -55,3 +59,5 @@ class DashboardStatsTest(unittest.TestCase):
         expected_result = 7
         result = average_by_result_type.get_median(input)
         self.assertEqual(result, expected_result)
+
+    # TODO: Needs another test?

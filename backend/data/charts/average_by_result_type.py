@@ -24,6 +24,7 @@ def get_result_type_averages(session: Session):
     return __format_output(result_set)
 
 # TODO: Try and clean this function up. It is convoluted and horrible
+# Should it be performant, readable or minimalist?
 # Questions around date availability. How do we calculqate if there is a Met but no Not Met?
 def __format_output(result_set):
 
