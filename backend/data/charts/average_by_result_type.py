@@ -68,6 +68,7 @@ def __format_output(result_set):
     return formatted_output
 
 def get_average(elapsed_days):
+     # TODO: What is missing here?
      return round(sum(elapsed_days) / len(elapsed_days))
             
 
