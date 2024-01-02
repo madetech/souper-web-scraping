@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 
 export default function CountChart() {
 
-  // var data = [["Stage", "Met", "Not Met"],["Alpha", 0, 0],["Beta", 0, 0],["Live", 0, 0]]
-
   const [data, setReport] = useState([]);
 
   useEffect(() => {

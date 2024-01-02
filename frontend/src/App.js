@@ -3,7 +3,7 @@ import React from 'react';
 import Navbar from './Components/Navbar';
 import ReportList from './Components/ReportList.js';
 import CountChart from './Components/charts/CountChart';
-// import AverageChart from './Components/charts/AverageChart';
+import AverageChart from './Components/charts/AverageChart';
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
         <Navbar 
         />
         <CountChart/>
-        {/* <AverageChart/> */}
+        <AverageChart/>
         <ReportList />
       </React.Fragment>
     </div>

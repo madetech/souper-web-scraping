@@ -27,6 +27,9 @@ def __format_output(result_set):
     # This is the format use in the graphs for the frontend, the first array is the names of the columns, the following arrays contain the name for the stage and then the values for the columns
     formatted_output = [["Stage", "Average", "Median"], ["Alpha", 0, 0], ["Beta", 0, 0], ["Live", 0, 0]]
 
+    if result_set == None:
+        return formatted_output
+
     dates = {}
 
     # Find the most recent date for each set of stage/name/verdict, result set is an array of names tuples, see chart_fixtures.py for example

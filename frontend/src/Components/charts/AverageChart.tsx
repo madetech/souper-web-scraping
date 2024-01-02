@@ -1,14 +1,23 @@
 import { Chart } from "react-google-charts";
-import getChartAverage from "../../RemoteUseCases/ChartCountFetcher";
+import getChartAverage from "../../RemoteUseCases/ChartAverageFetcher";
+import { useEffect, useState } from "react";
 
 export default function AverageChart() {
-  const data = async () => {await getChartAverage();
-  };
+
+  const [data, setReport] = useState([]);
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      setReport(await getChartAverage());
+    };
+
+    fetchReport();
+  }, [])
 
   const options = {
-    title: "Stage Averages",
-    vAxis: { title: "Days" },
-    hAxis: { title: "Stage" },
+    title: "Averages of days per stage",
+    vAxis: { title: "Stages" },
+    hAxis: { title: "Days" },
     seriesType: "bars",
     legend: { position: "right" },
   };
