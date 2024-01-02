@@ -72,8 +72,9 @@ def get_average(elapsed_days):
             
 
 def get_median(elapsed_days):
+    if len(elapsed_days) == 0:
+        return 0
     sorted_list = sorted(elapsed_days)
-
     list_size = len(sorted_list)
     middle_index = list_size // 2
 
