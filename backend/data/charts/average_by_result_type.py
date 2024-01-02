@@ -23,31 +23,29 @@ def get_result_type_averages(session: Session):
          
     return __format_output(result_set)
 
-# TODO: Try and clean this function up. It is convoluted and horrible
-# Should it be performant, readable or minimalist?
-# Questions around date availability. How do we calculqate if there is a Met but no Not Met?
 def __format_output(result_set):
-
+    # This is the format use in the graphs for the frontend, the first array is the names of the columns, the following arrays contain the name for the stage and then the values for the columns
     formatted_output = [["Stage", "Average", "Median"], ["Alpha", 0, 0], ["Beta", 0, 0], ["Live", 0, 0]]
 
     dates = {}
 
-    # Find the most recent date for each set of stage/name/verdict
+    # Find the most recent date for each set of stage/name/verdict, result set is an array of names tuples, see chart_fixtures.py for example
     for result in result_set:
-        key = (result.stage, result.name, result.overall_verdict)
-        current_date = result.assessment_date
+        composite_key = (result.stage, result.name, result.overall_verdict)
+        assessment_date = result.assessment_date
 
-        if key not in dates or current_date > dates[key]:
-            dates[key] = current_date
+        if composite_key not in dates or assessment_date > dates[composite_key]:
+            dates[composite_key] = assessment_date
 
     elapsed_days_dict = {}
 
     # Iterate through the data and calculate elapsed days
     for key, date in dates.items():
+        # unpack composite key
         stage, name, verdict = key
         current_date = datetime.strptime(date, '%d/%m/%Y')
 
-        # Check if there is a Not Met item to calculate elapsed time from
+        # Check if there is a Not Met item to calculate elapsed time from. 'Start date'
         if verdict == 'Not Met':
         # Check for matching 'Met' event
             met_key = (stage, name, 'Met')
@@ -68,7 +66,8 @@ def __format_output(result_set):
     return formatted_output
 
 def get_average(elapsed_days):
-     # TODO: What is missing here?
+     if len(elapsed_days) == 0:
+         return 0
      return round(sum(elapsed_days) / len(elapsed_days))
             
 

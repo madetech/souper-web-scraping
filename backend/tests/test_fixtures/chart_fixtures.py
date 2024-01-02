@@ -30,3 +30,5 @@ RESULT_TYPE_PERIOD = [
 ]
 
 EXPECTED_RESULT_PERIOD = [["Stage", "Average",  "Median"],["Alpha", 6, 6],["Beta", 5, 5],["Live", 0, 0]]
+
+
