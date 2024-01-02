@@ -46,6 +46,20 @@ app.get('/scrape', async function(req, res, next) {
   .catch(next);
 })
 
+
+app.get('/counts', function (_, res, next) {
+  axios.get(`${backend_url}/datacounts`)
+  .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
+  .catch(next);
+})
+
+
+app.get('/average', function (_, res, next) {
+  axios.get(`${backend_url}/dataaverage`)
+  .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
+  .catch(next);
+})
+
 app.use((err, req, res, next) => {
   console.log(err);
   res.sendStatus(500)

@@ -41,6 +41,7 @@ class DashboardStatsTest(unittest.TestCase):
         result = average_by_result_type.get_average(input)
         self.assertEqual(result, expected_result)
         
+        
     def test_get_average_with_input_empty(self):
         input = []
         expected_result = 0
@@ -70,9 +71,9 @@ class DashboardStatsTest(unittest.TestCase):
         expected_result = 7
         result = average_by_result_type.get_median(input)
         self.assertEqual(result, expected_result)
-
-    # def test_get_median_for_even_number_of_values_no_input(self):
-    #     input = []
-    #     expected_result = 0
-    #     result = average_by_result_type.get_median(input)
-    #     self.assertEqual(result, expected_result)
+    
+    def test_get_median_with_no_values(self):
+        input = []
+        expected_result = 0
+        result = average_by_result_type.get_median(input)
+        self.assertEqual(result, expected_result)
