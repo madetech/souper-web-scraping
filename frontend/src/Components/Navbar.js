@@ -17,14 +17,14 @@ export default function Navbar(props) {
   const [openChartDialog, setOpenChartDialog] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleClickOpenChartDialog = async () => {
-    setOpenChartDialog(true);
-    ChartModal()
-  }
+  // const handleClickOpenChartDialog = async () => {
+  //   setOpenChartDialog(true);
+  //   ChartModal()
+  // }
 
-  const handleClickCloseChartDialog = async () => {
-    setOpenChartDialog(false);
-  }
+  // const handleClickCloseChartDialog = async () => {
+  //   setOpenChartDialog(false);
+  // }
 
   const handleClickOpenDialog = async () => {
     setLoading(true);
@@ -43,7 +43,7 @@ export default function Navbar(props) {
         <img src={logo} alt="logo" />
         {<Box className="nav-links">
         
-        <LoadingButton
+        {/* <LoadingButton
           color='success'
           onClick={() => handleClickOpenChartDialog()}
           startIcon={<GetAppIcon />}
@@ -51,7 +51,7 @@ export default function Navbar(props) {
           variant="text"
         >
          View Chart
-        </LoadingButton>
+        </LoadingButton> */}
         
           <LoadingButton
             color='success'
