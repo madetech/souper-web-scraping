@@ -17,9 +17,9 @@ export default function CountChart() {
   }, [])
 
   const options = {
-    title: "Stage Times",
-    vAxis: { title: "Days" },
-    hAxis: { title: "Stage" },
+    title: "Count of Projects at each stage",
+    vAxis: { title: "Stage" },
+    hAxis: { title: "Days" },
     seriesType: "bars",
     legend: { position: "right" },
   };
