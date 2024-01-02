@@ -8,6 +8,6 @@
 
 <!-- 1. Complete tests -->
 <!-- 2. Update functionality in average_by_result -->
-3. Tidy up code
+<!-- 3. Tidy up code -->
 4. Get graph working - Highest Priority
 5. Review other requirements
