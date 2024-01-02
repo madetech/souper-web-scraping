@@ -13,6 +13,8 @@ RESULT_TYPE_COUNT = [
 
 EXPECTED_RESULT_COUNT = [["Stage", "Met", "Not Met"],["Alpha", 20, 5],["Beta", 10, 8],["Live", 35, 7]]
 
+EXPECTED_DEFAULT_COUNT_RESULT = [["Stage", "Met", "Not Met"],["Alpha", 0, 0],["Beta", 0, 0],["Live", 0, 0]]
+
 # average_and_median_by_result_type test fixtures
 MockAverageResult = namedtuple('MockResult', ['stage', 'name', 'overall_verdict', 'assessment_date'])
 RESULT_TYPE_PERIOD = [
@@ -30,5 +32,7 @@ RESULT_TYPE_PERIOD = [
 ]
 
 EXPECTED_RESULT_PERIOD = [["Stage", "Average",  "Median"],["Alpha", 6, 6],["Beta", 5, 5],["Live", 0, 0]]
+
+EXPECTED_DEFAULT_PERIOD_RESULT = [["Stage", "Average",  "Median"],["Alpha", 0, 0],["Beta", 0, 0],["Live", 0, 0]]
 
 

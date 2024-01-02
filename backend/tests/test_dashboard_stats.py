@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from tests.test_fixtures.chart_fixtures import EXPECTED_RESULT_COUNT, EXPECTED_RESULT_PERIOD, RESULT_TYPE_COUNT, RESULT_TYPE_PERIOD
+from tests.test_fixtures.chart_fixtures import EXPECTED_DEFAULT_COUNT_RESULT, EXPECTED_DEFAULT_PERIOD_RESULT, EXPECTED_RESULT_COUNT, EXPECTED_RESULT_PERIOD, RESULT_TYPE_COUNT, RESULT_TYPE_PERIOD
 
 from backend.data.charts import average_by_result_type, counts_by_result_type
 
@@ -17,17 +17,15 @@ class DashboardStatsTest(unittest.TestCase):
     def test_get_result_type_counts_with_no_input(self, mock_session):
         mock_session.query.return_value.group_by.return_value.all.return_value = []
         result = counts_by_result_type.get_result_type_counts(mock_session)
-        expected_result = [["Stage", "Met", "Not Met"],["Alpha", 0, 0],["Beta", 0, 0],["Live", 0, 0]]
 
-        self.assertEqual(result, expected_result)
+        self.assertEqual(result, EXPECTED_DEFAULT_COUNT_RESULT)
 
     @patch('data.charts.counts_by_result_type.Session')
     def test_get_result_type_counts_with_none_input(self, mock_session):
         mock_session.query.return_value.group_by.return_value.all.return_value = None
         result = counts_by_result_type.get_result_type_counts(mock_session)
-        expected_result = [["Stage", "Met", "Not Met"],["Alpha", 0, 0],["Beta", 0, 0],["Live", 0, 0]]
 
-        self.assertEqual(result, expected_result)
+        self.assertEqual(result, EXPECTED_DEFAULT_COUNT_RESULT)
     
 
     @patch('data.charts.counts_by_result_type.Session')
@@ -41,18 +39,16 @@ class DashboardStatsTest(unittest.TestCase):
     @patch('data.charts.counts_by_result_type.Session')
     def test_get_result_type_averages_with_no_input(self, mock_session):
         mock_session.query.return_value.group_by.return_value.all.return_value = []
-        expected_result = [["Stage", "Average", "Median"], ["Alpha", 0, 0], ["Beta", 0, 0], ["Live", 0, 0]]
         result = average_by_result_type.get_result_type_averages(mock_session)
 
-        self.assertEqual(result, expected_result)
+        self.assertEqual(result, EXPECTED_DEFAULT_PERIOD_RESULT)
 
     @patch('data.charts.counts_by_result_type.Session')
     def test_get_result_type_averages_with_none_input(self, mock_session):
         mock_session.query.return_value.group_by.return_value.all.return_value = None
-        expected_result = [["Stage", "Average", "Median"], ["Alpha", 0, 0], ["Beta", 0, 0], ["Live", 0, 0]]
         result = average_by_result_type.get_result_type_averages(mock_session)
 
-        self.assertEqual(result, expected_result)
+        self.assertEqual(result, EXPECTED_DEFAULT_PERIOD_RESULT)
 
     def test_get_average_round_down(self):
         input = [4, 5, 6, 6, 7, 8, 7]
