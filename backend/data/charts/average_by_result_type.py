@@ -19,7 +19,7 @@ def get_result_type_averages(session: Session):
                 .all()
             )
     except Exception as e:
-         LOGGER.error(f"Error '{e}' failed to retrieve counts from DB.")
+         LOGGER.error(f"Error '{e}' failed to retrieve dates from DB.")
          
     return __format_output(result_set)
 
@@ -34,7 +34,7 @@ def __format_output(result_set):
 
     # Find the most recent date for each set of stage/name/verdict, result set is an array of names tuples, see chart_fixtures.py for example
     for result in result_set:
-        composite_key = (result.stage, result.name, result.overall_verdict)
+        composite_key = (result.stage, result.name[:10], result.overall_verdict)
         assessment_date = result.assessment_date
 
         if composite_key not in dates or assessment_date > dates[composite_key]:
