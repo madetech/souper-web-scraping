@@ -1,6 +1,7 @@
 import logging
 import os
-
+from data.charts import counts_by_result_type
+from data.charts import average_by_result_type
 from data import feedback_reader, report_reader, section_reader
 from data.database import souperDB
 from data.report_writer import upsert_reports
@@ -59,3 +60,13 @@ def get_sections(id, database: Session = Depends(db.get_session)):
 @app.get("/sections/{id}/feedback")
 def get_feedback(id, database: Session = Depends(db.get_session)):
     return feedback_reader.get_feedback(id, database)
+
+
+@app.get("/datacounts")
+def get_graph_data_count(session:Session = Depends(db.get_session)):
+    return counts_by_result_type.get_result_type_counts(session)
+
+
+@app.get("/dataaverage")
+def get_graph_data_average(session:Session = Depends(db.get_session)):
+    return average_by_result_type.get_result_type_averages(session)
