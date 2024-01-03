@@ -18,17 +18,17 @@ EXPECTED_DEFAULT_COUNT_RESULT = [["Stage", "Met", "Not Met"],["Alpha", 0, 0],["B
 # average_and_median_by_result_type test fixtures
 MockAverageResult = namedtuple('MockResult', ['stage', 'name', 'overall_verdict', 'assessment_date'])
 RESULT_TYPE_PERIOD = [
-    MockAverageResult(stage='Alpha', name='Rep1', overall_verdict='Not Met', assessment_date='10/01/2020'),
-    MockAverageResult(stage='Alpha', name='Rep1', overall_verdict='Not Met', assessment_date='8/01/2020'),
-    MockAverageResult(stage='Alpha', name='Rep1', overall_verdict='Met', assessment_date='12/01/2020'),
-    MockAverageResult(stage='Alpha', name='Rep2', overall_verdict='Not Met', assessment_date='20/01/2020'),
-    MockAverageResult(stage='Alpha', name='Rep2', overall_verdict='Met', assessment_date='28/01/2020'),
-    MockAverageResult(stage='Alpha', name='Rep3', overall_verdict='Met', assessment_date='15/02/2020'),
-    MockAverageResult(stage='Beta', name='Rep4', overall_verdict='Not Met', assessment_date='10/01/2020'),
-    MockAverageResult(stage='Beta', name='Rep5', overall_verdict='Not Met', assessment_date='20/01/2020'),
-    MockAverageResult(stage='Beta', name='Rep5', overall_verdict='Met', assessment_date='25/01/2020'),
-    MockAverageResult(stage='Live', name='Rep6', overall_verdict='Met', assessment_date='10/02/2020'),
-    MockAverageResult(stage='Live', name='Rep7', overall_verdict='Met', assessment_date='10/03/2020'),
+    MockAverageResult(stage='Alpha', name='Report number 1 test name dgdgd', overall_verdict='Not Met', assessment_date='2020-01-10'),
+    MockAverageResult(stage='Alpha', name='Report number 1 test name hshs', overall_verdict='Not Met', assessment_date='2020-01-8'),
+    MockAverageResult(stage='Alpha', name='Report number 1 test name jete', overall_verdict='Met', assessment_date='2020-01-12'),
+    MockAverageResult(stage='Alpha', name='Report number 2 test name djdjdjd', overall_verdict='Not Met', assessment_date='2020-01-20'),
+    MockAverageResult(stage='Alpha', name='Report number 2 test name fhfhf', overall_verdict='Met', assessment_date='2020-01-28'),
+    MockAverageResult(stage='Alpha', name='Report number 3 test name jsjs', overall_verdict='Met', assessment_date='2020-01-15'),
+    MockAverageResult(stage='Beta', name='Report number 4 test name hfyryur', overall_verdict='Not Met', assessment_date='2020-01-10'),
+    MockAverageResult(stage='Beta', name='Report number 5 test name jsjsjs', overall_verdict='Not Met', assessment_date='2020-01-20'),
+    MockAverageResult(stage='Beta', name='Report number 5 test name jshsbs', overall_verdict='Met', assessment_date='2020-01-25'),
+    MockAverageResult(stage='Live', name='Report number 6 test name shshs', overall_verdict='Met', assessment_date='2020-01-10'),
+    MockAverageResult(stage='Live', name='Report number 7 test name jsauasbhdsnds', overall_verdict='Met', assessment_date='2020-01-10'),
 ]
 
 EXPECTED_RESULT_PERIOD = [["Stage", "Average",  "Median"],["Alpha", 6, 6],["Beta", 5, 5],["Live", 0, 0]]

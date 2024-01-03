@@ -1,9 +1,7 @@
 from datetime import datetime
 import logging
-from sqlalchemy import func
 from models.report import Report
 from sqlalchemy.orm import Session
-from collections import defaultdict
 
 LOGGER = logging.getLogger(__name__)  
 
@@ -15,7 +13,7 @@ def get_result_type_averages(session: Session):
         with session:
                 result_set = (
                 session.query(Report.stage, Report.name, Report.overall_verdict, Report.assessment_date)
-                .group_by(Report.stage, Report.name, Report.overall_verdict)
+                .group_by(Report.stage, Report.name, Report.overall_verdict, Report.assessment_date)
                 .all()
             )
     except Exception as e:
@@ -34,7 +32,7 @@ def __format_output(result_set):
 
     # Find the most recent date for each set of stage/name/verdict, result set is an array of names tuples, see chart_fixtures.py for example
     for result in result_set:
-        composite_key = (result.stage, result.name[:10], result.overall_verdict)
+        composite_key = (result.stage, result.name[:25], result.overall_verdict.upper())
         assessment_date = result.assessment_date
 
         if composite_key not in dates or assessment_date > dates[composite_key]:
@@ -46,19 +44,20 @@ def __format_output(result_set):
     for key, date in dates.items():
         # unpack composite key
         stage, name, verdict = key
-        current_date = datetime.strptime(date, '%d/%m/%Y')
+        current_date = datetime.strptime(date, '%Y-%m-%d')
 
         # Check if there is a Not Met item to calculate elapsed time from. 'Start date'
-        if verdict == 'Not Met':
+        if verdict == 'NOT MET':
         # Check for matching 'Met' event
-            met_key = (stage, name, 'Met')
+            met_key = (stage, name, 'MET')
             if met_key in dates:
-                met_date = datetime.strptime(dates[met_key], '%d/%m/%Y')
+                met_date = datetime.strptime(dates[met_key], '%Y-%m-%d')
                 elapsed_days = (met_date - current_date).days
 
                 if stage not in elapsed_days_dict:
                     elapsed_days_dict[stage] = []
-                elapsed_days_dict[stage].append(elapsed_days)
+                if elapsed_days > 0:
+                    elapsed_days_dict[stage].append(elapsed_days)
 
     for key, value in elapsed_days_dict.items():
         for item in formatted_output:
