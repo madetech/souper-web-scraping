@@ -23,7 +23,7 @@ def get_result_type_averages(session: Session):
 
 def __format_output(result_set):
     # This is the format use in the graphs for the frontend, the first array is the names of the columns, the following arrays contain the name for the stage and then the values for the columns
-    formatted_output = [["Stage", "Average", "Median"], ["Alpha", 0, 0], ["Beta", 0, 0], ["Live", 0, 0]]
+    formatted_output = [["Stage", "Average", "Median", "Shortest", "Longest"], ["Alpha", 0, 0, 0, 0], ["Beta", 0, 0, 0, 0], ["Live", 0, 0, 0, 0]]
 
     if result_set == None:
         return formatted_output
@@ -64,6 +64,8 @@ def __format_output(result_set):
             if item[0] == key:
                 item[1] = get_average(value)
                 item[2] = get_median(value)
+                item[3] = min(value)
+                item[4] = max(value)
 
     return formatted_output
 

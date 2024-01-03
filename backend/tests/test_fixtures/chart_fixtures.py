@@ -17,10 +17,11 @@ EXPECTED_DEFAULT_COUNT_RESULT = [["Stage", "Met", "Not Met"],["Alpha", 0, 0],["B
 
 # average_and_median_by_result_type test fixtures
 MockAverageResult = namedtuple('MockResult', ['stage', 'name', 'overall_verdict', 'assessment_date'])
+#  the matching mock data for date calculations, are report 1, 2 and 5.
 RESULT_TYPE_PERIOD = [
     MockAverageResult(stage='Alpha', name='Report number 1 test name dgdgd', overall_verdict='Not Met', assessment_date='2020-01-10'),
     MockAverageResult(stage='Alpha', name='Report number 1 test name hshs', overall_verdict='Not Met', assessment_date='2020-01-8'),
-    MockAverageResult(stage='Alpha', name='Report number 1 test name jete', overall_verdict='Met', assessment_date='2020-01-12'),
+    MockAverageResult(stage='Alpha', name='Report number 1 test name jete', overall_verdict='Met', assessment_date='2020-01-12'),   
     MockAverageResult(stage='Alpha', name='Report number 2 test name djdjdjd', overall_verdict='Not Met', assessment_date='2020-01-20'),
     MockAverageResult(stage='Alpha', name='Report number 2 test name fhfhf', overall_verdict='Met', assessment_date='2020-01-28'),
     MockAverageResult(stage='Alpha', name='Report number 3 test name jsjs', overall_verdict='Met', assessment_date='2020-01-15'),
@@ -31,8 +32,8 @@ RESULT_TYPE_PERIOD = [
     MockAverageResult(stage='Live', name='Report number 7 test name jsauasbhdsnds', overall_verdict='Met', assessment_date='2020-01-10'),
 ]
 
-EXPECTED_RESULT_PERIOD = [["Stage", "Average",  "Median"],["Alpha", 6, 6],["Beta", 5, 5],["Live", 0, 0]]
+EXPECTED_RESULT_PERIOD = [["Stage", "Average",  "Median", "Shortest", "Longest"],["Alpha", 6, 6, 4, 8],["Beta", 5, 5, 5, 5],["Live", 0, 0, 0, 0]]
 
-EXPECTED_DEFAULT_PERIOD_RESULT = [["Stage", "Average",  "Median"],["Alpha", 0, 0],["Beta", 0, 0],["Live", 0, 0]]
+EXPECTED_DEFAULT_PERIOD_RESULT = [["Stage", "Average",  "Median", "Shortest", "Longest" ],["Alpha", 0, 0, 0, 0],["Beta", 0, 0, 0, 0],["Live", 0, 0, 0, 0]]
 
 

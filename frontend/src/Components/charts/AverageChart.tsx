@@ -1,6 +1,7 @@
 import { Chart } from "react-google-charts";
 import getChartAverage from "../../RemoteUseCases/ChartAverageFetcher";
 import { useEffect, useState } from "react";
+import React from "react";
 
 export default function AverageChart() {
 
@@ -25,7 +26,7 @@ export default function AverageChart() {
   return (
     <Chart
       chartType="BarChart"
-      width="100%"
+      width="60%"
       height="400px"
       data={data}
       options={options}

@@ -4,6 +4,7 @@ import Navbar from './Components/Navbar';
 import ReportList from './Components/ReportList.js';
 import CountChart from './Components/charts/CountChart';
 import AverageChart from './Components/charts/AverageChart';
+import ParentChartComponent from './Components/charts/ParentChart.js';
 
 export default function App() {
   return (
@@ -11,8 +12,15 @@ export default function App() {
       <React.Fragment>
         <Navbar 
         />
+        <div class="container">
+          <div class="column">
         <CountChart/>
-        <AverageChart/>
+        </div>
+        <div class="column">
+          <AverageChart/> 
+        </div>
+        </div>
+        {/* <ParentChartComponent /> */}
         <ReportList />
       </React.Fragment>
     </div>
