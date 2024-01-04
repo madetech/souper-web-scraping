@@ -35,7 +35,7 @@ export default function SectionTableHelper(props) {
                 .slice(0, rowsPerPage)
                 .map((row) => {
                   return (
-                    <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.id} data-testid={props.rowTestId}>
+                    <StyledTableRow tabIndex={-1} key={row.id} data-testid={props.rowTestId}>
                       {props.columns.map((column) => {
                         const value = row[column.id];
                         return (

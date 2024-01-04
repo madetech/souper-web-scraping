@@ -74,4 +74,5 @@ def get_graph_data_average(session:Session = Depends(db.get_session)):
 
 @app.get("/resultcount")
 def get_chart_result_count(session:Session = Depends(db.get_session)):
+    logging.error('backend triggered')
     return feedback_response_summary.get_results_summary_count(session)

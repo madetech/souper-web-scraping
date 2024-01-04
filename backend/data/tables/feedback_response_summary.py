@@ -9,6 +9,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 def get_results_summary_count(session: Session):
+    LOGGER.info("get results summary function triggered")
     """ 
     This is the original SQL statement that is implemented below
     SELECT s."number", COUNT(CASE WHEN s.decision = 'Met' THEN f.section_id END) AS met_count, 
@@ -33,18 +34,23 @@ def get_results_summary_count(session: Session):
             )
     except Exception as e:
          LOGGER.error(f"Error '{e}' failed to retrieve feedback counts by section from DB.")
-
     return __format_output(result_set)
 
 def __format_output(result_set):
-    formatted_output = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+    formatted_output = [
+                    ["Met", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    ["Not Met", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+    
+        # formatted_output = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+        #             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        #             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
     
     if result_set == None:
         return formatted_output
     for result in result_set:
-        formatted_output[1][int(result.section) -1] = result.met
-        formatted_output[2][int(result.section) -1] = result.not_met
+            formatted_output[0][int(result[0])] = result[1]
+            formatted_output[1][int(result[0])] = result[2]
+    formatted_output[0][0] = 'Met'
+    formatted_output[1][0] = 'Not Met'
                      
     return formatted_output

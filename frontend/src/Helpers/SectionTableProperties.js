@@ -22,6 +22,11 @@ const reportColumns = [
   { id: '16', label: '16' },
 ];
 
+const reportRows = [
+  {id: 'Met', label: 'Met'},
+  {id: 'Not Met', label: 'Not Met'}
+]
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.success.light,
@@ -42,5 +47,5 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export { StyledTableCell, StyledTableRow, reportColumns };
+export { StyledTableCell, StyledTableRow, reportColumns, reportRows };
 
