@@ -1,5 +1,6 @@
 import logging
 import os
+from data.tables import feedback_response_summary
 from data.charts import counts_by_result_type
 from data.charts import average_by_result_type
 from data import feedback_reader, report_reader, section_reader
@@ -70,3 +71,8 @@ def get_graph_data_count(session:Session = Depends(db.get_session)):
 @app.get("/dataaverage")
 def get_graph_data_average(session:Session = Depends(db.get_session)):
     return average_by_result_type.get_result_type_averages(session)
+
+@app.get("/resultcount")
+def get_chart_result_count(session:Session = Depends(db.get_session)):
+    logging.error('backend triggered')
+    return feedback_response_summary.get_results_summary_count(session)

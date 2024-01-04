@@ -53,6 +53,12 @@ app.get('/counts', function (_, res, next) {
   .catch(next);
 })
 
+app.get('/resultcount', function (_, res, next) {
+  axios.get(`${backend_url}/resultcount`)
+  .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
+  .catch(next);
+})
+
 
 app.get('/average', function (_, res, next) {
   axios.get(`${backend_url}/dataaverage`)
