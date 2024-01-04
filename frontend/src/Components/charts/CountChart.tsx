@@ -1,6 +1,7 @@
 import { Chart } from "react-google-charts";
 import getChartCount from "../../RemoteUseCases/ChartCountFetcher";
 import { useEffect, useState } from "react";
+import React from "react";
 
 export default function CountChart() {
 
@@ -25,7 +26,7 @@ export default function CountChart() {
   return (
     <Chart
       chartType="BarChart"
-      width="100%"
+      width="60%"
       height="400px"
       data={data}
       options={options}
