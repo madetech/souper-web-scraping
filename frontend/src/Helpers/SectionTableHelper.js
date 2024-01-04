@@ -5,7 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import React, { useState } from 'react';
-import { StyledTableCell, StyledTableRow } from './TableProperties';
+import { StyledTableCell, StyledTableRow } from './SectionTableProperties';
 
 
 export default function SectionTableHelper(props) {
