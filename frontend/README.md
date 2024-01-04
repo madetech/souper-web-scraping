@@ -73,3 +73,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### Misc
 
 #### `npm run eject` (see https://create-react-app.dev/docs/available-scripts/#npm-run-eject)
+
+## Deploy to Live
+1. Sign on to AWS - Managed Services Tooling with Admin access
+3. Use command "copilot svc deploy"
+4. select frontend-2 or backend-2 (Have to run twice, once for each)
+5. select environment (souper-3)
