@@ -37,11 +37,14 @@ def get_results_summary_count(session: Session):
     return __format_output(result_set)
 
 def __format_output(result_set):
-     formatted_output = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    formatted_output = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
-     
-     if result_set == None:
-         return formatted_output
-     
-     return []
+    
+    if result_set == None:
+        return formatted_output
+    for result in result_set:
+        formatted_output[1][int(result.section) -1] = result.met
+        formatted_output[2][int(result.section) -1] = result.not_met
+                     
+    return formatted_output
