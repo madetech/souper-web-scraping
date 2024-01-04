@@ -2,6 +2,25 @@
   text-align: center;
 }
 
+.charts { 
+  display: flex;
+  flex-direction: column;
+  width: 50%
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.column {
+  width: 50%;
+  padding: 20px;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
