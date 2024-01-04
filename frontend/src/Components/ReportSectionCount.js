@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { reportTableStyle } from '../Helpers/ModalStyle';
 import SectionTableHelper from '../Helpers/SectionTableHelper';
 import { reportColumns } from '../Helpers/SectionTableProperties';
-import getReportList from '../RemoteUseCases/ReportListFetcher';
+import getResultCount from '../RemoteUseCases/ResultCountFetcher';
 import SectionModal from './SectionModal';
 
 export default function ReportSectionCount() {
@@ -12,7 +12,7 @@ export default function ReportSectionCount() {
 
   useEffect(() => {
     const fetchReport = async () => {
-      setReport(await getReportList());
+      setReport(await getResultCount());
     };
 
     fetchReport();
