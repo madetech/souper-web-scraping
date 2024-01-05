@@ -15,5 +15,13 @@
 7. Graphs on separate pages
 8. Table containing exact same data as graphs (more calls to DB, slower)
 9. Filter buttons sort only working on first page (Bug Fix)
+10. Remove Average chart from dashboard
  
 
+# Requirements
+
+* As a user, I would like to be able to see how many services have failed each service standard and the main reasons why?
+
+* As a user, I would like to see the trends over the last few years with regards to which services fail assessment and which standards are the primary reason for failure, to understand where improvements are being made? For example, with regards to accessibility, are the digital products improving their delivery to ensure their service meets accessibility standards?
+
+* As a user, I would like to be able to see which services have failed service standard 14 and the main reasons why?
