@@ -12,7 +12,19 @@ const reportColumns = [
 const sectionColumns = [
   { id: 'number', label: 'Section Number' },
   { id: 'decision', label: 'Decision' },
+  { id:'positive_language_percent', label: 'Positive language percent'},
+  { id: 'neutral_language_percent', label: 'Neutral language percent'},
+  { id: 'constructive_language_percent', label: 'Constructive language percent'}
 ];
+
+function languagePercentFormat (value) {
+  console.log(value)
+  if (value == '')
+    return "N/A"
+  else
+    console.log(typeof(value))
+    return value
+}
 
 const decisionColumns = [
   { id: 'decisionType', label: 'Decision', minWidth: 170 },

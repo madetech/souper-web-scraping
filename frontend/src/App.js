@@ -13,9 +13,7 @@ export default function App() {
       <React.Fragment>
         <Navbar/>
         <CountChart/>
-        <AverageChart/>
-        <ReportSectionCount/>
-        {/* <ReportList /> */}
+        <ReportList />
       </React.Fragment>
     </div>
   )

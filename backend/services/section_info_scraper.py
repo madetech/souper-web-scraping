@@ -95,9 +95,9 @@ def scrape_one(soup: BeautifulSoup, sections: list[dict]):
                 decision=get_decision(section_decision.text),
                 title = section_element.text.strip(),
                 feedback = feedback,
-                positive_feedback_percentage = analysed_feedback[0],
-                neutral_feedback_percentage = analysed_feedback[1],
-                negative_feedback_percentage = analysed_feedback[2],
+                positive_feedback_percentage = round(analysed_feedback[0]),
+                neutral_feedback_percentage = round(analysed_feedback[1]),
+                negative_feedback_percentage = round(analysed_feedback[2])
             ))
             break
 
@@ -142,6 +142,7 @@ def scrape_two(soup: BeautifulSoup, sections: list[dict]):
         offset = 0
         if cells[0].text=='\u2028' or cells[0].text=='\xa0':
             offset = 1
+
 
         sections.append(dict(
             number=int(cells[0 + offset].text),

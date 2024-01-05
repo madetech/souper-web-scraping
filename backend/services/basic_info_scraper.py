@@ -21,7 +21,7 @@ def scrape_reports() -> list[Report]:
     # report_links = ["/service-standard-reports/get-security-clearance"]
     # report_links = ["/service-standard-reports/apply-for-legal-aid-alpha-assessment"]
     # report_links = ["/service-standard-reports/business-properties-rental-information-beta-assessment"]
-    # report_links = ["/service-standard-reports/check-your-state-pension-beta-assessment"]
+    # report_links = ["/service-standard-reports/apply-for-legal-aid-alpha-assessment"]
     reports_models = []
     number_of_reports = len(report_links)
     LOGGER.info(f"Processing {number_of_reports} reports")
