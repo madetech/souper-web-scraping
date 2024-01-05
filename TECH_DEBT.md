@@ -15,6 +15,7 @@
 7. Graphs on separate pages
 8. Table containing exact same data as graphs (more calls to DB, slower)
 9. Filter buttons sort only working on first page (Bug Fix)
+10. Remove Average chart from dashboard
  
 
 # Requirements
