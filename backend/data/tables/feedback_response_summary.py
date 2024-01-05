@@ -46,7 +46,5 @@ def __format_output(result_set):
     for result in result_set:
             formatted_output[0][int(result[0])] = result[1]
             formatted_output[1][int(result[0])] = result[2]
-    # formatted_output[0][0] = 'Met'
-    # formatted_output[1][0] = 'Not Met'
                      
     return formatted_output
