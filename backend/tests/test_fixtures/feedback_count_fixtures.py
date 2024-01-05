@@ -1,5 +1,3 @@
-from collections import namedtuple
-
 DEFAULT_FEEDBACK_COUNT_RESPONSE = [["Met", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     ["Not Met",0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
