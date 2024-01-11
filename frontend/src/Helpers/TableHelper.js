@@ -82,7 +82,7 @@ export default function TableHelper(props) {
 
             <TableHead sx={{ bgcolor: 'black' }}>
               <StyledTableRow>
-                {props.columns.map((headCell) => (
+                {props.columns.map((headCell) => (  
                   <StyledTableCell
                     key={headCell.id}
                     sortDirection={orderBy === headCell.id ? order : false}
@@ -119,7 +119,7 @@ export default function TableHelper(props) {
                         return (
                           <StyledTableCell key={column.id} align={column.align}>        
                             {column.format && typeof value === 'number'
-                              ? column.format(value)
+                              ? column.format(value) 
                               : value}
                           </StyledTableCell>
                         );

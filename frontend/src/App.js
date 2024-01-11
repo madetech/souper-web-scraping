@@ -10,11 +10,12 @@ import ParentChartComponent from './Components/charts/ParentChart.js';
 export default function App() {
   return (
     <div className="App">
-      <React.Fragment>
         <Navbar/>
-        <CountChart/>
+        <div class='container'>
+        <div class='left-component'> <CountChart/></div>
+        <div class='right-component'> <AverageChart/></div>
+        </div>
         <ReportList />
-      </React.Fragment>
     </div>
   )
 }

@@ -32,3 +32,10 @@
 
 
 * Database testing (create local version for testing purposes)
+
+
+1. modal pop up research 
+2. see if we can set up a test data base
+3. clean up / refactor
+4. look into decimal point issue, asc and desc report bug
+5. look into word cloud?

@@ -8,7 +8,7 @@ from tests.test_fixtures.report_fixtures import VALID_REPORTS
 #@patch('data.report_reader.paginate')
 @patch('data.report_reader.Session')
 def test_get_reports_from_database(mock_session):
-    mock_session.query.return_value.all.return_value = VALID_REPORTS
+    mock_session.query.return_value.order_by.return_value.all.return_value = VALID_REPORTS
 
     reports = get_reports(mock_session)
 

@@ -26,7 +26,7 @@ export default function CountChart() {
   return (
     <Chart
       chartType="BarChart"
-      width="100%"
+      width="60%"
       height="400px"
       data={data}
       options={options}

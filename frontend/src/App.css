@@ -55,3 +55,16 @@
     transform: rotate(360deg);
   }
 }
+
+.flex-parent {
+  display: flex;
+}
+.left-component {
+  width: 400px;
+  flex: auto;
+}
+
+.right-component {
+  width: 35%;
+  flex: auto;
+}
