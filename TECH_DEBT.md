@@ -13,7 +13,7 @@
 5. Review other requirements
 6. More complex graph (specific sections)
 7. Graphs on separate pages
-8. Filter buttons sort only working on first page (Bug Fix)
+8. Filter buttons sort only working on first page (Bug Fix)    -- pagination error, spoke to Jaseera and it doesn't seem like an possible fix.
 9. Remove Average chart from dashboard (keep code written for it just in case )
 10. we have the sentiment analysis, just need to resize the modal so we can include it 
 

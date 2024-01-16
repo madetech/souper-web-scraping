@@ -2,12 +2,6 @@
   text-align: center;
 }
 
-.charts { 
-  display: flex;
-  flex-direction: column;
-  width: 50%
-}
-
 .container {
   display: flex;
   justify-content: center;
@@ -56,15 +50,20 @@
   }
 }
 
-.flex-parent {
+
+.charts {
   display: flex;
-}
-.left-component {
-  width: 400px;
-  flex: auto;
+  flex-direction: row;
 }
 
-.right-component {
-  width: 35%;
-  flex: auto;
+.chartr {
+  display: flex;
+  flex-direction: row;
+  background-color: blue;
+}
+
+.chartl {
+  display: flex;
+  flex-direction: row;
+
 }
