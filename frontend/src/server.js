@@ -19,19 +19,43 @@ app.get('/', function (_, res, _) {
 
   });
 
-app.get('/reports', function (_, res, next) {
-  axios.get(`${backend_url}/reports`)
-  .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
-  .catch(next);
-
+app.get('/reports', async function (_, res, next) {
+  try{
+    const result = await axios.get(`${backend_url}/reports`);
+    if(result.status === 200) {
+      res.send(result.data)
+    } else {
+      res.sendStatus(result.status)
+    }
+  } catch (error) {
+    next(error)
+  } 
 })
 
-app.get('/reports/:id/sections', function (req, res, next) {
+
+app.get('/reports/:id/sections', async function (req, res, next) {
   var id = req.params['id']
-  axios.get(`${backend_url}/reports/${id}/sections`)
-  .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
-  .catch(next);
+  try{
+    var id = req.params['id']
+    const backend_res = await axios.get(`${backend_url}/reports/${id}/sections`);
+    if(backend_res.status === 200) {
+      res.send(backend_res.data)
+    } else {
+      res.sendStatus(backend_res.status)
+    }
+  } catch (error) {
+    console.error("Axios Error:", error)
+    next(error)
+  }
 })
+
+// app.get('/reports/:id/sections', function (req, res, next) {
+//   var id = req.params['id']
+//   axios.get(`${backend_url}/reports/${id}/sections`)
+//   .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
+//   .catch(next);
+// })
+
 
 app.get(`/sections/:id/feedback`, function (req, res, next) {
 var id  = req.params['id']
