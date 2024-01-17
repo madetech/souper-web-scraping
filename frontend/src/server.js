@@ -48,13 +48,6 @@ app.get('/reports/:id/sections', async function (req, res, next) {
   }
 });
 
-// app.get('/reports/:id/sections', function (req, res, next) {
-//   var id = req.params['id']
-//   axios.get(`${backend_url}/reports/${id}/sections`)
-//   .then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
-//   .catch(next);
-// })
-
 app.get(`/sections/:id/feedback`, async function (req, res, next) {
   var id = req.params['id'];
   try {
@@ -71,12 +64,6 @@ app.get(`/sections/:id/feedback`, async function (req, res, next) {
     next(error);
   }
 });
-//app.get(`/sections/:id/feedback`, function (req, res, next) {
-//var id  = req.params['id']
-//axios.get(`${backend_url}/sections/${id}/feedback`)
-//.then(backend_res => backend_res.status === 200 ? res.send(backend_res.data) : res.sendStatus(backend_res.status))
-//.catch(next);
-//})
 
 app.get('/scrape', async function (req, res, next) {
   await axios
@@ -93,35 +80,40 @@ app.get('/counts', async function (_, res, next) {
   if(result.status === 200) {
     res.send(result.data);
   } else {
-    res.sendStatus(result.status);
-    next(error);
+    res.sendStatus(result.status);   
   }
 } catch(error) {
   console.error('Axios Error Counts: ', error);
+  next(error);
 }
 });
 
-app.get('/resultcount', function (_, res, next) {
-  axios
-    .get(`${backend_url}/resultcount`)
-    .then((backend_res) =>
-      backend_res.status === 200
-        ? res.send(backend_res.data)
-        : res.sendStatus(backend_res.status)
-    )
-    .catch(next);
-});
+app.get('/resultcount', async function (_, res, next) {
+  try {
+    const result = await axios.get(`${backend_url}/resultcount`);
+    if(result.status === 200) {
+      res.send(result.data);
+    } else {
+      res.sendStatus(result.status);
+    }
+  } catch(error) {
+    console.error('Axios Error Result Counts: ', error);
+    next(error);
+  }
+  });
 
-app.get('/average', function (_, res, next) {
-  axios
-    .get(`${backend_url}/dataaverage`)
-    .then((backend_res) =>
-      backend_res.status === 200
-        ? res.send(backend_res.data)
-        : res.sendStatus(backend_res.status)
-    )
-    .catch(next);
-});
+app.get('/average', async function (_,res, next) {
+  try {
+    const result = await axios.get(`${backend_url}/dataaverage`);
+    if(result.status === 200) {
+      res.send(result.data);
+    } else {
+      res.sendStatus(result.status);
+    }
+    } catch(error) {
+      console.error('Axios Error Result Average: ', error);
+      next(error);
+  }});
 
 app.use((err, req, res, next) => {
   console.log(err);
