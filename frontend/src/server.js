@@ -85,15 +85,20 @@ app.get('/scrape', async function (req, res, next) {
     .catch(next);
 });
 
-app.get('/counts', function (_, res, next) {
-  axios
-    .get(`${backend_url}/datacounts`)
-    .then((backend_res) =>
-      backend_res.status === 200
-        ? res.send(backend_res.data)
-        : res.sendStatus(backend_res.status)
-    )
-    .catch(next);
+app.get('/counts', async function (_, res, next) {
+  try{
+  const result = await axios.get(
+    `${backend_url}/datacounts`
+  );
+  if(result.status === 200) {
+    res.send(result.data);
+  } else {
+    res.sendStatus(result.status);
+    next(error);
+  }
+} catch(error) {
+  console.error('Axios Error Counts: ', error);
+}
 });
 
 app.get('/resultcount', function (_, res, next) {
