@@ -5,7 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: FastAPI",
+            "name": "Frontend",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "start",
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "cwd": "${workspaceFolder}/frontend"
+        },
+        {
+            "name": "Backend",
             "type": "python",
             "request": "launch",
             "module": "uvicorn",
@@ -17,5 +31,13 @@
             "justMyCode": true,
             "cwd": "${workspaceFolder}/backend"
         }
-    ]
+    ],
+    "compounds": [
+        {
+          "name": "Frontend & Backend",
+          "configurations": ["Frontend", "Backend"],
+        //   "preLaunchTask": "${defaultBuildTask}",
+          "stopAll": true
+        }
+      ]
 }
